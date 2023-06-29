@@ -1,0 +1,10 @@
+vim.g.mapleader=' '
+vim.keymap.set({'n','v'}, '<leader><Space>'	, ':'               , {noremap=true, silent=true,   })
+vim.keymap.set({'n'}    , '<Enter>'	        , 'a<Enter><Esc>l'  , {noremap=true, silent=true,   })
+vim.keymap.set({'n'}    , '<leader><Enter>'	, 'i<Enter><Esc>l'  , {noremap=true, silent=true,   })
+vim.keymap.set({'n','v'}, '<Leader>n'       , ':nohl<Enter>'    , {noremap=true, silent=true,   })
+vim.keymap.set({'n','v'}, '<C-u>'           , '12k'	            , {noremap=true,                })
+vim.keymap.set({'n','v'}, '<C-d>'           , '12j'	            , {noremap=true,                })
+vim.keymap.set({'n','v'}, '<Leader>y'       , '"zy'	            , {noremap=true, silent=true,   })
+vim.keymap.set({'n','v'}, '<Leader>p'       , '"zp'	            , {noremap=true, silent=true,   })
+vim.keymap.set({'i'}    , '<C-p>'           , '<C-o>p'          , {noremap=true,                })
