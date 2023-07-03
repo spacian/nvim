@@ -9,3 +9,5 @@ vim.keymap.set({'n','v'}, '<Leader>y'       , '"zy'	            , {noremap=true,
 vim.keymap.set({'n','v'}, '<Leader>p'       , '"zp'	            , {noremap=true, silent=true,   })
 vim.keymap.set({'i'}    , '<C-p>'           , '<C-o>p'          , {noremap=true,                })
 vim.keymap.set({'i'}    , '<C-l>'           , '<Del>'           , {noremap=true,                })
+vim.keymap.set({'n'}    , 'o'               , 'o.<Backspace>'   , {noremap=true,                })
+vim.keymap.set({'n'}    , 'O'               , 'O.<Backspace>'   , {noremap=true,                })
