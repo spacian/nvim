@@ -9,3 +9,4 @@ vim.keymap.set({'n','v'}, '<Leader>y'       , '"zy'	            , {noremap=true,
 vim.keymap.set({'n','v'}, '<Leader>p'       , '"zp'	            , {noremap=true, silent=true,   })
 vim.keymap.set({'i'}    , '<C-p>'           , '<C-o>p'          , {noremap=true,                })
 vim.keymap.set({'i'}    , '<C-l>'           , '<Del>'           , {noremap=true,                })
+vim.keymap.set({'v'}    , 'v'               , 'iw'              , {noremap=true,                })
