@@ -9,6 +9,7 @@ vim.keymap.set({'n','v'}, '<c-u>',
         nvim_feedkeys(':call VSCodeNotify("center-editor-window.center")<enter>')
     end
 )
+
 vim.keymap.set({'n','v'}, '<c-d>',
     function()
         nvim_feedkeys('12j')
