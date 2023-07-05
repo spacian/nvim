@@ -5,13 +5,13 @@ end
 
 vim.keymap.set({'n','v'}, '<C-u>',
     function()
-        nvim_feedkeys('<C-u>')
+        nvim_feedkeys('12k')
         vim.cmd('call VSCodeNotify("center-editor-window.center")')
     end
 )
 vim.keymap.set({'n','v'}, '<C-d>',
     function()
-        nvim_feedkeys('<C-d>')
+        nvim_feedkeys('12j')
         vim.cmd('call VSCodeNotify("center-editor-window.center")')
     end
 )
