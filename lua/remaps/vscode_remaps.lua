@@ -21,13 +21,13 @@ vim.keymap.set({'n','v'}, '<c-d>',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>e',
+vim.keymap.set({'n','v'}, '<leader>fe',
     function()
         vsc_notify('workbench.view.explorer')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>f',
+vim.keymap.set({'n','v'}, '<leader>ff',
     function()
         vsc_notify('workbench.action.findInFiles')
     end
@@ -120,5 +120,53 @@ vim.keymap.set({'n','v'}, '<leader>9',
 vim.keymap.set({'n','v'}, '<leader>0',
     function()
         vsc_notify('workbench.action.lastEditorInGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>fl',
+    function()
+        vsc_notify('workbench.action.focusNextGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>fh',
+    function()
+        vsc_notify('workbench.action.focusPreviousGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>fj',
+    function()
+        vsc_notify('workbench.action.focusBelowGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>fk',
+    function()
+        vsc_notify('workbench.action.focusAboveGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>mk',
+    function()
+        vsc_notify('workbench.action.moveEditorToAboveGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>mj',
+    function()
+        vsc_notify('workbench.action.moveEditorToBelowGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>ml',
+    function()
+        vsc_notify('workbench.action.moveEditorToNextGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>mh',
+    function()
+        vsc_notify('workbench.action.moveEditorToPreviousGroup')
     end
 )
