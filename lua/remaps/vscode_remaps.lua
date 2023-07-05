@@ -50,3 +50,75 @@ vim.keymap.set({'n','v'}, '<leader>r',
         vsc_notify('editor.action.rename')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>h',
+    function()
+        vsc_notify('workbench.action.previousEditor')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>l',
+    function()
+        vsc_notify('workbench.action.nextEditor')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>1',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex1')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>2',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex2')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>3',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex3')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>4',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex4')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>5',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex5')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>6',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex6')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>7',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex7')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>8',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex8')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>9',
+    function()
+        vsc_notify('workbench.action.openEditorAtIndex9')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>0',
+    function()
+        vsc_notify('workbench.action.lastEditorInGroup')
+    end
+)
