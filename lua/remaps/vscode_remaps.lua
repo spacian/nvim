@@ -39,3 +39,9 @@ vim.keymap.set({'n','v'}, '<leader>Q',
         vim.cmd('call VSCodeNotify("workbench.action.closeOtherEditors")')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>r',
+    function()
+        vim.cmd('call VSCodeNotify("editor.action.rename")')
+    end
+)
