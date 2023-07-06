@@ -10,5 +10,5 @@ vim.keymap.set({'i'}    , '<c-l>'           , '<del>'           , {noremap=true,
 vim.keymap.set({'v'}    , 'v'               , 'iw'              , {noremap=true,                })
 vim.keymap.set({'n'}    , 'o'               , 'o.<backspace>'   , {noremap=true,                })
 vim.keymap.set({'n'}    , 'O'               , 'O.<backspace>'   , {noremap=true,                })
-vim.keymap.set({'n'}    , 'q'               , ''                , {noremap=true,                })
-vim.keymap.set({'n'}    , 'Q'               , ''                , {noremap=true,                })
+vim.keymap.set({'n','v'}, 'q'               , ''                , {noremap=true,                })
+vim.keymap.set({'n','v'}, 'Q'               , ''                , {noremap=true,                })
