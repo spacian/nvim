@@ -170,3 +170,23 @@ vim.keymap.set({'n','v'}, '<leader>mh',
         vsc_notify('workbench.action.moveEditorToPreviousGroup')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>d',
+    function()
+        vsc_notify('editor.action.showDefinitionPreviewHover')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<c-i>',
+    function()
+        nvim_feedkeys('<c-i>')
+        vsc_notify('center-editor-window.center')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<c-o>',
+    function()
+        nvim_feedkeys('<c-o>')
+        vsc_notify('center-editor-window.center')
+    end
+)
