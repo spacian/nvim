@@ -1,2 +1,4 @@
 require('remaps.remaps')
-require('remaps.vscode_remaps')
+if vim.g.vscode then
+    require('remaps.vscode_remaps')
+end
