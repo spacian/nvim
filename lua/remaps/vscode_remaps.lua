@@ -177,16 +177,8 @@ vim.keymap.set({'n','v'}, '<leader>d',
     end
 )
 
-vim.keymap.set({'n','v'}, '<c-i>',
+vim.keymap.set({'n','v'}, '<leader><space>',
     function()
-        nvim_feedkeys('<c-i>')
-        vsc_notify('center-editor-window.center')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<c-o>',
-    function()
-        nvim_feedkeys('<c-o>')
         vsc_notify('center-editor-window.center')
     end
 )
