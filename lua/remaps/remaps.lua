@@ -10,5 +10,3 @@ vim.keymap.set({'i'}    , '<c-l>'           , '<del>'           , {noremap=true,
 vim.keymap.set({'v'}    , 'v'               , 'iw'              , {noremap=true,                })
 vim.keymap.set({'n'}    , 'o'               , 'o.<backspace>'   , {noremap=true,                })
 vim.keymap.set({'n'}    , 'O'               , 'O.<backspace>'   , {noremap=true,                })
-vim.keymap.set({'v'}    , 'J'               , ":m '>+1<CR>gv=gv", {                             })
-vim.keymap.set({'v'}    , 'K'               , ":m '<-2<CR>gv=gv", {                             })
