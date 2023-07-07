@@ -171,7 +171,7 @@ vim.keymap.set({'n','v'}, '<leader>mh',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>d',
+vim.keymap.set({'n','v'}, '<leader>i',
     function()
         vsc_notify('editor.action.showDefinitionPreviewHover')
     end
