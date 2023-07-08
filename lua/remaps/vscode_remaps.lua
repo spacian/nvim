@@ -182,3 +182,9 @@ vim.keymap.set({'n','v'}, '<leader><space>',
         vsc_notify('center-editor-window.center')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>ft',
+    function()
+        vsc_notify('workbench.action.terminal.toggleTerminal')
+    end
+)
