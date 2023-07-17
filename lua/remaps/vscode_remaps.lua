@@ -188,3 +188,9 @@ vim.keymap.set({'n','v'}, '<leader>ft',
         vsc_notify('workbench.action.terminal.toggleTerminal')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>fo',
+    function()
+        vsc_notify('outline.focus')
+    end
+)
