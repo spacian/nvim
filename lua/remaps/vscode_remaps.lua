@@ -9,14 +9,14 @@ end
 
 vim.keymap.set({'n','v'}, '<c-u>',
     function()
-        nvim_feedkeys('12k')
+        nvim_feedkeys('10k')
         vsc_notify('center-editor-window.center')
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-d>',
     function()
-        nvim_feedkeys('12j')
+        nvim_feedkeys('10j')
         vsc_notify('center-editor-window.center')
     end
 )
@@ -33,13 +33,13 @@ vim.keymap.set({'n','v'}, '<leader>ff',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>q',
+vim.keymap.set({'n','v'}, '<leader>w',
     function()
         vsc_notify('workbench.action.closeActiveEditor')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>Q',
+vim.keymap.set({'n','v'}, '<leader>W',
     function()
         vsc_notify('workbench.action.closeOtherEditors')
     end
