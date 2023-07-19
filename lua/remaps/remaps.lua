@@ -4,7 +4,6 @@ vim.keymap.set({'n','v'}, '<leader>p'       , '"+p'                , {noremap=tr
 vim.keymap.set({'n','v'}, '<leader>y'       , '"+y'                , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>d'       , '"_d'                , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>n'       , ':nohl<enter>'       , {noremap=true})
-vim.keymap.set({'i'}    , '<c-p>'           , '<c-o>P'             , {noremap=true})
 vim.keymap.set({'i'}    , '<c-l>'           , '<del>'              , {noremap=true})
 vim.keymap.set({'n'}    , 'o'               , 'o.<backspace>'      , {noremap=true})
 vim.keymap.set({'n'}    , 'O'               , 'O.<backspace>'      , {noremap=true})
