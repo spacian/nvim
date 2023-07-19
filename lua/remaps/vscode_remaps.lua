@@ -208,3 +208,15 @@ vim.keymap.set({'n','v'}, '<leader>fo',
         vsc_notify('outline.focus')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>ow',
+    function()
+        vsc_notify('workbench.action.openRecent')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>of',
+    function()
+        vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
+    end
+)
