@@ -8,7 +8,7 @@ function vsc_notify(arg)
 end
 
 function center()
-    nvim_feedkeys(':call <snr>4_reveal("center",0)<enter>')
+    nvim_feedkeys(':call <snr>3_reveal("center",0)<enter>')
 end
 
 vim.keymap.set({'n','v'}, '<c-u>',
