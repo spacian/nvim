@@ -7,31 +7,35 @@ function vsc_notify(arg)
     nvim_feedkeys(string.format(':call VSCodeNotify("%s")<enter>', arg))
 end
 
+function center()
+    vsc_notify('center-editor-window.center')
+end
+
 vim.keymap.set({'n','v'}, '<c-u>',
     function()
         nvim_feedkeys('20k^')
-        vsc_notify('center-editor-window.center')
+        center()
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-d>',
     function()
         nvim_feedkeys('20j^')
-        vsc_notify('center-editor-window.center')
+        center()
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-k>',
     function()
         nvim_feedkeys('10k^')
-        vsc_notify('center-editor-window.center')
+        center()
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-j>',
     function()
         nvim_feedkeys('10j^')
-        vsc_notify('center-editor-window.center')
+        center()
     end
 )
 
@@ -193,7 +197,7 @@ vim.keymap.set({'n','v'}, '<leader>i',
 
 vim.keymap.set({'n','v'}, '<leader><space>',
     function()
-        vsc_notify('center-editor-window.center')
+        center()
     end
 )
 
