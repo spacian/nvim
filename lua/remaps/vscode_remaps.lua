@@ -51,13 +51,13 @@ vim.keymap.set({'n','v'}, '<leader>ff',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>w',
+vim.keymap.set({'n','v'}, '<leader>q',
     function()
         vsc_notify('workbench.action.closeActiveEditor')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>W',
+vim.keymap.set({'n','v'}, '<leader>Q',
     function()
         vsc_notify('workbench.action.closeOtherEditors')
     end
@@ -222,5 +222,11 @@ vim.keymap.set({'n','v'}, '<leader>ow',
 vim.keymap.set({'n','v'}, '<leader>of',
     function()
         vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>s',
+    function()
+        vsc_notify('workbench.action.files.save')
     end
 )
