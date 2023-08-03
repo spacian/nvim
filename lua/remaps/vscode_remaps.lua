@@ -230,3 +230,9 @@ vim.keymap.set({'n','v'}, '<leader>s',
         vsc_notify('workbench.action.files.save')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>fn',
+    function()
+        vsc_notify('extension.advancedNewFile')
+    end
+)
