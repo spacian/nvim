@@ -249,3 +249,15 @@ vim.keymap.set({'n','v'}, '<leader>sl',
         vsc_notify('workbench.action.toggleAuxiliaryBar')
     end
 )
+
+vim.keymap.set({'n','v'}, '<leader>mtl',
+    function()
+        vsc_notify('workbench.action.moveEditorRightInGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>mth',
+    function()
+        vsc_notify('workbench.action.moveEditorLeftInGroup')
+    end
+)
