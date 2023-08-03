@@ -225,7 +225,7 @@ vim.keymap.set({'n','v'}, '<leader>of',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>s',
+vim.keymap.set({'n','v'}, '<leader>sf',
     function()
         vsc_notify('workbench.action.files.save')
     end
@@ -234,5 +234,18 @@ vim.keymap.set({'n','v'}, '<leader>s',
 vim.keymap.set({'n','v'}, '<leader>fn',
     function()
         vsc_notify('extension.advancedNewFile')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>sr',
+    function()
+        vsc_notify('workbench.action.toggleSidebarVisibility')
+    end
+)
+
+
+vim.keymap.set({'n','v'}, '<leader>sl',
+    function()
+        vsc_notify('workbench.action.toggleAuxiliaryBar')
     end
 )
