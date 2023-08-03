@@ -237,7 +237,7 @@ vim.keymap.set({'n','v'}, '<leader>fn',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>sr',
+vim.keymap.set({'n','v'}, '<leader>sh',
     function()
         vsc_notify('workbench.action.toggleSidebarVisibility')
     end
