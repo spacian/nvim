@@ -13,26 +13,12 @@ end
 
 vim.keymap.set({'n','v'}, '<c-u>',
     function()
-        nvim_feedkeys('20k^')
-        center()
-    end
-)
-
-vim.keymap.set({'n','v'}, '<c-d>',
-    function()
-        nvim_feedkeys('20j^')
-        center()
-    end
-)
-
-vim.keymap.set({'n','v'}, '<c-k>',
-    function()
         nvim_feedkeys('10k^')
         center()
     end
 )
 
-vim.keymap.set({'n','v'}, '<c-j>',
+vim.keymap.set({'n','v'}, '<c-d>',
     function()
         nvim_feedkeys('10j^')
         center()
