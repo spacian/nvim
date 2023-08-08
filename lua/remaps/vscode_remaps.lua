@@ -225,7 +225,7 @@ vim.keymap.set({'n','v'}, '<leader>of',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>sf',
+vim.keymap.set({'n'}, '<leader>sf',
     function()
         vsc_notify('workbench.action.files.save')
     end
@@ -237,16 +237,24 @@ vim.keymap.set({'n','v'}, '<leader>fn',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>sh',
+vim.keymap.set({'n','v'}, '<leader>cb',
     function()
-        vsc_notify('workbench.action.toggleSidebarVisibility')
+        vsc_notify('workbench.action.closeSidebar')
+        vsc_notify('workbench.action.closeAuxiliaryBar')
     end
 )
 
 
-vim.keymap.set({'n','v'}, '<leader>sl',
+vim.keymap.set({'n','v'}, '<leader>ch',
     function()
-        vsc_notify('workbench.action.toggleAuxiliaryBar')
+        vsc_notify('workbench.action.closeSidebar')
+    end
+)
+
+
+vim.keymap.set({'n','v'}, '<leader>cl',
+    function()
+        vsc_notify('workbench.action.closeAuxiliaryBar')
     end
 )
 
