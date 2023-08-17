@@ -11,16 +11,30 @@ function center()
     vsc_notify('center-editor-window.center')
 end
 
-vim.keymap.set({'n','v'}, '<c-u>',
+
+vim.keymap.set({'n','v'}, '<c-d>',
     function()
-        nvim_feedkeys('10k^')
+        nvim_feedkeys('20j^')
         center()
     end
 )
 
-vim.keymap.set({'n','v'}, '<c-d>',
+vim.keymap.set({'n','v'}, '<c-u>',
     function()
-        nvim_feedkeys('10j^')
+        nvim_feedkeys('20k^')
+        center()
+    end
+)
+vim.keymap.set({'n','v'}, '<c-k>',
+    function()
+        nvim_feedkeys('5k^')
+        center()
+    end
+)
+
+vim.keymap.set({'n','v'}, '<c-j>',
+    function()
+        nvim_feedkeys('5j^')
         center()
     end
 )
@@ -253,5 +267,11 @@ vim.keymap.set({'n','v'}, '<leader>mtl',
 vim.keymap.set({'n','v'}, '<leader>mth',
     function()
         vsc_notify('workbench.action.moveEditorLeftInGroup')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>fg',
+    function()
+        vsc_notify('workbench.scm.focus')
     end
 )
