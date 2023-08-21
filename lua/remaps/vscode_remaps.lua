@@ -275,3 +275,21 @@ vim.keymap.set({'n','v'}, '<leader>fg',
         vsc_notify('workbench.scm.focus')
     end
 )
+
+
+vim.keymap.set({'n'}, '<leader>sd',
+    function()
+        vsc_notify('workbench.action.decreaseViewSize')
+    end
+)
+vim.keymap.set({'n'}, '<leader>si',
+    function()
+        vsc_notify('workbench.action.increaseViewSize')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>sr',
+    function()
+        vsc_notify('workbench.action.evenEditorWidths')
+    end
+)
