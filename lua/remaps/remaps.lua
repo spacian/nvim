@@ -12,3 +12,5 @@ vim.keymap.set({'n','v'}, 'Q'               , ''                   , {noremap=tr
 vim.keymap.set({'n','v'}, 'J'               , 'mzJ`z'              , {noremap=true})
 vim.keymap.set({'n','v'}, 'K'               , 'a<enter><esc>k$'    , {noremap=true})
 vim.keymap.set({'x'}    , '<leader>sub'     , '"zy<esc>:%s/<c-r>z/', {noremap=true})
+vim.keymap.set({'n','v'}, '0'               , '^'                   , {noremap=true})
+vim.keymap.set({'n','v'}, '^'               , '0'                   , {noremap=true})
