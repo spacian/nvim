@@ -251,7 +251,6 @@ vim.keymap.set({'n','v'}, '<leader>ch',
     end
 )
 
-
 vim.keymap.set({'n','v'}, '<leader>cl',
     function()
         vsc_notify('workbench.action.closeAuxiliaryBar')
