@@ -237,7 +237,7 @@ vim.keymap.set({'n','v'}, '<leader>fn',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>cb',
+vim.keymap.set({'n','v'}, '<leader>cj',
     function()
         vsc_notify('workbench.action.closeSidebar')
         vsc_notify('workbench.action.closeAuxiliaryBar')
@@ -277,7 +277,7 @@ vim.keymap.set({'n','v'}, '<leader>fg',
 )
 
 
-vim.keymap.set({'n'}, '<leader>sd',
+vim.keymap.set({'n'}, '<leader>so',
     function()
         vsc_notify('workbench.action.decreaseViewSize')
     end
