@@ -27,14 +27,14 @@ vim.keymap.set({'n','v'}, '<c-u>',
 )
 vim.keymap.set({'n','v'}, '<c-k>',
     function()
-        nvim_feedkeys('5k^')
+        nvim_feedkeys('5k')
         center()
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-j>',
     function()
-        nvim_feedkeys('5j^')
+        nvim_feedkeys('5j')
         center()
     end
 )
@@ -45,19 +45,19 @@ vim.keymap.set({'n','v'}, '<leader>fe',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>ff',
+vim.keymap.set({'n','v'}, '<leader>fs',
     function()
         vsc_notify('workbench.action.findInFiles')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>q',
+vim.keymap.set({'n','v'}, 'q',
     function()
         vsc_notify('workbench.action.closeActiveEditor')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>Q',
+vim.keymap.set({'n','v'}, 'Q',
     function()
         vsc_notify('workbench.action.closeOtherEditors')
     end
@@ -71,13 +71,27 @@ vim.keymap.set({'n','v'}, '<leader>r',
 
 vim.keymap.set({'n','v'}, '<leader>h',
     function()
-        vsc_notify('workbench.action.previousEditor')
+        if (vim.v.count > 0) then
+            for _ = 1, vim.v.count, 1
+            do
+                vsc_notify('workbench.action.previousEditor')
+            end
+        else
+            vsc_notify('workbench.action.previousEditor')
+        end
     end
 )
 
 vim.keymap.set({'n','v'}, '<leader>l',
     function()
-        vsc_notify('workbench.action.nextEditor')
+        if (vim.v.count > 0) then
+            for _ = 1, vim.v.count, 1
+            do
+                vsc_notify('workbench.action.nextEditor')
+            end
+        else
+            vsc_notify('workbench.action.nextEditor')
+        end
     end
 )
 
@@ -207,6 +221,12 @@ vim.keymap.set({'n','v'}, '<leader>ft',
     end
 )
 
+vim.keymap.set({'n','v'}, '<leader>ct',
+    function()
+        vsc_notify('workbench.action.togglePanel')
+    end
+)
+
 vim.keymap.set({'n','v'}, '<leader>fo',
     function()
         vsc_notify('outline.focus')
@@ -220,6 +240,12 @@ vim.keymap.set({'n','v'}, '<leader>ow',
 )
 
 vim.keymap.set({'n','v'}, '<leader>of',
+    function()
+        vsc_notify('workbench.action.quickOpen')
+    end
+)
+
+vim.keymap.set({'n','v'}, '<leader>or',
     function()
         vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
     end
@@ -259,13 +285,27 @@ vim.keymap.set({'n','v'}, '<leader>cl',
 
 vim.keymap.set({'n','v'}, '<leader>mtl',
     function()
-        vsc_notify('workbench.action.moveEditorRightInGroup')
+        if (vim.v.count > 0) then
+            for _ = 1, vim.v.count, 1
+            do
+                vsc_notify('workbench.action.moveEditorRightInGroup')
+            end
+        else
+            vsc_notify('workbench.action.moveEditorRightInGroup')
+        end
     end
 )
 
 vim.keymap.set({'n','v'}, '<leader>mth',
     function()
-        vsc_notify('workbench.action.moveEditorLeftInGroup')
+        if (vim.v.count > 0) then
+            for _ = 1, vim.v.count, 1
+            do
+                vsc_notify('workbench.action.moveEditorLeftInGroup')
+            end
+        else
+            vsc_notify('workbench.action.moveEditorLeftInGroup')
+        end
     end
 )
 
@@ -278,12 +318,26 @@ vim.keymap.set({'n','v'}, '<leader>fg',
 
 vim.keymap.set({'n'}, '<leader>so',
     function()
-        vsc_notify('workbench.action.decreaseViewSize')
+        if (vim.v.count > 0) then
+            for _ = 1, vim.v.count, 1
+            do
+                vsc_notify('workbench.action.decreaseViewSize')
+            end
+        else
+            vsc_notify('workbench.action.decreaseViewSize')
+        end
     end
 )
 vim.keymap.set({'n'}, '<leader>si',
     function()
-        vsc_notify('workbench.action.increaseViewSize')
+        if (vim.v.count > 0) then
+            for _ = 1, vim.v.count, 1
+            do
+                vsc_notify('workbench.action.increaseViewSize')
+            end
+        else
+            vsc_notify('workbench.action.increaseViewSize')
+        end
     end
 )
 
