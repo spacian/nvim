@@ -16,3 +16,5 @@ vim.keymap.set({'n','v'}, 'H'               , '^'                  , {noremap=tr
 vim.keymap.set({'n','v'}, 'L'               , '$'                  , {noremap=true})
 vim.keymap.set({'n','v'}, 'gg'              , 'gg0'                , {noremap=true})
 vim.keymap.set({'n','v'}, 'G'               , 'G$'                 , {noremap=true})
+vim.keymap.set({'n'}    , 'yall'            , ':%y<enter>'         , {noremap=true})
+vim.keymap.set({'n'}    , '<leader>yall'    , ':%y+<enter>'        , {noremap=true})
