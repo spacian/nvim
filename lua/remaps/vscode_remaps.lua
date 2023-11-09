@@ -328,6 +328,7 @@ vim.keymap.set({'n'}, '<leader>so',
         end
     end
 )
+
 vim.keymap.set({'n'}, '<leader>si',
     function()
         if (vim.v.count > 0) then
@@ -344,5 +345,36 @@ vim.keymap.set({'n'}, '<leader>si',
 vim.keymap.set({'n'}, '<leader>sr',
     function()
         vsc_notify('workbench.action.evenEditorWidths')
+    end
+)
+
+vim.keymap.set({'n'}, 'm',
+    function()
+        vsc_notify('codemarks.createMark')
+    end
+)
+
+vim.keymap.set({'n'}, "'",
+    function()
+        vsc_notify('codemarks.jumpToMark')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, "`",
+    function()
+        vsc_notify('codemarks.jumpToMark')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>mc',
+    function()
+        vsc_notify('codemarks.clearMarksUnderCursor')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>mac',
+    function()
+        vsc_notify('codemarks.clearAllMarks')
     end
 )
