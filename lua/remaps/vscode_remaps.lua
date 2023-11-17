@@ -69,92 +69,6 @@ vim.keymap.set({'n','v'}, '<leader>r',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>h',
-    function()
-        if (vim.v.count > 0) then
-            for _ = 1, vim.v.count, 1
-            do
-                vsc_notify('workbench.action.previousEditor')
-            end
-        else
-            vsc_notify('workbench.action.previousEditor')
-        end
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>l',
-    function()
-        if (vim.v.count > 0) then
-            for _ = 1, vim.v.count, 1
-            do
-                vsc_notify('workbench.action.nextEditor')
-            end
-        else
-            vsc_notify('workbench.action.nextEditor')
-        end
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>1',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex1')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>2',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex2')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>3',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex3')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>4',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex4')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>5',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex5')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>6',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex6')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>7',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex7')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>8',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex8')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>9',
-    function()
-        vsc_notify('workbench.action.openEditorAtIndex9')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>0',
-    function()
-        vsc_notify('workbench.action.lastEditorInGroup')
-    end
-)
-
 vim.keymap.set({'n','v'}, '<leader>fl',
     function()
         vsc_notify('workbench.action.focusNextGroup')
@@ -357,7 +271,6 @@ vim.keymap.set({'n'}, 'm',
 vim.keymap.set({'n'}, "'",
     function()
         vsc_notify('codemarks.jumpToMark')
-        center()
     end
 )
 
@@ -376,5 +289,93 @@ vim.keymap.set({'n'}, '<leader>mc',
 vim.keymap.set({'n'}, '<leader>mac',
     function()
         vsc_notify('codemarks.clearAllMarks')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>ha',
+    function()
+        vsc_notify('vscode-harpoon.addEditor')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>he',
+    function()
+        vsc_notify('vscode-harpoon.editEditors')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>ho',
+    function()
+        vsc_notify('vscode-harpoon.editorQuickPick')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>hp',
+    function()
+        vsc_notify('vscode-harpoon.gotoPreviousHarpoonEditor')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-1>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor1')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-2>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor2')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-3>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor3')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-4>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor4')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-5>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor5')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-6>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor6')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-7>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor7')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-8>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor8')
+        center()
+    end
+)
+
+vim.keymap.set({'n'}, '<c-9>',
+    function()
+        vsc_notify('vscode-harpoon.gotoEditor9')
+        center()
     end
 )
