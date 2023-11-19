@@ -304,7 +304,7 @@ vim.keymap.set({'n'}, '<leader>he',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ho',
+vim.keymap.set({'n'}, '<leader>oh',
     function()
         vsc_notify('vscode-harpoon.editorQuickPick')
     end
