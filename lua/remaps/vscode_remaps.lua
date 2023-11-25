@@ -286,6 +286,12 @@ vim.keymap.set({'n'}, '<leader>mc',
     end
 )
 
+vim.keymap.set({'n'}, '<leader>ml',
+    function()
+        vsc_notify('codemarks.listMarks')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>mac',
     function()
         vsc_notify('codemarks.clearAllMarks')
