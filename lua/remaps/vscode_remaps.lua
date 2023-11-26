@@ -11,20 +11,20 @@ function center()
     vsc_notify('center-editor-window.center')
 end
 
-
 vim.keymap.set({'n','v'}, '<c-d>',
     function()
-        nvim_feedkeys('20j^')
+        nvim_feedkeys('}')
         center()
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-u>',
     function()
-        nvim_feedkeys('20k^')
+        nvim_feedkeys('{')
         center()
     end
 )
+
 vim.keymap.set({'n','v'}, '<c-k>',
     function()
         nvim_feedkeys('5k')
@@ -184,7 +184,6 @@ vim.keymap.set({'n','v'}, '<leader>cj',
     end
 )
 
-
 vim.keymap.set({'n','v'}, '<leader>ch',
     function()
         vsc_notify('workbench.action.closeSidebar')
@@ -228,7 +227,6 @@ vim.keymap.set({'n','v'}, '<leader>fg',
         vsc_notify('workbench.scm.focus')
     end
 )
-
 
 vim.keymap.set({'n'}, '<leader>so',
     function()
