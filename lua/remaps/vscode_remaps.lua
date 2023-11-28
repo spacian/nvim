@@ -39,13 +39,13 @@ vim.keymap.set({'n','v'}, '<c-j>',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fe',
+vim.keymap.set({'n','v'}, '<leader>oe',
     function()
         vsc_notify('workbench.view.explorer')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fs',
+vim.keymap.set({'n','v'}, '<leader>os',
     function()
         vsc_notify('workbench.action.findInFiles')
     end
@@ -129,7 +129,7 @@ vim.keymap.set({'n','v'}, '<leader><space>',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>ft',
+vim.keymap.set({'n','v'}, '<leader>ot',
     function()
         vsc_notify('workbench.action.terminal.toggleTerminal')
     end
@@ -141,7 +141,7 @@ vim.keymap.set({'n','v'}, '<leader>ct',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fo',
+vim.keymap.set({'n','v'}, '<leader>oo',
     function()
         vsc_notify('outline.focus')
     end
@@ -171,7 +171,7 @@ vim.keymap.set({'n'}, '<leader>sf',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fn',
+vim.keymap.set({'n','v'}, '<leader>on',
     function()
         vsc_notify('extension.advancedNewFile')
     end
@@ -222,7 +222,7 @@ vim.keymap.set({'n','v'}, '<leader>mth',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fg',
+vim.keymap.set({'n','v'}, '<leader>og',
     function()
         vsc_notify('workbench.scm.focus')
     end
@@ -314,7 +314,7 @@ vim.keymap.set({'n'}, '<leader>oh',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>hp',
+vim.keymap.set({'n'}, '<leader>hl',
     function()
         vsc_notify('vscode-harpoon.gotoPreviousHarpoonEditor')
         center()
