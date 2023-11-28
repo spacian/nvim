@@ -284,7 +284,7 @@ vim.keymap.set({'n'}, '<leader>mc',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ml',
+vim.keymap.set({'n'}, '<leader>lm',
     function()
         vsc_notify('codemarks.listMarks')
     end
