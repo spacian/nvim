@@ -383,3 +383,15 @@ vim.keymap.set({'n'}, '<c-9>',
         center()
     end
 )
+
+vim.keymap.set({'n'}, 'f',
+    function()
+        vsc_notify('metaGo.gotoBefore')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>v',
+    function()
+        vsc_notify('metaGo.selectAfter')
+    end
+)
