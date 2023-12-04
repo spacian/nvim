@@ -69,49 +69,49 @@ vim.keymap.set({'n','v'}, '<leader>r',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fl',
+vim.keymap.set({'n','v'}, '<leader>gfl',
     function()
         vsc_notify('workbench.action.focusNextGroup')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fh',
+vim.keymap.set({'n','v'}, '<leader>gfh',
     function()
         vsc_notify('workbench.action.focusPreviousGroup')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fj',
+vim.keymap.set({'n','v'}, '<leader>gfj',
     function()
         vsc_notify('workbench.action.focusBelowGroup')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>fk',
+vim.keymap.set({'n','v'}, '<leader>gfk',
     function()
         vsc_notify('workbench.action.focusAboveGroup')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>mk',
+vim.keymap.set({'n','v'}, '<leader>gmk',
     function()
         vsc_notify('workbench.action.moveEditorToAboveGroup')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>mj',
+vim.keymap.set({'n','v'}, '<leader>gmj',
     function()
         vsc_notify('workbench.action.moveEditorToBelowGroup')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>ml',
+vim.keymap.set({'n','v'}, '<leader>gml',
     function()
         vsc_notify('workbench.action.moveEditorToNextGroup')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>mh',
+vim.keymap.set({'n','v'}, '<leader>gmh',
     function()
         vsc_notify('workbench.action.moveEditorToPreviousGroup')
     end
@@ -193,32 +193,6 @@ vim.keymap.set({'n','v'}, '<leader>ch',
 vim.keymap.set({'n','v'}, '<leader>cl',
     function()
         vsc_notify('workbench.action.closeAuxiliaryBar')
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>mtl',
-    function()
-        if (vim.v.count > 0) then
-            for _ = 1, vim.v.count, 1
-            do
-                vsc_notify('workbench.action.moveEditorRightInGroup')
-            end
-        else
-            vsc_notify('workbench.action.moveEditorRightInGroup')
-        end
-    end
-)
-
-vim.keymap.set({'n','v'}, '<leader>mth',
-    function()
-        if (vim.v.count > 0) then
-            for _ = 1, vim.v.count, 1
-            do
-                vsc_notify('workbench.action.moveEditorLeftInGroup')
-            end
-        else
-            vsc_notify('workbench.action.moveEditorLeftInGroup')
-        end
     end
 )
 
