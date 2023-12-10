@@ -7,6 +7,7 @@ vim.keymap.set({'n','v'}, '<leader>n'       , ':nohl<enter>'       , {noremap=tr
 vim.keymap.set({'i'}    , '<c-l>'           , '<del>'              , {noremap=true})
 -- vim.keymap.set({'n'}    , 'o'               , 'o.<backspace>'      , {noremap=true})
 -- vim.keymap.set({'n'}    , 'O'               , 'O.<backspace>'      , {noremap=true})
+vim.keymap.set({'n','v'}, '<c-t>'           , ''                   , {noremap=true})
 vim.keymap.set({'n','v'}, 'q'               , ''                   , {noremap=true})
 vim.keymap.set({'n','v'}, 'Q'               , ''                   , {noremap=true})
 vim.keymap.set({'n','v'}, 'J'               , 'mzJ`z'              , {noremap=true})

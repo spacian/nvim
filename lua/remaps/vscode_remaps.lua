@@ -1,26 +1,15 @@
-function nvim_feedkeys(keys)
-    local feedable_keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
-    vim.api.nvim_feedkeys(feedable_keys, "n", false)
-end
-
-function vsc_notify(arg)
-    nvim_feedkeys(string.format(':call VSCodeNotify("%s")<enter>', arg))
-end
-
-function center()
-    vsc_notify('center-editor-window.center')
-end
+require('remaps.vscode_utils')
 
 vim.keymap.set({'n','v'}, '<c-d>',
     function()
-        nvim_feedkeys('}')
+        nvim_feedkeys('10j')
         center()
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-u>',
     function()
-        nvim_feedkeys('{')
+        nvim_feedkeys('10k')
         center()
     end
 )
