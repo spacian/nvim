@@ -126,7 +126,7 @@ vim.keymap.set({'n','v'}, '<leader>ot',
 
 vim.keymap.set({'n','v'}, '<leader>ct',
     function()
-        vsc_notify('workbench.action.togglePanel')
+        vsc_notify('workbench.action.closePanel')
     end
 )
 
@@ -166,10 +166,11 @@ vim.keymap.set({'n','v'}, '<leader>on',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>cj',
+vim.keymap.set({'n','v'}, '<leader>e',
     function()
         vsc_notify('workbench.action.closeSidebar')
         vsc_notify('workbench.action.closeAuxiliaryBar')
+        vsc_notify('workbench.action.closePanel')
     end
 )
 
