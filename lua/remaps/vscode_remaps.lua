@@ -1,4 +1,15 @@
 require('remaps.vscode_utils')
+require('remaps.vscode_jumps')
+
+vim.keymap.set({'n'}, '<c-o>', jump_back, {})
+vim.keymap.set({'n','v'}, '<c-i>', jump_forw, {noremap=true})
+
+vim.keymap.set({'n','v'}, 'gd',
+    function()
+        register_jump()
+        vsc_notify('editor.action.revealDefinition')
+    end
+)
 
 vim.keymap.set({'n','v'}, '<c-d>',
     function()
@@ -30,18 +41,21 @@ vim.keymap.set({'n','v'}, '<c-j>',
 
 vim.keymap.set({'n','v'}, '<leader>oe',
     function()
+        register_jump()
         vsc_notify('workbench.view.explorer')
     end
 )
 
 vim.keymap.set({'n','v'}, '<leader>os',
     function()
+        register_jump()
         vsc_notify('workbench.action.findInFiles')
     end
 )
 
 vim.keymap.set({'n','v'}, 'q',
     function()
+        register_jump()
         vsc_notify('workbench.action.closeActiveEditor')
     end
 )
@@ -120,6 +134,7 @@ vim.keymap.set({'n','v'}, '<leader><space>',
 
 vim.keymap.set({'n','v'}, '<leader>ot',
     function()
+        register_jump()
         vsc_notify('workbench.action.terminal.toggleTerminal')
     end
 )
@@ -144,12 +159,14 @@ vim.keymap.set({'n','v'}, '<leader>ow',
 
 vim.keymap.set({'n','v'}, '<leader>of',
     function()
+        register_jump()
         vsc_notify('workbench.action.quickOpen')
     end
 )
 
 vim.keymap.set({'n','v'}, '<leader>or',
     function()
+        register_jump()
         vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
     end
 )
@@ -162,6 +179,7 @@ vim.keymap.set({'n'}, '<leader>sf',
 
 vim.keymap.set({'n','v'}, '<leader>on',
     function()
+        register_jump()
         vsc_notify('extension.advancedNewFile')
     end
 )
@@ -188,6 +206,7 @@ vim.keymap.set({'n','v'}, '<leader>cl',
 
 vim.keymap.set({'n','v'}, '<leader>og',
     function()
+        register_jump()
         vsc_notify('workbench.scm.focus')
     end
 )
@@ -268,18 +287,21 @@ vim.keymap.set({'n'}, '<leader>ha',
 
 vim.keymap.set({'n'}, '<leader>he',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.editEditors')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>oh',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.editorQuickPick')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>hl',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoPreviousHarpoonEditor')
         center()
     end
@@ -287,6 +309,7 @@ vim.keymap.set({'n'}, '<leader>hl',
 
 vim.keymap.set({'n'}, '<c-1>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor1')
         center()
     end
@@ -294,6 +317,7 @@ vim.keymap.set({'n'}, '<c-1>',
 
 vim.keymap.set({'n'}, '<c-2>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor2')
         center()
     end
@@ -301,6 +325,7 @@ vim.keymap.set({'n'}, '<c-2>',
 
 vim.keymap.set({'n'}, '<c-3>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor3')
         center()
     end
@@ -308,6 +333,7 @@ vim.keymap.set({'n'}, '<c-3>',
 
 vim.keymap.set({'n'}, '<c-4>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor4')
         center()
     end
@@ -315,6 +341,7 @@ vim.keymap.set({'n'}, '<c-4>',
 
 vim.keymap.set({'n'}, '<c-5>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor5')
         center()
     end
@@ -322,6 +349,7 @@ vim.keymap.set({'n'}, '<c-5>',
 
 vim.keymap.set({'n'}, '<c-6>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor6')
         center()
     end
@@ -329,6 +357,7 @@ vim.keymap.set({'n'}, '<c-6>',
 
 vim.keymap.set({'n'}, '<c-7>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor7')
         center()
     end
@@ -336,6 +365,7 @@ vim.keymap.set({'n'}, '<c-7>',
 
 vim.keymap.set({'n'}, '<c-8>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor8')
         center()
     end
@@ -343,6 +373,7 @@ vim.keymap.set({'n'}, '<c-8>',
 
 vim.keymap.set({'n'}, '<c-9>',
     function()
+        register_jump()
         vsc_notify('vscode-harpoon.gotoEditor9')
         center()
     end
