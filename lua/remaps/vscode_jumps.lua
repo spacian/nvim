@@ -91,3 +91,17 @@ vim.keymap.set({'n'}, '*',
         nvim_feedkeys('*')
     end
 )
+
+vim.keymap.set({'n'}, 'gg',
+    function()
+        register_jump()
+        nvim_feedkeys('gg')
+    end
+)
+
+vim.keymap.set({'n'}, 'G',
+    function()
+        register_jump()
+        nvim_feedkeys('G')
+    end
+)
