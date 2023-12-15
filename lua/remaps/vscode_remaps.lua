@@ -1,8 +1,8 @@
 require('remaps.vscode_utils')
 require('remaps.vscode_jumps')
 
-vim.keymap.set({'n'}, '<c-o>', jump_back, {})
-vim.keymap.set({'n','v'}, '<c-i>', jump_forw, {noremap=true})
+vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
+vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 
 vim.keymap.set({'n','v'}, 'gd',
     function()
