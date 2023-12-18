@@ -95,13 +95,13 @@ vim.keymap.set({'n'}, '*',
 vim.keymap.set({'n'}, 'gg',
     function()
         register_jump()
-        nvim_feedkeys('gg')
+        nvim_feedkeys('gg^')
     end
 )
 
 vim.keymap.set({'n'}, 'G',
     function()
         register_jump()
-        nvim_feedkeys('G')
+        nvim_feedkeys('G$')
     end
 )

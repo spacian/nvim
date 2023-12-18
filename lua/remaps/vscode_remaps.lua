@@ -7,7 +7,8 @@ vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 vim.keymap.set({'n','v'}, 'gd',
     function()
         register_jump()
-        vsc_notify('editor.action.revealDefinition')
+        vsc_call('editor.action.revealDefinition')
+        register_jump()
     end
 )
 
