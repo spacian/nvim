@@ -24,9 +24,9 @@ function register_jump()
 end
 
 function jump_back()
-    vsc_notify('jumplist.jumpBack')
+    vsc_call('jumplist.jumpBack')
 end
 
 function jump_forw()
-    vsc_notify('jumplist.jumpForward')
+    vsc_call('jumplist.jumpForward')
 end
