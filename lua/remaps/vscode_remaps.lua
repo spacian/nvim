@@ -4,7 +4,7 @@ require('remaps.vscode_jumps')
 vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
 vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 
-vim.keymap.set({'n','v'}, 'gd',
+vim.keymap.set({'n'}, 'gd',
     function()
         register_jump()
         vsc_call('editor.action.revealDefinition')
@@ -28,15 +28,13 @@ vim.keymap.set({'n','v'}, '<c-u>',
 
 vim.keymap.set({'n','v'}, '<c-k>',
     function()
-        nvim_feedkeys('5k')
-        center()
+        vsc_notify('scrollLineUp')
     end
 )
 
 vim.keymap.set({'n','v'}, '<c-j>',
     function()
-        nvim_feedkeys('5j')
-        center()
+        vsc_notify('scrollLineDown')
     end
 )
 
