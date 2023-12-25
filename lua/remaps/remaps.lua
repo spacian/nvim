@@ -1,7 +1,9 @@
 vim.g.mapleader=' '
 vim.keymap.set({'v'}    , 'p'               , '"_dP'               , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>p'       , '"+p'                , {noremap=true})
+vim.keymap.set({'n','v'}, '<leader>P'       , '"+P'                , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>y'       , '"+y'                , {noremap=true})
+vim.keymap.set({'n','v'}, '<leader>Y'       , '"+Y'                , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>d'       , '"_d'                , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>n'       , ':nohl<enter>'       , {noremap=true})
 vim.keymap.set({'i'}    , '<c-l>'           , '<del>'              , {noremap=true})
