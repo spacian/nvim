@@ -38,14 +38,14 @@ vim.keymap.set({'n','v'}, '<c-j>',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>oe',
+vim.keymap.set({'n'}, 'ge',
     function()
         register_jump()
         vsc_notify('workbench.view.explorer')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>os',
+vim.keymap.set({'n'}, 'gs',
     function()
         register_jump()
         vsc_notify('workbench.action.findInFiles')
@@ -131,7 +131,7 @@ vim.keymap.set({'n','v'}, '<leader><space>',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>ot',
+vim.keymap.set({'n'}, 'gt',
     function()
         register_jump()
         vsc_notify('workbench.action.terminal.toggleTerminal')
@@ -144,26 +144,26 @@ vim.keymap.set({'n','v'}, '<leader>ct',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>oo',
+vim.keymap.set({'n'}, 'go',
     function()
         vsc_notify('outline.focus')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>ow',
+vim.keymap.set({'n'}, 'gw',
     function()
         vsc_notify('workbench.action.openRecent')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>of',
+vim.keymap.set({'n'}, 'gf',
     function()
         register_jump()
         vsc_notify('workbench.action.quickOpen')
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>or',
+vim.keymap.set({'n'}, 'gr',
     function()
         register_jump()
         vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
@@ -176,7 +176,7 @@ vim.keymap.set({'n'}, '<leader>sf',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>on',
+vim.keymap.set({'n'}, 'gn',
     function()
         register_jump()
         vsc_notify('extension.advancedNewFile')
@@ -203,7 +203,7 @@ vim.keymap.set({'n','v'}, '<leader>cl',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>og',
+vim.keymap.set({'n'}, 'gg',
     function()
         register_jump()
         vsc_notify('workbench.scm.focus')
@@ -291,7 +291,7 @@ vim.keymap.set({'n'}, '<leader>he',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>oh',
+vim.keymap.set({'n'}, 'gh',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.editorQuickPick')
