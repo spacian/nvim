@@ -38,14 +38,14 @@ vim.keymap.set({'n','v'}, '<c-j>',
     end
 )
 
-vim.keymap.set({'n'}, 'ge',
+vim.keymap.set({'n'}, '<leader>oe',
     function()
         register_jump()
         vsc_notify('workbench.view.explorer')
     end
 )
 
-vim.keymap.set({'n'}, 'gs',
+vim.keymap.set({'n'}, '<leader>os',
     function()
         register_jump()
         vsc_notify('workbench.action.findInFiles')
@@ -131,7 +131,7 @@ vim.keymap.set({'n','v'}, '<leader><space>',
     end
 )
 
-vim.keymap.set({'n'}, 'gt',
+vim.keymap.set({'n'}, '<leader>ot',
     function()
         register_jump()
         vsc_notify('workbench.action.terminal.toggleTerminal')
@@ -144,26 +144,26 @@ vim.keymap.set({'n','v'}, '<leader>ct',
     end
 )
 
-vim.keymap.set({'n'}, 'go',
+vim.keymap.set({'n'}, '<leader>oo',
     function()
         vsc_notify('outline.focus')
     end
 )
 
-vim.keymap.set({'n'}, 'gw',
+vim.keymap.set({'n'}, '<leader>ow',
     function()
         vsc_notify('workbench.action.openRecent')
     end
 )
 
-vim.keymap.set({'n'}, 'gf',
+vim.keymap.set({'n'}, '<leader>of',
     function()
         register_jump()
         vsc_notify('workbench.action.quickOpen')
     end
 )
 
-vim.keymap.set({'n'}, 'gr',
+vim.keymap.set({'n'}, '<leader>or',
     function()
         register_jump()
         vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
@@ -176,7 +176,7 @@ vim.keymap.set({'n'}, '<leader>sf',
     end
 )
 
-vim.keymap.set({'n'}, 'gn',
+vim.keymap.set({'n'}, '<leader>on',
     function()
         register_jump()
         vsc_notify('extension.advancedNewFile')
@@ -203,7 +203,7 @@ vim.keymap.set({'n','v'}, '<leader>cl',
     end
 )
 
-vim.keymap.set({'n'}, 'gg',
+vim.keymap.set({'n'}, '<leader>og',
     function()
         register_jump()
         vsc_notify('workbench.scm.focus')
@@ -291,7 +291,7 @@ vim.keymap.set({'n'}, '<leader>he',
     end
 )
 
-vim.keymap.set({'n'}, 'gh',
+vim.keymap.set({'n'}, '<leader>oh',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.editorQuickPick')
@@ -388,5 +388,23 @@ vim.keymap.set({'n'}, 'f',
 vim.keymap.set({'n'}, '<leader>v',
     function()
         vsc_notify('metaGo.selectAfter')
+    end
+)
+
+vim.keymap.set({'n',}, '<leader>ga',
+    function()
+        vsc_notify('git.stage')
+    end
+)
+
+vim.keymap.set({'n',}, '<leader>gu',
+    function()
+        vsc_notify('git.unstage')
+    end
+)
+
+vim.keymap.set({'n',}, '<leader>gc',
+    function()
+        vsc_notify('git.commitStaged')
     end
 )
