@@ -408,3 +408,9 @@ vim.keymap.set({'n',}, '<leader>gc',
         vsc_notify('git.commitStaged')
     end
 )
+
+vim.keymap.set({'n',}, '<leader>oc',
+    function()
+        vsc_notify('workbench.action.showCommands')
+    end
+)

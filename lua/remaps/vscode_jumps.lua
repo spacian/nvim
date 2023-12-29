@@ -46,14 +46,14 @@ vim.keymap.set({'n'}, '*',
     end
 )
 
-vim.keymap.set({'n', 'v'}, 'gg',
+vim.keymap.set({'n'}, 'gg',
     function()
         register_jump()
         nvim_feedkeys('gg^')
     end
 )
 
-vim.keymap.set({'n', 'v'}, 'G',
+vim.keymap.set({'n'}, 'G',
     function()
         register_jump()
         nvim_feedkeys('G$')
