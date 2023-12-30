@@ -1,4 +1,4 @@
-require('remaps.vscode_utils')
+require('remaps.vscode.utils')
 
 vim.keymap.set({'n'}, 'x',
     function()

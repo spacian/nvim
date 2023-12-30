@@ -1,5 +1,5 @@
-require('remaps.vscode_utils')
-require('remaps.vscode_jumps')
+require('remaps.vscode.utils')
+require('remaps.vscode.jumps')
 
 vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
 vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
@@ -41,6 +41,8 @@ vim.keymap.set({'n'}, '<c-j>',
 vim.keymap.set({'n'}, '<leader>oe',
     function()
         register_jump()
+        vsc_notify('workbench.action.closeAuxiliaryBar')
+        vsc_notify('workbench.action.closePanel')
         vsc_notify('workbench.view.explorer')
     end
 )
@@ -128,18 +130,16 @@ vim.keymap.set({'n'}, '<leader><space>',
 vim.keymap.set({'n'}, '<leader>ot',
     function()
         register_jump()
+        vsc_notify('workbench.action.closeSidebar')
+        vsc_notify('workbench.action.closeAuxiliaryBar')
         vsc_notify('workbench.action.terminal.toggleTerminal')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>ct',
-    function()
-        vsc_notify('workbench.action.closePanel')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>oo',
     function()
+        vsc_notify('workbench.action.closeSidebar')
+        vsc_notify('workbench.action.closePanel')
         vsc_notify('outline.focus')
     end
 )
