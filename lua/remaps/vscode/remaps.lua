@@ -408,3 +408,15 @@ vim.keymap.set({'n',}, '<leader>oc',
         vsc_notify('workbench.action.showCommands')
     end
 )
+
+vim.keymap.set({'n',}, '<leader>L',
+    function()
+        vsc_notify('workbench.action.openNextRecentlyUsedEditor')
+    end
+)
+
+vim.keymap.set({'n',}, '<leader>H',
+    function()
+        vsc_notify('workbench.action.openPreviousRecentlyUsedEditor')
+    end
+)
