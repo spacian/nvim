@@ -403,6 +403,18 @@ vim.keymap.set({'n',}, '<leader>gc',
     end
 )
 
+vim.keymap.set({'n',}, '<leader>gp',
+    function()
+        vsc_notify('workbench.action.compareEditor.previousChange')
+    end
+)
+
+vim.keymap.set({'n',}, '<leader>gn',
+    function()
+        vsc_notify('workbench.action.compareEditor.nextChange')
+    end
+)
+
 vim.keymap.set({'n',}, '<leader>oc',
     function()
         vsc_notify('workbench.action.showCommands')
