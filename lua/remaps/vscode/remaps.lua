@@ -372,8 +372,7 @@ vim.keymap.set({'n'}, '<c-9>',
     end
 )
 
-vim.keymap.set({'n','v'}, '<leader>f', 'f', {noremap=true})
-vim.keymap.set({'n'}, 'f',
+vim.keymap.set({'n'}, '<leader>f',
     function()
         vsc_notify('metaGo.gotoBefore')
     end
