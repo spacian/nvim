@@ -41,8 +41,6 @@ vim.keymap.set({'n'}, '<c-j>',
 vim.keymap.set({'n'}, '<leader>oe',
     function()
         register_jump()
-        vsc_notify('workbench.action.closeAuxiliaryBar')
-        vsc_notify('workbench.action.closePanel')
         vsc_notify('workbench.view.explorer')
     end
 )
@@ -130,16 +128,12 @@ vim.keymap.set({'n'}, '<leader><space>',
 vim.keymap.set({'n'}, '<leader>ot',
     function()
         register_jump()
-        vsc_notify('workbench.action.closeSidebar')
-        vsc_notify('workbench.action.closeAuxiliaryBar')
         vsc_notify('workbench.action.terminal.toggleTerminal')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>oo',
     function()
-        vsc_notify('workbench.action.closeSidebar')
-        vsc_notify('workbench.action.closePanel')
         vsc_notify('outline.focus')
     end
 )
