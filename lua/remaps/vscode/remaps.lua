@@ -26,15 +26,29 @@ vim.keymap.set({'n'}, '<c-u>',
     end
 )
 
-vim.keymap.set({'n'}, '<c-k>',
+vim.keymap.set({'n', 'v'}, '<c-k>',
     function()
-        vsc_notify('scrollLineUp')
+        nvim_feedkeys('5k')
     end
 )
 
-vim.keymap.set({'n'}, '<c-j>',
+vim.keymap.set({'n', 'v'}, '<c-j>',
     function()
-        vsc_notify('scrollLineDown')
+        nvim_feedkeys('5j')
+    end
+)
+
+vim.keymap.set({'n', 'v'}, '}',
+    function()
+        nvim_feedkeys('}')
+        center()
+    end
+)
+
+vim.keymap.set({'n', 'v'}, '{',
+    function()
+        nvim_feedkeys('{')
+        center()
     end
 )
 
