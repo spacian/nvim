@@ -1,6 +1,8 @@
 require('remaps.vscode.utils')
 require('remaps.vscode.jumps')
 
+vim.keymap.set({'n'}, '<leader>k', '<plug>VSCodeCommentaryLine', {noremap=true})
+vim.keymap.set({'x'}, '<leader>k', '<plug>VSCodeCommentary', {noremap=true})
 vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
 vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 
@@ -67,6 +69,13 @@ vim.keymap.set({'n'}, '<leader>os',
 )
 
 vim.keymap.set({'n'}, '<c-q>',
+    function()
+        register_jump()
+        vsc_notify('workbench.action.closeActiveEditor')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>q',
     function()
         register_jump()
         vsc_notify('workbench.action.closeActiveEditor')
@@ -392,49 +401,49 @@ vim.keymap.set({'n'}, '<leader>v',
     end
 )
 
-vim.keymap.set({'n',}, '<leader>ga',
+vim.keymap.set({'n'}, '<leader>ga',
     function()
         vsc_notify('git.stage')
     end
 )
 
-vim.keymap.set({'n',}, '<leader>gu',
+vim.keymap.set({'n'}, '<leader>gu',
     function()
         vsc_notify('git.unstage')
     end
 )
 
-vim.keymap.set({'n',}, '<leader>gc',
+vim.keymap.set({'n'}, '<leader>gc',
     function()
         vsc_notify('git.commitStaged')
     end
 )
 
-vim.keymap.set({'n',}, '<leader>gp',
+vim.keymap.set({'n'}, '<leader>gp',
     function()
         vsc_notify('workbench.action.compareEditor.previousChange')
     end
 )
 
-vim.keymap.set({'n',}, '<leader>gn',
+vim.keymap.set({'n'}, '<leader>gn',
     function()
         vsc_notify('workbench.action.compareEditor.nextChange')
     end
 )
 
-vim.keymap.set({'n',}, '<leader>oc',
+vim.keymap.set({'n'}, '<leader>oc',
     function()
         vsc_notify('workbench.action.showCommands')
     end
 )
 
-vim.keymap.set({'n',}, '<leader>L',
+vim.keymap.set({'n'}, '<leader>L',
     function()
         vsc_notify('workbench.action.openNextRecentlyUsedEditor')
     end
 )
 
-vim.keymap.set({'n',}, '<leader>H',
+vim.keymap.set({'n'}, '<leader>H',
     function()
         vsc_notify('workbench.action.openPreviousRecentlyUsedEditor')
     end
