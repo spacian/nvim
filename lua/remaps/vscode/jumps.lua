@@ -56,6 +56,10 @@ vim.keymap.set({'n'}, 'gg',
 vim.keymap.set({'n'}, 'G',
     function()
         register_jump()
-        nvim_feedkeys('G$')
+        if vim.v.count > 0 then
+            nvim_feedkeys(string.format('%dG^', vim.v.count))
+        else
+            nvim_feedkeys('G$')
+        end
     end
 )
