@@ -75,7 +75,7 @@ vim.keymap.set({'n'}, '<leader>fr',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>q',
+vim.keymap.set({'n'}, '<c-q>',
     function()
         register_jump()
         vsc_notify('workbench.action.closeActiveEditor')
@@ -178,12 +178,6 @@ vim.keymap.set({'n'}, '<leader>or',
     function()
         register_jump()
         vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>sf',
-    function()
-        vsc_notify('workbench.action.files.save')
     end
 )
 
