@@ -61,17 +61,17 @@ vim.keymap.set({'n'}, '<leader>oe',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>os',
+vim.keymap.set({'n'}, '<leader>ff',
     function()
         register_jump()
         vsc_notify('search.action.openEditor')
     end
 )
 
-vim.keymap.set({'n'}, '<c-q>',
+vim.keymap.set({'n'}, '<leader>fr',
     function()
         register_jump()
-        vsc_notify('workbench.action.closeActiveEditor')
+        vsc_notify('editor.action.referenceSearch.trigger')
     end
 )
 
@@ -389,7 +389,7 @@ vim.keymap.set({'n'}, '<leader>9',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>f',
+vim.keymap.set({'n'}, '<leader>j',
     function()
         vsc_notify('metaGo.gotoBefore')
     end
