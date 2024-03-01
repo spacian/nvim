@@ -64,7 +64,7 @@ vim.keymap.set({'n'}, '<leader>oe',
 vim.keymap.set({'n'}, '<leader>os',
     function()
         register_jump()
-        vsc_notify('workbench.action.findInFiles')
+        vsc_notify('search.action.openEditor')
     end
 )
 
