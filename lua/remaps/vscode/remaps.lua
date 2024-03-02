@@ -222,6 +222,24 @@ vim.keymap.set({'n'}, '<leader>og',
     end
 )
 
+vim.keymap.set({'n'}, '<leader>osn',
+    function()
+        vsc_notify('gitlens.compareWith')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>ose',
+    function()
+        vsc_notify('gitlens.views.searchAndCompare.focus')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>oso',
+    function()
+        vsc_notify('workbench.action.compareEditor.focusOtherSide')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>so',
     function()
         if (vim.v.count > 0) then
