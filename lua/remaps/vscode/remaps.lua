@@ -57,7 +57,7 @@ vim.keymap.set({'n', 'v'}, '{',
 vim.keymap.set({'n'}, '<leader>oe',
     function()
         register_jump()
-        vsc_notify('workbench.view.explorer')
+        vsc_notify('workbench.explorer.fileView.focus')
     end
 )
 
@@ -212,31 +212,6 @@ vim.keymap.set({'n'}, '<leader>ch',
 vim.keymap.set({'n'}, '<leader>cl',
     function()
         vsc_notify('workbench.action.closeAuxiliaryBar')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>og',
-    function()
-        register_jump()
-        vsc_notify('workbench.scm.focus')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>osn',
-    function()
-        vsc_notify('gitlens.compareWith')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>ose',
-    function()
-        vsc_notify('gitlens.views.searchAndCompare.focus')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>oso',
-    function()
-        vsc_notify('workbench.action.compareEditor.focusOtherSide')
     end
 )
 
@@ -417,6 +392,32 @@ vim.keymap.set({'n'}, '<leader>j',
 vim.keymap.set({'n'}, '<leader>v',
     function()
         vsc_notify('metaGo.selectAfter')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>gg',
+    function()
+        register_jump()
+        vsc_notify('workbench.scm.focus')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>gv',
+    function()
+        vsc_notify('git.viewHistory')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>ge',
+    function()
+        register_jump()
+        vsc_notify('compareCommitViewProvider.focus')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>go',
+    function()
+        vsc_notify('workbench.action.compareEditor.focusOtherSide')
     end
 )
 
