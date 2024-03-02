@@ -61,6 +61,13 @@ vim.keymap.set({'n'}, '<leader>oe',
     end
 )
 
+vim.keymap.set({'n'}, '<leader>fs',
+    function()
+        register_jump()
+        vsc_notify('workbench.action.showAllSymbols')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>ff',
     function()
         register_jump()
