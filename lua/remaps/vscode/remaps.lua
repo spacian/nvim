@@ -395,7 +395,7 @@ vim.keymap.set({'n'}, '<leader>v',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gg',
+vim.keymap.set({'n'}, '<leader>og',
     function()
         register_jump()
         vsc_notify('workbench.scm.focus')
