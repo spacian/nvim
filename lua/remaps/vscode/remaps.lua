@@ -439,6 +439,12 @@ vim.keymap.set({'n'}, '<leader>gc',
     end
 )
 
+vim.keymap.set({'n'}, '<leader>gs',
+    function()
+        vsc_notify('editor.action.dirtydiff.next')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>gp',
     function()
         vsc_notify('workbench.action.compareEditor.previousChange')
