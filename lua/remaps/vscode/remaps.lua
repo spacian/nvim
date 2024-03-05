@@ -442,12 +442,14 @@ vim.keymap.set({'n'}, '<leader>gc',
 vim.keymap.set({'n'}, '<leader>gp',
     function()
         vsc_notify('workbench.action.compareEditor.previousChange')
+        vsc_notify('workbench.action.editor.previousChange')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>gn',
     function()
         vsc_notify('workbench.action.compareEditor.nextChange')
+        vsc_notify('workbench.action.editor.nextChange')
     end
 )
 
