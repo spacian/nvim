@@ -10,7 +10,6 @@ vim.keymap.set({'n'}, 'gd',
     function()
         register_jump()
         vsc_call('editor.action.revealDefinition')
-        register_jump()
     end
 )
 
@@ -164,6 +163,7 @@ vim.keymap.set({'n'}, '<leader>ot',
 
 vim.keymap.set({'n'}, '<leader>oo',
     function()
+        register_jump()
         vsc_notify('outline.focus')
     end
 )
@@ -383,7 +383,7 @@ vim.keymap.set({'n'}, '<leader>9',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>j',
+vim.keymap.set({'n'}, '<leader>fc',
     function()
         vsc_notify('metaGo.gotoBefore')
     end
@@ -404,6 +404,7 @@ vim.keymap.set({'n'}, '<leader>og',
 
 vim.keymap.set({'n'}, '<leader>gv',
     function()
+        register_jump()
         vsc_notify('git.viewHistory')
     end
 )
@@ -441,12 +442,14 @@ vim.keymap.set({'n'}, '<leader>gc',
 
 vim.keymap.set({'n'}, '<leader>gs',
     function()
+        register_jump()
         vsc_notify('editor.action.dirtydiff.next')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>gp',
     function()
+        register_jump()
         vsc_notify('workbench.action.compareEditor.previousChange')
         vsc_notify('workbench.action.editor.previousChange')
     end
@@ -454,6 +457,7 @@ vim.keymap.set({'n'}, '<leader>gp',
 
 vim.keymap.set({'n'}, '<leader>gn',
     function()
+        register_jump()
         vsc_notify('workbench.action.compareEditor.nextChange')
         vsc_notify('workbench.action.editor.nextChange')
     end
@@ -461,18 +465,21 @@ vim.keymap.set({'n'}, '<leader>gn',
 
 vim.keymap.set({'n'}, '<leader>oc',
     function()
+        register_jump()
         vsc_notify('workbench.action.showCommands')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>L',
     function()
+        register_jump()
         vsc_notify('workbench.action.openNextRecentlyUsedEditor')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>H',
     function()
+        register_jump()
         vsc_notify('workbench.action.openPreviousRecentlyUsedEditor')
     end
 )
