@@ -19,14 +19,17 @@ function center()
     vsc_notify('center-editor-window.center')
 end
 
-function register_jump()
-    vsc_call('jumplist.registerJump')
+function register_jump(i)
+    i = i or ''
+    vsc_call('jumplist.registerJump' .. i)
 end
 
-function jump_back()
-    vsc_call('jumplist.jumpBack')
+function jump_back(i)
+    i = i or ''
+    vsc_call('jumplist.jumpBack' .. i)
 end
 
-function jump_forw()
-    vsc_call('jumplist.jumpForward')
+function jump_forw(i)
+    i = i or ''
+    vsc_call('jumplist.jumpForward' .. i)
 end

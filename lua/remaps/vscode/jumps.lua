@@ -15,6 +15,7 @@ vim.keymap.set({'i'}, '<escape>',
     function()
         nvim_feedkeys('<escape>')
         register_jump()
+        register_jump(1)
     end
 )
 

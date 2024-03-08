@@ -468,3 +468,17 @@ vim.keymap.set({'n'}, '<leader>H',
         vsc_notify('workbench.action.openPreviousRecentlyUsedEditor')
     end
 )
+
+vim.keymap.set({'n'}, 'gi',
+    function()
+        register_jump()
+        jump_forw(1)
+    end
+)
+
+vim.keymap.set({'n'}, 'go',
+    function()
+        register_jump()
+        jump_back(1)
+    end
+)
