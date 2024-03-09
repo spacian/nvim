@@ -228,7 +228,7 @@ vim.keymap.set({'n'}, '<leader>mc',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>lm',
+vim.keymap.set({'n'}, '<leader>ml',
     function()
         vsc_notify('codemarks.listMarks')
     end
@@ -337,18 +337,6 @@ vim.keymap.set({'n'}, '<leader>9',
         register_jump()
         vsc_notify('vscode-harpoon.gotoEditor9')
         center()
-    end
-)
-
-vim.keymap.set({'n'}, '<c-f>',
-    function()
-        vsc_notify('metaGo.gotoBefore')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>v',
-    function()
-        vsc_notify('metaGo.selectAfter')
     end
 )
 

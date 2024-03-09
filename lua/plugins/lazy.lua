@@ -14,12 +14,15 @@ require("lazy").setup({
     {
         "kylechui/nvim-surround",
         version = "*",
-        event = "VimEnter",
     },
     {
         "gbprod/substitute.nvim",
         version = "*",
-        event = "VimEnter",
+        opts = {},
+    },
+    {
+        'smoka7/hop.nvim',
+        version = "*",
         opts = {},
     },
 })
