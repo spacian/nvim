@@ -27,26 +27,15 @@ vim.keymap.set({'n'}, '<c-u>',
     end
 )
 
-vim.keymap.set({'n', 'v'}, '<c-k>',
-    function()
-        nvim_feedkeys('5k')
-    end
-)
 
-vim.keymap.set({'n', 'v'}, '<c-j>',
-    function()
-        nvim_feedkeys('5j')
-    end
-)
-
-vim.keymap.set({'n', 'v'}, '}',
+vim.keymap.set({'n'}, '}',
     function()
         nvim_feedkeys('}')
         center()
     end
 )
 
-vim.keymap.set({'n', 'v'}, '{',
+vim.keymap.set({'n'}, '{',
     function()
         nvim_feedkeys('{')
         center()
@@ -215,38 +204,6 @@ vim.keymap.set({'n'}, '<leader>cl',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>so',
-    function()
-        if (vim.v.count > 0) then
-            for _ = 1, vim.v.count, 1
-            do
-                vsc_notify('workbench.action.decreaseViewSize')
-            end
-        else
-            vsc_notify('workbench.action.decreaseViewSize')
-        end
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>si',
-    function()
-        if (vim.v.count > 0) then
-            for _ = 1, vim.v.count, 1
-            do
-                vsc_notify('workbench.action.increaseViewSize')
-            end
-        else
-            vsc_notify('workbench.action.increaseViewSize')
-        end
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>sr',
-    function()
-        vsc_notify('workbench.action.evenEditorWidths')
-    end
-)
-
 vim.keymap.set({'n'}, 'm',
     function()
         vsc_notify('codemarks.createMark')
@@ -383,7 +340,7 @@ vim.keymap.set({'n'}, '<leader>9',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>fc',
+vim.keymap.set({'n'}, '<c-f>',
     function()
         vsc_notify('metaGo.gotoBefore')
     end
@@ -467,20 +424,6 @@ vim.keymap.set({'n'}, '<leader>oc',
     function()
         register_jump()
         vsc_notify('workbench.action.showCommands')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>L',
-    function()
-        register_jump()
-        vsc_notify('workbench.action.openNextRecentlyUsedEditor')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>H',
-    function()
-        register_jump()
-        vsc_notify('workbench.action.openPreviousRecentlyUsedEditor')
     end
 )
 
