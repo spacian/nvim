@@ -184,7 +184,7 @@ vim.keymap.set({'n'}, '<leader>on',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>e',
+vim.keymap.set({'n'}, '<leader>u',
     function()
         vsc_notify('workbench.action.closeSidebar')
         vsc_notify('workbench.action.closeAuxiliaryBar')
