@@ -137,12 +137,6 @@ vim.keymap.set({'n'}, '<leader>i',
     end
 )
 
-vim.keymap.set({'n'}, '<leader><space>',
-    function()
-        center()
-    end
-)
-
 vim.keymap.set({'n'}, '<leader>ot',
     function()
         register_jump()
@@ -184,7 +178,7 @@ vim.keymap.set({'n'}, '<leader>on',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>u',
+vim.keymap.set({'n'}, '<leader><space>',
     function()
         vsc_notify('workbench.action.closeSidebar')
         vsc_notify('workbench.action.closeAuxiliaryBar')
