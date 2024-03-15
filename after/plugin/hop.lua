@@ -9,14 +9,16 @@ vim.keymap.set('n', 'f',
         hop.hint_char1({
             direction = directions.AFTER_CURSOR,
             current_line_only = true })
-    end, {remap=true})
+    end, {remap=true}
+)
 
 vim.keymap.set('n', 'F',
     function()
         hop.hint_char1({
             direction = directions.BEFORE_CURSOR,
             current_line_only = true })
-    end, {remap=true})
+    end, {remap=true}
+)
 
 vim.keymap.set('n', 't',
     function()
@@ -24,7 +26,8 @@ vim.keymap.set('n', 't',
             direction = directions.AFTER_CURSOR,
             current_line_only = true,
             hint_offset = -1 })
-    end, {remap=true})
+    end, {remap=true}
+)
 
 vim.keymap.set('n', 'T',
     function()
@@ -32,7 +35,8 @@ vim.keymap.set('n', 'T',
             direction = directions.BEFORE_CURSOR,
             current_line_only = true,
             hint_offset = 1 })
-    end, {remap=true})
+    end, {remap=true}
+)
 
 vim.keymap.set('n', '<leader>e',
     function()
@@ -40,14 +44,16 @@ vim.keymap.set('n', '<leader>e',
             direction = directions.AFTER_CURSOR,
             current_line_only = true,
             hint_position = position.END })
-    end, {remap=true})
+    end, {remap=true}
+)
 
 vim.keymap.set('n', '<leader>w',
     function()
         hop.hint_words({
             direction = directions.AFTER_CURSOR,
             current_line_only = true })
-    end, {remap=true})
+    end, {remap=true}
+)
 
 vim.keymap.set('n', '<leader>jl',
     function()
