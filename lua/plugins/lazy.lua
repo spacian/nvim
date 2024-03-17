@@ -25,4 +25,22 @@ require("lazy").setup({
         version = "*",
         opts = {},
     },
+    {
+        "natecraddock/workspaces.nvim",
+        version = "*",
+        opts = {},
+        enabled = not vim.g.vscode,
+    },
+    {
+        "stevearc/oil.nvim",
+        version = "*",
+        opts = {},
+        enabled = not vim.g.vscode,
+    },
+    {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.6',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        enabled = not vim.g.vscode,
+    },
 })
