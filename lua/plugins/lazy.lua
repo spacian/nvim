@@ -38,9 +38,23 @@ require("lazy").setup({
         enabled = not vim.g.vscode,
     },
     {
-        'nvim-telescope/telescope.nvim',
+        "nvim-telescope/telescope.nvim",
         tag = '0.1.6',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = { "nvim-lua/plenary.nvim" },
         enabled = not vim.g.vscode,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        version = "*",
+        enabled = not vim.g.vscode,
+    },
+    {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x',
+        dependencies = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/nvim-cmp',
+            'L3MON4D3/LuaSnip',
+         },
     },
 })
