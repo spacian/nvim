@@ -1,8 +1,8 @@
-- [ ] theme
-- [ ] syntax highlighting / treesitter
 - [ ] python venv
 - [ ] git
 
+- [x] theme
+- [x] syntax highlighting / treesitter
 - [x] spell check
 - [x] telescope with workspaces
     - require("telescope").load_extension("workspaces")
@@ -15,5 +15,6 @@
 - [x] autosave
 - [x] remove trailing whitespace
 
-- fd, fzf, rg (ripgrep)
+- rg (ripgrep)
 - npm i -g pyright
+- buildtools x64

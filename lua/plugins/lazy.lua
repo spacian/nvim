@@ -62,4 +62,14 @@ require("lazy").setup({
         version = "*",
         enabled = not vim.g.vscode,
     },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        version = "*",
+        enabled = not vim.g.vscode,
+    },
+    {
+        "rebelot/kanagawa.nvim",
+        version = "*",
+        enabled = not vim.g.vscode,
+    },
 })
