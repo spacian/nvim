@@ -1,13 +1,13 @@
 - [ ] theme
 - [ ] syntax highlighting / treesitter
 - [ ] python venv
-- [ ] grapple / harpoon2
 - [ ] git
-- [ ] telescope with workspaces
+
+- [x] spell check
+- [x] telescope with workspaces
     - require("telescope").load_extension("workspaces")
     - :Telescope workspaces
-- [ ] spell check
-
+- [x] grapple / harpoon2
 - [x] telescope
 - [x] lsps: python
 - [x] formatters: python

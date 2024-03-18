@@ -57,4 +57,9 @@ require("lazy").setup({
             'L3MON4D3/LuaSnip',
          },
     },
+    {
+        "cbochs/grapple.nvim",
+        version = "*",
+        enabled = not vim.g.vscode,
+    },
 })
