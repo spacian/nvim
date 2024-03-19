@@ -26,9 +26,9 @@ require("lazy").setup({
         opts = {},
     },
     {
-        "natecraddock/workspaces.nvim",
-        version = "*",
-        opts = {},
+        "olimorris/persisted.nvim",
+        lazy = false,
+        config = true,
         enabled = not vim.g.vscode,
     },
     {
@@ -56,6 +56,7 @@ require("lazy").setup({
             'hrsh7th/nvim-cmp',
             'L3MON4D3/LuaSnip',
          },
+        enabled = not vim.g.vscode,
     },
     {
         "cbochs/grapple.nvim",

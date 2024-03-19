@@ -9,6 +9,6 @@ if not vim.g.vscode then
     })
     vim.keymap.set("n", "<leader>oe",
         function()
-        vim.cmd("silent e .")
+        vim.cmd("silent e %:h")
         end, { noremap = true })
 end

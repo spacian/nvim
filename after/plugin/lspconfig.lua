@@ -1,6 +1,16 @@
 if not vim.g.vscode then
     local lspconfig = require('lspconfig')
-    lspconfig.pyright.setup({})
+    lspconfig.pyright.setup({
+        settings = {
+            python = {
+                analysis = {
+                    typeCheckingMode = "strict",
+                    autoSearchPaths = true,
+                    useLibraryCodeForTypes = true,
+                }
+            }
+        }
+    })
 
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
