@@ -88,4 +88,13 @@ require("lazy").setup({
         },
         enabled = not vim.g.vscode,
     },
+    {
+        'linux-cultist/venv-selector.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'nvim-telescope/telescope.nvim',
+            'mfussenegger/nvim-dap-python',
+        },
+        enabled = not vim.g.vscode,
+    },
 })
