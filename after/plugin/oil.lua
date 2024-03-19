@@ -13,7 +13,12 @@ if not vim.g.vscode then
     })
     vim.keymap.set("n", "<leader>oe",
         function()
-            vim.cmd("silent e %:h")
+            local bufname = vim.fn.expand("%")
+            if bufname ~= "" then
+                vim.cmd("silent e %:h")
+            else
+                vim.cmd("silent e .")
+            end
         end, { noremap = true })
     vim.keymap.set("n", "<leader>cd",
         function()
