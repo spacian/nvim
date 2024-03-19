@@ -4,7 +4,7 @@ if not vim.g.vscode then
     require('autocmd')
     vim.api.nvim_exec('set spell', true)
 end
-if vim.fn.has("windows") then
+if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.api.nvim_exec('language en_US', true)
 end
 vim.api.nvim_exec('set nohlsearch', true)
