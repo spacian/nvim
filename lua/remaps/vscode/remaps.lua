@@ -262,7 +262,7 @@ vim.keymap.set({'n'}, '<leader>hl',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>1',
+vim.keymap.set({'n'}, '<c-j>',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.gotoEditor1')
@@ -270,7 +270,7 @@ vim.keymap.set({'n'}, '<leader>1',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>2',
+vim.keymap.set({'n'}, '<c-k>',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.gotoEditor2')
@@ -278,58 +278,10 @@ vim.keymap.set({'n'}, '<leader>2',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>3',
+vim.keymap.set({'n'}, '<c-l>',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.gotoEditor3')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>4',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor4')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>5',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor5')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>6',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor6')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>7',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor7')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>8',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor8')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>9',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor9')
         center()
     end
 )
