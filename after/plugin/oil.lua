@@ -7,6 +7,9 @@ if not vim.g.vscode then
             ["-"] = "actions.parent",
         },
         use_default_keymaps = false,
+        view_options = {
+            show_hidden = true,
+        },
     })
     vim.keymap.set("n", "<leader>oe",
         function()
