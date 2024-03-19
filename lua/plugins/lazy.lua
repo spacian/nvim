@@ -75,6 +75,7 @@ require("lazy").setup({
     },
     {
         "kdheepak/lazygit.nvim",
+        version = "*",
     	cmd = {
     		"LazyGit",
     		"LazyGitConfig",
@@ -85,5 +86,6 @@ require("lazy").setup({
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
+        enabled = not vim.g.vscode,
     },
 })

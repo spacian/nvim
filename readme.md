@@ -1,6 +1,6 @@
 - [ ] python venv
-- [ ] git
 
+- [x] git
 - [x] theme
 - [x] syntax highlighting / treesitter
 - [x] spell check
