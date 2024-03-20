@@ -13,17 +13,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         "kylechui/nvim-surround",
-        version = "*",
     },
     {
         "gbprod/substitute.nvim",
-        version = "*",
-        opts = {},
     },
     {
         'smoka7/hop.nvim',
-        version = "*",
-        opts = {},
     },
     {
         "olimorris/persisted.nvim",
@@ -33,8 +28,6 @@ require("lazy").setup({
     },
     {
         "stevearc/oil.nvim",
-        version = "*",
-        opts = {},
         enabled = not vim.g.vscode,
     },
     {
@@ -45,7 +38,6 @@ require("lazy").setup({
     },
     {
         "neovim/nvim-lspconfig",
-        version = "*",
         enabled = not vim.g.vscode,
     },
     {
@@ -60,22 +52,18 @@ require("lazy").setup({
     },
     {
         "cbochs/grapple.nvim",
-        version = "*",
         enabled = not vim.g.vscode,
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        version = "*",
         enabled = not vim.g.vscode,
     },
     {
         "rebelot/kanagawa.nvim",
-        version = "*",
         enabled = not vim.g.vscode,
     },
     {
         "kdheepak/lazygit.nvim",
-        version = "*",
     	cmd = {
     		"LazyGit",
     		"LazyGitConfig",
@@ -83,14 +71,11 @@ require("lazy").setup({
     		"LazyGitFilter",
     		"LazyGitFilterCurrentFile",
     	},
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
+        dependencies = { "nvim-lua/plenary.nvim", },
         enabled = not vim.g.vscode,
     },
     {
         'linux-cultist/venv-selector.nvim',
-        version = "*",
         dependencies = {
             'neovim/nvim-lspconfig',
             'nvim-telescope/telescope.nvim',
@@ -100,14 +85,11 @@ require("lazy").setup({
     },
     {
         'lervag/vimtex',
-        version = "*",
-        init = function()
-        end,
+        init = function() end,
         enabled = not vim.g.vscode,
     },
     {
         "micangl/cmp-vimtex",
-        version = "*",
         enabled = not vim.g.vscode,
     },
     {
@@ -115,6 +97,11 @@ require("lazy").setup({
         dependencies = "nvim-lua/plenary.nvim",
         config = true,
         keys = { { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" }, },
+        enabled = not vim.g.vscode,
+    },
+    {
+        'numToStr/Comment.nvim',
+        lazy = false,
         enabled = not vim.g.vscode,
     },
 })
