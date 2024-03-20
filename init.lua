@@ -6,6 +6,8 @@ if not vim.g.vscode then
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.api.nvim_exec('language en_US', true)
+else
+    set colorcolumn=+1
 end
 vim.api.nvim_exec('set nohlsearch', true)
 vim.api.nvim_exec('set ignorecase', true)
