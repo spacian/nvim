@@ -14,7 +14,7 @@ if not vim.g.vscode then
             ['<c-l>'] = cmp.mapping(
                 function()
                     if cmp.visible() then
-                        cmp.confirm({select = false})
+                        cmp.confirm({select = true})
                     else
                         cmp.complete()
                     end
