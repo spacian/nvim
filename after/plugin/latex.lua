@@ -6,4 +6,5 @@ if not vim.g.vscode then
             { name = 'buffer' },
       },
     })
+    vim.g.vimtex_compiler_latexmk = { out_dir = 'build'}
 end
