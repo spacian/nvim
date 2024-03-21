@@ -3,7 +3,7 @@
   "LuaSnip": { "branch": "master", "commit": "a7a4b4682c4b3e2ba82b82a4e6e5f5a0e79dec32" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
   "cmp-vimtex": { "branch": "master", "commit": "613fbfc54d9488252b0b0289d6d1d60242513558" },
-  "grapple.nvim": { "branch": "main", "commit": "b381b690fc112acb7f89573e0052ffccb2818ab7" },
+  "grapple.nvim": { "branch": "main", "commit": "b2b058606ce2ef4c9cb2ca133bb649aca648ecd1" },
   "hop.nvim": { "branch": "master", "commit": "6d853addd6e11df8338b26e869a29b36f2c3e893" },
   "kanagawa.nvim": { "branch": "master", "commit": "bfa818c7bf6259152f1d89cf9fbfba3554c93695" },
   "lazy.nvim": { "branch": "main", "commit": "83493db50a434a4c5c648faf41e2ead80f96e478" },
