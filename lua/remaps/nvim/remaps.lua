@@ -16,7 +16,15 @@ vim.keymap.set({'', 'l', 't'}, '<c-a-j>', [[<c-\><c-n><c-w>J]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<c-a-k>', [[<c-\><c-n><c-w>K]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<c-a-l>', [[<c-\><c-n><c-w>L]], {noremap=true})
 if vim.loop.os_uname().sysname == "Windows_NT" then
-    vim.keymap.set({'n'}, '<leader>otw', ':vsplit term://<enter>acls<enter>', {noremap=true})
+    vim.keymap.set({'n'}, '<leader>otw', 
+        function()
+            vim.cmd('vsplit')
+            vim.cmd('term')
+            vim.fn.feedkeys('a')
+            vim.fn.feedkeys(
+                'cls' .. vim.api.nvim_replace_termcodes('<enter>', true, true, true)
+            )
+        end, {noremap=true})
     vim.keymap.set(
         {'t'},
         '<a-e>',
