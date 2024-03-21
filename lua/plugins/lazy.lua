@@ -70,6 +70,17 @@ require("lazy").setup({
         priority = 1000,
     },
     {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        lazy = false,
+        priority = 1000,
+    },
+    {
+        "EdenEast/nightfox.nvim",
+        lazy = false,
+        priority = 1000,
+    },
+    {
         "kdheepak/lazygit.nvim",
     	cmd = {
     		"LazyGit",
