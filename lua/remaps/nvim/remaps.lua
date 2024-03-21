@@ -7,10 +7,24 @@ vim.keymap.set({'', 'l', 't'}, '<a-h>', [[<c-\><c-n><c-w>h]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<a-j>', [[<c-\><c-n><c-w>j]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<a-k>', [[<c-\><c-n><c-w>k]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<a-l>', [[<c-\><c-n><c-w>l]], {noremap=true})
-vim.keymap.set(
-    {'t'},
-    '<a-e>',
-    [[python3 -c "import sys; print(sys.executable)"<enter>]],
-    {noremap=true}
-)
-vim.keymap.set({'n'}, '<leader>otw', ':vsplit term://bash<enter>a', {noremap=true})
+vim.keymap.set({'', 'l', 't'}, '<c-a-h>', [[<c-\><c-n><c-w>H]], {noremap=true})
+vim.keymap.set({'', 'l', 't'}, '<c-a-j>', [[<c-\><c-n><c-w>J]], {noremap=true})
+vim.keymap.set({'', 'l', 't'}, '<c-a-k>', [[<c-\><c-n><c-w>K]], {noremap=true})
+vim.keymap.set({'', 'l', 't'}, '<c-a-l>', [[<c-\><c-n><c-w>L]], {noremap=true})
+if vim.loop.os_uname().sysname == "Windows_NT" then
+    vim.keymap.set({'n'}, '<leader>otw', ':vsplit term://<enter>acls<enter>', {noremap=true})
+    vim.keymap.set(
+        {'t'},
+        '<a-e>',
+        [[python -c "import sys; print(sys.executable)"<enter>]],
+        {noremap=true}
+    )
+else
+    vim.keymap.set({'n'}, '<leader>otw', ':vsplit term://<enter>a', {noremap=true})
+    vim.keymap.set(
+        {'t'},
+        '<a-e>',
+        [[python3 -c "import sys; print(sys.executable)"<enter>]],
+        {noremap=true}
+    )
+end

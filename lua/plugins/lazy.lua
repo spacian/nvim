@@ -61,6 +61,13 @@ require("lazy").setup({
     {
         "rebelot/kanagawa.nvim",
         enabled = not vim.g.vscode,
+        lazy = false,
+        priority = 1000,
+    },
+    {
+        "craftzdog/solarized-osaka.nvim",
+        lazy = false,
+        priority = 1000,
     },
     {
         "kdheepak/lazygit.nvim",

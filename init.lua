@@ -7,10 +7,11 @@ if not vim.g.vscode then
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.api.nvim_exec('language en_US', true)
+    vim.api.nvim_exec('set shell=cmd.exe', true)
 else
     vim.api.nvim_exec('set wildignorecase', true)
-    vim.api.nvim_exec('set splitright', true)
 end
+vim.api.nvim_exec('set splitright', true)
 vim.api.nvim_exec('set timeoutlen=2250', true)
 vim.api.nvim_exec('set nohlsearch', true)
 vim.api.nvim_exec('set ignorecase', true)
