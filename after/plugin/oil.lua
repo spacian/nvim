@@ -30,4 +30,18 @@ if not vim.g.vscode then
             end
             print("current working directory: "..vim.fn.getcwd())
         end, { noremap = true })
+    vim.keymap.set(
+        'n',
+        '<leader>otf',
+        function()
+            local cwd = oil.get_current_dir()
+            if cwd == nil then
+                local path = vim.fn.expand("%:p:h")
+                vim.cmd('vsplit term://bash')
+                vim.cmd('startinsert')
+                vim.cmd('call feedkeys("cd ' .. path .. '\\nclear\\n")')
+            end
+        end,
+        {noremap=true}
+    )
 end
