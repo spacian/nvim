@@ -31,4 +31,5 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>or', builtin.oldfiles)
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find)
     vim.keymap.set('n', '<leader>otl', builtin.resume)
+    vim.keymap.set('n', '<leader>ocs', builtin.colorscheme)
 end
