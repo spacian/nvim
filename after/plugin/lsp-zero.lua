@@ -5,7 +5,6 @@ if not vim.g.vscode then
             lsp_zero.default_keymaps({buffer = bufnr})
         end
     )
-    vim.keymap.set('n', 'gr', ':Telescope lsp_references<enter>', {buffer = bufnr})
     local cmp = require('cmp')
     local cmp_format = require('lsp-zero').cmp_format({details = true})
     cmp.setup({
