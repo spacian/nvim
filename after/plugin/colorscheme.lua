@@ -23,6 +23,7 @@ if not vim.g.vscode then
             light = "lotus"
         },
     })
+
     require("solarized-osaka").setup({
         transparent = false,
         terminal_colors = true,
@@ -42,25 +43,26 @@ if not vim.g.vscode then
         on_colors = function(colors) end,
         on_highlights = function(highlights, colors) end,
     })
+
     require("catppuccin").setup({
-        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        flavour = "mocha",
         background = {
             light = "latte",
             dark = "mocha",
         },
-        transparent_background = false, -- disables setting the background color.
-        show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-        term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+        transparent_background = false,
+        show_end_of_buffer = false,
+        term_colors = true,
         dim_inactive = {
-            enabled = false, -- dims the background color of inactive window
+            enabled = false,
             shade = "dark",
-            percentage = 0.15, -- percentage of the shade to apply to the inactive window
+            percentage = 0.15,
         },
-        no_italic = true, -- Force no italic
-        no_bold = true, -- Force no bold
-        no_underline = false, -- Force no underline
-        styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-            comments = { "italic" }, -- Change the style of comments
+        no_italic = true,
+        no_bold = true,
+        no_underline = false,
+        styles = {
+            comments = { "italic" },
             conditionals = { "italic" },
             loops = {},
             functions = {},
@@ -72,7 +74,6 @@ if not vim.g.vscode then
             properties = {},
             types = {},
             operators = {},
-            -- miscs = {}, -- Uncomment to turn off hard-coded styles
         },
         color_overrides = {},
         custom_highlights = {},
@@ -88,9 +89,56 @@ if not vim.g.vscode then
             },
         },
     })
+
+    require("rose-pine").setup({
+        variant = "auto",
+        dark_variant = "main",
+        dim_inactive_windows = false,
+        extend_background_behind_borders = true,
+        enable = {
+            terminal = true,
+            legacy_highlights = true,
+            migrations = true,
+        },
+        styles = {
+            bold = false,
+            italic = false,
+            transparency = false,
+        },
+        groups = {
+            border = "muted",
+            link = "iris",
+            panel = "surface",
+            error = "love",
+            hint = "iris",
+            info = "foam",
+            note = "pine",
+            todo = "rose",
+            warn = "gold",
+            git_add = "foam",
+            git_change = "rose",
+            git_delete = "love",
+            git_dirty = "rose",
+            git_ignore = "muted",
+            git_merge = "iris",
+            git_rename = "pine",
+            git_stage = "iris",
+            git_text = "rose",
+            git_untracked = "subtle",
+            h1 = "iris",
+            h2 = "foam",
+            h3 = "rose",
+            h4 = "gold",
+            h5 = "pine",
+            h6 = "foam",
+        },
+        highlight_groups = {
+        },
+        before_highlight = function(group, highlight, palette)
+        end,
+    })
+    
     require("nightfox").setup()
-    vim.cmd("colorscheme solarized-osaka-night")
-    -- vim.cmd("colorscheme kanagawa")
-    -- vim.cmd("colorscheme catppuccin-mocha")
-    -- vim.cmd("colorscheme carbonfox")
+    
+    vim.cmd("colorscheme solarized-osaka-storm")
 end
