@@ -5,6 +5,7 @@ if not vim.g.vscode then
             ["<enter>"] = "actions.select",
             ["<c-p>"] = "actions.preview",
             ["-"] = "actions.parent",
+            ["<leader>r"] = "actions.refresh",
         },
         use_default_keymaps = false,
         view_options = {

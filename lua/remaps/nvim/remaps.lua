@@ -1,4 +1,3 @@
-vim.keymap.set({'n'}, '<enter>' , 'o.<backspace><esc>', {noremap=true})
 vim.keymap.set({'n'}, 'o', 'o.<backspace>', {noremap=true})
 vim.keymap.set({'n'}, 'O', 'O.<backspace>', {noremap=true})
 vim.keymap.set({'n'}, '<c-s>', ':w<enter>', {noremap=true})
@@ -16,7 +15,7 @@ vim.keymap.set({'', 'l', 't'}, '<c-a-j>', [[<c-\><c-n><c-w>J]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<c-a-k>', [[<c-\><c-n><c-w>K]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<c-a-l>', [[<c-\><c-n><c-w>L]], {noremap=true})
 if vim.loop.os_uname().sysname == "Windows_NT" then
-    vim.keymap.set({'n'}, '<leader>otw', 
+    vim.keymap.set({'n'}, '<leader>otw',
         function()
             vim.cmd('vsplit')
             vim.cmd('term')

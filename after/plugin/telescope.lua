@@ -32,4 +32,7 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find)
     vim.keymap.set('n', '<leader>otl', builtin.resume)
     vim.keymap.set('n', '<leader>ocs', builtin.colorscheme)
+    vim.keymap.set('n', '<leader>oj', builtin.jumplist)
+    vim.keymap.set('n', '<leader>oqf', builtin.quickfix)
+    vim.keymap.set('n', '<leader>oqh', builtin.quickfixhistory)
 end
