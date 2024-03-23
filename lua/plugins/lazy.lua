@@ -124,4 +124,8 @@ require("lazy").setup({
         lazy = false,
         enabled = not vim.g.vscode,
     },
+    {
+        'gabrielpoca/replacer.nvim',
+        enabled = not vim.g.vscode,
+    },
 })

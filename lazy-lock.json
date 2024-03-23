@@ -19,6 +19,7 @@
   "oil.nvim": { "branch": "master", "commit": "e462a3446505185adf063566f5007771b69027a1" },
   "persisted.nvim": { "branch": "main", "commit": "c157b89b5c6e057c17a562ebcf02f0577405ad57" },
   "plenary.nvim": { "branch": "master", "commit": "f7adfc4b3f4f91aab6caebf42b3682945fbc35be" },
+  "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "rose-pine": { "branch": "main", "commit": "7777aa953c1561fb93d595b33bf019b2ef4af9de" },
   "solarized-osaka.nvim": { "branch": "main", "commit": "f7615ec5972ba52a0eba2d553c12aebea06247b9" },
   "substitute.nvim": { "branch": "main", "commit": "17ffaeb5a1dc2dbef39cf0865d8a4b6000836714" },
