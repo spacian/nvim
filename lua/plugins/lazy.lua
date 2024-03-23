@@ -56,7 +56,6 @@ require("lazy").setup({
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        enabled = not vim.g.vscode,
     },
     {
         "rebelot/kanagawa.nvim",

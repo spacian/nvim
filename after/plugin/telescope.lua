@@ -35,4 +35,23 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>oj', builtin.jumplist)
     vim.keymap.set('n', '<leader>oqf', builtin.quickfix)
     vim.keymap.set('n', '<leader>oqh', builtin.quickfixhistory)
+    
+    require("telescope").load_extension("persisted")
+    vim.keymap.set({"n"}, "<leader>ow",
+        function()
+            if oil.get_current_dir() ~= nil 
+                or vim.fn.expand("%:p") == "replacer://replacer" 
+            then
+                vim.cmd("bd!")
+            end
+            vim.cmd("Telescope persisted")
+            changing_workspace = true
+        end
+    )
+    
+    require("telescope").load_extension("lazygit")
+    vim.keymap.set({"n"}, "<leader>gr",
+        function() require("telescope").extensions.lazygit.lazygit() end,
+        {noremap=true}
+    )
 end
