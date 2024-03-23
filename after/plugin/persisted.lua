@@ -2,17 +2,36 @@ if not vim.g.vscode then
     require("persisted").setup({
         autosave = false,
         silent = true,
-        ignored_dirs = {"oil:///"},
+        ignored_dirs = { "oil://", "replacer://" },
     })
     require("telescope").load_extension("persisted")
-    vim.keymap.set({"n"}, "<leader>ow", ":Telescope persisted<enter>")
-    vim.keymap.set({"n"}, "<leader>sw",
-        function() require("persisted").save() end
+    local changing_workspace = false
+    vim.keymap.set({"n"}, "<leader>ow",
+        function()
+            if oil.get_current_dir() ~= nil 
+                or vim.fn.expand("%:p") == "replacer://replacer" 
+            then
+                vim.cmd("bd!")
+            end
+            vim.cmd("Telescope persisted")
+            changing_workspace = true
+        end
     )
-    vim.api.nvim_create_autocmd({ "VimLeavePre", "BufRead" }, {
-        pattern = {"*"},
-        callback = function()
-            require("persisted").save({force = true})
-        end,
-    })
+    vim.api.nvim_create_autocmd(
+        { "VimLeavePre", "BufRead", "InsertLeave", "TextChanged", "BufWritePost" },
+        {
+            pattern = {"*"},
+            callback = function()
+                if (not changing_workspace)
+                    and vim.v.vim_did_enter
+                    and (not (vim.bo.buftype == "quickfix"))
+                    and (not (vim.bo.buftype == "terminal"))
+                    and oil.get_current_dir() == nil
+                then
+                        require("persisted").save({force = true})
+                end
+                changing_workspace = false
+            end,
+        }
+    )
 end
