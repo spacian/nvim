@@ -1,8 +1,6 @@
 require('remaps.vscode.utils')
 require('remaps.vscode.jumps')
 
-vim.keymap.set({'n'}, '<leader>k', '<plug>VSCodeCommentaryLine', {noremap=true})
-vim.keymap.set({'x'}, '<leader>k', '<plug>VSCodeCommentary', {noremap=true})
 vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
 vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 
@@ -234,35 +232,20 @@ vim.keymap.set({'n'}, '<leader>mac',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ha',
+vim.keymap.set({'n'}, '<leader>a',
     function()
         vsc_notify('vscode-harpoon.addEditor')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>he',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.editEditors')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>oh',
     function()
         register_jump()
-        vsc_notify('vscode-harpoon.editorQuickPick')
+        vsc_notify('vscode-harpoon.editEditors')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>hl',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoPreviousHarpoonEditor')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<c-j>',
+vim.keymap.set({'n'}, '<leader>j',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.gotoEditor1')
@@ -270,7 +253,7 @@ vim.keymap.set({'n'}, '<c-j>',
     end
 )
 
-vim.keymap.set({'n'}, '<c-k>',
+vim.keymap.set({'n'}, '<leader>k',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.gotoEditor2')
@@ -278,7 +261,7 @@ vim.keymap.set({'n'}, '<c-k>',
     end
 )
 
-vim.keymap.set({'n'}, '<c-l>',
+vim.keymap.set({'n'}, '<leader>l',
     function()
         register_jump()
         vsc_notify('vscode-harpoon.gotoEditor3')
@@ -286,10 +269,24 @@ vim.keymap.set({'n'}, '<c-l>',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>og',
+vim.keymap.set({'n'}, '<leader>gg',
     function()
         register_jump()
-        vsc_notify('workbench.scm.focus')
+        vsc_notify('lazygit.lazygit')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>gl',
+    function()
+        register_jump()
+        vsc_notify('lazygit.log')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>gf',
+    function()
+        register_jump()
+        vsc_notify('lazygit.file_history')
     end
 )
 
