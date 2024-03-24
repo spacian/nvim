@@ -1,4 +1,9 @@
 if not vim.g.vscode then
+    require("telescope").load_extension("lazygit")
+    vim.keymap.set({"n"}, "<leader>gr",
+        function() require("telescope").extensions.lazygit.lazygit() end,
+        {noremap=true}
+    )
     vim.keymap.set({"n"}, "<leader>gg", ":LazyGit<enter>")
     vim.keymap.set({"n"}, "<leader>gl", ":LazyGitFilter<enter>")
     vim.keymap.set({"n"}, "<leader>gf", ":LazyGitFilterCurrentFile<enter>")

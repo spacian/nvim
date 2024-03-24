@@ -4,7 +4,19 @@ if not vim.g.vscode then
         silent = true,
         ignored_dirs = { "oil://", "replacer://" },
     })
+    require("telescope").load_extension("persisted")
     local changing_workspace = false
+    vim.keymap.set({"n"}, "<leader>ow",
+        function()
+            if oil.get_current_dir() ~= nil 
+                or vim.fn.expand("%:p") == "replacer://replacer" 
+            then
+                vim.cmd("bd!")
+            end
+            vim.cmd("Telescope persisted")
+            changing_workspace = true
+        end
+    )
     vim.api.nvim_create_autocmd(
         { "VimLeavePre", "BufRead", "InsertLeave", "TextChanged", "BufWritePost" },
         {
