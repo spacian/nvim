@@ -11,6 +11,20 @@ vim.keymap.set({'n'}, 'gd',
     end
 )
 
+vim.keymap.set({'n'}, 'gD',
+    function()
+        register_jump()
+        vsc_call('editor.action.goToTypeDefinition')
+    end
+)
+
+vim.keymap.set({'n'}, 'gI',
+    function()
+        register_jump()
+        vsc_call('editor.action.goToImplementation')
+    end
+)
+
 vim.keymap.set({'n'}, '<c-d>',
     function()
         nvim_feedkeys('10j')
@@ -61,7 +75,7 @@ vim.keymap.set({'n'}, '<leader>ff',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>fr',
+vim.keymap.set({'n'}, 'gr',
     function()
         register_jump()
         vsc_notify('editor.action.referenceSearch.trigger')
@@ -78,54 +92,6 @@ vim.keymap.set({'n'}, '<c-q>',
 vim.keymap.set({'n'}, '<leader>r',
     function()
         vsc_notify('editor.action.rename')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gfl',
-    function()
-        vsc_notify('workbench.action.focusNextGroup')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gfh',
-    function()
-        vsc_notify('workbench.action.focusPreviousGroup')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gfj',
-    function()
-        vsc_notify('workbench.action.focusBelowGroup')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gfk',
-    function()
-        vsc_notify('workbench.action.focusAboveGroup')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gmk',
-    function()
-        vsc_notify('workbench.action.moveEditorToAboveGroup')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gmj',
-    function()
-        vsc_notify('workbench.action.moveEditorToBelowGroup')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gml',
-    function()
-        vsc_notify('workbench.action.moveEditorToNextGroup')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gmh',
-    function()
-        vsc_notify('workbench.action.moveEditorToPreviousGroup')
     end
 )
 
