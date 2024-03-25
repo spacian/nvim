@@ -150,6 +150,14 @@ vim.keymap.set({'n'}, '<leader><space>',
     end
 )
 
+vim.keymap.set({'n'}, '<esc>',
+    function()
+        vsc_notify('workbench.action.closeSidebar')
+        vsc_notify('workbench.action.closeAuxiliaryBar')
+        vsc_notify('workbench.action.closePanel')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>ch',
     function()
         vsc_notify('workbench.action.closeSidebar')
