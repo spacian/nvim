@@ -267,7 +267,7 @@ vim.keymap.set({'n'}, '<leader>gcl',
 vim.keymap.set({'n'}, '<leader>gl',
     function()
         register_jump()
-        vsc_notify('lazygit.log_current_file')
+        vsc_notify('lazygit.log_repository_current_file')
     end
 )
 
