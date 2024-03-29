@@ -29,6 +29,13 @@ vim.keymap.set({'n'}, 'gr',
     end
 )
 
+vim.keymap.set({'n'}, 'gs',
+    function()
+        register_jump()
+        vsc_notify('workbench.action.gotoSymbol')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>r',
     function()
         vsc_notify('editor.action.rename')
