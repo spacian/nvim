@@ -21,6 +21,9 @@ require("lazy").setup({
         'smoka7/hop.nvim',
     },
     {
+        "chrisgrieser/nvim-spider",
+    },
+    {
         "olimorris/persisted.nvim",
         lazy = false,
         config = true,
