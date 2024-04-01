@@ -49,6 +49,13 @@ vim.keymap.set({'n'}, '<leader>or',
     end
 )
 
+vim.keymap.set({'n'}, '<leader>og',
+    function()
+        register_jump()
+        vsc_notify('workbench.scm.focus')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>on',
     function()
         register_jump()
