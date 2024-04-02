@@ -1,59 +1,6 @@
 require('remaps.vscode.utils')
 require('remaps.vscode.jumps')
 
-vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
-vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
-
-vim.keymap.set({'n'}, 'gd',
-    function()
-        register_jump()
-        vsc_call('editor.action.revealDefinition')
-    end
-)
-
-vim.keymap.set({'n'}, 'gD',
-    function()
-        register_jump()
-        vsc_call('editor.action.goToTypeDefinition')
-    end
-)
-
-vim.keymap.set({'n'}, 'gI',
-    function()
-        register_jump()
-        vsc_call('editor.action.goToImplementation')
-    end
-)
-
-vim.keymap.set({'n'}, '<c-d>',
-    function()
-        nvim_feedkeys('10j')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<c-u>',
-    function()
-        nvim_feedkeys('10k')
-        center()
-    end
-)
-
-
-vim.keymap.set({'n'}, '}',
-    function()
-        nvim_feedkeys('}')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '{',
-    function()
-        nvim_feedkeys('{')
-        center()
-    end
-)
-
 vim.keymap.set({'n'}, '<leader>oe',
     function()
         register_jump()
@@ -61,43 +8,10 @@ vim.keymap.set({'n'}, '<leader>oe',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>fs',
-    function()
-        register_jump()
-        vsc_notify('workbench.action.showAllSymbols')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>ff',
-    function()
-        register_jump()
-        vsc_notify('search.action.openEditor')
-    end
-)
-
-vim.keymap.set({'n'}, 'gr',
-    function()
-        register_jump()
-        vsc_notify('editor.action.referenceSearch.trigger')
-    end
-)
-
 vim.keymap.set({'n'}, '<c-q>',
     function()
         register_jump()
         vsc_notify('workbench.action.closeActiveEditor')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>r',
-    function()
-        vsc_notify('editor.action.rename')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>i',
-    function()
-        vsc_notify('editor.action.showDefinitionPreviewHover')
     end
 )
 
@@ -135,18 +49,17 @@ vim.keymap.set({'n'}, '<leader>or',
     end
 )
 
+vim.keymap.set({'n'}, '<leader>og',
+    function()
+        register_jump()
+        vsc_notify('workbench.scm.focus')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>on',
     function()
         register_jump()
         vsc_notify('extension.advancedNewFile')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader><space>',
-    function()
-        vsc_notify('workbench.action.closeSidebar')
-        vsc_notify('workbench.action.closeAuxiliaryBar')
-        vsc_notify('workbench.action.closePanel')
     end
 )
 
@@ -158,88 +71,15 @@ vim.keymap.set({'n'}, '<esc>',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ch',
+vim.keymap.set({'n'}, '<leader>cl',
     function()
         vsc_notify('workbench.action.closeSidebar')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>cl',
+vim.keymap.set({'n'}, '<leader>ch',
     function()
         vsc_notify('workbench.action.closeAuxiliaryBar')
-    end
-)
-
-vim.keymap.set({'n'}, 'm',
-    function()
-        vsc_notify('codemarks.createMark')
-    end
-)
-
-vim.keymap.set({'n'}, "'",
-    function()
-        vsc_notify('codemarks.jumpToMark')
-    end
-)
-
-vim.keymap.set({'n'}, "`",
-    function()
-        vsc_notify('codemarks.jumpToMark')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>mc',
-    function()
-        vsc_notify('codemarks.clearMarksUnderCursor')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>ml',
-    function()
-        vsc_notify('codemarks.listMarks')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>mac',
-    function()
-        vsc_notify('codemarks.clearAllMarks')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>a',
-    function()
-        vsc_notify('vscode-harpoon.addEditor')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>oh',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.editEditors')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>j',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor1')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>k',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor2')
-        center()
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>l',
-    function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor3')
-        center()
     end
 )
 
@@ -343,19 +183,5 @@ vim.keymap.set({'n'}, '<leader>oc',
     function()
         register_jump()
         vsc_notify('workbench.action.showCommands')
-    end
-)
-
-vim.keymap.set({'n'}, 'gi',
-    function()
-        register_jump()
-        jump_forw(1)
-    end
-)
-
-vim.keymap.set({'n'}, 'go',
-    function()
-        register_jump()
-        jump_back(1)
     end
 )
