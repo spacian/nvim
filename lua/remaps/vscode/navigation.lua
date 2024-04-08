@@ -47,20 +47,13 @@ vim.keymap.set({'n'}, '{',
     end
 )
 
-vim.keymap.set({'n'}, 'm',
+vim.keymap.set({'n'}, 'M',
     function()
         vsc_notify('codemarks.createMark')
     end
 )
 
-vim.keymap.set({'n'}, "'",
-    function()
-        register_jump()
-        vsc_notify('codemarks.jumpToMark')
-    end
-)
-
-vim.keymap.set({'n'}, "`",
+vim.keymap.set({'n'}, "m",
     function()
         register_jump()
         vsc_notify('codemarks.jumpToMark')
