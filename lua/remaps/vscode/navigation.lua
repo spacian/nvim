@@ -4,6 +4,25 @@ require('remaps.vscode.jumps')
 vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
 vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 
+vim.keymap.set({'n'}, 'j',
+    function()
+        vim.cmd(
+            "call VSCodeNotify('cursorMove', " ..
+            "{'to':'down', 'by':'wrappedLine', 'value':" .. vim.v.count + 1 .. "})"
+        )
+    end
+)
+
+vim.keymap.set({'n'}, 'k',
+    function()
+        vim.cmd(
+            "call VSCodeNotify('cursorMove', {'to':'up', 'by':'wrappedLine', 'value':"
+            ..vim.v.count..
+            "})"
+        )
+    end
+)
+
 vim.keymap.set({'n'}, 'gi',
     function()
         register_jump()
