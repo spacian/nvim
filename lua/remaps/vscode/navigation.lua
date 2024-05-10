@@ -67,8 +67,8 @@ vim.keymap.set({'n'}, '{',
 )
 
 for i = 1, 26 do
-    upper = string.char(i+64)
-    lower = string.char(i+96)
+    local upper = string.char(i+64)
+    local lower = string.char(i+96)
     vim.keymap.set({'n'}, 'M'..upper,
         function()
             vsc_notify('vim-marks.create_mark_'..upper)

@@ -23,7 +23,7 @@ vim.keymap.set({'n'}    , 'gwl'         , 'gwl0'            , {noremap=true})
 vim.keymap.set({'x'}    , 'gw'          , 'gw0'             , {noremap=true})
 local b = '()[]{}<>'
 for i = 1, string.len(b) do
-    c = string.sub(b, i, i)
+    local c = string.sub(b, i, i)
     vim.keymap.set({'n'}, 'cif' .. c , 'f' .. c .. 'ci' .. c, {noremap=true})
     vim.keymap.set({'n'}, 'caf' .. c , 'f' .. c .. 'ca' .. c, {noremap=true})
 end
