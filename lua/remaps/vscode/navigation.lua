@@ -66,37 +66,32 @@ vim.keymap.set({'n'}, '{',
     end
 )
 
-vim.keymap.set({'n'}, 'M',
-    function()
-        vsc_notify('codemarks.createMark')
-    end
-)
-
-vim.keymap.set({'n'}, "m",
-    function()
-        register_jump()
-        vsc_notify('codemarks.jumpToMark')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>mc',
-    function()
-        vsc_notify('codemarks.clearMarksUnderCursor')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>ml',
-    function()
-        register_jump()
-        vsc_notify('codemarks.listMarks')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>mac',
-    function()
-        vsc_notify('codemarks.clearAllMarks')
-    end
-)
+for i = 1, 26 do
+    upper = string.char(i+64)
+    lower = string.char(i+96)
+    vim.keymap.set({'n'}, 'M'..upper,
+        function()
+            vsc_notify('vim-marks.create_mark_'..upper)
+        end
+    )
+    vim.keymap.set({'n'}, 'M'..lower,
+        function()
+            vsc_notify('vim-marks.create_mark_'..lower)
+        end
+    )
+    vim.keymap.set({'n'}, 'm'..upper,
+        function()
+            register_jump()
+            vsc_notify('vim-marks.jump_to_mark_'..upper)
+        end
+    )
+    vim.keymap.set({'n'}, 'm'..lower,
+        function()
+            register_jump()
+            vsc_notify('vim-marks.jump_to_mark_'..lower)
+        end
+    )
+end
 
 vim.keymap.set({'n'}, '<leader>a',
     function()
