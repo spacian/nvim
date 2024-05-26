@@ -1,3 +1,5 @@
+local vscode = require('vscode-neovim')
+
 function nvim_feedkeys(keys)
     local feedable_keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
     vim.api.nvim_feedkeys(feedable_keys, "n", false)
@@ -8,11 +10,11 @@ function call(arg)
 end
 
 function vsc_notify(arg)
-    call(string.format('VSCodeNotify("%s")', arg))
+    vscode.action(arg)
 end
 
 function vsc_call(arg)
-    call(string.format('VSCodeCall("%s")', arg))
+    vscode.call(arg)
 end
 
 function center()
