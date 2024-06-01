@@ -4,22 +4,38 @@ require('remaps.vscode.jumps')
 vim.keymap.set({'n'}, '<c-o>', jump_back, {noremap=true})
 vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 
-vim.keymap.set({'n'}, 'j',
-    function()
-        vim.cmd(
-            "call VSCodeNotify('cursorMove', " ..
-            "{'to':'down', 'by':'wrappedLine', 'value':" .. vim.v.count + 1 .. "})"
-        )
-    end
-)
+local do_wrap = true
 
-vim.keymap.set({'n'}, 'k',
+function wrap_jk()
+    vim.keymap.set({'n'}, 'j',
+        function()
+            vsc_call('cursorMove', {
+                args={to='down', by='wrappedLine', value=vim.v.count+1}
+            })
+        end
+    )
+    vim.keymap.set({'n'}, 'k',
+        function()
+            vsc_call('cursorMove', {
+                args={to='up', by='wrappedLine', value=vim.v.count}
+            })
+        end
+    )
+end
+
+function unwrap_jk()
+    vim.keymap.set({'n'}, 'j', 'j')
+    vim.keymap.set({'n'}, 'k', 'k')
+end
+
+vim.keymap.set({'n'}, 'gwrap',
     function()
-        vim.cmd(
-            "call VSCodeNotify('cursorMove', {'to':'up', 'by':'wrappedLine', 'value':"
-            ..vim.v.count..
-            "})"
-        )
+        if do_wrap then
+            wrap_jk()
+        else
+            unwrap_jk()
+        end
+        do_wrap = not do_wrap
     end
 )
 
