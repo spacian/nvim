@@ -6,12 +6,12 @@ hop.setup({ keys = 'kdslaeiowcpnbtyhgruvmfj'})
 
 vim.keymap.set({'n', 'v'}, ',',
     function()
-        hop.hint_camel_case()
+        hop.hint_char2()
     end
 )
 
 vim.keymap.set({'n', 'v'}, '<leader>,',
     function()
-        hop.hint_words({ hint_position = position.END })
+        hop.hint_camel_case()
     end
 )
