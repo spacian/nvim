@@ -31,8 +31,10 @@ end
 vim.keymap.set({'n'}, 'gwrap',
     function()
         if do_wrap then
+            print("wrapped line navigation: enabled ")
             wrap_jk()
         else
+            print("wrapped line navigation: disabled")
             unwrap_jk()
         end
         do_wrap = not do_wrap
