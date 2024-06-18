@@ -6,7 +6,7 @@ hop.setup({ keys = 'kdslaeiowcpnbtyhgruvmfj'})
 
 vim.keymap.set({'n', 'v'}, ',',
     function()
-        hop.hint_words()
+        hop.hint_camel_case()
     end
 )
 
