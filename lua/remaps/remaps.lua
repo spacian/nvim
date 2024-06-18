@@ -1,4 +1,5 @@
 vim.g.mapleader=' '
+vim.keymap.set({'n','v'}, '<leader><leader>', ''            , {noremap=true})
 vim.keymap.set({'v'}    , 'p'           , '"_dP'            , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>p'   , '"+p'             , {noremap=true})
 vim.keymap.set({'n','v'}, '<leader>P'   , '"+P'             , {noremap=true})
