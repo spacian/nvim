@@ -12,6 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
+        "svban/YankAssassin.nvim",
+    },
+    {
         "kylechui/nvim-surround",
     },
     {
