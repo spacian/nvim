@@ -111,11 +111,31 @@ for i = 1, 26 do
     )
 end
 
-vim.keymap.set({'n'}, '<leader>a',
+vim.keymap.set({'n'}, '<leader>ah',
     function()
         vsc_notify('vscode-harpoon.addEditor')
     end
 )
+
+vim.keymap.set({'n'}, '<leader>aj',
+    function()
+        vsc_notify('vscode-harpoon.addEditor1')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>ak',
+    function()
+        vsc_notify('vscode-harpoon.addEditor2')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>al',
+    function()
+        vsc_notify('vscode-harpoon.addEditor3')
+    end
+)
+
+
 
 vim.keymap.set({'n'}, '<leader>oh',
     function()
