@@ -24,12 +24,15 @@ vim.keymap.set({'n'}, 'R',
     end
 )
 
-vim.keymap.set({'i'}, '<escape>',
-    function()
-        nvim_feedkeys('<escape>')
-        register_jump()
-        register_jump(1)
-    end
+vim.api.nvim_create_autocmd(
+    { 'InsertLeave' },
+    {
+        pattern = '*',
+        callback = function()
+            register_jump()
+            register_jump(1)
+        end
+  }
 )
 
 vim.keymap.set({'n'}, '/',
@@ -63,7 +66,11 @@ vim.keymap.set({'n'}, '*',
 vim.keymap.set({'n'}, 'gg',
     function()
         register_jump()
-        nvim_feedkeys('gg^')
+        if vim.v.count > 0 then
+            nvim_feedkeys(string.format('%dgg^', vim.v.count))
+        else
+            nvim_feedkeys('gg^')
+        end
     end
 )
 
@@ -75,5 +82,44 @@ vim.keymap.set({'n'}, 'G',
         else
             nvim_feedkeys('G$')
         end
+    end
+)
+
+vim.keymap.set({'n'}, 'U',
+    function()
+        register_jump()
+        if vim.v.count > 0 then
+            nvim_feedkeys(string.format('%dU', vim.v.count))
+        else
+            nvim_feedkeys('U')
+        end
+        register_jump()
+        register_jump(1)
+    end
+)
+
+vim.keymap.set({'n'}, 'u',
+    function()
+        register_jump()
+        if vim.v.count > 0 then
+            nvim_feedkeys(string.format('%du', vim.v.count))
+        else
+            nvim_feedkeys('u')
+        end
+        register_jump()
+        register_jump(1)
+    end
+)
+
+vim.keymap.set({'n'}, '<c-r>',
+    function()
+        register_jump()
+        if vim.v.count > 0 then
+            nvim_feedkeys(string.format('%d<c-r>', vim.v.count))
+        else
+            nvim_feedkeys('<c-r>')
+        end
+        register_jump()
+        register_jump(1)
     end
 )
