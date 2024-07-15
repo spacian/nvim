@@ -55,9 +55,16 @@ vim.keymap.set({'n'}, '<leader>fs',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ff',
+vim.keymap.set({'n'}, '<leader>fe',
     function()
         register_jump()
         vsc_notify('search.action.openEditor')
+    end
+)
+
+vim.keymap.set({'n'}, '<leader>ff',
+    function()
+        register_jump()
+        vsc_notify('workbench.action.quickTextSearch')
     end
 )
