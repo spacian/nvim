@@ -185,3 +185,10 @@ vim.keymap.set({'n'}, '<leader>oc',
         vsc_notify('workbench.action.showCommands')
     end
 )
+
+vim.keymap.set({'n'}, '<leader>op',
+    function()
+        register_jump()
+        vsc_notify('workbench.action.problems.focus')
+    end
+)
