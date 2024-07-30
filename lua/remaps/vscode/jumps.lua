@@ -1,31 +1,7 @@
 require('remaps.vscode.utils')
 
-vim.keymap.set({'n'}, 'r',
-    function()
-        register_jump()
-        register_jump(1)
-        if vim.v.count > 0 then
-            nvim_feedkeys(string.format('%dr', vim.v.count))
-        else
-            nvim_feedkeys('r')
-        end
-    end
-)
-
-vim.keymap.set({'n'}, 'R',
-    function()
-        register_jump()
-        register_jump(1)
-        if vim.v.count > 0 then
-            nvim_feedkeys(string.format('%dR', vim.v.count))
-        else
-            nvim_feedkeys('R')
-        end
-    end
-)
-
 vim.api.nvim_create_autocmd(
-    { 'InsertLeave' },
+    { 'InsertLeave', 'TextChanged' },
     {
         pattern = '*',
         callback = function()
@@ -35,91 +11,30 @@ vim.api.nvim_create_autocmd(
   }
 )
 
-vim.keymap.set({'n'}, '/',
-    function()
-        register_jump()
-        nvim_feedkeys('/')
-    end
-)
+jump_keys = {
+    ['/']='',
+    ['?']='',
+    ['#']='',
+    ['*']='',
+    ['gg']='gg^',
+    ['G']='G$',
+    ['<c-r>']='',
+    ['u']='',
+    ['U']=''
+}
 
-vim.keymap.set({'n'}, '?',
-    function()
-        register_jump()
-        nvim_feedkeys('?')
+for key, map in pairs(jump_keys) do
+    if string.len(map) == 0 then
+        map = key
     end
-)
-
-vim.keymap.set({'n'}, '#',
-    function()
-        register_jump()
-        nvim_feedkeys('#')
-    end
-)
-
-vim.keymap.set({'n'}, '*',
-    function()
-        register_jump()
-        nvim_feedkeys('*')
-    end
-)
-
-vim.keymap.set({'n'}, 'gg',
-    function()
-        register_jump()
-        if vim.v.count > 0 then
-            nvim_feedkeys(string.format('%dgg^', vim.v.count))
-        else
-            nvim_feedkeys('gg^')
+    vim.keymap.set({'n'}, key,
+        function()
+            register_jump()
+            if vim.v.count > 0 then
+                nvim_feedkeys(vim.v.count .. map)
+            else
+                nvim_feedkeys(map)
+            end
         end
-    end
-)
-
-vim.keymap.set({'n'}, 'G',
-    function()
-        register_jump()
-        if vim.v.count > 0 then
-            nvim_feedkeys(string.format('%dG^', vim.v.count))
-        else
-            nvim_feedkeys('G$')
-        end
-    end
-)
-
-vim.keymap.set({'n'}, 'U',
-    function()
-        register_jump()
-        if vim.v.count > 0 then
-            nvim_feedkeys(string.format('%dU', vim.v.count))
-        else
-            nvim_feedkeys('U')
-        end
-        register_jump()
-        register_jump(1)
-    end
-)
-
-vim.keymap.set({'n'}, 'u',
-    function()
-        register_jump()
-        if vim.v.count > 0 then
-            nvim_feedkeys(string.format('%du', vim.v.count))
-        else
-            nvim_feedkeys('u')
-        end
-        register_jump()
-        register_jump(1)
-    end
-)
-
-vim.keymap.set({'n'}, '<c-r>',
-    function()
-        register_jump()
-        if vim.v.count > 0 then
-            nvim_feedkeys(string.format('%d<c-r>', vim.v.count))
-        else
-            nvim_feedkeys('<c-r>')
-        end
-        register_jump()
-        register_jump(1)
-    end
-)
+    )
+end
