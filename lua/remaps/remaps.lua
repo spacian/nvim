@@ -28,4 +28,6 @@ for i = 1, string.len(b) do
     local c = string.sub(b, i, i)
     vim.keymap.set({'n'}, 'cif' .. c , 'f' .. c .. 'ci' .. c, {noremap=true})
     vim.keymap.set({'n'}, 'caf' .. c , 'f' .. c .. 'ca' .. c, {noremap=true})
+    vim.keymap.set({'n'}, 'dif' .. c , 'f' .. c .. 'di' .. c, {noremap=true})
+    vim.keymap.set({'n'}, 'daf' .. c , 'f' .. c .. 'da' .. c, {noremap=true})
 end
