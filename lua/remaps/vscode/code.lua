@@ -25,46 +25,46 @@ vim.keymap.set({'n'}, 'gI',
 vim.keymap.set({'n'}, 'gr',
     function()
         register_jump()
-        vsc_notify('editor.action.referenceSearch.trigger')
+        vsc_call('editor.action.referenceSearch.trigger')
     end
 )
 
 vim.keymap.set({'n'}, 'gs',
     function()
         register_jump()
-        vsc_notify('workbench.action.gotoSymbol')
+        vsc_call('workbench.action.gotoSymbol')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>r',
     function()
-        vsc_notify('editor.action.rename')
+        vsc_call('editor.action.rename')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>i',
+vim.keymap.set({'n'}, 'K',
     function()
-        vsc_notify('editor.action.showDefinitionPreviewHover')
+        vsc_call('editor.action.showDefinitionPreviewHover')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>fs',
     function()
         register_jump()
-        vsc_notify('workbench.action.showAllSymbols')
+        vsc_call('workbench.action.showAllSymbols')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>fe',
     function()
         register_jump()
-        vsc_notify('search.action.openEditor')
+        vsc_call('search.action.openEditor')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>ff',
     function()
         register_jump()
-        vsc_notify('workbench.action.quickTextSearch')
+        vsc_call('workbench.action.quickTextSearch')
     end
 )

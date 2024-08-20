@@ -18,7 +18,7 @@ function vsc_call(arg, opt)
 end
 
 function center()
-    vsc_notify('center-editor-window.center')
+    vsc_call('center-editor-window.center')
 end
 
 function register_jump(i)

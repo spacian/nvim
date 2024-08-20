@@ -89,49 +89,49 @@ for i = 1, 26 do
     local lower = string.char(i+96)
     vim.keymap.set({'n'}, 'M'..upper,
         function()
-            vsc_notify('vim-marks.create_mark_'..upper)
+            vsc_call('vim-marks.create_mark_'..upper)
         end
     )
     vim.keymap.set({'n'}, 'M'..lower,
         function()
-            vsc_notify('vim-marks.create_mark_'..lower)
+            vsc_call('vim-marks.create_mark_'..lower)
         end
     )
     vim.keymap.set({'n'}, 'm'..upper,
         function()
             register_jump()
-            vsc_notify('vim-marks.jump_to_mark_'..upper)
+            vsc_call('vim-marks.jump_to_mark_'..upper)
         end
     )
     vim.keymap.set({'n'}, 'm'..lower,
         function()
             register_jump()
-            vsc_notify('vim-marks.jump_to_mark_'..lower)
+            vsc_call('vim-marks.jump_to_mark_'..lower)
         end
     )
 end
 
 vim.keymap.set({'n'}, '<leader>ah',
     function()
-        vsc_notify('vscode-harpoon.addEditor')
+        vsc_call('vscode-harpoon.addEditor')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>aj',
     function()
-        vsc_notify('vscode-harpoon.addEditor1')
+        vsc_call('vscode-harpoon.addEditor1')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>ak',
     function()
-        vsc_notify('vscode-harpoon.addEditor2')
+        vsc_call('vscode-harpoon.addEditor2')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>al',
     function()
-        vsc_notify('vscode-harpoon.addEditor3')
+        vsc_call('vscode-harpoon.addEditor3')
     end
 )
 
@@ -140,14 +140,14 @@ vim.keymap.set({'n'}, '<leader>al',
 vim.keymap.set({'n'}, '<leader>oh',
     function()
         register_jump()
-        vsc_notify('vscode-harpoon.editEditors')
+        vsc_call('vscode-harpoon.editEditors')
     end
 )
 
 vim.keymap.set({'n'}, '<leader>j',
     function()
         register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor1')
+        vsc_call('vscode-harpoon.gotoEditor1')
         center()
     end
 )
@@ -155,7 +155,7 @@ vim.keymap.set({'n'}, '<leader>j',
 vim.keymap.set({'n'}, '<leader>k',
     function()
         register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor2')
+        vsc_call('vscode-harpoon.gotoEditor2')
         center()
     end
 )
@@ -163,7 +163,7 @@ vim.keymap.set({'n'}, '<leader>k',
 vim.keymap.set({'n'}, '<leader>l',
     function()
         register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor3')
+        vsc_call('vscode-harpoon.gotoEditor3')
         center()
     end
 )
