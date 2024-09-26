@@ -36,6 +36,20 @@ vim.keymap.set({'n'}, 'gs',
     end
 )
 
+vim.keymap.set({'n'}, 'gp',
+    function()
+        register_jump()
+        vsc_call('go-to-next-error.next.error')
+    end
+)
+
+vim.keymap.set({'n'}, 'gP',
+    function()
+        register_jump()
+        vsc_call('go-to-next-error.prev.error')
+    end
+)
+
 vim.keymap.set({'n'}, '<leader>r',
     function()
         vsc_call('editor.action.rename')
