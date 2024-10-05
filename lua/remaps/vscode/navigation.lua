@@ -7,6 +7,20 @@ vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 local do_wrap = true
 
 function wrap_jk()
+    vim.keymap.set({'n'}, 'H',
+        function()
+            vsc_call('cursorMove', {
+                args={to='wrappedLineStart'}
+            })
+        end
+    )
+    vim.keymap.set({'n'}, 'L',
+        function()
+            vsc_call('cursorMove', {
+                args={to='wrappedLineEnd'}
+            })
+        end
+    )
     vim.keymap.set({'n'}, 'j',
         function()
             vsc_call('cursorMove', {
@@ -26,6 +40,8 @@ end
 function unwrap_jk()
     vim.keymap.set({'n'}, 'j', 'j')
     vim.keymap.set({'n'}, 'k', 'k')
+    vim.keymap.set({'n'}, 'L', '$')
+    vim.keymap.set({'n'}, 'H', '^')
 end
 
 vim.keymap.set({'n'}, 'gwrap',
