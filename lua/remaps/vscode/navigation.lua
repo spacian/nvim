@@ -7,6 +7,22 @@ vim.keymap.set({'n'}, '<c-i>', jump_forw, {noremap=true})
 local do_wrap = true
 
 function wrap_jk()
+    vim.keymap.set({'n'}, 'I',
+        function()
+            vsc_notify('cursorMove', {
+                args={to='wrappedLineStart'}
+            })
+            nvim_feedkeys('i')
+        end
+    )
+    vim.keymap.set({'n'}, 'A',
+        function()
+            vsc_notify('cursorMove', {
+                args={to='wrappedLineEnd'}
+            })
+            nvim_feedkeys('a')
+        end
+    )
     vim.keymap.set({'n'}, 'H',
         function()
             vsc_call('cursorMove', {
