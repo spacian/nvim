@@ -18,7 +18,7 @@ function vsc_call(arg, opt)
 end
 
 function center()
-    vsc_call('center-editor-window.center')
+    vsc_notify('center-editor-window.center')
 end
 
 function register_jump(i)
@@ -28,10 +28,10 @@ end
 
 function jump_back(i)
     i = i or ''
-    vsc_call('jumplist.jumpBack' .. i)
+    vsc_notify('jumplist.jumpBack' .. i)
 end
 
 function jump_forw(i)
     i = i or ''
-    vsc_call('jumplist.jumpForward' .. i)
+    vsc_notify('jumplist.jumpForward' .. i)
 end
