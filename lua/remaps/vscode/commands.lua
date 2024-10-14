@@ -138,24 +138,6 @@ vim.keymap.set({'n'}, '<leader>go',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ga',
-    function()
-        vsc_call('git.stage')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gu',
-    function()
-        vsc_call('git.unstage')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gc',
-    function()
-        vsc_call('git.commitStaged')
-    end
-)
-
 vim.keymap.set({'n'}, '<leader>gs',
     function()
         register_jump()
