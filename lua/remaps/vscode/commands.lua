@@ -26,6 +26,7 @@ vim.keymap.set({'n'}, '<leader>oo',
     function()
         register_jump()
         vsc_notify('outline.focus')
+        vsc_notify('outline.focus')
     end
 )
 
