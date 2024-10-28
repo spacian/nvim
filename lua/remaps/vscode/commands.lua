@@ -30,7 +30,7 @@ vim.keymap.set({'n'}, '<leader>oo',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ow',
+vim.keymap.set({'n'}, '<leader>oP',
     function()
         vsc_notify('workbench.action.openRecent')
     end
@@ -40,13 +40,6 @@ vim.keymap.set({'n'}, '<leader>of',
     function()
         register_jump()
         vsc_notify('workbench.action.quickOpen')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>or',
-    function()
-        register_jump()
-        vsc_notify('workbench.action.quickOpenPreviousRecentlyUsedEditor')
     end
 )
 
@@ -81,84 +74,6 @@ vim.keymap.set({'n'}, '<leader>cl',
 vim.keymap.set({'n'}, '<leader>ch',
     function()
         vsc_notify('workbench.action.closeAuxiliaryBar')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gg',
-    function()
-        register_jump()
-        vsc_notify('lazygit.lazygit_repository_current_file')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gcr',
-    function()
-        register_jump()
-        vsc_notify('lazygit.lazygit')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gcl',
-    function()
-        register_jump()
-        vsc_notify('lazygit.log')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gl',
-    function()
-        register_jump()
-        vsc_notify('lazygit.log_repository_current_file')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gf',
-    function()
-        register_jump()
-        vsc_notify('lazygit.file_history')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gv',
-    function()
-        register_jump()
-        vsc_notify('git.viewHistory')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>ge',
-    function()
-        register_jump()
-        vsc_notify('compareCommitViewProvider.focus')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>go',
-    function()
-        vsc_notify('workbench.action.compareEditor.focusOtherSide')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gs',
-    function()
-        register_jump()
-        vsc_notify('editor.action.dirtydiff.next')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gp',
-    function()
-        register_jump()
-        vsc_notify('workbench.action.compareEditor.previousChange')
-        vsc_notify('workbench.action.editor.previousChange')
-    end
-)
-
-vim.keymap.set({'n'}, '<leader>gn',
-    function()
-        register_jump()
-        vsc_notify('workbench.action.compareEditor.nextChange')
-        vsc_notify('workbench.action.editor.nextChange')
     end
 )
 

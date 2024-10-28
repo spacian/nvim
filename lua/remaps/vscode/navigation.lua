@@ -103,14 +103,14 @@ vim.keymap.set({'n', 'i'}, '<c-k>',
 
 vim.keymap.set({'n'}, '<c-d>',
     function()
-        nvim_feedkeys('}')
+        nvim_feedkeys('10j')
         center()
     end
 )
 
 vim.keymap.set({'n'}, '<c-u>',
     function()
-        nvim_feedkeys('{')
+        nvim_feedkeys('10k')
         center()
     end
 )
