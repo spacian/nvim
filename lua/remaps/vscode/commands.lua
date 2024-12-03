@@ -62,6 +62,7 @@ vim.keymap.set({'n'}, '<esc>',
         vsc_notify('workbench.action.closeSidebar')
         vsc_notify('workbench.action.closeAuxiliaryBar')
         vsc_notify('workbench.action.closePanel')
+        vsc_notify('notifications.hideToasts')
     end
 )
 
