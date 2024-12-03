@@ -21,7 +21,7 @@ require("lazy").setup({
         "gbprod/substitute.nvim",
     },
     {
-        'smoka7/hop.nvim',
+        "smoka7/hop.nvim",
     },
     {
         "chrisgrieser/nvim-spider",
@@ -47,7 +47,7 @@ require("lazy").setup({
         enabled = not vim.g.vscode,
     },
     {
-        'VonHeikemen/lsp-zero.nvim',
+        "VonHeikemen/lsp-zero.nvim",
         branch = 'v3.x',
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
@@ -62,6 +62,11 @@ require("lazy").setup({
     },
     {
         "nvim-treesitter/nvim-treesitter",
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        after = "nvim-treesitter"
     },
     {
         "rebelot/kanagawa.nvim",
