@@ -11,6 +11,7 @@ if vim.loop.os_uname().sysname == "Windows_NT" then
 else
     vim.api.nvim_exec('set wildignorecase', true)
 end
+vim.api.nvim_exec('set shada="None"', true)
 vim.api.nvim_exec('set splitright', true)
 vim.api.nvim_exec('set timeoutlen=2250', true)
 vim.api.nvim_exec('set nohlsearch', true)
