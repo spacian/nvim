@@ -40,22 +40,26 @@ require('nvim-treesitter.configs').setup({
       goto_next_start = {
         ["]f"] = "@function.outer",
         ["]c"] = "@class.outer",
+        ["]a"] = "@parameter.inner",
         ["]s"] = { query = "@local.scope", query_group = "locals" },
       },
       goto_next_end = {
         ["]F"] = "@function.outer",
         ["]C"] = "@class.outer",
+        ["]A"] = "@parameter.inner",
         ["]S"] = { query = "@local.scope", query_group = "locals" },
       },
       goto_previous_start = {
         ["[f"] = "@function.outer",
         ["[c"] = "@class.outer",
-        ["]s"] = { query = "@local.scope", query_group = "locals" },
+        ["[a"] = "@parameter.inner",
+        ["[s"] = { query = "@local.scope", query_group = "locals" },
       },
       goto_previous_end = {
         ["[F"] = "@function.outer",
         ["[C"] = "@class.outer",
-        ["]S"] = { query = "@local.scope", query_group = "locals" },
+        ["[A"] = "@parameter.inner",
+        ["[S"] = { query = "@local.scope", query_group = "locals" },
       },
     },
   },
