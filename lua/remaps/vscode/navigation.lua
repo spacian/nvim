@@ -89,18 +89,6 @@ vim.keymap.set({'n'}, 'go',
     end
 )
 
-vim.keymap.set({'n', 'i'}, '<c-j>',
-    function()
-        vsc_notify('scrollLineDown')
-    end
-)
-
-vim.keymap.set({'n', 'i'}, '<c-k>',
-    function()
-        vsc_notify('scrollLineUp')
-    end
-)
-
 vim.keymap.set({'n'}, '<c-d>',
     function()
         nvim_feedkeys('10j')

@@ -27,6 +27,9 @@ require("lazy").setup({
         "chrisgrieser/nvim-spider",
     },
     {
+        "aaronik/treewalker.nvim",
+    },
+    {
         "olimorris/persisted.nvim",
         lazy = false,
         config = true,
