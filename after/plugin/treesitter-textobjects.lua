@@ -4,21 +4,34 @@ require('nvim-treesitter.configs').setup({
       enable = true,
       lookahead = true,
       keymaps = {
-        ["ash"] = "@assignment.lhs",
-        ["asl"] = "@assignment.rhs",
-        ["aso"] = "@assignment.outer",
+        ["ah"] = "@assignment.lhs",
+        ["al"] = "@assignment.rhs",
+        ["as"] = "@assignment.outer",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
-        ["ib"] = "@conditional.inner",
-        ["ab"] = "@conditional.outer",
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
-        ["asc"] = { query = "@local.scope", query_group = "locals" },
-        ["il"] = "@loop.inner",
-        ["al"] = "@loop.outer",
+        ["ak"] = "@comment.outer",
+        ["ik"] = "@comment.inner",
+        ["ad"] = {
+            query = "@string.documentation",
+            query_group = "highlights",
+        },
         ["aa"] = "@parameter.outer",
         ["ia"] = "@parameter.inner",
       },
+      selection_modes = {
+      --   ['@parameter.outer'] = 'v', -- charwise
+        ['@class.inner'] = 'V', -- linewise
+        ['@class.outer'] = 'V', -- linewise
+        ['@function.outer'] = 'V', -- linewise
+        ['@function.inner'] = 'V', -- linewise
+        ['@block.outer'] = 'V', -- linewise
+        ['@block.inner'] = 'V', -- linewise
+      --   ['@class.outer'] = '<c-v>', -- blockwise
+        },
       include_surrounding_whitespace = false,
     },
     swap = {
@@ -41,25 +54,21 @@ require('nvim-treesitter.configs').setup({
         ["]f"] = "@function.outer",
         ["]c"] = "@class.outer",
         ["]a"] = "@parameter.inner",
-        ["]s"] = { query = "@local.scope", query_group = "locals" },
       },
       goto_next_end = {
         ["]F"] = "@function.outer",
         ["]C"] = "@class.outer",
         ["]A"] = "@parameter.inner",
-        ["]S"] = { query = "@local.scope", query_group = "locals" },
       },
       goto_previous_start = {
         ["[f"] = "@function.outer",
         ["[c"] = "@class.outer",
         ["[a"] = "@parameter.inner",
-        ["[s"] = { query = "@local.scope", query_group = "locals" },
       },
       goto_previous_end = {
         ["[F"] = "@function.outer",
         ["[C"] = "@class.outer",
         ["[A"] = "@parameter.inner",
-        ["[S"] = { query = "@local.scope", query_group = "locals" },
       },
     },
   },
