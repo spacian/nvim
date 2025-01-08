@@ -1,4 +1,5 @@
 require('nvim-treesitter.configs').setup({
+  ensure_installed = "all",
   highlight = {
     enable = not vim.g.vscode,
     additional_vim_regex_highlighting = false,
