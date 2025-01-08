@@ -21,6 +21,10 @@ if not vim.g.vscode then
                 vim.cmd("silent e .")
             end
         end, { noremap = true })
+    vim.keymap.set("n", "<leader>od",
+        function()
+            vim.cmd("silent e " .. vim.fn.getcwd())
+        end, { noremap = true })
     vim.keymap.set("n", "<leader>cd",
         function()
             local cwd = oil.get_current_dir()
