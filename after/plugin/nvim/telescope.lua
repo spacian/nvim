@@ -5,8 +5,8 @@ if not vim.g.vscode then
                 layout_config = {
                     horizontal = {
                         preview_cutoff = 0,
-                        height = 0.999999,
-                        width = 0.999999,
+                        height = { padding=0 },
+                        width = { padding=0 },
                     },
                 },
                 mappings = {
