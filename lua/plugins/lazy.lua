@@ -46,6 +46,8 @@ require("lazy").setup({
         enabled = not vim.g.vscode,
     },
     {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
         enabled = not vim.g.vscode,
     },

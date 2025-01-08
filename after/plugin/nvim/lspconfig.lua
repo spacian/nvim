@@ -1,7 +1,16 @@
 if not vim.g.vscode then
+    require("mason").setup()
+    require("mason-lspconfig").setup({
+        ensure_installed = {
+            "pyright",
+        }
+    })
     local lspconfig = require('lspconfig')
     lspconfig.pyright.setup({
         settings = {
+            pyright = {
+                disableOrganizeImports = true,
+            },
             python = {
                 analysis = {
                     typeCheckingMode = "strict",
@@ -15,7 +24,6 @@ if not vim.g.vscode then
             }
         }
     })
-
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
