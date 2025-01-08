@@ -11,6 +11,7 @@ vim.api.nvim_create_autocmd(
             then
                 return
             end
+            vim.cmd('doau BufWritePre')
             vim.cmd('silent w')
             vim.cmd('doau BufWritePost')
         end
