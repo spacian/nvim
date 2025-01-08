@@ -5,7 +5,7 @@ if not vim.g.vscode then
         ignored_dirs = { "oil://", "replacer://" },
     })
     require("telescope").load_extension("persisted")
-    vim.keymap.set({"n"}, "<leader>ow",
+    vim.keymap.set({"n"}, "<leader>oP",
         function()
             if oil.get_current_dir() ~= nil
                 or vim.fn.expand("%:p") == "replacer://replacer"
@@ -20,11 +20,12 @@ if not vim.g.vscode then
         {
             pattern = {"*"},
             callback = function()
-                if (not (vim.bo.buftype == "quickfix"))
-                    and (not (vim.bo.buftype == "terminal"))
-                    and oil.get_current_dir() == nil
+                if not (
+                    vim.bo.buftype == "quickfix"
+                    or vim.bo.buftype == "terminal"
+                    or oil.get_current_dir() == nil)
                 then
-                        require("persisted").save({force = true})
+                    require("persisted").save({force = true})
                 end
             end,
         }
