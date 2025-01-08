@@ -137,8 +137,8 @@ if not vim.g.vscode then
         before_highlight = function(group, highlight, palette)
         end,
     })
-    
+
     require("nightfox").setup()
-    
-    vim.cmd("colorscheme solarized-osaka-storm")
+
+    vim.cmd("colorscheme kanagawa")
 end
