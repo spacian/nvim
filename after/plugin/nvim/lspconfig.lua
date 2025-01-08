@@ -27,7 +27,6 @@ if not vim.g.vscode then
             vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
             local opts = { buffer = ev.buf }
             vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
-            vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover, opts)
             vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
             vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
             vim.keymap.set('n', '<space>wl', function()

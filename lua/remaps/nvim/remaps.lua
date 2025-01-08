@@ -1,12 +1,8 @@
 vim.keymap.set({'n'}, 'o', 'o.<backspace>', {noremap=true})
 vim.keymap.set({'n'}, 'O', 'O.<backspace>', {noremap=true})
 vim.keymap.set({'n'}, '<c-s>', ':w<enter>', {noremap=true})
-vim.keymap.set({''}, '<c-j>', '10jzz', {noremap=true})
-vim.keymap.set({''}, '<c-k>', '10kzz', {noremap=true})
-vim.keymap.set({''}, '<c-d>', '}zz', {noremap=true})
-vim.keymap.set({''}, '<c-u>', '{zz', {noremap=true})
 vim.keymap.set({''}, '<c-q>', ':w<enter>:bd<enter>', {noremap=true})
-vim.keymap.set({'', 'l', 't'}, '<a-q>', [[<c-\><c-n>:q<enter>]], {noremap=true})
+vim.keymap.set({'', 'l', 't'}, '<c-q>', [[<c-\><c-n>:q<enter>]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<a-h>', [[<c-\><c-n><c-w>h]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<a-j>', [[<c-\><c-n><c-w>j]], {noremap=true})
 vim.keymap.set({'', 'l', 't'}, '<a-k>', [[<c-\><c-n><c-w>k]], {noremap=true})
@@ -27,7 +23,7 @@ if vim.loop.os_uname().sysname == "Windows_NT" then
         end, {noremap=true})
     vim.keymap.set(
         {'t'},
-        '<a-e>',
+        '<c-e>',
         [[python -c "import sys; print(sys.executable)"<enter>]],
         {noremap=true}
     )
@@ -35,7 +31,7 @@ else
     vim.keymap.set({'n'}, '<leader>otw', ':vsplit term://<enter>a', {noremap=true})
     vim.keymap.set(
         {'t'},
-        '<a-e>',
+        '<c-e>',
         [[python3 -c "import sys; print(sys.executable)"<enter>]],
         {noremap=true}
     )
