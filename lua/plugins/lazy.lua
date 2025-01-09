@@ -1,13 +1,13 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
@@ -28,6 +28,10 @@ require("lazy").setup({
     },
     {
         "aaronik/treewalker.nvim",
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        enabled = not vim.g.vscode,
     },
     {
         "olimorris/persisted.nvim",
@@ -58,7 +62,7 @@ require("lazy").setup({
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/nvim-cmp',
             'L3MON4D3/LuaSnip',
-         },
+        },
         enabled = not vim.g.vscode,
     },
     {
@@ -99,13 +103,13 @@ require("lazy").setup({
     },
     {
         "kdheepak/lazygit.nvim",
-    	cmd = {
-    		"LazyGit",
-    		"LazyGitConfig",
-    		"LazyGitCurrentFile",
-    		"LazyGitFilter",
-    		"LazyGitFilterCurrentFile",
-    	},
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
         dependencies = { "nvim-lua/plenary.nvim", },
         enabled = not vim.g.vscode,
     },
