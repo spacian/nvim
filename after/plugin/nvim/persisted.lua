@@ -7,7 +7,7 @@ if not vim.g.vscode then
     require("telescope").load_extension("persisted")
     vim.keymap.set({ "n" }, "<leader>oP",
         function()
-            if oil.get_current_dir() ~= nil
+            if require("oil").get_current_dir() ~= nil
                 or vim.fn.expand("%:p") == "replacer://replacer"
             then
                 vim.cmd("bd!")
@@ -23,7 +23,7 @@ if not vim.g.vscode then
                 if not (
                         vim.bo.buftype == "quickfix"
                         or vim.bo.buftype == "terminal"
-                        or oil.get_current_dir() == nil)
+                        or require("oil").get_current_dir() == nil)
                 then
                     require("persisted").save({ force = true })
                 end
