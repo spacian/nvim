@@ -4,6 +4,9 @@ if not vim.g.vscode then
     require('autocmd')
     vim.api.nvim_exec('set spell', true)
     vim.api.nvim_exec('set colorcolumn=+1', true)
+    vim.opt.number = true
+    vim.opt.relativenumber = false
+    vim.opt.cursorline = true
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.api.nvim_exec('language en_US', true)
