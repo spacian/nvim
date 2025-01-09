@@ -1,28 +1,28 @@
 require('remaps.vscode.utils')
 require('remaps.vscode.jumps')
 
-vim.keymap.set({'n'}, '<leader>oe',
+vim.keymap.set({ 'n' }, '<leader>oe',
     function()
         register_jump()
         vsc_notify('workbench.explorer.fileView.focus')
     end
 )
 
-vim.keymap.set({'n'}, '<c-q>',
+vim.keymap.set({ 'n' }, '<c-q>',
     function()
         register_jump()
         vsc_notify('workbench.action.closeActiveEditor')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ot',
+vim.keymap.set({ 'n' }, '<leader>ot',
     function()
         register_jump()
         vsc_notify('workbench.action.terminal.toggleTerminal')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>oo',
+vim.keymap.set({ 'n' }, '<leader>oo',
     function()
         register_jump()
         vsc_notify('outline.focus')
@@ -30,34 +30,34 @@ vim.keymap.set({'n'}, '<leader>oo',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>oP',
+vim.keymap.set({ 'n' }, '<leader>oP',
     function()
         vsc_notify('workbench.action.openRecent')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>of',
+vim.keymap.set({ 'n' }, '<leader>of',
     function()
         register_jump()
         vsc_notify('workbench.action.quickOpen')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>og',
+vim.keymap.set({ 'n' }, '<leader>og',
     function()
         register_jump()
         vsc_notify('workbench.scm.focus')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>on',
+vim.keymap.set({ 'n' }, '<leader>on',
     function()
         register_jump()
         vsc_notify('extension.advancedNewFile')
     end
 )
 
-vim.keymap.set({'n'}, '<esc>',
+vim.keymap.set({ 'n' }, '<esc>',
     function()
         vsc_notify('workbench.action.closeSidebar')
         vsc_notify('workbench.action.closeAuxiliaryBar')
@@ -66,26 +66,26 @@ vim.keymap.set({'n'}, '<esc>',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>cl',
+vim.keymap.set({ 'n' }, '<leader>cl',
     function()
         vsc_notify('workbench.action.closeSidebar')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>ch',
+vim.keymap.set({ 'n' }, '<leader>ch',
     function()
         vsc_notify('workbench.action.closeAuxiliaryBar')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>oc',
+vim.keymap.set({ 'n' }, '<leader>oc',
     function()
         register_jump()
         vsc_notify('workbench.action.showCommands')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>op',
+vim.keymap.set({ 'n' }, '<leader>op',
     function()
         register_jump()
         vsc_notify('workbench.action.problems.focus')

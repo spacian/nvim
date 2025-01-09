@@ -1,11 +1,12 @@
 if not vim.g.vscode then
-    oil = require("oil")
+    local oil = require("oil")
     oil.setup({
         keymaps = {
             ["<enter>"] = "actions.select",
             ["<c-p>"] = "actions.preview",
             ["-"] = "actions.parent",
             ["<leader>r"] = "actions.refresh",
+            ["q"] = { "actions.close", mode = "n" },
         },
         use_default_keymaps = false,
         view_options = {
@@ -33,7 +34,7 @@ if not vim.g.vscode then
             else
                 vim.cmd("cd %:p:h")
             end
-            print("current working directory: "..vim.fn.getcwd())
+            print("current working directory: " .. vim.fn.getcwd())
         end, { noremap = true })
     vim.keymap.set(
         'n',
@@ -59,6 +60,6 @@ if not vim.g.vscode then
                 end
             end
         end,
-        {noremap=true}
+        { noremap = true }
     )
 end

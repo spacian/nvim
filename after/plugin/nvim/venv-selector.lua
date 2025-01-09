@@ -1,6 +1,6 @@
 if not vim.g.vscode then
     require('venv-selector').setup({
-        name = {".venv", "venv"},
+        name = { ".venv", "venv" },
         search_workspace = true,
         search_venv_managers = false,
         search = true,
@@ -64,6 +64,6 @@ if not vim.g.vscode then
                 update_workspace()
                 update_venv()
             end
-      }
+        }
     )
 end

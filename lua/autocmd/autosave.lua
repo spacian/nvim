@@ -15,5 +15,5 @@ vim.api.nvim_create_autocmd(
             vim.cmd('silent w')
             vim.cmd('doau BufWritePost')
         end
-  }
+    }
 )

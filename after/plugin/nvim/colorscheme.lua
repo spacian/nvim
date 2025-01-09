@@ -2,7 +2,7 @@ if not vim.g.vscode then
     require('kanagawa').setup({
         commentStyle = { italic = false },
         functionStyle = {},
-        keywordStyle = { italic = false},
+        keywordStyle = { italic = false },
         statementStyle = { bold = true },
         typeStyle = {},
         transparent = false,

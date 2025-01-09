@@ -4,7 +4,7 @@ if not vim.g.vscode then
         sources = {
             { name = 'vimtex' },
             { name = 'buffer' },
-      },
+        },
     })
-    vim.g.vimtex_compiler_latexmk = { out_dir = 'build'}
+    vim.g.vimtex_compiler_latexmk = { out_dir = 'build' }
 end

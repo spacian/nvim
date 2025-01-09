@@ -1,7 +1,7 @@
 require('remaps.vscode.utils')
 require('remaps.vscode.jumps')
 
-vim.keymap.set({'n'}, '<leader>gg',
+vim.keymap.set({ 'n' }, '<leader>gg',
     function()
         register_jump()
         vsc_notify('workbench.action.closeSidebar')
@@ -10,7 +10,7 @@ vim.keymap.set({'n'}, '<leader>gg',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gr',
+vim.keymap.set({ 'n' }, '<leader>gr',
     function()
         register_jump()
         vsc_notify('workbench.action.closeSidebar')
@@ -19,7 +19,7 @@ vim.keymap.set({'n'}, '<leader>gr',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gl',
+vim.keymap.set({ 'n' }, '<leader>gl',
     function()
         register_jump()
         vsc_notify('workbench.action.closeSidebar')
@@ -28,7 +28,7 @@ vim.keymap.set({'n'}, '<leader>gl',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gf',
+vim.keymap.set({ 'n' }, '<leader>gf',
     function()
         register_jump()
         vsc_notify('workbench.action.closeSidebar')
@@ -37,21 +37,21 @@ vim.keymap.set({'n'}, '<leader>gf',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gv',
+vim.keymap.set({ 'n' }, '<leader>gv',
     function()
         register_jump()
         vsc_notify('git.viewHistory')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gs',
+vim.keymap.set({ 'n' }, '<leader>gs',
     function()
         register_jump()
         vsc_notify('editor.action.dirtydiff.next')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gp',
+vim.keymap.set({ 'n' }, '<leader>gp',
     function()
         register_jump()
         vsc_notify('workbench.action.compareEditor.previousChange')
@@ -59,7 +59,7 @@ vim.keymap.set({'n'}, '<leader>gp',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gn',
+vim.keymap.set({ 'n' }, '<leader>gn',
     function()
         register_jump()
         vsc_notify('workbench.action.compareEditor.nextChange')
@@ -67,14 +67,14 @@ vim.keymap.set({'n'}, '<leader>gn',
     end
 )
 
-vim.keymap.set({'n'}, '<leader>gd',
+vim.keymap.set({ 'n' }, '<leader>gd',
     function()
         register_jump()
         vsc_notify('git.openChange')
     end
 )
 
-vim.keymap.set({'n'}, '<leader>go',
+vim.keymap.set({ 'n' }, '<leader>go',
     function()
         vsc_notify('workbench.action.compareEditor.focusOtherSide')
     end
