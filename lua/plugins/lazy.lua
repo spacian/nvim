@@ -49,6 +49,11 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim" },
         enabled = not vim.g.vscode,
     },
+
+    {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    },
     {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",

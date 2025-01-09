@@ -5,6 +5,17 @@ vim.api.nvim_create_autocmd(
     {
         pattern = "*",
         callback = function()
+            local buffer_name = vim.api.nvim_buf_get_name(0)
+            if
+                vim.bo.readonly
+                or buffer_name == ''
+                or string.find(buffer_name, "^oil://") ~= nil
+                or string.find(buffer_name, "^replacer://") ~= nil
+                or vim.bo.buftype ~= ''
+                or not (vim.bo.modifiable and vim.bo.modified)
+            then
+                return
+            end
             local save_cursor = vim.fn.getpos(".")
             pcall(function() vim.cmd([[%s/\s\+$//e]]) end)
             if vim.bo.filetype == "lua" then
