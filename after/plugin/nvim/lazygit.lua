@@ -1,5 +1,6 @@
 if not vim.g.vscode then
     require("telescope").load_extension("lazygit")
+    vim.g.lazygit_floating_window_scaling_factor = 0.95
     vim.keymap.set({ "n" }, "<leader>gr",
         function() require("telescope").extensions.lazygit.lazygit() end,
         { noremap = true }
