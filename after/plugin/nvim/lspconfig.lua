@@ -18,6 +18,7 @@ if not vim.g.vscode then
                     typeCheckingMode = "strict",
                     autoSearchPaths = true,
                     useLibraryCodeForTypes = true,
+                    diagnosticMode = "workspace",
                     diagnosticSeverityOverrides = {
                         reportUnboundVariable = "error",
                         reportMissingModuleSource = "error",
