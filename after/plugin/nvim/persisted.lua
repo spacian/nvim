@@ -26,13 +26,13 @@ if not vim.g.vscode then
     })
     vim.api.nvim_create_autocmd("User", {
         pattern = "PersistedTelescopeLoadPre",
-        callback = function(session)
+        callback = function(_)
             require("persisted").save({ session = vim.g.persisted_loaded_session })
             vim.cmd('%bd!')
         end,
     })
     vim.api.nvim_create_autocmd(
-        { "VimLeavePre", "BufEnter", "TextChanged", "BufWritePost" },
+        { "BufEnter" },
         {
             callback = function()
                 local buffer_name = vim.api.nvim_buf_get_name(0)

@@ -1,59 +1,59 @@
 require('remaps.vscode.utils')
 require('remaps.vscode.jumps')
 
-vim.keymap.set({ 'n' }, '<c-o>', jump_back, { noremap = true })
-vim.keymap.set({ 'n' }, '<c-i>', jump_forw, { noremap = true })
+vim.keymap.set({ 'n' }, '<c-o>', Jump_back, { noremap = true })
+vim.keymap.set({ 'n' }, '<c-i>', Jump_forw, { noremap = true })
 
 local do_wrap = true
 
-function wrap_jk()
+local function wrap_jk()
     vim.keymap.set({ 'n' }, 'I',
         function()
-            vsc_notify('cursorMove', {
+            Vsc_notify('cursorMove', {
                 args = { to = 'wrappedLineStart' }
             })
-            nvim_feedkeys('i')
+            Nvim_feedkeys('i')
         end
     )
     vim.keymap.set({ 'n' }, 'A',
         function()
-            vsc_notify('cursorMove', {
+            Vsc_notify('cursorMove', {
                 args = { to = 'wrappedLineEnd' }
             })
-            nvim_feedkeys('a')
+            Nvim_feedkeys('a')
         end
     )
     vim.keymap.set({ 'n' }, 'H',
         function()
-            vsc_notify('cursorMove', {
+            Vsc_notify('cursorMove', {
                 args = { to = 'wrappedLineStart' }
             })
         end
     )
     vim.keymap.set({ 'n' }, 'L',
         function()
-            vsc_notify('cursorMove', {
+            Vsc_notify('cursorMove', {
                 args = { to = 'wrappedLineEnd' }
             })
         end
     )
     vim.keymap.set({ 'n' }, 'j',
         function()
-            vsc_notify('cursorMove', {
+            Vsc_notify('cursorMove', {
                 args = { to = 'down', by = 'wrappedLine', value = vim.v.count + 1 }
             })
         end
     )
     vim.keymap.set({ 'n' }, 'k',
         function()
-            vsc_notify('cursorMove', {
+            Vsc_notify('cursorMove', {
                 args = { to = 'up', by = 'wrappedLine', value = vim.v.count }
             })
         end
     )
 end
 
-function unwrap_jk()
+local function unwrap_jk()
     vim.keymap.set({ 'n' }, 'j', 'j')
     vim.keymap.set({ 'n' }, 'k', 'k')
     vim.keymap.set({ 'n' }, 'L', '$')
@@ -77,43 +77,43 @@ vim.keymap.set({ 'n' }, 'gwrap',
 
 vim.keymap.set({ 'n' }, 'gi',
     function()
-        register_jump()
-        jump_forw(1)
+        Register_jump()
+        Jump_forw(1)
     end
 )
 
 vim.keymap.set({ 'n' }, 'go',
     function()
-        register_jump()
-        jump_back(1)
+        Register_jump()
+        Jump_back(1)
     end
 )
 
 vim.keymap.set({ 'n' }, '<c-d>',
     function()
-        nvim_feedkeys('10j')
-        center()
+        Nvim_feedkeys('10j')
+        Center()
     end
 )
 
 vim.keymap.set({ 'n' }, '<c-u>',
     function()
-        nvim_feedkeys('10k')
-        center()
+        Nvim_feedkeys('10k')
+        Center()
     end
 )
 
 vim.keymap.set({ 'n' }, '}',
     function()
-        nvim_feedkeys('}')
-        center()
+        Nvim_feedkeys('}')
+        Center()
     end
 )
 
 vim.keymap.set({ 'n' }, '{',
     function()
-        nvim_feedkeys('{')
-        center()
+        Nvim_feedkeys('{')
+        Center()
     end
 )
 
@@ -122,49 +122,49 @@ for i = 1, 26 do
     local lower = string.char(i + 96)
     vim.keymap.set({ 'n' }, 'M' .. upper,
         function()
-            vsc_notify('vim-marks.create_mark_' .. upper)
+            Vsc_notify('vim-marks.create_mark_' .. upper)
         end
     )
     vim.keymap.set({ 'n' }, 'M' .. lower,
         function()
-            vsc_notify('vim-marks.create_mark_' .. lower)
+            Vsc_notify('vim-marks.create_mark_' .. lower)
         end
     )
     vim.keymap.set({ 'n' }, 'm' .. upper,
         function()
-            register_jump()
-            vsc_notify('vim-marks.jump_to_mark_' .. upper)
+            Register_jump()
+            Vsc_notify('vim-marks.jump_to_mark_' .. upper)
         end
     )
     vim.keymap.set({ 'n' }, 'm' .. lower,
         function()
-            register_jump()
-            vsc_notify('vim-marks.jump_to_mark_' .. lower)
+            Register_jump()
+            Vsc_notify('vim-marks.jump_to_mark_' .. lower)
         end
     )
 end
 
 vim.keymap.set({ 'n' }, '<leader>ah',
     function()
-        vsc_notify('vscode-harpoon.addEditor')
+        Vsc_notify('vscode-harpoon.addEditor')
     end
 )
 
 vim.keymap.set({ 'n' }, '<leader>aj',
     function()
-        vsc_notify('vscode-harpoon.addEditor1')
+        Vsc_notify('vscode-harpoon.addEditor1')
     end
 )
 
 vim.keymap.set({ 'n' }, '<leader>ak',
     function()
-        vsc_notify('vscode-harpoon.addEditor2')
+        Vsc_notify('vscode-harpoon.addEditor2')
     end
 )
 
 vim.keymap.set({ 'n' }, '<leader>al',
     function()
-        vsc_notify('vscode-harpoon.addEditor3')
+        Vsc_notify('vscode-harpoon.addEditor3')
     end
 )
 
@@ -172,31 +172,31 @@ vim.keymap.set({ 'n' }, '<leader>al',
 
 vim.keymap.set({ 'n' }, '<leader>oh',
     function()
-        register_jump()
-        vsc_notify('vscode-harpoon.editEditors')
+        Register_jump()
+        Vsc_notify('vscode-harpoon.editEditors')
     end
 )
 
 vim.keymap.set({ 'n' }, '<leader>j',
     function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor1')
-        center()
+        Register_jump()
+        Vsc_notify('vscode-harpoon.gotoEditor1')
+        Center()
     end
 )
 
 vim.keymap.set({ 'n' }, '<leader>k',
     function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor2')
-        center()
+        Register_jump()
+        Vsc_notify('vscode-harpoon.gotoEditor2')
+        Center()
     end
 )
 
 vim.keymap.set({ 'n' }, '<leader>l',
     function()
-        register_jump()
-        vsc_notify('vscode-harpoon.gotoEditor3')
-        center()
+        Register_jump()
+        Vsc_notify('vscode-harpoon.gotoEditor3')
+        Center()
     end
 )

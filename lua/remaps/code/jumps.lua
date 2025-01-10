@@ -4,13 +4,13 @@ vim.api.nvim_create_autocmd(
     { 'InsertLeave', 'TextChanged' },
     {
         callback = function()
-            register_jump()
-            register_jump(1)
+            Register_jump()
+            Register_jump(1)
         end
     }
 )
 
-jump_keys = {
+local jump_keys = {
     ['/'] = '',
     ['?'] = '',
     ['#'] = '',
@@ -28,11 +28,11 @@ for key, map in pairs(jump_keys) do
     end
     vim.keymap.set({ 'n' }, key,
         function()
-            register_jump()
+            Register_jump()
             if vim.v.count > 0 then
-                nvim_feedkeys(vim.v.count .. map)
+                Nvim_feedkeys(vim.v.count .. map)
             else
-                nvim_feedkeys(map)
+                Nvim_feedkeys(map)
             end
         end
     )
