@@ -14,6 +14,7 @@ if not vim.g.vscode then
                 or string.find(buffer_name, "^replacer://") ~= nil
             then
                 print('cannot open new session from this buffer')
+                return
             end
             vim.cmd("Telescope persisted")
         end
@@ -22,6 +23,13 @@ if not vim.g.vscode then
         callback = function()
             vim.cmd('Telescope persisted')
         end
+    })
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistedTelescopeLoadPre",
+        callback = function(session)
+            require("persisted").save({ session = vim.g.persisted_loaded_session })
+            vim.cmd('%bd!')
+        end,
     })
     vim.api.nvim_create_autocmd(
         { "VimLeavePre", "BufEnter", "TextChanged", "BufWritePost" },
