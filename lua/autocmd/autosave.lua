@@ -7,10 +7,10 @@ vim.api.nvim_create_autocmd(
             if
                 vim.bo.readonly
                 or buffer_name == ''
-                or string.find(buffer_name, "^oil://") ~= nil
-                or string.find(buffer_name, "^replacer://") ~= nil
                 or vim.bo.buftype ~= ''
                 or not (vim.bo.modifiable and vim.bo.modified)
+                or string.find(buffer_name, "^oil://") ~= nil
+                or string.find(buffer_name, "^replacer://") ~= nil
             then
                 return
             end

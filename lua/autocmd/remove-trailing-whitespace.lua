@@ -8,11 +8,9 @@ vim.api.nvim_create_autocmd(
             local buffer_name = vim.api.nvim_buf_get_name(0)
             if
                 vim.bo.readonly
-                or buffer_name == ''
+                or not (vim.bo.modifiable and vim.bo.modified)
                 or string.find(buffer_name, "^oil://") ~= nil
                 or string.find(buffer_name, "^replacer://") ~= nil
-                or vim.bo.buftype ~= ''
-                or not (vim.bo.modifiable and vim.bo.modified)
             then
                 return
             end

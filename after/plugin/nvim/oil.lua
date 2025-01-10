@@ -62,32 +62,4 @@ if not vim.g.vscode then
         end,
         { noremap = true }
     )
-    vim.keymap.set({ "n" }, "<leader>oP",
-        function()
-            local buffer_name = vim.api.nvim_buf_get_name(0)
-            if string.find(buffer_name, "^oil://") ~= nil
-                or string.find(buffer_name, "^replacer://") ~= nil
-            then
-                vim.cmd("bd!")
-            end
-            vim.cmd("Telescope persisted")
-        end
-    )
-    vim.api.nvim_create_autocmd(
-        { "VimLeavePre", "InsertLeave", "TextChanged", "BufWritePost", "BufEnter" },
-        {
-            pattern = { "*" },
-            callback = function()
-                local buffer_name = vim.api.nvim_buf_get_name(0)
-                if not (
-                        vim.bo.buftype == "quickfix"
-                        or vim.bo.buftype == "terminal"
-                        or string.find(buffer_name, "^oil://") ~= nil
-                        or string.find(buffer_name, "^replacer://") ~= nil)
-                then
-                    require("persisted").save({ force = true })
-                end
-            end,
-        }
-    )
 end
