@@ -4,6 +4,7 @@ require('nvim-treesitter.configs').setup({
             enable = true,
             lookahead = true,
             keymaps = {
+                ["ai"] = "@statement.outer",
                 ["ah"] = "@assignment.lhs",
                 ["al"] = "@assignment.rhs",
                 ["as"] = "@assignment.outer",
@@ -24,12 +25,12 @@ require('nvim-treesitter.configs').setup({
             },
             selection_modes = {
                 --   ['@parameter.outer'] = 'v', -- charwise
-                ['@class.inner'] = 'V', -- linewise
-                ['@class.outer'] = 'V', -- linewise
+                ['@class.inner'] = 'V',    -- linewise
+                ['@class.outer'] = 'V',    -- linewise
                 ['@function.outer'] = 'V', -- linewise
                 ['@function.inner'] = 'V', -- linewise
-                ['@block.outer'] = 'V', -- linewise
-                ['@block.inner'] = 'V', -- linewise
+                ['@block.outer'] = 'V',    -- linewise
+                ['@block.inner'] = 'V',    -- linewise
                 --   ['@class.outer'] = '<c-v>', -- blockwise
             },
             include_surrounding_whitespace = false,
