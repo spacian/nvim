@@ -67,4 +67,32 @@ if not vim.g.vscode then
             end
         }
     )
+    if vim.loop.os_uname().sysname == "Windows_NT" then
+        vim.keymap.set({ 'n' }, '<leader>otp',
+            function()
+                vim.cmd('vsplit')
+                vim.cmd('term')
+                vim.fn.feedkeys('a')
+                vim.fn.feedkeys(
+                    vim.api.nvim_replace_termcodes(
+                        '.venv/Scripts/activate<enter>' ..
+                        'cls<enter>'
+                        , true, true, true)
+                )
+            end, { noremap = true })
+    else
+        vim.keymap.set({ 'n' }, '<leader>otp',
+            function()
+                vim.cmd('vsplit')
+                vim.cmd('term')
+                vim.fn.feedkeys('a')
+                vim.fn.feedkeys(
+                    vim.api.nvim_replace_termcodes(
+                        '.venv/bin/activate<enter>'
+                        , true, true, true)
+                )
+            end,
+            -- ':vsplit term://<enter>a',
+            { noremap = true })
+    end
 end
