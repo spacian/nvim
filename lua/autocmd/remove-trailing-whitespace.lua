@@ -3,7 +3,6 @@ vim.api.nvim_create_autocmd(
         "BufWritePre",
     },
     {
-        pattern = "*",
         callback = function()
             local buffer_name = vim.api.nvim_buf_get_name(0)
             if

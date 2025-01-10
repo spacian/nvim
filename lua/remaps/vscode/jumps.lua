@@ -3,7 +3,6 @@ require('remaps.vscode.utils')
 vim.api.nvim_create_autocmd(
     { 'InsertLeave', 'TextChanged' },
     {
-        pattern = '*',
         callback = function()
             register_jump()
             register_jump(1)

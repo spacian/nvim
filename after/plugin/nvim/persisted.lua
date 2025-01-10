@@ -20,7 +20,6 @@ if not vim.g.vscode then
     vim.api.nvim_create_autocmd(
         { "VimLeavePre", "InsertLeave", "TextChanged", "BufWritePost" },
         {
-            pattern = { "*" },
             callback = function()
                 local buffer_name = vim.api.nvim_buf_get_name(0)
                 if
