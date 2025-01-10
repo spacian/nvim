@@ -33,17 +33,17 @@ if not vim.g.vscode then
             end
 
             -- Navigation
-            map('n', ']d', function()
+            map('n', ']g', function()
                 if vim.wo.diff then
-                    vim.cmd.normal({ ']d', bang = true })
+                    vim.cmd.normal({ ']g', bang = true })
                 else
                     gitsigns.nav_hunk('next')
                 end
             end)
 
-            map('n', '[d', function()
+            map('n', '[g', function()
                 if vim.wo.diff then
-                    vim.cmd.normal({ '[d', bang = true })
+                    vim.cmd.normal({ '[g', bang = true })
                 else
                     gitsigns.nav_hunk('prev')
                 end
@@ -58,11 +58,10 @@ if not vim.g.vscode then
             map('n', '<leader>hu', gitsigns.undo_stage_hunk)
             map('n', '<leader>hR', gitsigns.reset_buffer)
             map('n', '<leader>hp', gitsigns.preview_hunk)
-            map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end)
-            map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+            map('n', '<leader>hb', gitsigns.toggle_current_line_blame)
             map('n', '<leader>hd', gitsigns.diffthis)
             map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
-            map('n', '<leader>td', gitsigns.toggle_deleted)
+            map('n', '<leader>gd', gitsigns.toggle_deleted)
 
             -- Text object
             map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

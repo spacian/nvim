@@ -7,8 +7,8 @@ if not vim.g.vscode then
         parents = 0,
         notify_user_on_activate = false,
     })
-    vim.keymap.set('n', '<leader>es', function() vim.cmd('VenvSelect') end)
-    vim.keymap.set('n', '<leader>ec', function()
+    vim.keymap.set('n', '<leader>Es', function() vim.cmd('VenvSelect') end)
+    vim.keymap.set('n', '<leader>Ec', function()
         print(require('venv-selector').venv())
     end)
 
