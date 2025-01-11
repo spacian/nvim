@@ -22,8 +22,17 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>of', builtin.find_files)
     vim.keymap.set('n', '<leader>ob', builtin.buffers)
     vim.keymap.set('n', '<leader>og', builtin.git_files)
-    vim.keymap.set('n', '<leader>fw', builtin.live_grep)
-    vim.keymap.set('n', '<leader>ff', builtin.grep_string)
+    vim.keymap.set('n', '<leader>fe', builtin.live_grep)
+    vim.keymap.set('n', '<leader>fw', builtin.grep_string)
+    vim.keymap.set('n', '<leader>ff', function()
+        builtin.grep_string(
+            {
+                search = '',
+                word_match = '-w',
+                shorten_path = true,
+                only_sort_text = true
+            })
+    end)
     vim.keymap.set('n', 'gr', builtin.lsp_references)
     vim.keymap.set('n', 'gd', builtin.lsp_definitions)
     vim.keymap.set('n', 'gD', builtin.lsp_type_definitions)
@@ -36,5 +45,6 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>oj', builtin.jumplist)
     vim.keymap.set('n', '<leader>oq', builtin.quickfix)
     vim.keymap.set('n', '<leader>och', builtin.command_history)
+    vim.keymap.set('n', '<leader>oco', builtin.commands)
     vim.keymap.set('n', '<leader>op', builtin.diagnostics)
 end
