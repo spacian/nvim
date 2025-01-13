@@ -28,6 +28,7 @@ if not vim.g.vscode then
                         state.commands['open'](state)
                     end
                 end,
+                ["<esc>"] = "close_window",
             },
         },
     })

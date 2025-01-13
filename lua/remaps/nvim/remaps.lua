@@ -16,12 +16,20 @@ vim.keymap.set({ '', 'l', 't' }, '<c-a-l>', [[<c-\><c-n><c-w>L]], { noremap = tr
 if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.keymap.set({ 'n' }, '<leader>otw',
         function()
-            vim.cmd('vsplit')
-            vim.cmd('term')
-            vim.fn.feedkeys('a')
-            vim.fn.feedkeys(
-                'cls' .. vim.api.nvim_replace_termcodes('<enter>', true, true, true)
-            )
+            local buffer_name = vim.api.nvim_buf_get_name(0)
+            if
+                string.find(buffer_name, "^oil://") ~= nil
+                or string.find(buffer_name, "^replacer://") ~= nil
+            then
+                return
+            else
+                vim.cmd('vsplit')
+                vim.cmd('term')
+                vim.fn.feedkeys('a')
+                vim.fn.feedkeys(
+                    'cls' .. vim.api.nvim_replace_termcodes('<enter>', true, true, true)
+                )
+            end
         end, { noremap = true })
     vim.keymap.set(
         { 't' },
@@ -30,7 +38,17 @@ if vim.loop.os_uname().sysname == "Windows_NT" then
         { noremap = true }
     )
 else
-    vim.keymap.set({ 'n' }, '<leader>otw', ':vsplit term://<enter>a', { noremap = true })
+    vim.keymap.set({ 'n' }, '<leader>otw', function()
+        local buffer_name = vim.api.nvim_buf_get_name(0)
+        if
+            string.find(buffer_name, "^oil://") ~= nil
+            or string.find(buffer_name, "^replacer://") ~= nil
+        then
+            return
+        else
+            vim.cmd('vsplit term://<enter>a')
+        end
+    end, { noremap = true })
     vim.keymap.set(
         { 't' },
         '<c-e>',
@@ -76,7 +94,7 @@ end)
 vim.keymap.set('n', '<leader>qft', function()
     local qf = vim.fn.getqflist()
     local filtered = {}
-    local filter_by = vim.fn.input("filter qflist by type (E/W/H): ", "E")
+    local filter_by = vim.fn.input("filter qflist by type (E/W/N): ", "E")
     for _, item in ipairs(qf) do
         if item.type:match(filter_by) then
             table.insert(filtered, item)
@@ -96,3 +114,33 @@ vim.keymap.set('n', '<leader>qff', function()
     end
     vim.fn.setqflist(filtered)
 end)
+vim.keymap.set(
+    'n',
+    '<leader>otf',
+    function()
+        local buffer_name = vim.api.nvim_buf_get_name(0)
+        if
+            string.find(buffer_name, "^oil://") ~= nil
+            or string.find(buffer_name, "^replacer://") ~= nil
+        then
+            return
+        else
+            local path = vim.fn.expand("%:p:h")
+            if vim.loop.os_uname().sysname == "Windows_NT" then
+                vim.cmd('vsplit')
+                vim.cmd('term')
+                local enter = vim.api.nvim_replace_termcodes(
+                    "<enter>", true, true, true
+                )
+                vim.fn.feedkeys('a')
+                vim.fn.feedkeys('cd ' .. path:gsub("\\", "/") .. enter)
+                vim.fn.feedkeys('cls' .. enter)
+            else
+                vim.cmd('vsplit term://bash')
+                vim.cmd('startinsert')
+                vim.cmd('call feedkeys("cd ' .. path .. '\\nclear\\n")')
+            end
+        end
+    end,
+    { noremap = true }
+)
