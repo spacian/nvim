@@ -30,6 +30,16 @@ require("lazy").setup({
         "aaronik/treewalker.nvim",
     },
     {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
+        enabled = not vim.g.vscode,
+    },
+    {
         'lewis6991/gitsigns.nvim',
         enabled = not vim.g.vscode,
     },
@@ -52,7 +62,8 @@ require("lazy").setup({
 
     {
         "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+        enabled = not vim.g.vscode,
     },
     {
         "williamboman/mason.nvim",
