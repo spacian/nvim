@@ -1,5 +1,5 @@
-require('remaps.vscode.utils')
-require('remaps.vscode.jumps')
+require('remaps.code.utils')
+require('remaps.code.jumps')
 
 vim.keymap.set({ 'n' }, '<leader>oe',
     function()

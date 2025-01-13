@@ -1,4 +1,4 @@
-require('remaps.vscode.utils')
+require('remaps.code.utils')
 
 vim.api.nvim_create_autocmd(
     { 'InsertLeave', 'TextChanged' },
