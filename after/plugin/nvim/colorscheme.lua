@@ -15,6 +15,11 @@ if not vim.g.vscode then
         overrides = function(colors)
             return {
                 ["@variable.builtin"] = { italic = false },
+                -- Visual = { bg = colors.palette.lotusOrange },
+                -- Visual = { bg = colors.palette.lotusRed },
+                -- Visual = { bg = colors.palette.oniViolet },
+                -- Visual = { bg = colors.palette.lotusRed3 },
+                Visual = { bg = colors.palette.lotusViolet4 },
             }
         end,
         theme = "wave",
