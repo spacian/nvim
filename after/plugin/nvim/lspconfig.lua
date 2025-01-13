@@ -1,19 +1,30 @@
 if not vim.g.vscode then
     require("mason").setup()
+    require("mason-null-ls").setup({
+        ensure_installed = {
+            "cspell",
+        }
+    })
     require("mason-lspconfig").setup({
         ensure_installed = {
-            "pyright",
+            -- "pyright",
+            "basedpyright",
             "gopls",
             "lua_ls",
         }
     })
+    local cspell = require('cspell')
+    local null_ls = require('null-ls')
+    null_ls.setup({
+        fallback_severity = vim.diagnostic.severity.HINT,
+        sources = {
+            cspell.diagnostics,
+        },
+    })
     local lspconfig = require('lspconfig')
-    lspconfig.pyright.setup({
+    lspconfig.basedpyright.setup({
         settings = {
-            pyright = {
-                disableOrganizeImports = true,
-            },
-            python = {
+            basedpyright = {
                 analysis = {
                     typeCheckingMode = "strict",
                     autoSearchPaths = true,
@@ -22,11 +33,30 @@ if not vim.g.vscode then
                     diagnosticSeverityOverrides = {
                         reportUnboundVariable = "error",
                         reportMissingModuleSource = "error",
-                    }
+                    },
                 }
             }
-        }
+        },
     })
+    -- lspconfig.pyright.setup({
+    --     settings = {
+    --         pyright = {
+    --             disableOrganizeImports = true,
+    --         },
+    --         python = {
+    --             analysis = {
+    --                 typeCheckingMode = "strict",
+    --                 autoSearchPaths = true,
+    --                 useLibraryCodeForTypes = true,
+    --                 diagnosticMode = "workspace",
+    --                 diagnosticSeverityOverrides = {
+    --                     reportUnboundVariable = "error",
+    --                     reportMissingModuleSource = "error",
+    --                 },
+    --             }
+    --         }
+    --     }
+    -- })
     lspconfig.gopls.setup({})
     lspconfig.lua_ls.setup({
         on_init = function(client)

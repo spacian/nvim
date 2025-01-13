@@ -1,0 +1,19 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "allowCompoundWords": true,
+    "words": [
+        "pyright",
+        "basedpyright",
+        "lsp",
+        "gopls",
+        "luarc",
+        "cmd",
+        "omnifunc",
+        "autocmd",
+        "nvim",
+        "nohlsearch",
+        "sysname",
+        "shada",
+    ],
+}
