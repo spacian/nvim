@@ -3,6 +3,7 @@
     "language": "en",
     "allowCompoundWords": true,
     "words": [
+        "lspconfig",
         "pyright",
         "basedpyright",
         "lsp",

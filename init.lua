@@ -1,5 +1,5 @@
 require('remaps')
-require('plugins')
+require('config.lazy')
 if not vim.g.vscode then
     require('autocmd')
     vim.cmd('set spell')

@@ -1,0 +1,5 @@
+return {
+    {
+        "svban/YankAssassin.nvim",
+    },
+}

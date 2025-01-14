@@ -13,12 +13,11 @@ if not vim.g.vscode then
             "lua_ls",
         }
     })
-    local cspell = require('cspell')
     local null_ls = require('null-ls')
     null_ls.setup({
         fallback_severity = vim.diagnostic.severity.HINT,
         sources = {
-            cspell.diagnostics,
+            require('cspell').diagnostics,
         },
     })
     local lspconfig = require('lspconfig')
