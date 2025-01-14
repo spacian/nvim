@@ -1,6 +1,5 @@
 if not vim.g.vscode then
     require('autocmd')
-    vim.cmd('set spell')
     vim.cmd('set colorcolumn=+1')
     vim.opt.number = true
     vim.opt.relativenumber = false
