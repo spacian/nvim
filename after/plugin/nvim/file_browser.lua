@@ -4,4 +4,7 @@ if not vim.g.vscode then
         vim.cmd('SessionStop')
         vim.cmd('Telescope file_browser path=C:/Users/mark_ro/DLR/Projekte/software_development')
     end)
+    vim.keymap.set({ 'n' }, '<leader>oF', function()
+        vim.cmd('Telescope file_browser')
+    end)
 end
