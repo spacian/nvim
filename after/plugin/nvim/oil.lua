@@ -6,8 +6,10 @@ if not vim.g.vscode then
             ["<c-p>"] = "actions.preview",
             ["-"] = "actions.parent",
             ["<leader>r"] = "actions.refresh",
-            ["q"] = { "actions.close", mode = "n" },
-            ["<esc>"] = { "actions.close", mode = "n" },
+            -- ["q"] = { "actions.close", mode = "n" },
+            -- ["<esc>"] = { "actions.close", mode = "n" },
+            ["q"] = function() vim.cmd('bd') end,
+            ["<esc>"] = function() vim.cmd('bd') end,
         },
         use_default_keymaps = false,
         view_options = {

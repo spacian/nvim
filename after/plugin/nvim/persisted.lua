@@ -34,6 +34,16 @@ if not vim.g.vscode then
             vim.cmd('%bd!')
         end,
     })
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistedStart",
+        callback = function(_)
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                if vim.api.nvim_buf_get_name(buf):match('^oil://') ~= nil then
+                    vim.api.nvim_buf_delete(buf, { force = true })
+                end
+            end
+        end,
+    })
     vim.api.nvim_create_autocmd(
         { "BufEnter" },
         {
