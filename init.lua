@@ -1,5 +1,3 @@
-require('remaps')
-require('config.lazy')
 if not vim.g.vscode then
     require('autocmd')
     vim.cmd('set spell')
@@ -27,3 +25,8 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.bo.softtabstop = 4
+require('remaps')
+require('config.lazy')
+if not vim.g.vscode then
+    require('autocmd')
+end

@@ -1,12 +1,15 @@
 {
     "version": "0.2",
-    "language": "en",
+    "language": ["en", "de"],
     "allowCompoundWords": true,
     "words": [
+        "getcwd",
+        "nvim",
+        "keymaps",
+        "bufnr",
         "lspconfig",
         "pyright",
         "basedpyright",
-        "lsp",
         "gopls",
         "luarc",
         "cmd",
