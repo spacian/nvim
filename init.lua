@@ -1,11 +1,25 @@
 if not vim.g.vscode then
-    require('autocmd')
     vim.cmd('set colorcolumn=+1')
+    vim.cmd('set signcolumn=yes:1')
     vim.opt.number = true
     vim.opt.relativenumber = false
     vim.opt.cursorline = false
     vim.opt.laststatus = 0
     vim.opt.winbar = "%=%f"
+    vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#43243B" }) -- kanagawa:winterRed
+    vim.diagnostic.config({
+        signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = "",
+                [vim.diagnostic.severity.WARN]  = "W",
+                [vim.diagnostic.severity.INFO]  = "",
+                [vim.diagnostic.severity.HINT]  = "",
+            },
+            linehl = {
+                [vim.diagnostic.severity.ERROR] = "DiagnosticErrorLn",
+            },
+        },
+    })
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
     vim.cmd('language en_US')
