@@ -6,17 +6,14 @@ if not vim.g.vscode then
             ["<c-p>"] = "actions.preview",
             ["-"] = "actions.parent",
             ["<leader>r"] = "actions.refresh",
-            -- ["q"] = { "actions.close", mode = "n" },
-            -- ["<esc>"] = { "actions.close", mode = "n" },
             ["q"] = function() vim.cmd('bd') end,
-            ["<esc>"] = function() vim.cmd('bd') end,
         },
         use_default_keymaps = false,
         view_options = {
             show_hidden = true,
         },
     })
-    vim.keymap.set("n", "<leader>oe",
+    vim.keymap.set("n", "<leader>oE",
         function()
             local bufname = vim.fn.expand("%")
             if bufname ~= "" then
@@ -25,7 +22,7 @@ if not vim.g.vscode then
                 vim.cmd("silent e .")
             end
         end, { noremap = true })
-    vim.keymap.set("n", "<leader>od",
+    vim.keymap.set("n", "<leader>oD",
         function()
             vim.cmd("silent e " .. vim.fn.getcwd())
         end, { noremap = true })

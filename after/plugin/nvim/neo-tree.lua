@@ -28,23 +28,22 @@ if not vim.g.vscode then
                         state.commands['open'](state)
                     end
                 end,
-                -- ["<esc>"] = "close_window",
-                ["<esc>"] = function() vim.cmd('bd') end,
                 ["q"] = function() vim.cmd('bd') end,
             },
         },
     })
-    vim.keymap.set({ 'n' }, '<leader>oE', function()
+    vim.keymap.set({ 'n' }, '<leader>oe', function()
         require("neo-tree.command").execute({
             action = "focus",
-            position = "right",
+            position = "current",
             dir = vim.fn.getcwd(),
+            reveal = true,
         })
     end)
-    vim.keymap.set({ 'n' }, '<leader>oD', function()
+    vim.keymap.set({ 'n' }, '<leader>od', function()
         require("neo-tree.command").execute({
             action = "focus",
-            position = "right",
+            position = "current",
             source = "filesystem",
             dir = vim.fn.getcwd(),
         })

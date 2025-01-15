@@ -3,6 +3,7 @@
     "language": "en",
     "allowCompoundWords": true,
     "words": [
+        "noremap",
         "getcwd",
         "nvim",
         "keymaps",

@@ -1,4 +1,5 @@
 if not vim.g.vscode then
+    local fb_actions = require("telescope").extensions.file_browser.actions
     require('telescope').setup(
         {
             defaults = {
@@ -16,8 +17,21 @@ if not vim.g.vscode then
                     },
                 },
             },
+            extensions = {
+                file_browser = {
+                    mappings = {
+                        ["i"] = {
+                            ["<a-n>"] = fb_actions.create,
+                            ["<a-c>"] = false,
+                        },
+                    },
+                },
+            },
         }
     )
+    require("telescope").load_extension("lazygit")
+    require("telescope").load_extension("persisted")
+    require('telescope').load_extension('file_browser')
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>of', builtin.find_files)
     vim.keymap.set('n', '<leader>ob', builtin.buffers)
@@ -40,7 +54,7 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>osw', builtin.lsp_dynamic_workspace_symbols)
     vim.keymap.set('n', '<leader>ol', builtin.oldfiles)
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find)
-    vim.keymap.set('n', '<leader>tr', builtin.resume)
+    vim.keymap.set('n', '<leader>or', builtin.resume)
     vim.keymap.set('n', '<leader>ocs', builtin.colorscheme)
     vim.keymap.set('n', '<leader>oj', builtin.jumplist)
     vim.keymap.set('n', '<leader>oq', builtin.quickfix)

@@ -5,7 +5,6 @@ if not vim.g.vscode then
         silent = true,
         ignored_dirs = { "oil://", "replacer://" },
     })
-    require("telescope").load_extension("persisted")
     vim.keymap.set({ "n" }, "<leader>oP",
         function()
             local buffer_name = vim.api.nvim_buf_get_name(0)
@@ -37,6 +36,7 @@ if not vim.g.vscode then
     vim.api.nvim_create_autocmd("User", {
         pattern = "PersistedStart",
         callback = function(_)
+            vim.cmd('clearjumps')
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
                 if vim.api.nvim_buf_get_name(buf):match('^oil://') ~= nil then
                     vim.api.nvim_buf_delete(buf, { force = true })

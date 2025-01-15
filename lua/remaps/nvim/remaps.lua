@@ -1,7 +1,18 @@
 vim.keymap.set({ 'n' }, 'o', 'o.<backspace>', { noremap = true })
 vim.keymap.set({ 'n' }, 'O', 'O.<backspace>', { noremap = true })
 vim.keymap.set({ 'n' }, '<c-s>', ':w<enter>', { noremap = true })
-vim.keymap.set({ '' }, '<c-q>', ':w<enter>:bd<enter>', { noremap = true })
+vim.keymap.set({ '' }, '<c-q>',
+    function()
+        local bufname = vim.api.nvim_buf_get_name(0)
+        if bufname == '' then
+            return
+        elseif bufname:match("^term://") then
+            vim.cmd('bd!')
+            return
+        else
+            vim.cmd('w|bd')
+        end
+    end, { noremap = true })
 vim.keymap.set({ 't' }, '<c-q>', [[<c-\><c-n>:q<enter>]], { noremap = true })
 vim.keymap.set({ 't' }, '<c-n>', [[<c-\><c-n>]], { noremap = true })
 vim.keymap.set({ '', 'l', 't' }, '<a-h>', [[<c-\><c-n><c-w>h]], { noremap = true })
@@ -94,7 +105,7 @@ end)
 vim.keymap.set('n', '<leader>qft', function()
     local qf = vim.fn.getqflist()
     local filtered = {}
-    local filter_by = vim.fn.input("filter qflist by type (E/W/N): ", "E")
+    local filter_by = vim.fn.input("filter qflist by type (E/W/I/N): ", "E")
     for _, item in ipairs(qf) do
         if item.type:match(filter_by) then
             table.insert(filtered, item)
