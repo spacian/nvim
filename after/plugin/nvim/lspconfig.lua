@@ -1,12 +1,8 @@
 if not vim.g.vscode then
     require("mason").setup()
-    require("mason-null-ls").setup({
+    require("mason-tool-installer").setup({
         ensure_installed = {
             "cspell",
-        }
-    })
-    require("mason-lspconfig").setup({
-        ensure_installed = {
             -- "pyright",
             "basedpyright",
             "gopls",
