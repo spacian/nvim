@@ -1,7 +1,16 @@
 {
     "version": "0.2",
-    "language": "en",
+    "language": "en,de",
     "allowCompoundWords": true,
+    "languageSettings": [
+        {
+            "locale": "*",
+            "caseSensitive": false
+        }
+    ],
+    "import": [
+        "C:/Users/Robert/AppData/Roaming/npm/node_modules/@cspell/dict-de-de/cspell-ext.json"
+    ],
     "words": [
         "noremap",
         "getcwd",
@@ -19,6 +28,6 @@
         "nvim",
         "nohlsearch",
         "sysname",
-        "shada",
-    ],
+        "shada"
+    ]
 }

@@ -1,6 +1,6 @@
 return {
     {
-        "davidmh/cspell.nvim",
+        "spacian/cspell.nvim",
         dependencies = {
             "nvimtools/none-ls.nvim",
         },
