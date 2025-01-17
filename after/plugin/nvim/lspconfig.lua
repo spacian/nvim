@@ -7,6 +7,7 @@ if not vim.g.vscode then
             "basedpyright",
             "gopls",
             "lua_ls",
+            "jsonls",
         }
     })
     local null_ls = require('null-ls')
@@ -53,6 +54,13 @@ if not vim.g.vscode then
     --     }
     -- })
     lspconfig.gopls.setup({})
+    lspconfig.jsonls.setup({
+        settings = {
+            json = {
+                validate = { enable = true },
+            },
+        },
+    })
     lspconfig.lua_ls.setup({
         on_init = function(client)
             if client.workspace_folders then
