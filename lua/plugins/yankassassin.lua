@@ -1,5 +1,5 @@
 return {
-    {
-        "svban/YankAssassin.nvim",
-    },
+	{
+		"svban/YankAssassin.nvim",
+	},
 }

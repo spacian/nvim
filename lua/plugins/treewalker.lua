@@ -1,5 +1,5 @@
 return {
-    {
-        "aaronik/treewalker.nvim",
-    },
+	{
+		"aaronik/treewalker.nvim",
+	},
 }

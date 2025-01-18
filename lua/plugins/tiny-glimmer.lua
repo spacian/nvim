@@ -1,4 +1,4 @@
 return {
-    "rachartier/tiny-glimmer.nvim",
-    event = "TextYankPost",
+	"rachartier/tiny-glimmer.nvim",
+	event = "TextYankPost",
 }

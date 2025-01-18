@@ -1,6 +1,6 @@
 return {
-    {
-        "stevearc/oil.nvim",
-        enabled = not vim.g.vscode,
-    },
+	{
+		"stevearc/oil.nvim",
+		enabled = not vim.g.vscode,
+	},
 }
