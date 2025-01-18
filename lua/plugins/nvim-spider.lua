@@ -1,5 +1,5 @@
 return {
-    {
-        "chrisgrieser/nvim-spider",
-    },
+	{
+		"chrisgrieser/nvim-spider",
+	},
 }

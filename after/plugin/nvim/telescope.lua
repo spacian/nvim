@@ -1,64 +1,61 @@
 if not vim.g.vscode then
-    local fb_actions = require("telescope").extensions.file_browser.actions
-    require('telescope').setup(
-        {
-            defaults = {
-                layout_config = {
-                    horizontal = {
-                        preview_cutoff = 0,
-                        height = { padding = 0 },
-                        width = { padding = 0 },
-                    },
-                },
-                mappings = {
-                    i = {
-                        ["<c-j>"] = require('telescope.actions').move_selection_next,
-                        ["<c-k>"] = require('telescope.actions').move_selection_previous,
-                    },
-                },
-            },
-            extensions = {
-                file_browser = {
-                    mappings = {
-                        ["i"] = {
-                            ["<a-n>"] = fb_actions.create,
-                            ["<a-c>"] = false,
-                        },
-                    },
-                },
-            },
-        }
-    )
-    require("telescope").load_extension("lazygit")
-    require("telescope").load_extension("persisted")
-    require('telescope').load_extension('file_browser')
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>of', builtin.find_files)
-    vim.keymap.set('n', '<leader>ob', builtin.buffers)
-    vim.keymap.set('n', '<leader>og', builtin.git_files)
-    vim.keymap.set('n', '<leader>fe', builtin.live_grep)
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string)
-    vim.keymap.set('n', '<leader>ff', function()
-        builtin.grep_string(
-            {
-                search = '',
-                word_match = '-w',
-                shorten_path = true,
-                only_sort_text = true
-            })
-    end)
-    vim.keymap.set('n', 'gr', builtin.lsp_references)
-    vim.keymap.set('n', 'gd', builtin.lsp_definitions)
-    vim.keymap.set('n', 'gD', builtin.lsp_type_definitions)
-    vim.keymap.set('n', '<leader>osf', builtin.lsp_document_symbols)
-    vim.keymap.set('n', '<leader>osw', builtin.lsp_dynamic_workspace_symbols)
-    vim.keymap.set('n', '<leader>ol', builtin.oldfiles)
-    vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find)
-    vim.keymap.set('n', '<leader>or', builtin.resume)
-    vim.keymap.set('n', '<leader>ocs', builtin.colorscheme)
-    vim.keymap.set('n', '<leader>oj', builtin.jumplist)
-    vim.keymap.set('n', '<leader>oq', builtin.quickfix)
-    vim.keymap.set('n', '<leader>och', builtin.command_history)
-    vim.keymap.set('n', '<leader>oco', builtin.commands)
-    vim.keymap.set('n', '<leader>op', builtin.diagnostics)
+	local fb_actions = require("telescope").extensions.file_browser.actions
+	require("telescope").setup({
+		defaults = {
+			layout_config = {
+				horizontal = {
+					preview_cutoff = 0,
+					height = { padding = 0 },
+					width = { padding = 0 },
+				},
+			},
+			mappings = {
+				i = {
+					["<c-j>"] = require("telescope.actions").move_selection_next,
+					["<c-k>"] = require("telescope.actions").move_selection_previous,
+				},
+			},
+		},
+		extensions = {
+			file_browser = {
+				mappings = {
+					["i"] = {
+						["<a-n>"] = fb_actions.create,
+						["<a-c>"] = false,
+					},
+				},
+			},
+		},
+	})
+	require("telescope").load_extension("lazygit")
+	require("telescope").load_extension("persisted")
+	require("telescope").load_extension("file_browser")
+	local builtin = require("telescope.builtin")
+	vim.keymap.set("n", "<leader>of", builtin.find_files)
+	vim.keymap.set("n", "<leader>ob", builtin.buffers)
+	vim.keymap.set("n", "<leader>og", builtin.git_files)
+	vim.keymap.set("n", "<leader>fe", builtin.live_grep)
+	vim.keymap.set("n", "<leader>fw", builtin.grep_string)
+	vim.keymap.set("n", "<leader>ff", function()
+		builtin.grep_string({
+			search = "",
+			word_match = "-w",
+			shorten_path = true,
+			only_sort_text = true,
+		})
+	end)
+	vim.keymap.set("n", "gr", builtin.lsp_references)
+	vim.keymap.set("n", "gd", builtin.lsp_definitions)
+	vim.keymap.set("n", "gD", builtin.lsp_type_definitions)
+	vim.keymap.set("n", "<leader>osf", builtin.lsp_document_symbols)
+	vim.keymap.set("n", "<leader>osw", builtin.lsp_dynamic_workspace_symbols)
+	vim.keymap.set("n", "<leader>ol", builtin.oldfiles)
+	vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
+	vim.keymap.set("n", "<leader>or", builtin.resume)
+	vim.keymap.set("n", "<leader>ocs", builtin.colorscheme)
+	vim.keymap.set("n", "<leader>oj", builtin.jumplist)
+	vim.keymap.set("n", "<leader>oq", builtin.quickfix)
+	vim.keymap.set("n", "<leader>och", builtin.command_history)
+	vim.keymap.set("n", "<leader>oco", builtin.commands)
+	vim.keymap.set("n", "<leader>op", builtin.diagnostics)
 end

@@ -1,5 +1,5 @@
 return {
-    {
-        "smoka7/hop.nvim",
-    },
+	{
+		"smoka7/hop.nvim",
+	},
 }

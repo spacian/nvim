@@ -1,3 +1,3 @@
 return {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+	"WhoIsSethDaniel/mason-tool-installer.nvim",
 }
