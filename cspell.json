@@ -12,6 +12,8 @@
         "C:/Users/Robert/AppData/Roaming/npm/node_modules/@cspell/dict-de-de/cspell-ext.json"
     ],
     "words": [
+        "kanagawa",
+        "gruvbox",
         "noremap",
         "getcwd",
         "nvim",
