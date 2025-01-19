@@ -6,9 +6,8 @@ if not vim.g.vscode then
 			["<c-p>"] = "actions.preview",
 			["-"] = "actions.parent",
 			["<leader>r"] = "actions.refresh",
-			["q"] = function()
-				vim.cmd("bd")
-			end,
+			["<esc>"] = { "actions.close", mode = "n" },
+			["q"] = { "actions.close", mode = "n" },
 		},
 		use_default_keymaps = false,
 		view_options = {
@@ -18,9 +17,9 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader>oe", function()
 		local bufname = vim.fn.expand("%")
 		if bufname ~= "" then
-			vim.cmd("silent e %:h")
+			vim.cmd("silent Oil %:h")
 		else
-			vim.cmd("silent e .")
+			vim.cmd("silent Oil .")
 		end
 	end, { noremap = true })
 	-- vim.keymap.set("n", "<leader>oD", function()

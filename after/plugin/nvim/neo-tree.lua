@@ -28,9 +28,8 @@ if not vim.g.vscode then
 						state.commands["open"](state)
 					end
 				end,
-				["q"] = function()
-					vim.cmd("bd")
-				end,
+				["q"] = "close_window",
+				["<esc>"] = "close_window",
 			},
 		},
 	})
@@ -39,7 +38,7 @@ if not vim.g.vscode then
 			action = "focus",
 			position = "current",
 			source = "filesystem",
-			dir = vim.fn.getcwd(),
+			dir = vim.fn.getcwd(-1, -1),
 			reveal = true,
 		})
 	end)

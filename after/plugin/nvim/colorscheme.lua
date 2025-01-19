@@ -161,21 +161,21 @@ if not vim.g.vscode then
 		invert_tabline = false,
 		invert_intend_guides = false,
 		inverse = true, -- invert background for search, diffs, statuslines and errors
-		contrast = "hard", -- can be "hard", "soft" or empty string
+		contrast = "", -- can be "hard", "soft" or empty string
 		palette_overrides = {},
 		overrides = {},
 		dim_inactive = false,
 		transparent_mode = false,
 	})
 
-	-- vim.cmd("colorscheme kanagawa")
-	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#43243B" }) -- kanagawa:winterRed
-	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#49443C" }) -- kanagawa:winterYellow
+	vim.cmd("colorscheme kanagawa")
+	vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#43243B" }) -- kanagawa:winterRed
+	vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#49443C" }) -- kanagawa:winterYellow
 
-	vim.cmd("colorscheme gruvbox")
-	vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua_hard })
-	vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red_hard })
-
+	-- vim.cmd("colorscheme gruvbox")
+	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua })
+	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red })
+	--
 	vim.diagnostic.config({
 		signs = {
 			text = {

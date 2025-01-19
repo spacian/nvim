@@ -15,7 +15,9 @@ if not vim.g.vscode then
 	null_ls.setup({
 		fallback_severity = vim.diagnostic.severity.HINT,
 		sources = {
-			require("cspell").diagnostics,
+			require("cspell").diagnostics.with({
+				config = { reload_on_cwd_change = true },
+			}),
 			null_ls.builtins.formatting.stylua,
 		},
 	})
