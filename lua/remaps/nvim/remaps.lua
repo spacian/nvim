@@ -1,6 +1,6 @@
 vim.keymap.set({ "n" }, "o", "o.<backspace>", { noremap = true })
 vim.keymap.set({ "n" }, "O", "O.<backspace>", { noremap = true })
-vim.keymap.set({ "n" }, "qqq", "q", { noremap = true })
+vim.keymap.set({ "n" }, "<a-q>", "q", { noremap = true })
 vim.keymap.set({ "n" }, "q", "", { noremap = true })
 vim.keymap.set({ "n" }, "<c-s>", ":w<enter>", { noremap = true })
 vim.keymap.set({ "" }, "<c-q>", function()

@@ -34,20 +34,21 @@ if not vim.g.vscode then
 			},
 		},
 	})
-	vim.keymap.set({ "n" }, "<leader>oe", function()
-		require("neo-tree.command").execute({
-			action = "focus",
-			position = "current",
-			dir = vim.fn.getcwd(),
-			reveal = true,
-		})
-	end)
 	vim.keymap.set({ "n" }, "<leader>od", function()
 		require("neo-tree.command").execute({
 			action = "focus",
 			position = "current",
 			source = "filesystem",
 			dir = vim.fn.getcwd(),
+			reveal = true,
 		})
 	end)
+	-- vim.keymap.set({ "n" }, "<leader>od", function()
+	-- 	require("neo-tree.command").execute({
+	-- 		action = "focus",
+	-- 		position = "current",
+	-- 		source = "filesystem",
+	-- 		dir = vim.fn.getcwd(),
+	-- 	})
+	-- end)
 end

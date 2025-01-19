@@ -15,7 +15,7 @@ if not vim.g.vscode then
 			show_hidden = true,
 		},
 	})
-	vim.keymap.set("n", "<leader>oE", function()
+	vim.keymap.set("n", "<leader>oe", function()
 		local bufname = vim.fn.expand("%")
 		if bufname ~= "" then
 			vim.cmd("silent e %:h")
@@ -23,9 +23,9 @@ if not vim.g.vscode then
 			vim.cmd("silent e .")
 		end
 	end, { noremap = true })
-	vim.keymap.set("n", "<leader>oD", function()
-		vim.cmd("silent e " .. vim.fn.getcwd())
-	end, { noremap = true })
+	-- vim.keymap.set("n", "<leader>oD", function()
+	-- 	vim.cmd("silent e " .. vim.fn.getcwd())
+	-- end, { noremap = true })
 	vim.keymap.set("n", "<leader>cd", function()
 		local cwd = oil.get_current_dir()
 		if cwd ~= nil then
