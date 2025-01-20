@@ -65,6 +65,7 @@ if not vim.g.vscode then
 				string.find(bufname, "^oil://") == nil
 				and string.find(bufname, "^replacer://") == nil
 				and string.find(bufname, "^term://") == nil
+				and string.find(bufname, "neo.tree filesystem .1000.") == nil
 			then
 				if last_bufname ~= "" then
 					vim.cmd("silent Grapple tag name=prev scope=prev path=" .. last_bufname)
