@@ -1,9 +1,10 @@
 if not vim.g.vscode then
-	require("kanagawa").setup({
-		commentStyle = { italic = false },
+	local kanagawa = require("kanagawa")
+	kanagawa.setup({
+		commentStyle = {},
 		functionStyle = {},
 		keywordStyle = { italic = false },
-		statementStyle = { bold = true },
+		statementStyle = {},
 		typeStyle = {},
 		transparent = false,
 		dimInactive = false,
@@ -15,11 +16,9 @@ if not vim.g.vscode then
 		overrides = function(colors)
 			return {
 				["@variable.builtin"] = { italic = false },
-				-- Visual = { bg = colors.palette.lotusOrange },
-				-- Visual = { bg = colors.palette.lotusRed },
-				-- Visual = { bg = colors.palette.oniViolet },
-				-- Visual = { bg = colors.palette.lotusRed3 },
-				Visual = { bg = colors.palette.lotusViolet4 },
+				Visual = { bg = colors.palette.winterGreen },
+				String = { italic = true },
+				Boolean = { italic = true },
 			}
 		end,
 		theme = "wave",
@@ -173,9 +172,9 @@ if not vim.g.vscode then
 	vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#49443C" }) -- kanagawa:winterYellow
 
 	-- vim.cmd("colorscheme gruvbox")
-	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua })
-	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red })
-	--
+	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua_hard })
+	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red_hard })
+
 	vim.diagnostic.config({
 		signs = {
 			text = {
