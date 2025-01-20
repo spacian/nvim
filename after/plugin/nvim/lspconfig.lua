@@ -17,7 +17,8 @@ if not vim.g.vscode then
 		fallback_severity = vim.diagnostic.severity.HINT,
 		sources = {
 			require("cspell").diagnostics.with({
-				config = { reload_on_session_change = true },
+				config = { reload_on_cwd_change = true },
+				-- config = { reload_on_session_change = true },
 				cwd = function()
 					return vim.fn.getcwd(-1, -1)
 				end,
