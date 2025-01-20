@@ -47,11 +47,11 @@ if not vim.g.vscode then
 
 	vim.api.nvim_create_autocmd("TermOpen", {
 		callback = function()
-			vim.cmd("Grapple tag scope=term name=term")
+			vim.cmd("silent Grapple tag scope=term name=term")
 		end,
 	})
 
-	vim.api.nvim_create_autocmd("TermLeave", {
+	vim.api.nvim_create_autocmd("TermClose", {
 		callback = function()
 			vim.cmd("silent Grapple untag scope=term name=term")
 		end,
