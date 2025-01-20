@@ -1,5 +1,0 @@
-return {
-	{
-		"gbprod/substitute.nvim",
-	},
-}

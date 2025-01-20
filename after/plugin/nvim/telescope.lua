@@ -33,10 +33,8 @@ if not vim.g.vscode then
 	local builtin = require("telescope.builtin")
 	vim.keymap.set("n", "<leader>of", builtin.find_files)
 	vim.keymap.set("n", "<leader>ob", builtin.buffers)
-	vim.keymap.set("n", "<leader>og", builtin.git_files)
-	vim.keymap.set("n", "<leader>fe", builtin.live_grep)
-	vim.keymap.set("n", "<leader>fw", builtin.grep_string)
-	vim.keymap.set("n", "<leader>ff", function()
+	vim.keymap.set("n", "<leader>ff", builtin.live_grep)
+	vim.keymap.set("n", "<leader>fp", function()
 		builtin.grep_string({
 			search = "",
 			word_match = "-w",
@@ -47,15 +45,8 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "gr", builtin.lsp_references)
 	vim.keymap.set("n", "gd", builtin.lsp_definitions)
 	vim.keymap.set("n", "gD", builtin.lsp_type_definitions)
-	vim.keymap.set("n", "<leader>osf", builtin.lsp_document_symbols)
-	vim.keymap.set("n", "<leader>osw", builtin.lsp_dynamic_workspace_symbols)
-	vim.keymap.set("n", "<leader>ol", builtin.oldfiles)
-	vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
-	vim.keymap.set("n", "<leader>or", builtin.resume)
-	vim.keymap.set("n", "<leader>ocs", builtin.colorscheme)
-	vim.keymap.set("n", "<leader>oj", builtin.jumplist)
+	vim.keymap.set("n", "<leader>or", builtin.oldfiles)
+	vim.keymap.set("n", "<leader>R", builtin.resume)
 	vim.keymap.set("n", "<leader>oq", builtin.quickfix)
-	vim.keymap.set("n", "<leader>och", builtin.command_history)
-	vim.keymap.set("n", "<leader>oco", builtin.commands)
-	vim.keymap.set("n", "<leader>op", builtin.diagnostics)
+	vim.keymap.set("n", "<leader>od", builtin.diagnostics)
 end

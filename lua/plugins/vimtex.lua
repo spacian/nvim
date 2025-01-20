@@ -2,10 +2,10 @@ return {
 	{
 		"lervag/vimtex",
 		init = function() end,
-		enabled = not vim.g.vscode,
+		enabled = false,
 	},
 	{
 		"micangl/cmp-vimtex",
-		enabled = not vim.g.vscode,
+		enabled = false,
 	},
 }

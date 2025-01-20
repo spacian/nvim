@@ -9,7 +9,7 @@ if not vim.g.vscode then
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		callback = function()
 			local bufname = vim.fn.expand("%")
-			if string.sub(bufname, 1, 3) ~= "oil" then
+			if string.find(bufname, "^oil://") ~= nil or string.find(bufname, "^replacer://") ~= nil then
 				require("lazygit.utils").project_root_dir()
 			end
 		end,

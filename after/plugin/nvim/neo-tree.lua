@@ -33,7 +33,7 @@ if not vim.g.vscode then
 			},
 		},
 	})
-	vim.keymap.set({ "n" }, "<leader>od", function()
+	vim.keymap.set({ "n" }, "<leader>ot", function()
 		require("neo-tree.command").execute({
 			action = "focus",
 			position = "current",
@@ -42,12 +42,4 @@ if not vim.g.vscode then
 			reveal = true,
 		})
 	end)
-	-- vim.keymap.set({ "n" }, "<leader>od", function()
-	-- 	require("neo-tree.command").execute({
-	-- 		action = "focus",
-	-- 		position = "current",
-	-- 		source = "filesystem",
-	-- 		dir = vim.fn.getcwd(),
-	-- 	})
-	-- end)
 end

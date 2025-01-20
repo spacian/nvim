@@ -5,7 +5,7 @@ if not vim.g.vscode then
 		silent = true,
 		ignored_dirs = { "oil://", "replacer://" },
 	})
-	vim.keymap.set({ "n" }, "<leader>oP", function()
+	vim.keymap.set({ "n" }, "<leader>so", function()
 		local buffer_name = vim.api.nvim_buf_get_name(0)
 		if string.find(buffer_name, "^oil://") ~= nil or string.find(buffer_name, "^replacer://") ~= nil then
 			print("cannot open new session from this buffer")

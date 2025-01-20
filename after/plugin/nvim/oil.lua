@@ -14,18 +14,20 @@ if not vim.g.vscode then
 			show_hidden = true,
 		},
 	})
+
 	vim.keymap.set("n", "<leader>oe", function()
-		local bufname = vim.fn.expand("%")
-		if bufname ~= "" then
-			vim.cmd("silent Oil %:h")
-		else
+		local bufname = vim.api.nvim_buf_get_name(0)
+		if string.find(bufname, "^oil://") ~= nil then
+			return
+		end
+		if bufname == "" or string.find(bufname, "^replacer://") ~= nil or string.find(bufname, "^term://") ~= nil then
 			vim.cmd("silent Oil .")
+		else
+			vim.cmd("silent Oil %:h")
 		end
 	end, { noremap = true })
-	-- vim.keymap.set("n", "<leader>oD", function()
-	-- 	vim.cmd("silent e " .. vim.fn.getcwd())
-	-- end, { noremap = true })
-	vim.keymap.set("n", "<leader>cd", function()
+
+	vim.api.nvim_create_user_command("CD", function()
 		local cwd = oil.get_current_dir()
 		if cwd ~= nil then
 			vim.cmd("cd " .. cwd)
@@ -33,5 +35,5 @@ if not vim.g.vscode then
 			vim.cmd("cd %:p:h")
 		end
 		print("new working directory: " .. vim.fn.getcwd())
-	end, { noremap = true })
+	end, {})
 end

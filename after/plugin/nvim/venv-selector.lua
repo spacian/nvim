@@ -7,12 +7,9 @@ if not vim.g.vscode then
 		parents = 0,
 		notify_user_on_activate = false,
 	})
-	vim.keymap.set("n", "<leader>Es", function()
-		vim.cmd("VenvSelect")
-	end)
-	vim.keymap.set("n", "<leader>Ec", function()
+	vim.api.nvim_create_user_command("VenvShowCurrent", function()
 		print(require("venv-selector").venv())
-	end)
+	end, {})
 
 	local function exists(file)
 		local ok, err, code = os.rename(file, file)
@@ -65,27 +62,4 @@ if not vim.g.vscode then
 			update_venv()
 		end,
 	})
-	if vim.loop.os_uname().sysname == "Windows_NT" then
-		vim.keymap.set({ "n" }, "<leader>otp", function()
-			vim.cmd("vsplit")
-			vim.cmd("term")
-			vim.fn.feedkeys("a")
-			vim.fn.feedkeys(
-				vim.api.nvim_replace_termcodes(".venv/Scripts/activate<enter>" .. "cls<enter>", true, true, true)
-			)
-		end, { noremap = true })
-	else
-		vim.keymap.set(
-			{ "n" },
-			"<leader>otp",
-			function()
-				vim.cmd("vsplit")
-				vim.cmd("term")
-				vim.fn.feedkeys("a")
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes(".venv/bin/activate<enter>", true, true, true))
-			end,
-			-- ':vsplit term://<enter>a',
-			{ noremap = true }
-		)
-	end
 end

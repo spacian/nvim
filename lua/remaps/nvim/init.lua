@@ -1,1 +1,5 @@
 require("remaps.nvim.remaps")
+require("remaps.nvim.marks")
+require("remaps.nvim.panels")
+require("remaps.nvim.terminal")
+require("remaps.nvim.quickfix")

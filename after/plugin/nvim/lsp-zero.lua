@@ -39,8 +39,6 @@ if not vim.g.vscode then
 			["<c-h>"] = cmp.mapping.abort(),
 			["<c-k>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
 			["<c-j>"] = cmp.mapping.select_next_item({ behavior = "select" }),
-			["<c-u>"] = cmp.mapping.scroll_docs(-4),
-			["<c-d>"] = cmp.mapping.scroll_docs(4),
 		},
 		completion = {
 			completeopt = "menu,menuone,noinsert",
