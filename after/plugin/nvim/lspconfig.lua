@@ -13,22 +13,17 @@ if not vim.g.vscode then
 	})
 	local lspconfig = require("lspconfig")
 	local null_ls = require("null-ls")
+	local cspell_config = {
+		reload_on_session_change = true,
+		cwd = function()
+			return vim.fn.getcwd()
+		end,
+	}
 	null_ls.setup({
 		fallback_severity = vim.diagnostic.severity.HINT,
 		sources = {
-			require("cspell").diagnostics.with({
-				config = { reload_on_cwd_change = true },
-				-- config = { reload_on_session_change = true },
-				cwd = function()
-					return vim.fn.getcwd(-1, -1)
-				end,
-			}),
-			require("cspell").code_actions.with({
-				config = { reload_on_session_change = true },
-				cwd = function()
-					return vim.fn.getcwd(-1, -1)
-				end,
-			}),
+			require("cspell").diagnostics.with({ config = cspell_config }),
+			require("cspell").code_actions.with({ config = cspell_config }),
 		},
 	})
 	require("mason-lspconfig").setup_handlers({
