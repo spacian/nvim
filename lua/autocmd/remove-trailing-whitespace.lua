@@ -8,6 +8,7 @@ vim.api.nvim_create_autocmd({
 			or not (vim.bo.modifiable and vim.bo.modified)
 			or string.find(buffer_name, "^oil://") ~= nil
 			or string.find(buffer_name, "^replacer://") ~= nil
+			or string.find(buffer_name, "neo.tree filesystem .1000.") ~= nil
 		then
 			return
 		end

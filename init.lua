@@ -1,3 +1,8 @@
+require("remaps")
+require("config.lazy")
+if not vim.g.vscode then
+	require("autocmd")
+end
 if not vim.g.vscode then
 	vim.cmd("set colorcolumn=+1")
 	vim.cmd("set signcolumn=yes:1")
@@ -24,8 +29,3 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.bo.softtabstop = 4
-require("remaps")
-require("config.lazy")
-if not vim.g.vscode then
-	require("autocmd")
-end

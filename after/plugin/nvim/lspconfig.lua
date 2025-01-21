@@ -9,6 +9,8 @@ if not vim.g.vscode then
 			"lua_ls",
 			"jsonls",
 			"stylua",
+			"taplo",
+			"yaml-language-server",
 		},
 	})
 	local lspconfig = require("lspconfig")
@@ -29,6 +31,11 @@ if not vim.g.vscode then
 	require("mason-lspconfig").setup_handlers({
 		basedpyright = function()
 			lspconfig.basedpyright.setup({
+				on_init = function(client, _)
+					if client.name == "basedpyright" then
+						client.server_capabilities.documentFormattingProvider = false
+					end
+				end,
 				settings = {
 					basedpyright = {
 						analysis = {
@@ -44,31 +51,39 @@ if not vim.g.vscode then
 					},
 				},
 			})
-			-- lspconfig.pyright.setup({
-			--     settings = {
-			--         pyright = {
-			--             disableOrganizeImports = true,
-			--         },
-			--         python = {
-			--             analysis = {
-			--                 typeCheckingMode = "strict",
-			--                 autoSearchPaths = true,
-			--                 useLibraryCodeForTypes = true,
-			--                 diagnosticMode = "workspace",
-			--                 diagnosticSeverityOverrides = {
-			--                     reportUnboundVariable = "error",
-			--                     reportMissingModuleSource = "error",
-			--                 },
-			--             }
-			--         }
-			--     }
-			-- })
 		end,
+		-- pyright = function()
+		-- lspconfig.pyright.setup({
+		--     settings = {
+		--         pyright = {
+		--             disableOrganizeImports = true,
+		--         },
+		--         python = {
+		--             analysis = {
+		--                 typeCheckingMode = "strict",
+		--                 autoSearchPaths = true,
+		--                 useLibraryCodeForTypes = true,
+		--                 diagnosticMode = "workspace",
+		--                 diagnosticSeverityOverrides = {
+		--                     reportUnboundVariable = "error",
+		--                     reportMissingModuleSource = "error",
+		--                 },
+		--             }
+		--         }
+		--     }
+		-- })
+		-- end,
 		jsonls = function()
 			lspconfig.jsonls.setup({ settings = { json = { validate = { enable = true } } } })
 		end,
 		gopls = function()
 			lspconfig.gopls.setup({})
+		end,
+		taplo = function()
+			lspconfig.taplo.setup({ settings = { toml = { validate = { enable = true } } } })
+		end,
+		yamlls = function()
+			lspconfig.yamlls.setup({ settings = { yaml = { validate = { enable = true } } } })
 		end,
 		lua_ls = function()
 			null_ls.register({ sources = { null_ls.builtins.formatting.stylua } })

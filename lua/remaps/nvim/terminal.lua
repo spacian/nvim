@@ -9,7 +9,6 @@ vim.api.nvim_create_user_command("TW", function()
 	if string.find(buffer_name, "^oil://") ~= nil or string.find(buffer_name, "^replacer://") ~= nil then
 		return
 	end
-	vim.cmd("vsplit")
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.cmd("term powershell")
 		vim.fn.feedkeys("a")
@@ -26,7 +25,6 @@ vim.api.nvim_create_user_command("TF", function()
 		return
 	end
 	local path = vim.fn.expand("%:p:h")
-	vim.cmd("vsplit")
 	local enter = vim.api.nvim_replace_termcodes("<enter>", true, true, true)
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.cmd("term powershell")
@@ -42,7 +40,6 @@ vim.api.nvim_create_user_command("TF", function()
 end, {})
 
 vim.api.nvim_create_user_command("TE", function()
-	vim.cmd("vsplit")
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.cmd("term powershell")
 		vim.fn.feedkeys("a")
