@@ -15,15 +15,26 @@ if not vim.g.vscode then
 	})
 	local lspconfig = require("lspconfig")
 	local null_ls = require("null-ls")
+	local cspell_last_session = ""
 	null_ls.setup({
 		fallback_severity = vim.diagnostic.severity.HINT,
 		sources = {
 			require("cspell").diagnostics.with({
 				config = {
-					reload_on_cwd_change = true,
-					cspell_import_files = {
-						vim.fn.expand("$APPDATA") .. "/npm/node_modules/@cspell/dict-de-de/cspell-ext.json",
-					},
+					cspell_import_files = function(_)
+						return { vim.fn.expand("$APPDATA") .. "/npm/node_modules/@cspell/dict-de-de/cspell-ext.json" }
+					end,
+					cwd = function(_)
+						return vim.fn.getcwd(-1, -1)
+					end,
+					reset_cspell = function(params)
+						if params ~= nil and params.cwd ~= nil and vim.v.this_session ~= cspell_last_session then
+							cspell_last_session = vim.v.this_session
+							return true
+						else
+							return false
+						end
+					end,
 				},
 			}),
 		},
