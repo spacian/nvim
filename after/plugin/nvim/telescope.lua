@@ -1,5 +1,6 @@
 if not vim.g.vscode then
 	local fb_actions = require("telescope").extensions.file_browser.actions
+	local actions = require("telescope.actions")
 	require("telescope").setup({
 		defaults = {
 			layout_config = {
@@ -13,6 +14,16 @@ if not vim.g.vscode then
 				i = {
 					["<c-j>"] = require("telescope.actions").move_selection_next,
 					["<c-k>"] = require("telescope.actions").move_selection_previous,
+					["<enter>"] = function(prompt_bufnr)
+						actions.select_default(prompt_bufnr)
+						vim.cmd("normal! zz")
+					end,
+				},
+				n = {
+					["<enter>"] = function(prompt_bufnr)
+						actions.select_default(prompt_bufnr)
+						vim.cmd("normal! zz")
+					end,
 				},
 			},
 		},
