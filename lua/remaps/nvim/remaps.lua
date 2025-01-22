@@ -5,6 +5,7 @@ vim.keymap.set({ "c" }, "<c-l>", "<c-n>", { noremap = true })
 vim.keymap.set({ "c" }, "<c-k>", "<c-y>", { noremap = true })
 vim.keymap.set({ "n" }, "<c-i>", "<c-i>zz", { noremap = true })
 vim.keymap.set({ "n" }, "<c-o>", "<c-o>zz", { noremap = true })
+
 vim.keymap.set({ "n" }, "/", function()
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("/", "n", true)
@@ -21,3 +22,9 @@ vim.keymap.set({ "n" }, "#", function()
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("#", "n", true)
 end, { noremap = true })
+
+if vim.loop.os_uname().sysname == "Windows_NT" then
+	vim.api.nvim_create_user_command("OpenInExplorer", function()
+		vim.cmd("silent !start explorer /select,%:p")
+	end, {})
+end
