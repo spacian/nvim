@@ -10,6 +10,8 @@
     ],
     "import": [],
     "words": [
+        "buftype",
+        "venv",
         "kanagawa",
         "gruvbox",
         "noremap",

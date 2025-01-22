@@ -7,11 +7,11 @@ if not vim.g.vscode then
 	require("autocmd")
 end
 if not vim.g.vscode then
-	vim.cmd("set colorcolumn=+1")
+	vim.cmd("set colorcolumn=89")
 	vim.cmd("set signcolumn=yes:1")
 	vim.opt.number = true
 	vim.opt.relativenumber = false
-	vim.opt.cursorline = false
+	vim.opt.cursorline = true
 	vim.opt.laststatus = 0
 	vim.opt.winbar = "%=%f"
 end
@@ -27,7 +27,6 @@ vim.cmd("set timeoutlen=2250")
 vim.cmd("set nohlsearch")
 vim.cmd("set ignorecase")
 vim.cmd("set smartcase")
-vim.o.textwidth = 88
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true

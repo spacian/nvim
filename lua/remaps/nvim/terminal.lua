@@ -1,7 +1,11 @@
 if vim.loop.os_uname().sysname == "Windows_NT" then
-	vim.keymap.set({ "t" }, "<c-e>", [[python -c "import sys; print(sys.executable)"<enter>]], { noremap = true })
+	vim.keymap.set({ "t" }, "<c-e><c-s>", [[python -c "import sys; print(sys.executable)"<enter>]], { noremap = true })
+	vim.keymap.set({ "t" }, "<c-e><c-a>", [[.\.venv\Scripts\activate<enter>]], { noremap = true })
+	vim.keymap.set({ "t" }, "<c-e><c-d>", [[deactivate<enter>]], { noremap = true })
 else
-	vim.keymap.set({ "t" }, "<c-e>", [[python3 -c "import sys; print(sys.executable)"<enter>]], { noremap = true })
+	vim.keymap.set({ "t" }, "<c-e><c-s>", [[python3 -c "import sys; print(sys.executable)"<enter>]], { noremap = true })
+	vim.keymap.set({ "t" }, "<c-e><c-a>", [[./.venv/bin/activate<enter>]], { noremap = true })
+	vim.keymap.set({ "t" }, "<c-e><c-d>", [[deactivate<enter>]], { noremap = true })
 end
 
 vim.api.nvim_create_user_command("Tw", function()

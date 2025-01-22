@@ -7,7 +7,7 @@ if not vim.g.vscode then
 	})
 	vim.keymap.set({ "n" }, "<leader>oP", function()
 		local buffer_name = vim.api.nvim_buf_get_name(0)
-		if not buffer_name == '' and BufIsSpecial(buffer_name) then
+		if not buffer_name == "" and BufIsSpecial(buffer_name) then
 			print("cannot open new session from this buffer")
 			return
 		end
@@ -36,6 +36,7 @@ if not vim.g.vscode then
 	})
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		callback = function()
+			vim.cmd("set nohls")
 			local buffer_name = vim.api.nvim_buf_get_name(0)
 			if not BufIsSpecial(buffer_name) then
 				persisted.save({ force = true })

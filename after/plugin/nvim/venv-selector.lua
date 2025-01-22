@@ -21,11 +21,11 @@ if not vim.g.vscode then
 		return ok, err
 	end
 
-	local function update_workspace()
+	local function workspace_update()
 		if vim.lsp.buf.list_workspace_folders ~= nil then
 			local folders = vim.lsp.buf.list_workspace_folders()
 			local found = false
-			local cwd = vim.fn.getcwd():gsub("\\", "/"):lower()
+			local cwd = vim.fn.getcwd(-1, -1):gsub("\\", "/"):lower()
 			for i = 1, #folders do
 				if folders[i]:lower() == cwd then
 					found = true
@@ -34,32 +34,40 @@ if not vim.g.vscode then
 				end
 			end
 			if not found then
-				vim.lsp.buf.add_workspace_folder(vim.fn.getcwd():lower())
+				vim.lsp.buf.add_workspace_folder(vim.fn.getcwd(-1, -1):lower())
 			end
 		end
 	end
 
-	local function update_venv()
+	local function venv_update()
 		local venv = require("venv-selector")
-		if venv ~= nil then
-			local venv_path = vim.fn.getcwd():lower() .. "/.venv"
-			if venv.venv() == nil or not (venv.venv():lower() == venv_path) then
-				if venv.venv() ~= nil then
-					venv.deactivate()
-				end
-				local python_path = vim.fn.getcwd() .. "/.venv/Scripts/python.exe"
-				if exists(python_path) then
-					venv.activate_from_path(python_path)
-				end
-			end
+		if venv == nil then
+			return
+		end
+		if venv.venv() ~= nil then
+			venv.deactivate()
+		end
+		local python_path = vim.fn.getcwd(-1, -1) .. "/.venv/Scripts/python.exe"
+		if exists(python_path) then
+			venv.activate_from_path(python_path)
 		end
 	end
+
+	local last_cwd = ""
+	vim.api.nvim_create_autocmd({ "BufEnter" }, {
+		callback = function()
+			if last_cwd ~= vim.fn.getcwd(-1, -1) then
+				last_cwd = vim.fn.getcwd(-1, -1)
+				venv_update()
+			end
+		end,
+	})
 
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
-		pattern = "*.py",
 		callback = function()
-			update_workspace()
-			update_venv()
+			if vim.bo.buftype == "python" then
+				workspace_update()
+			end
 		end,
 	})
 end
