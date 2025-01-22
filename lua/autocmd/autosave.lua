@@ -6,8 +6,7 @@ vim.api.nvim_create_autocmd({ "VimLeave", "BufLeave", "FocusLost" }, {
 			or buffer_name == ""
 			or vim.bo.buftype ~= ""
 			or not (vim.bo.modifiable and vim.bo.modified)
-			or string.find(buffer_name, "^oil://") ~= nil
-			or string.find(buffer_name, "^replacer://") ~= nil
+			or BufIsSpecial(buffer_name)
 		then
 			return
 		end

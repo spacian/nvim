@@ -1,3 +1,6 @@
+BufIsSpecial = function(bufname)
+	return vim.bo.buftype ~= "" or bufname == ""
+end
 require("remaps")
 require("config.lazy")
 if not vim.g.vscode then

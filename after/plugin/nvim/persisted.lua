@@ -7,11 +7,7 @@ if not vim.g.vscode then
 	})
 	vim.keymap.set({ "n" }, "<leader>oP", function()
 		local buffer_name = vim.api.nvim_buf_get_name(0)
-		if
-			string.find(buffer_name, "neo.tree filesystem .1000.") ~= nil
-			or string.find(buffer_name, "^oil://") ~= nil
-			or string.find(buffer_name, "^replacer://") ~= nil
-		then
+		if not buffer_name == '' and BufIsSpecial(buffer_name) then
 			print("cannot open new session from this buffer")
 			return
 		end
@@ -41,13 +37,7 @@ if not vim.g.vscode then
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		callback = function()
 			local buffer_name = vim.api.nvim_buf_get_name(0)
-			if
-				not (vim.bo.buftype == "quickfix")
-				and not (vim.bo.buftype == "terminal")
-				and string.find(buffer_name, "^oil://") == nil
-				and string.find(buffer_name, "^replacer://") == nil
-				and string.find(buffer_name, "neo.tree filesystem .1000.") == nil
-			then
+			if not BufIsSpecial(buffer_name) then
 				persisted.save({ force = true })
 			end
 		end,

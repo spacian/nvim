@@ -56,6 +56,7 @@ if not vim.g.vscode then
 
 	vim.api.nvim_create_autocmd("TermClose", {
 		callback = function()
+			vim.cmd("silent Grapple tag scope=term name=term")
 			vim.cmd("silent Grapple untag scope=term name=term")
 		end,
 	})
@@ -64,12 +65,7 @@ if not vim.g.vscode then
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		callback = function()
 			local bufname = vim.api.nvim_buf_get_name(0)
-			if
-				string.find(bufname, "^oil://") == nil
-				and string.find(bufname, "^replacer://") == nil
-				and string.find(bufname, "^term://") == nil
-				and string.find(bufname, "neo.tree filesystem .1000.") == nil
-			then
+			if not BufIsSpecial(bufname) then
 				if last_bufname ~= "" then
 					vim.cmd("silent Grapple tag name=prev scope=prev path=" .. last_bufname)
 				end

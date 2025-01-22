@@ -4,9 +4,9 @@ else
 	vim.keymap.set({ "t" }, "<c-e>", [[python3 -c "import sys; print(sys.executable)"<enter>]], { noremap = true })
 end
 
-vim.api.nvim_create_user_command("TW", function()
+vim.api.nvim_create_user_command("Tw", function()
 	local buffer_name = vim.api.nvim_buf_get_name(0)
-	if string.find(buffer_name, "^oil://") ~= nil or string.find(buffer_name, "^replacer://") ~= nil then
+	if not buffer_name == "" and BufIsSpecial(buffer_name) then
 		return
 	end
 	if vim.loop.os_uname().sysname == "Windows_NT" then
@@ -19,9 +19,9 @@ vim.api.nvim_create_user_command("TW", function()
 	end
 end, {})
 
-vim.api.nvim_create_user_command("TF", function()
+vim.api.nvim_create_user_command("Tf", function()
 	local buffer_name = vim.api.nvim_buf_get_name(0)
-	if string.find(buffer_name, "^oil://") ~= nil or string.find(buffer_name, "^replacer://") ~= nil then
+	if not buffer_name == "" and BufIsSpecial(buffer_name) then
 		return
 	end
 	local path = vim.fn.expand("%:p:h")
@@ -39,7 +39,11 @@ vim.api.nvim_create_user_command("TF", function()
 	end
 end, {})
 
-vim.api.nvim_create_user_command("TE", function()
+vim.api.nvim_create_user_command("Te", function()
+	local buffer_name = vim.api.nvim_buf_get_name(0)
+	if not buffer_name == "" and BufIsSpecial(buffer_name) then
+		return
+	end
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.cmd("term powershell")
 		vim.fn.feedkeys("a")
@@ -52,7 +56,11 @@ vim.api.nvim_create_user_command("TE", function()
 end, {})
 
 if vim.loop.os_uname().sysname == "Windows_NT" then
-	vim.api.nvim_create_user_command("TP", function()
+	vim.api.nvim_create_user_command("Tp", function()
+		local buffer_name = vim.api.nvim_buf_get_name(0)
+		if not buffer_name == "" and BufIsSpecial(buffer_name) then
+			return
+		end
 		vim.cmd("term powershell")
 		vim.fn.feedkeys("a")
 	end, {})
