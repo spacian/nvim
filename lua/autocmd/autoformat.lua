@@ -1,8 +1,10 @@
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	pattern = "*.py",
 	callback = function()
+		local save_cursor = vim.fn.getpos(".")
 		vim.cmd("silent !isort %:p")
 		vim.cmd("silent !black %:p")
+		vim.fn.setpos(".", save_cursor)
 	end,
 })
 
@@ -11,7 +13,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		local bufnr = vim.api.nvim_get_current_buf()
 		local bufname = vim.api.nvim_buf_get_name(bufnr)
 		if vim.bo.buftype == "python" or BufIsSpecial(bufname) then
-		return
+			return
 		end
 		local clients = vim.lsp.get_clients({ bufnr = bufnr })
 		for _, client in ipairs(clients) do

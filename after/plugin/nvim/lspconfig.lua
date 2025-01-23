@@ -25,7 +25,7 @@ if not vim.g.vscode then
 						return { vim.fn.expand("$APPDATA") .. "/npm/node_modules/@cspell/dict-de-de/cspell-ext.json" }
 					end,
 					cwd = function(_)
-						return vim.fn.getcwd(-1, -1)
+						return vim.fn.getcwd()
 					end,
 					reset_cspell = function(params)
 						if params ~= nil and params.cwd ~= nil and vim.v.this_session ~= cspell_last_session then

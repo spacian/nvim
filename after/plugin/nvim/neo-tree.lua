@@ -34,15 +34,15 @@ if not vim.g.vscode then
 		},
 	})
 	vim.keymap.set({ "n" }, "<leader>ot", function()
-        local bufname = vim.api.nvim_buf_get_name(0)
-        if bufname == "" or not BufIsSpecial(bufname) then
-            require("neo-tree.command").execute({
-                action = "focus",
-                position = "current",
-                source = "filesystem",
-                dir = vim.fn.getcwd(-1, -1),
-                reveal = true,
-            })
-        end
+		local bufname = vim.api.nvim_buf_get_name(0)
+		if bufname == "" or not BufIsSpecial(bufname) then
+			require("neo-tree.command").execute({
+				action = "focus",
+				position = "current",
+				source = "filesystem",
+				dir = vim.fn.getcwd(),
+				reveal = true,
+			})
+		end
 	end)
 end

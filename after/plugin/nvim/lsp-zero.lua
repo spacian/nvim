@@ -6,6 +6,9 @@ if not vim.g.vscode then
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
 	local cmp_format = require("lsp-zero").cmp_format({ details = true })
+	local starts_with_underscore = function(label, n)
+		return label:sub(1, n) == string.sub("__", 1, n)
+	end
 	cmp.setup({
 		preselect = cmp.PreselectMode.Item,
 		formatting = cmp_format,
@@ -26,6 +29,30 @@ if not vim.g.vscode then
 		},
 		sorting = {
 			comparators = {
+				function(a, b)
+					local a_enum = a.completion_item.kind == cmp.lsp.CompletionItemKind.EnumMember
+					local b_enum = b.completion_item.kind == cmp.lsp.CompletionItemKind.EnumMember
+					if a_enum ~= b_enum then
+						return a_enum
+					end
+					return nil
+				end,
+				function(a, b)
+					local a_ = starts_with_underscore(a.completion_item.label, 2)
+					local b_ = starts_with_underscore(b.completion_item.label, 2)
+					if a_ ~= b_ then
+						return not a_
+					end
+					return nil
+				end,
+				function(a, b)
+					local a_ = starts_with_underscore(a.completion_item.label, 1)
+					local b_ = starts_with_underscore(b.completion_item.label, 1)
+					if a_ ~= b_ then
+						return not a_
+					end
+					return nil
+				end,
 				compare.recently_used,
 				compare.offset,
 				compare.exact,
