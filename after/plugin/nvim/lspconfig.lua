@@ -43,9 +43,7 @@ if not vim.g.vscode then
 		basedpyright = function()
 			lspconfig.basedpyright.setup({
 				on_init = function(client, _)
-					if client.name == "basedpyright" then
-						client.server_capabilities.documentFormattingProvider = false
-					end
+					client.server_capabilities.documentFormattingProvider = false
 				end,
 				settings = {
 					basedpyright = {
@@ -100,6 +98,7 @@ if not vim.g.vscode then
 			null_ls.register({ sources = { null_ls.builtins.formatting.stylua } })
 			lspconfig.lua_ls.setup({
 				on_init = function(client)
+					client.server_capabilities.documentFormattingProvider = false
 					if client.workspace_folders then
 						local path = client.workspace_folders[1].name
 						if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then

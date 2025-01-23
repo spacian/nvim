@@ -1,15 +1,6 @@
 if not vim.g.vscode then
-	require("venv-selector").setup({
-		name = { ".venv", "venv" },
-		search_workspace = true,
-		search_venv_managers = false,
-		search = true,
-		parents = 0,
-		notify_user_on_activate = false,
-	})
-	vim.api.nvim_create_user_command("VenvShowCurrent", function()
-		print(require("venv-selector").venv())
-	end, {})
+	local venv = require("venv-selector")
+	venv.setup({ settings = { options = {} } })
 
 	local function exists(file)
 		local ok, err, code = os.rename(file, file)
@@ -40,10 +31,6 @@ if not vim.g.vscode then
 	end
 
 	local function venv_update()
-		local venv = require("venv-selector")
-		if venv == nil then
-			return
-		end
 		if venv.venv() ~= nil then
 			venv.deactivate()
 		end
@@ -59,15 +46,14 @@ if not vim.g.vscode then
 			if last_cwd ~= vim.fn.getcwd(-1, -1) then
 				last_cwd = vim.fn.getcwd(-1, -1)
 				venv_update()
+				if vim.bo.buftype == "python" then
+					workspace_update()
+				end
 			end
 		end,
 	})
 
-	vim.api.nvim_create_autocmd({ "BufEnter" }, {
-		callback = function()
-			if vim.bo.buftype == "python" then
-				workspace_update()
-			end
-		end,
-	})
+	vim.api.nvim_create_user_command("VenvCurrent", function()
+		print(venv.python())
+	end, {})
 end
