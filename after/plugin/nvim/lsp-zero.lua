@@ -10,7 +10,7 @@ if not vim.g.vscode then
 		return label:sub(1, n) == string.sub("__", 1, n)
 	end
 	local ends_on_equals = function(label)
-		return label:match("=$")
+		return string.match(label, "=$") == "="
 	end
 	cmp.setup({
 		preselect = cmp.PreselectMode.Item,
@@ -41,24 +41,24 @@ if not vim.g.vscode then
 					return nil
 				end,
 				function(a, b)
-					local a_ = ends_on_equals(a.completion_item.label)
-					local b_ = ends_on_equals(b.completion_item.label)
+					local a_ = ends_on_equals(a.completion_item.label or "")
+					local b_ = ends_on_equals(b.completion_item.label or "")
 					if a_ ~= b_ then
 						return a_
 					end
 					return nil
 				end,
 				function(a, b)
-					local a_ = starts_with_underscore(a.completion_item.label, 2)
-					local b_ = starts_with_underscore(b.completion_item.label, 2)
+					local a_ = starts_with_underscore(a.completion_item.label or "", 2)
+					local b_ = starts_with_underscore(b.completion_item.label or "", 2)
 					if a_ ~= b_ then
 						return not a_
 					end
 					return nil
 				end,
 				function(a, b)
-					local a_ = starts_with_underscore(a.completion_item.label, 1)
-					local b_ = starts_with_underscore(b.completion_item.label, 1)
+					local a_ = starts_with_underscore(a.completion_item.label or "", 1)
+					local b_ = starts_with_underscore(b.completion_item.label or "", 1)
 					if a_ ~= b_ then
 						return not a_
 					end
