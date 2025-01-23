@@ -65,10 +65,10 @@ if not vim.g.vscode then
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		callback = function()
 			local bufname = vim.api.nvim_buf_get_name(0)
+			if last_bufname ~= "" and bufname ~= last_bufname then
+				vim.cmd("silent Grapple tag name=prev scope=prev path=" .. last_bufname)
+			end
 			if not BufIsSpecial(bufname) then
-				if last_bufname ~= "" then
-					vim.cmd("silent Grapple tag name=prev scope=prev path=" .. last_bufname)
-				end
 				last_bufname = bufname
 			end
 		end,

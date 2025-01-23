@@ -7,6 +7,7 @@ if not vim.g.vscode then
 			delete = { text = "_" },
 			topdelete = { text = "‾" },
 			changedelete = { text = "┃" },
+			-- untracked = { text = "┆" },
 			untracked = { text = "?" },
 		},
 		signs_staged = {
@@ -15,6 +16,7 @@ if not vim.g.vscode then
 			delete = { text = "_" },
 			topdelete = { text = "‾" },
 			changedelete = { text = "┃" },
+			-- untracked = { text = "┆" },
 			untracked = { text = "?" },
 		},
 		signs_staged_enable = true,

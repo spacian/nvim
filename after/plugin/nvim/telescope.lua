@@ -10,6 +10,7 @@ if not vim.g.vscode then
 					width = { padding = 0 },
 				},
 			},
+			path_display = { "smart" },
 			mappings = {
 				i = {
 					["<c-j>"] = require("telescope.actions").move_selection_next,
