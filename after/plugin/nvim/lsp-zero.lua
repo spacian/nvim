@@ -9,6 +9,9 @@ if not vim.g.vscode then
 	local starts_with_underscore = function(label, n)
 		return label:sub(1, n) == string.sub("__", 1, n)
 	end
+	local ends_on_equals = function(label)
+		return label:match("=$")
+	end
 	cmp.setup({
 		preselect = cmp.PreselectMode.Item,
 		formatting = cmp_format,
@@ -34,6 +37,14 @@ if not vim.g.vscode then
 					local b_enum = b.completion_item.kind == cmp.lsp.CompletionItemKind.EnumMember
 					if a_enum ~= b_enum then
 						return a_enum
+					end
+					return nil
+				end,
+				function(a, b)
+					local a_ = ends_on_equals(a.completion_item.label)
+					local b_ = ends_on_equals(b.completion_item.label)
+					if a_ ~= b_ then
+						return a_
 					end
 					return nil
 				end,
