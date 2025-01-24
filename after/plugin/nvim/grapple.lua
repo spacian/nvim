@@ -27,9 +27,15 @@ if not vim.g.vscode then
 		require("grapple").open_tags()
 	end, {})
 	vim.keymap.set("n", "<leader>h", function()
+		if not BufIsSpecial(vim.api.nvim_buf_get_name(0)) then
+			vim.cmd("silent noa w")
+		end
 		vim.cmd("silent Grapple select name=prev scope=prev")
 	end)
 	vim.keymap.set("t", "<c-h>", function()
+		if not BufIsSpecial(vim.api.nvim_buf_get_name(0)) then
+			vim.cmd("silent noa w")
+		end
 		vim.cmd("silent Grapple select name=prev scope=prev")
 	end)
 	vim.keymap.set("n", "<leader>j", function()

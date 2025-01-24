@@ -21,11 +21,8 @@ if not vim.g.vscode then
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "PersistedTelescopeLoadPre",
 		callback = function(_)
-			-- if vim.api.nvim_buf_get_name(0) ~= "" then
-			-- 	vim.cmd("%bd!|e#")
-			-- end
 			require("persisted").save({ session = vim.g.persisted_loaded_session })
-			-- vim.cmd("%bd!")
+			vim.cmd("%bd!")
 		end,
 	})
 	vim.api.nvim_create_autocmd("User", {

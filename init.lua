@@ -12,9 +12,10 @@ if not vim.g.vscode then
 	vim.opt.number = true
 	vim.opt.relativenumber = false
 	vim.opt.cursorline = true
-	vim.opt.cmdheight = 0
-	-- vim.opt.laststatus = 3
-	-- vim.opt.winbar = "%=%f"
+	vim.opt.cmdheight = 1
+	vim.o.showcmd = false
+	vim.o.ruler = false
+	vim.o.showmode = false
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
 	vim.cmd("language en_US")
