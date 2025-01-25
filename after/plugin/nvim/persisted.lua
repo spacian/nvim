@@ -22,7 +22,7 @@ if not vim.g.vscode then
 		pattern = "PersistedTelescopeLoadPre",
 		callback = function(_)
 			require("persisted").save({ session = vim.g.persisted_loaded_session })
-			vim.cmd("%bd!")
+			vim.cmd("silent %bd!")
 		end,
 	})
 	vim.api.nvim_create_autocmd("User", {

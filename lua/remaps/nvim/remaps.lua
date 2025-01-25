@@ -5,6 +5,8 @@ vim.keymap.set({ "c" }, "<c-l>", "<c-n>", { noremap = true })
 vim.keymap.set({ "c" }, "<c-k>", "<c-y>", { noremap = true })
 vim.keymap.set({ "n" }, "<c-i>", "<c-i>zz", { noremap = true })
 vim.keymap.set({ "n" }, "<c-o>", "<c-o>zz", { noremap = true })
+vim.keymap.set({ "n" }, "n", "nzz", { noremap = true })
+vim.keymap.set({ "n" }, "N", "Nzz", { noremap = true })
 
 vim.keymap.set({ "n" }, "/", function()
 	vim.cmd("set nohls")

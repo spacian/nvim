@@ -11,8 +11,8 @@ if not vim.g.vscode then
 			t = "TERMINAL",
 		}
 		local mode = vim.api.nvim_get_mode().mode
-		local mode_name = mode_map[mode] or "NORMAL  "
-		return string.format("%-7s", mode_name)
+		local mode_name = mode_map[mode] or "NORMAL"
+		return string.format("%-8s", mode_name)
 	end
 
 	local function special()
@@ -26,7 +26,7 @@ if not vim.g.vscode then
 	local function project()
 		local dir = vim.fn.getcwd()
 		dir = dir:gsub("\\", "/")
-		dir = dir:match(".*/(.+)$") or special()
+		dir = dir:match(".*/(.+)$") or ""
 		return dir
 	end
 	local function telescope_smart_path()
@@ -56,20 +56,14 @@ if not vim.g.vscode then
 		return filepath:gsub("\\", "/")
 	end
 
-	local colors = require("gruvbox").palette
-	local config = {
-		a = { bg = colors.dark_red_hard, fg = colors.black, gui = "bold" },
-		b = { bg = colors.dark2, fg = colors.white },
-		c = { bg = colors.dark1, fg = colors.gray },
-	}
-	local theme = {
-		normal = config,
-		insert = config,
-		visual = config,
-		replace = config,
-		command = config,
-		inactive = config,
-	}
+	local theme = require("lualine.themes.auto")
+	theme.insert.c = theme.normal.c
+	theme.visual.c = theme.normal.c
+	theme.replace.c = theme.normal.c
+	theme.command.c = theme.normal.c
+	theme.terminal = theme.command
+	theme.inactive = theme.normal
+
 	require("lualine").setup({
 		options = {
 			theme = theme,
@@ -79,11 +73,11 @@ if not vim.g.vscode then
 		},
 		sections = {
 			lualine_a = { fixed_mode },
-			lualine_b = { { "diagnostics", sections = { "error" } } },
-			lualine_c = { { "diagnostics", sections = { "warn", "info", "hint" } } },
-			lualine_x = { project },
-			lualine_y = { "filename" },
-			lualine_z = {},
+			lualine_b = { project },
+			lualine_c = { { "diff", colored = false }, { "filename", path = 1 } },
+			lualine_x = { { "diagnostics" } },
+			lualine_y = {},
+			lualine_z = { {} },
 		},
 	})
 end

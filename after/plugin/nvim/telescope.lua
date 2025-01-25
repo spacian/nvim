@@ -1,5 +1,4 @@
 if not vim.g.vscode then
-	local fb_actions = require("telescope").extensions.file_browser.actions
 	local actions = require("telescope.actions")
 	require("telescope").setup({
 		defaults = {
@@ -30,12 +29,7 @@ if not vim.g.vscode then
 		},
 		extensions = {
 			file_browser = {
-				mappings = {
-					["i"] = {
-						["<a-n>"] = fb_actions.create,
-						["<a-c>"] = false,
-					},
-				},
+				mappings = {},
 			},
 		},
 	})
@@ -57,8 +51,8 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "gr", builtin.lsp_references)
 	vim.keymap.set("n", "gd", builtin.lsp_definitions)
 	vim.keymap.set("n", "gD", builtin.lsp_type_definitions)
-	vim.keymap.set("n", "<leader>or", builtin.oldfiles)
-	vim.keymap.set("n", "<leader>R", builtin.resume)
+	vim.keymap.set("n", "<leader>oR", builtin.oldfiles)
+	vim.keymap.set("n", "<leader>or", builtin.resume)
 	vim.keymap.set("n", "<leader>oq", builtin.quickfix)
 	vim.keymap.set("n", "<leader>od", builtin.diagnostics)
 end
