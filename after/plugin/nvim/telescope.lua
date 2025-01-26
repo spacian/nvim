@@ -40,6 +40,7 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader>of", builtin.find_files)
 	vim.keymap.set("n", "<leader>ob", builtin.buffers)
 	vim.keymap.set("n", "<leader>ff", builtin.live_grep)
+	vim.keymap.set("n", "<leader>fw", builtin.grep_string)
 	vim.keymap.set("n", "<leader>fp", function()
 		builtin.grep_string({
 			search = "",
@@ -55,4 +56,6 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader>or", builtin.resume)
 	vim.keymap.set("n", "<leader>oq", builtin.quickfix)
 	vim.keymap.set("n", "<leader>od", builtin.diagnostics)
+	vim.keymap.set("n", "<leader>oj", builtin.jumplist)
+	vim.keymap.set("n", "<leader>og", builtin.git_status)
 end
