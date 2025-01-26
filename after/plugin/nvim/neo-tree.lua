@@ -1,4 +1,5 @@
 if not vim.g.vscode then
+	local jumplist = require("remaps.nvim.jumplist")
 	require("neo-tree").setup({
 		position = "right",
 		filesystem = {
@@ -36,6 +37,7 @@ if not vim.g.vscode then
 	vim.keymap.set({ "n" }, "<leader>ot", function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 		if bufname == "" or not BufIsSpecial(bufname) then
+			jumplist.register()
 			require("neo-tree.command").execute({
 				action = "focus",
 				position = "current",

@@ -1,5 +1,5 @@
 vim.keymap.set("n", "<leader>qq", function()
-	vim.cmd("cexpr []")
+	vim.diagnostic.setqflist({})
 	vim.diagnostic.setqflist({ open = true })
 end)
 vim.keymap.set("n", "<leader>qfd", function()

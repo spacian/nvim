@@ -10,6 +10,13 @@
     ],
     "import": [],
     "words": [
+        "taplo",
+        "yamlls",
+        "setqflist",
+        "getqflist",
+        "qflist",
+        "nohls",
+        "lnum",
         "lualine",
         "buftype",
         "venv",

@@ -28,6 +28,7 @@ if not vim.g.vscode then
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "PersistedStart",
 		callback = function(_)
+			require("remaps.nvim.jumplist").reset()
 			vim.cmd("clearjumps")
 		end,
 	})

@@ -1,4 +1,5 @@
 if not vim.g.vscode then
+	local jumplist = require("remaps.nvim.jumplist")
 	local oil = require("oil")
 	oil.setup({
 		keymaps = {
@@ -18,10 +19,12 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader>oe", function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 		if bufname == "" then
+			jumplist.register()
 			vim.cmd("silent Oil .")
 		elseif BufIsSpecial(bufname) then
 			return
 		end
+		jumplist.register()
 		vim.cmd("silent Oil %:h")
 	end, { noremap = true })
 
@@ -31,8 +34,8 @@ if not vim.g.vscode then
 			vim.cmd("cd " .. cwd)
 		elseif not BufIsSpecial(vim.api.nvim_buf_get_name(0)) then
 			vim.cmd("cd %:p:h")
-        else
-            return
+		else
+			return
 		end
 		print("new working directory: " .. vim.fn.getcwd())
 	end, {})
