@@ -19,12 +19,12 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader>oe", function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 		if bufname == "" then
-			jumplist.register()
+			jumplist.register(false)
 			vim.cmd("silent Oil .")
 		elseif BufIsSpecial(bufname) then
 			return
 		end
-		jumplist.register()
+		jumplist.register(false)
 		vim.cmd("silent Oil %:h")
 	end, { noremap = true })
 

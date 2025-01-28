@@ -7,40 +7,40 @@ vim.keymap.set({ "c" }, "<c-k>", "<c-y>", { noremap = true })
 
 vim.keymap.set({ "n" }, "<c-i>", function()
 	jumplist.jump_forward()
-	-- vim.api.nvim_feedkeys("zz", "n", true)
+	vim.api.nvim_feedkeys("zz", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "<c-o>", function()
 	jumplist.jump_back()
-	-- vim.api.nvim_feedkeys("zz", "n", true)
+	vim.api.nvim_feedkeys("zz", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "/", function()
-	jumplist.register()
+	jumplist.register(false)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("/", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "?", function()
-	jumplist.register()
+	jumplist.register(false)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("?", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "*", function()
-	jumplist.register()
+	jumplist.register(false)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("*", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "#", function()
-	jumplist.register()
+	jumplist.register(false)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("#", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "gg", function()
-	jumplist.register()
+	jumplist.register(false)
 	if vim.v.count > 0 then
 		vim.api.nvim_feedkeys(vim.v.count .. "gg", "n", true)
 	else
@@ -49,7 +49,7 @@ vim.keymap.set({ "n" }, "gg", function()
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "G", function()
-	jumplist.register()
+	jumplist.register(false)
 	vim.api.nvim_feedkeys("G$", "n", true)
 end, { noremap = true })
 

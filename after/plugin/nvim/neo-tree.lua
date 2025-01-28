@@ -34,10 +34,10 @@ if not vim.g.vscode then
 			},
 		},
 	})
-	vim.keymap.set({ "n" }, "<leader>ot", function()
+	vim.keymap.set({ "n" }, "<leader>oE", function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 		if bufname == "" or not BufIsSpecial(bufname) then
-			jumplist.register()
+			jumplist.register(false)
 			require("neo-tree.command").execute({
 				action = "focus",
 				position = "current",

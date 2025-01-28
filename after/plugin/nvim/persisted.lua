@@ -37,7 +37,9 @@ if not vim.g.vscode then
 			vim.cmd("set nohls")
 			local buffer_name = vim.api.nvim_buf_get_name(0)
 			if not BufIsSpecial(buffer_name) then
-				persisted.save({ force = true })
+				vim.schedule(function()
+					persisted.save({ force = true })
+				end)
 			end
 		end,
 	})
