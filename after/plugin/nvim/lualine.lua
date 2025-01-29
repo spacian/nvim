@@ -15,6 +15,40 @@ if not vim.g.vscode then
 		return string.format("%-8s", mode_name)
 	end
 
+	local function git()
+		local gitsigns = vim.b.gitsigns_status_dict
+		if gitsigns and (gitsigns.added ~= 0 or gitsigns.changed ~= 0 or gitsigns.removed ~= 0) then
+			return "✦"
+		end
+		return " "
+	end
+
+	local indicator_symbol = "●"
+	local function diagnostic(level)
+		if (vim.diagnostic.count(0)[level] or 0) > 0 then
+			return indicator_symbol
+		else
+			-- return "◌"
+			return "○"
+		end
+	end
+
+	local function error_ind()
+		return diagnostic(vim.diagnostic.severity.ERROR)
+	end
+
+	local function warn_ind()
+		return diagnostic(vim.diagnostic.severity.WARN)
+	end
+
+	local function info_ind()
+		return diagnostic(vim.diagnostic.severity.INFO)
+	end
+
+	local function note_ind()
+		return diagnostic(vim.diagnostic.severity.HINT)
+	end
+
 	local function project()
 		local dir = vim.fn.getcwd()
 		dir = dir:gsub("\\", "/")
@@ -39,11 +73,19 @@ if not vim.g.vscode then
 		},
 		sections = {
 			lualine_a = { fixed_mode },
-			lualine_b = { project },
-			lualine_c = { { "diff", colored = false }, { "filename", path = 1 } },
-			lualine_x = { { "diagnostics" } },
-			lualine_y = {},
-			lualine_z = { {} },
+			lualine_b = {},
+			lualine_c = {
+				{ error_ind, color = { fg = "#FF0000" } },
+				{ warn_ind, color = { fg = "#FFAA00" } },
+				{ info_ind, color = { fg = "#229922" } },
+				{ note_ind, color = { fg = "#005599" } },
+			},
+			lualine_x = { { "filename", path = 4, file_status = false } },
+			lualine_y = {
+				{ git, color = { fg = theme.normal.c.fg } },
+				{ project, color = { fg = theme.normal.c.fg } },
+			},
+			lualine_z = {},
 		},
 	})
 end
