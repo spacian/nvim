@@ -10,7 +10,7 @@ end
 
 vim.api.nvim_create_user_command("Tw", function()
 	local buffer_name = vim.api.nvim_buf_get_name(0)
-	if not buffer_name == "" and BufIsSpecial(buffer_name) then
+	if not buffer_name == "" and BufIsSpecial() then
 		return
 	end
 	if vim.loop.os_uname().sysname == "Windows_NT" then
@@ -25,7 +25,7 @@ end, {})
 
 vim.api.nvim_create_user_command("Tf", function()
 	local buffer_name = vim.api.nvim_buf_get_name(0)
-	if not buffer_name == "" and BufIsSpecial(buffer_name) then
+	if not buffer_name == "" and BufIsSpecial() then
 		return
 	end
 	local path = vim.fn.expand("%:p:h")
@@ -45,7 +45,7 @@ end, {})
 
 vim.api.nvim_create_user_command("Te", function()
 	local buffer_name = vim.api.nvim_buf_get_name(0)
-	if not buffer_name == "" and BufIsSpecial(buffer_name) then
+	if not buffer_name == "" and BufIsSpecial() then
 		return
 	end
 	if vim.loop.os_uname().sysname == "Windows_NT" then
@@ -62,7 +62,7 @@ end, {})
 if vim.loop.os_uname().sysname == "Windows_NT" then
 	vim.api.nvim_create_user_command("Tp", function()
 		local buffer_name = vim.api.nvim_buf_get_name(0)
-		if not buffer_name == "" and BufIsSpecial(buffer_name) then
+		if not buffer_name == "" and BufIsSpecial() then
 			return
 		end
 		vim.cmd("term powershell")

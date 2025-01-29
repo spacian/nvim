@@ -21,7 +21,7 @@ if not vim.g.vscode then
 		if bufname == "" then
 			jumplist.register(false)
 			vim.cmd("silent Oil .")
-		elseif BufIsSpecial(bufname) then
+		elseif BufIsSpecial() then
 			return
 		end
 		jumplist.register(false)
@@ -32,7 +32,7 @@ if not vim.g.vscode then
 		local cwd = oil.get_current_dir()
 		if cwd ~= nil then
 			vim.cmd("cd " .. cwd)
-		elseif not BufIsSpecial(vim.api.nvim_buf_get_name(0)) then
+		elseif not BufIsSpecial() then
 			vim.cmd("cd %:p:h")
 		else
 			return

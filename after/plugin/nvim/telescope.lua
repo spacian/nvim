@@ -2,6 +2,12 @@ if not vim.g.vscode then
 	local jumplist = require("remaps.nvim.jumplist")
 	local actions = require("telescope.actions")
 	require("telescope").setup({
+		pickers = {
+			find_files = {
+				hidden = true,
+				file_ignore_patterns = { "^.git[/\\]" },
+			},
+		},
 		defaults = {
 			layout_config = {
 				horizontal = {

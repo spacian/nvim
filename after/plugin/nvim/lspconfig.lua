@@ -44,6 +44,7 @@ if not vim.g.vscode then
 			lspconfig.basedpyright.setup({
 				on_init = function(client, _)
 					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.semanticTokensProvider = false
 				end,
 				settings = {
 					basedpyright = {
@@ -83,22 +84,42 @@ if not vim.g.vscode then
 		-- })
 		-- end,
 		jsonls = function()
-			lspconfig.jsonls.setup({ settings = { json = { validate = { enable = true } } } })
+			lspconfig.jsonls.setup({
+				on_init = function(client)
+					client.server_capabilities.semanticTokensProvider = false
+				end,
+				settings = { json = { validate = { enable = true } } },
+			})
 		end,
 		gopls = function()
-			lspconfig.gopls.setup({})
+			lspconfig.gopls.setup({
+				on_init = function(client)
+					client.server_capabilities.semanticTokensProvider = false
+				end,
+			})
 		end,
 		taplo = function()
-			lspconfig.taplo.setup({ settings = { toml = { validate = { enable = true } } } })
+			lspconfig.taplo.setup({
+				on_init = function(client)
+					client.server_capabilities.semanticTokensProvider = false
+				end,
+				settings = { toml = { validate = { enable = true } } },
+			})
 		end,
 		yamlls = function()
-			lspconfig.yamlls.setup({ settings = { yaml = { validate = { enable = true } } } })
+			lspconfig.yamlls.setup({
+				on_init = function(client)
+					client.server_capabilities.semanticTokensProvider = false
+				end,
+				settings = { yaml = { validate = { enable = true } } },
+			})
 		end,
 		lua_ls = function()
 			null_ls.register({ sources = { null_ls.builtins.formatting.stylua } })
 			lspconfig.lua_ls.setup({
 				on_init = function(client)
 					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.semanticTokensProvider = false
 					if client.workspace_folders then
 						local path = client.workspace_folders[1].name
 						if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then

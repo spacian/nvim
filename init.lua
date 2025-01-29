@@ -1,6 +1,16 @@
+---@param bufname string|nil
+---@return boolean
 BufIsSpecial = function(bufname)
-	return vim.bo.buftype ~= "" or bufname == ""
+	if bufname == nil then
+		return vim.bo.buftype ~= "" or vim.api.nvim_buf_get_name(0) == ""
+	else
+		return bufname == ""
+			or bufname:match("oil://")
+			or bufname:match("replacer://")
+			or bufname:match("neo%-tree filesystem")
+	end
 end
+
 require("remaps")
 require("config.lazy")
 if not vim.g.vscode then

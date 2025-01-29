@@ -14,8 +14,7 @@ if not vim.g.vscode then
 	end)
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		callback = function()
-			local bufname = vim.fn.expand("%")
-			if not BufIsSpecial(bufname) then
+			if not BufIsSpecial() then
 				require("lazygit.utils").project_root_dir()
 			end
 		end,

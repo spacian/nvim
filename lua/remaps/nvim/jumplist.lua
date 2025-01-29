@@ -104,7 +104,7 @@ M.register = function(persistent)
 	if persistent == nil then
 		persistent = true
 	end
-	if BufIsSpecial(vim.api.nvim_buf_get_name(0)) then
+	if BufIsSpecial() then
 		return
 	end
 	local node = M.create_node(persistent)
