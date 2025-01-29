@@ -37,7 +37,7 @@ if not vim.g.vscode then
 	vim.keymap.set({ "n" }, "<leader>oE", function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 		if bufname == "" or not BufIsSpecial() then
-			jumplist.register(false)
+			jumplist.register(1)
 			require("neo-tree.command").execute({
 				action = "focus",
 				position = "current",

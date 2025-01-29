@@ -16,31 +16,31 @@ vim.keymap.set({ "n" }, "<c-o>", function()
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "/", function()
-	jumplist.register(false)
+	jumplist.register(1)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("/", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "?", function()
-	jumplist.register(false)
+	jumplist.register(1)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("?", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "*", function()
-	jumplist.register(false)
+	jumplist.register(1)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("*", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "#", function()
-	jumplist.register(false)
+	jumplist.register(1)
 	vim.cmd("set nohls")
 	vim.api.nvim_feedkeys("#", "n", true)
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "gg", function()
-	jumplist.register(false)
+	jumplist.register(1)
 	if vim.v.count > 0 then
 		vim.api.nvim_feedkeys(vim.v.count .. "gg", "n", true)
 	else
@@ -49,7 +49,7 @@ vim.keymap.set({ "n" }, "gg", function()
 end, { noremap = true })
 
 vim.keymap.set({ "n" }, "G", function()
-	jumplist.register(false)
+	jumplist.register(1)
 	vim.api.nvim_feedkeys("G$", "n", true)
 end, { noremap = true })
 

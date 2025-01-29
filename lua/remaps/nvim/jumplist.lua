@@ -1,5 +1,7 @@
 local M = {}
 
+local persistence_jump = 1
+
 ---@return Node
 local create_root = function()
 	local root = {
@@ -7,7 +9,7 @@ local create_root = function()
 		col = 0,
 		bufnr = 0,
 		root = true,
-		persistent = true,
+		persistence = 0,
 	}
 	root.next = root
 	root.prev = root
@@ -19,9 +21,9 @@ if M.root == nil then
 	M.cur = M.root
 end
 
----@param persistent boolean
+---@param persistence number
 ---@return Node
-M.create_node = function(persistent)
+M.create_node = function(persistence)
 	local pos = vim.fn.getpos(".")
 	return {
 		lnum = pos[2],
@@ -30,13 +32,13 @@ M.create_node = function(persistent)
 		root = false,
 		prev = M.cur,
 		next = M.root,
-		persistent = persistent,
+		persistence = persistence,
 	}
 end
 
 ---@param node Node
 M.insert = function(node)
-	while node.persistent and not M.cur.persistent do
+	while node.persistence < M.cur.persistence do
 		M.delete(M.cur)
 	end
 	M.root.prev.next = M.root.prev
@@ -45,12 +47,12 @@ M.insert = function(node)
 	M.root.prev = node
 end
 
----@param persistent boolean
-M.update = function(persistent)
+---@param persistence number
+M.update = function(persistence)
 	local pos = vim.fn.getpos(".")
 	M.cur.lnum = pos[2]
 	M.cur.col = pos[3]
-	M.cur.persistent = M.cur.persistent or persistent
+	M.cur.persistence = math.min(M.cur.persistence, persistence)
 end
 
 ---@param node Node
@@ -95,21 +97,20 @@ M.setpos = function()
 			vim.cmd("b" .. M.cur.bufnr)
 		end
 		vim.fn.setpos(".", { 0, M.cur.lnum, M.cur.col, 0 })
-		-- print(M.cur.prev.lnum, M.cur.lnum, M.cur.next.lnum, M.cur.persistent)
 	end
 end
 
----@param persistent boolean|nil
-M.register = function(persistent)
-	if persistent == nil then
-		persistent = true
+---@param persistence number|nil
+M.register = function(persistence)
+	if persistence == nil or M.cur.root then
+		persistence = 0
 	end
 	if BufIsSpecial() then
 		return
 	end
-	local node = M.create_node(persistent)
+	local node = M.create_node(persistence)
 	if nodes_equal_soft(M.cur, node) then
-		M.update(persistent)
+		M.update(persistence)
 	else
 		M.insert(node)
 		M.cur = M.cur.next
@@ -120,17 +121,19 @@ M.jump_back = function()
 	if M.cur.root then
 		M.register()
 	end
-	local node = M.create_node(false)
+	local node = M.create_node(persistence_jump)
 	if nodes_equal_soft(M.cur, node) then
-		-- todo
 		if not nodes_equal_hard(M.cur, node) then
 			M.setpos()
 			return
 		else
-			while (M.cur.persistent and not M.cur.prev.persistent) or nodes_equal_soft(M.cur, M.cur.prev) do
+			while
+				(math.min(M.cur.persistence, node.persistence) < M.cur.prev.persistence)
+				or nodes_equal_soft(M.cur, M.cur.prev)
+			do
 				M.delete(M.cur.prev)
 			end
-			M.update(false)
+			M.update(M.cur.persistence)
 			if not M.cur.prev.root then
 				M.cur = M.cur.prev
 			end
@@ -157,9 +160,9 @@ M.jump_forward = function()
 		M.register()
 	end
 	if not M.cur.next.root then
-		local node = M.create_node(false)
+		local node = M.create_node(persistence_jump)
 		if nodes_equal_soft(node, M.cur) then
-			M.update(false)
+			M.update(persistence_jump)
 		end
 		M.cur = M.cur.next
 	end
@@ -182,4 +185,4 @@ return JumpList
 ---@field next Node
 ---@field prev Node
 ---@field root boolean
----@field persistent boolean
+---@field persistence number
