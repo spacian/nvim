@@ -36,6 +36,7 @@ if not vim.g.vscode then
 		},
 		extensions = {
 			file_browser = {
+				hidden = true,
 				mappings = {},
 			},
 		},

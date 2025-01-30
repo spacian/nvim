@@ -1,30 +1,4 @@
 vim.keymap.set({ "n" }, "<c-s>", ":w<enter>", { noremap = true })
-vim.keymap.set({ "" }, "<c-q>", function()
-	if vim.fn.winnr("$") > 1 then
-		vim.cmd("silent close")
-		return
-	end
-	local bufname = vim.api.nvim_buf_get_name(0)
-	if bufname == "" then
-		vim.cmd("bd")
-		return
-	elseif bufname:match("^term://") then
-		vim.cmd("bd!")
-		return
-	else
-		vim.cmd("w|bd")
-		return
-	end
-end, { noremap = true })
-vim.keymap.set({ "t" }, "<c-q>", function()
-	if vim.fn.winnr("$") > 1 then
-		vim.cmd("silent close")
-		return
-	else
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<c-\><c-n>:bd!<enter>]], true, false, true), "n", true)
-		return
-	end
-end, { noremap = true })
 
 vim.keymap.set({ "t" }, "<c-n>", [[<c-\><c-n>]], { noremap = true })
 

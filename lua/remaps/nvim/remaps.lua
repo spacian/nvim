@@ -62,7 +62,7 @@ end
 vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
 	callback = function()
 		if not BufIsSpecial() then
-			jumplist.register()
+			jumplist.register(1)
 		end
 	end,
 })

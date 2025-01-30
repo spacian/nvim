@@ -37,5 +37,5 @@ local filter_diagnostic = function()
 	end, {})
 end
 
-vim.keymap.set("n", "<leader>dj", filter_diagnostic)
-vim.keymap.set("n", "<leader>dk", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>D", filter_diagnostic)
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)

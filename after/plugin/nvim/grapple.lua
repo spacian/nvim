@@ -26,7 +26,7 @@ if not vim.g.vscode then
 	vim.api.nvim_create_user_command("GrappleTags", function()
 		require("grapple").open_tags()
 	end, {})
-	vim.keymap.set("n", "<leader>h", function()
+	vim.keymap.set("n", "<leader>oh", function()
 		if grapple.exists({ name = "prev", scope = "prev" }) then
 			if not BufIsSpecial() then
 				vim.cmd("silent noa w")
@@ -48,8 +48,8 @@ if not vim.g.vscode then
 	end)
 	local tags = { "j", "k", "l" }
 	for i = 1, #tags do
-		vim.keymap.set("n", "<leader>" .. tags[i], function()
-			if grapple.exists({ name = "j" }) then
+		vim.keymap.set("n", "<leader>o" .. tags[i], function()
+			if grapple.exists({ name = tags[i] }) then
 				vim.cmd("silent noa w")
 				vim.cmd("silent Grapple select name=" .. tags[i])
 			else
@@ -72,9 +72,9 @@ if not vim.g.vscode then
 			vim.fn.feedkeys("a")
 		end
 	end)
-	vim.keymap.set("n", "<leader>J", ":Grapple tag name=j<enter>")
-	vim.keymap.set("n", "<leader>K", ":Grapple tag name=k<enter>")
-	vim.keymap.set("n", "<leader>L", ":Grapple tag name=l<enter>")
+	vim.keymap.set("n", "<leader>tj", ":Grapple tag name=j<enter>")
+	vim.keymap.set("n", "<leader>tk", ":Grapple tag name=k<enter>")
+	vim.keymap.set("n", "<leader>tl", ":Grapple tag name=l<enter>")
 
 	vim.api.nvim_create_autocmd("TermOpen", {
 		callback = function()
@@ -105,4 +105,37 @@ if not vim.g.vscode then
 			end)
 		end,
 	})
+	vim.keymap.set({ "" }, "<c-q>", function()
+		if vim.fn.winnr("$") > 1 then
+			vim.cmd("silent close")
+			return
+		end
+		local bufname = vim.api.nvim_buf_get_name(0)
+		if bufname == "" then
+			vim.cmd("bd")
+			return
+		elseif bufname:match("^term://") then
+			if grapple.exists({ name = "prev", scope = "prev" }) then
+				grapple.select({ name = "prev", scope = "prev" })
+			else
+				vim.cmd("bd!")
+			end
+			return
+		else
+			vim.cmd("w|bd")
+			return
+		end
+	end, { noremap = true })
+	vim.keymap.set({ "t" }, "<c-q>", function()
+		if vim.fn.winnr("$") > 1 then
+			vim.cmd("silent close")
+			return
+		elseif grapple.exists({ name = "prev", scope = "prev" }) then
+			grapple.select({ name = "prev", scope = "prev" })
+		else
+			local keys = vim.api.nvim_replace_termcodes([[<c-\><c-n>:bd!<enter>]], true, false, true)
+			vim.api.nvim_feedkeys(keys, "n", false)
+			return
+		end
+	end, { noremap = true })
 end

@@ -174,6 +174,9 @@ local JumpList = {
 	register = M.register,
 	jump_back = M.jump_back,
 	jump_forward = M.jump_forward,
+	delete = function()
+		M.delete(M.cur)
+	end,
 }
 
 return JumpList

@@ -1,3 +1,3 @@
 return {
-	{ "m4xshen/autoclose.nvim" },
+	{ "spacian/autoclose.nvim" },
 }
