@@ -8,6 +8,18 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
+local function trim_whitespace()
+	vim.cmd([[%s/\s\+$//e]])
+end
+
+local function delete_empty_lines()
+	local last_line = vim.fn.getline("$")
+	while last_line == "" and vim.fn.line("$") > 1 do
+		vim.cmd("silent $d")
+		last_line = vim.fn.getline("$")
+	end
+end
+
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	callback = function()
 		local bufnr = vim.api.nvim_get_current_buf()
@@ -23,9 +35,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		end
 		if not vim.bo.readonly and vim.bo.modifiable and vim.bo.modified then
 			local save_cursor = vim.fn.getpos(".")
-			pcall(function()
-				vim.cmd([[%s/\s\+$//e]])
-			end)
+			trim_whitespace()
+			delete_empty_lines()
 			vim.fn.setpos(".", save_cursor)
 		end
 	end,
