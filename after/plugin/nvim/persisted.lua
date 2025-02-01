@@ -15,7 +15,9 @@ if not vim.g.vscode then
 	end)
 	vim.api.nvim_create_autocmd({ "VimEnter" }, {
 		callback = function()
-			vim.cmd("Telescope persisted")
+			if vim.api.nvim_buf_get_name(0) == "" then
+				vim.cmd("Telescope persisted")
+			end
 		end,
 	})
 	vim.api.nvim_create_autocmd("User", {

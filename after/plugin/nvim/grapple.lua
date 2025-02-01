@@ -138,4 +138,28 @@ if not vim.g.vscode then
 			return
 		end
 	end, { noremap = true })
+	vim.api.nvim_create_autocmd("TermOpen", {
+		pattern = "*",
+		callback = function()
+			vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
+			vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
+			vim.keymap.set({ "n", "t" }, "<c-u><c-i>", function()
+				-- local keys = vim.api.nvim_replace_termcodes([[<c-\><c-n>:bd!<enter>]], true, false, true)
+				-- vim.api.nvim_feedkeys(keys, "n", false)
+				vim.cmd("silent bd!")
+			end, { buffer = true })
+			-- vim.keymap.set({ "t" }, "<c-u><c-i>", function()
+			-- 	local keys = vim.api.nvim_replace_termcodes([[<c-\><c-n>:bd!<enter>]], true, false, true)
+			-- 	vim.api.nvim_feedkeys(keys, "n", false)
+			-- end, { buffer = true, silent = true })
+			vim.keymap.set({ "t", "n" }, "<c-u><c-u>", function()
+				if vim.fn.winnr("$") > 1 then
+					vim.cmd("silent close")
+					return
+				elseif grapple.exists({ name = "prev", scope = "prev" }) then
+					grapple.select({ name = "prev", scope = "prev" })
+				end
+			end, { buffer = true })
+		end,
+	})
 end
