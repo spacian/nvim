@@ -1,33 +1,33 @@
 if not vim.g.vscode then
-	local kanagawa = require("kanagawa")
-	kanagawa.setup({
-		compile = true,
-		commentStyle = {},
-		functionStyle = {},
-		keywordStyle = { italic = false },
-		statementStyle = {},
-		typeStyle = {},
-		transparent = false,
-		dimInactive = false,
-		terminalColors = true,
-		colors = {
-			palette = {},
-			theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-		},
-		overrides = function(colors)
-			return {
-				["@variable.builtin"] = { italic = false },
-				Visual = { bg = colors.palette.winterGreen },
-				String = { italic = true },
-				Boolean = { italic = true },
-			}
-		end,
-		theme = "wave",
-		background = {
-			dark = "wave",
-			light = "lotus",
-		},
-	})
+	-- local kanagawa = require("kanagawa")
+	-- kanagawa.setup({
+	-- 	compile = true,
+	-- 	commentStyle = {},
+	-- 	functionStyle = {},
+	-- 	keywordStyle = { italic = false },
+	-- 	statementStyle = {},
+	-- 	typeStyle = {},
+	-- 	transparent = false,
+	-- 	dimInactive = false,
+	-- 	terminalColors = true,
+	-- 	colors = {
+	-- 		palette = {},
+	-- 		theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+	-- 	},
+	-- 	overrides = function(colors)
+	-- 		return {
+	-- 			["@variable.builtin"] = { italic = false },
+	-- 			Visual = { bg = colors.palette.winterGreen },
+	-- 			String = { italic = true },
+	-- 			Boolean = { italic = true },
+	-- 		}
+	-- 	end,
+	-- 	theme = "wave",
+	-- 	background = {
+	-- 		dark = "wave",
+	-- 		light = "lotus",
+	-- 	},
+	-- })
 
 	-- require("solarized-osaka").setup({
 	-- 	transparent = false,
@@ -143,42 +143,42 @@ if not vim.g.vscode then
 
 	-- require("nightfox").setup()
 
-	require("gruvbox").setup({
-		terminal_colors = true, -- add neovim terminal colors
-		undercurl = true,
-		underline = true,
-		bold = true,
-		italic = {
-			strings = true,
-			emphasis = true,
-			comments = true,
-			operators = false,
-			folds = true,
-		},
-		strikethrough = true,
-		invert_selection = false,
-		invert_signs = false,
-		invert_tabline = false,
-		invert_intend_guides = false,
-		inverse = true, -- invert background for search, diffs, statuslines and errors
-		contrast = "hard", -- can be "hard", "soft" or empty string
-		palette_overrides = {},
-		overrides = {
-			SignColumn = { bg = require("gruvbox").palette.dark0_hard },
-			ColorColumn = { bg = require("gruvbox").palette.dark0_hard },
-		},
-		dim_inactive = false,
-		transparent_mode = false,
-	})
+	-- require("gruvbox").setup({
+	-- 	terminal_colors = true, -- add neovim terminal colors
+	-- 	undercurl = true,
+	-- 	underline = true,
+	-- 	bold = true,
+	-- 	italic = {
+	-- 		strings = true,
+	-- 		emphasis = true,
+	-- 		comments = true,
+	-- 		operators = false,
+	-- 		folds = true,
+	-- 	},
+	-- 	strikethrough = true,
+	-- 	invert_selection = false,
+	-- 	invert_signs = false,
+	-- 	invert_tabline = false,
+	-- 	invert_intend_guides = false,
+	-- 	inverse = true, -- invert background for search, diffs, statuslines and errors
+	-- 	contrast = "hard", -- can be "hard", "soft" or empty string
+	-- 	palette_overrides = {},
+	-- 	overrides = {
+	-- 		SignColumn = { bg = require("gruvbox").palette.dark0_hard },
+	-- 		ColorColumn = { bg = require("gruvbox").palette.dark0_hard },
+	-- 	},
+	-- 	dim_inactive = false,
+	-- 	transparent_mode = false,
+	-- })
 
 	-- vim.cmd("colorscheme kanagawa")
 	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#43243B" }) -- kanagawa:winterRed
 	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#49443C" }) -- kanagawa:winterYellow
 
-	vim.cmd("colorscheme gruvbox")
-	vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua_hard })
-	vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red_hard })
-	vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = require("gruvbox").palette.dark1 })
+	-- vim.cmd("colorscheme gruvbox")
+	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua_hard })
+	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red_hard })
+	-- vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = require("gruvbox").palette.dark1 })
 
 	vim.diagnostic.config({
 		signs = {

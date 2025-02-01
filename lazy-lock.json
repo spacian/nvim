@@ -6,6 +6,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "99290b3ec1322070bcfb9e846450a46f6efa50f0" },
   "cmp-vimtex": { "branch": "master", "commit": "5283bf9108ef33d41e704027b9ef22437ce7a15b" },
   "cspell.nvim": { "branch": "main", "commit": "b770363c2b2b914d747f52891622455acca92bd8" },
+  "ex-colors.nvim": { "branch": "main", "commit": "1e12d59f3984b67e440c6131d82163819fe3e08b" },
   "gitsigns.nvim": { "branch": "main", "commit": "9b36d497495436c135659902054ee637e0ba6021" },
   "grapple.nvim": { "branch": "main", "commit": "b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7" },
   "gruvbox.nvim": { "branch": "main", "commit": "68c3460a5d1d1a362318960035c9f3466d5011f5" },
