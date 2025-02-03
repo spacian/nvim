@@ -180,6 +180,13 @@ if not vim.g.vscode then
 	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red_hard })
 	-- vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = require("gruvbox").palette.dark1 })
 
+	-- vim.cmd("colorscheme gruvbox")
+	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua })
+	-- vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red })
+	-- vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = require("gruvbox").palette.dark2 })
+	-- vim.api.nvim_set_hl(0, "SignColumn", { bg = require("gruvbox").palette.dark0 })
+	-- vim.api.nvim_set_hl(0, "ColorColumn", { bg = require("gruvbox").palette.dark0 })
+
 	vim.diagnostic.config({
 		severity_sort = true,
 		signs = {
