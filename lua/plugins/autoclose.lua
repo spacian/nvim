@@ -1,3 +1,3 @@
 return {
-	{ "spacian/autoclose.nvim" },
+	{ "spacian/autoclose.nvim", enabled = not vim.g.vscode },
 }

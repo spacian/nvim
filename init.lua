@@ -19,7 +19,7 @@ end
 if not vim.g.vscode then
 	vim.cmd("set colorcolumn=89")
 	vim.cmd("set signcolumn=yes:1")
-	vim.o.number = true
+	vim.o.number = false
 	vim.o.relativenumber = false
 	vim.o.cursorline = true
 	vim.o.cmdheight = 1
@@ -27,6 +27,7 @@ if not vim.g.vscode then
 	vim.o.ruler = false
 	vim.o.showmode = false
 	vim.o.jumpoptions = "stack,view"
+	vim.o.scrolloff = 3
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
 	vim.cmd("language en_US")

@@ -181,6 +181,7 @@ if not vim.g.vscode then
 	-- vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = require("gruvbox").palette.dark1 })
 
 	vim.diagnostic.config({
+		severity_sort = true,
 		signs = {
 			text = {
 				[vim.diagnostic.severity.ERROR] = "",
