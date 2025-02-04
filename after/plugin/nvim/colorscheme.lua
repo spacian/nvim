@@ -1,4 +1,20 @@
 if not vim.g.vscode then
+	require("vague").setup({
+		style = {
+			boolean = "italic",
+		},
+		plugins = {
+			lsp = {
+				diagnostic_info = "none",
+			},
+		},
+	})
+	vim.cmd("colorscheme vague")
+	vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark0 })
+	vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark0 })
+	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#606079" })
+	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#7E98E8" })
+
 	-- local kanagawa = require("kanagawa")
 	-- kanagawa.setup({
 	-- 	compile = true,
@@ -186,6 +202,8 @@ if not vim.g.vscode then
 	-- vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = require("gruvbox").palette.dark2 })
 	-- vim.api.nvim_set_hl(0, "SignColumn", { bg = require("gruvbox").palette.dark0 })
 	-- vim.api.nvim_set_hl(0, "ColorColumn", { bg = require("gruvbox").palette.dark0 })
+
+	-- vim.cmd("colorscheme ex-gruvbox-hard")
 
 	vim.diagnostic.config({
 		severity_sort = true,

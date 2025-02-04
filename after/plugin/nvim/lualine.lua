@@ -60,7 +60,7 @@ if not vim.g.vscode then
 	theme.insert.c = theme.normal.c
 	theme.visual.c = theme.normal.c
 	theme.replace.c = theme.normal.c
-	theme.command.c = theme.normal.c
+	theme.command = theme.normal
 	theme.terminal = theme.command
 	theme.inactive = theme.normal
 

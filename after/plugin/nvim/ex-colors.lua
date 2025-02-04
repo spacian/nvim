@@ -3,5 +3,4 @@ if not vim.g.vscode then
 		-- included_patterns = require("ex-colors.presets").recommended.included_patterns + { "^GitSigns%u" },
 		included_patterns = { "." },
 	})
-	vim.cmd("colorscheme ex-gruvbox")
 end
