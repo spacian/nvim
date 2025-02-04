@@ -1,3 +1,13 @@
+vim.api.nvim_create_user_command("CleanupBuffers", function()
+	if BufIsSpecial() then
+		print("cannot cleanup buffers from special buffer")
+	else
+		local view = vim.fn.winsaveview()
+		vim.cmd("%bd!|e#")
+		vim.fn.winrestview(view)
+	end
+end, {})
+
 vim.keymap.set({ "n" }, "<c-s>", ":w<enter>", { noremap = true })
 
 vim.keymap.set({ "t" }, "<c-n>", [[<c-\><c-n>]], { noremap = true })
