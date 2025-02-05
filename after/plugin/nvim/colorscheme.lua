@@ -10,10 +10,32 @@ if not vim.g.vscode then
 		},
 	})
 	vim.cmd("colorscheme vague")
-	vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark0 })
-	vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark0 })
-	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#606079" })
-	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#7E98E8" })
+	vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#3B1F29" })
+	-- vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#3B311F" })
+	vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#2E2A1F" })
+	local colors = require("vague.config.internal").current.colors
+	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = colors.comment })
+	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = colors.hint })
+	vim.api.nvim_set_hl(
+		0,
+		"DiagnosticUnderlineHint",
+		{ cterm = { underline = true }, sp = colors.comment, underline = true }
+	)
+	vim.api.nvim_set_hl(
+		0,
+		"DiagnosticUnderlineInfo",
+		{ cterm = { underline = true }, sp = colors.hint, underline = true }
+	)
+	vim.api.nvim_set_hl(
+		0,
+		"DiagnosticUnderlineWarn",
+		{ cterm = { underline = true }, sp = colors.warning, underline = true }
+	)
+	vim.api.nvim_set_hl(
+		0,
+		"DiagnosticUnderlineError",
+		{ cterm = { underline = true }, sp = colors.error, underline = true }
+	)
 
 	-- local kanagawa = require("kanagawa")
 	-- kanagawa.setup({
@@ -206,6 +228,9 @@ if not vim.g.vscode then
 	-- vim.cmd("colorscheme ex-gruvbox-hard")
 
 	vim.diagnostic.config({
+		virtual_text = {
+			severity_sort = true,
+		},
 		severity_sort = true,
 		signs = {
 			text = {
