@@ -3,6 +3,9 @@ vim.api.nvim_create_user_command("CleanupBuffers", function()
 		print("cannot cleanup buffers from special buffer")
 	else
 		local view = vim.fn.winsaveview()
+		for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+			vim.diagnostic.reset(nil, bufnr)
+		end
 		vim.cmd("%bd!|e#")
 		vim.fn.winrestview(view)
 	end
