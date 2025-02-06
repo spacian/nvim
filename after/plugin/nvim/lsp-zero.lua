@@ -64,10 +64,10 @@ if not vim.g.vscode then
 					end
 					return nil
 				end,
-				compare.recently_used,
 				compare.offset,
 				compare.exact,
 				compare.score,
+				compare.recently_used,
 				compare.kind,
 				compare.sort_text,
 				compare.length,
