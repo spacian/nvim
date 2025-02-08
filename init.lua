@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 ---@param bufname string|nil
 ---@return boolean
 BufIsSpecial = function(bufname)
@@ -41,6 +43,7 @@ vim.cmd("set timeoutlen=2250")
 vim.cmd("set nohlsearch")
 vim.cmd("set ignorecase")
 vim.cmd("set smartcase")
+vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
