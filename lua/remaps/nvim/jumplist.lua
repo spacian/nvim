@@ -123,23 +123,18 @@ M.jump_back = function()
 	end
 	local node = M.create_node(persistence_jump)
 	if nodes_equal_soft(M.cur, node) then
-		if not nodes_equal_hard(M.cur, node) then
-			M.setpos()
-			return
-		else
-			while
-				(math.min(M.cur.persistence, node.persistence) < M.cur.prev.persistence)
-				or nodes_equal_soft(M.cur, M.cur.prev)
-			do
-				M.delete(M.cur.prev)
-			end
-			M.update(M.cur.persistence)
-			if not M.cur.prev.root then
-				M.cur = M.cur.prev
-			end
-			M.setpos()
-			return
+		while
+			(math.min(M.cur.persistence, node.persistence) < M.cur.prev.persistence)
+			or nodes_equal_soft(M.cur, M.cur.prev)
+		do
+			M.delete(M.cur.prev)
 		end
+		M.update(M.cur.persistence)
+		if not M.cur.prev.root then
+			M.cur = M.cur.prev
+		end
+		M.setpos()
+		return
 	end
 	M.insert(node)
 	M.setpos()
