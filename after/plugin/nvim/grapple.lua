@@ -60,7 +60,7 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader>ot", function()
 		if not grapple.exists({ name = "term", scope = "term" }) then
 			if vim.loop.os_uname().sysname == "Windows_NT" then
-				vim.cmd("term powershell")
+				vim.cmd("term pwsh")
 				vim.fn.feedkeys("a")
 				vim.fn.feedkeys("cls" .. vim.api.nvim_replace_termcodes("<enter>", true, true, true))
 			else

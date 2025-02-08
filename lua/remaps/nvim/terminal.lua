@@ -14,7 +14,7 @@ vim.api.nvim_create_user_command("Tw", function()
 		return
 	end
 	if vim.loop.os_uname().sysname == "Windows_NT" then
-		vim.cmd("term powershell")
+		vim.cmd("term pwsh")
 		vim.fn.feedkeys("a")
 		vim.fn.feedkeys("cls" .. vim.api.nvim_replace_termcodes("<enter>", true, true, true))
 	else
@@ -31,7 +31,7 @@ vim.api.nvim_create_user_command("Tf", function()
 	local path = vim.fn.expand("%:p:h")
 	local enter = vim.api.nvim_replace_termcodes("<enter>", true, true, true)
 	if vim.loop.os_uname().sysname == "Windows_NT" then
-		vim.cmd("term powershell")
+		vim.cmd("term pwsh")
 		vim.fn.feedkeys("a")
 		vim.fn.feedkeys("cd " .. path:gsub("\\", "/") .. enter)
 		vim.fn.feedkeys("cls" .. enter)
@@ -49,7 +49,7 @@ vim.api.nvim_create_user_command("Te", function()
 		return
 	end
 	if vim.loop.os_uname().sysname == "Windows_NT" then
-		vim.cmd("term powershell")
+		vim.cmd("term pwsh")
 		vim.fn.feedkeys("a")
 		vim.fn.feedkeys(vim.api.nvim_replace_termcodes(".venv/Scripts/activate<enter>cls<enter>", true, true, true))
 	else
@@ -65,7 +65,7 @@ if vim.loop.os_uname().sysname == "Windows_NT" then
 		if not buffer_name == "" and BufIsSpecial() then
 			return
 		end
-		vim.cmd("term powershell")
+		vim.cmd("term pwsh")
 		vim.fn.feedkeys("a")
 	end, {})
 end
