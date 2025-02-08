@@ -86,6 +86,7 @@ if not vim.g.vscode then
 	vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#89b4fa", bold = true }) -- Matched text
 	vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#89b4fa", italic = true }) -- Fuzzy match
 	vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#7f849c", strikethrough = true }) -- Deprecated
+	vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#a0a0a0", bg = "NONE" })
 
 	-- local kanagawa = require("kanagawa")
 	-- kanagawa.setup({
