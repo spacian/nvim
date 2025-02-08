@@ -17,8 +17,6 @@ require("remaps")
 require("config.lazy")
 if not vim.g.vscode then
 	require("autocmd")
-end
-if not vim.g.vscode then
 	vim.cmd("set colorcolumn=89")
 	vim.cmd("set signcolumn=yes:1")
 	vim.o.number = false

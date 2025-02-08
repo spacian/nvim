@@ -1,4 +1,5 @@
 if not vim.g.vscode then
+	local jumplist = require("remaps.nvim.jumplist")
 	local grapple = require("grapple")
 	grapple.setup({
 		scope = "prev",
@@ -22,7 +23,7 @@ if not vim.g.vscode then
 			},
 		},
 	})
-	grapple.setup({ icons = true, scope = "cwd" })
+	grapple.setup({ scope = "git" })
 	vim.api.nvim_create_user_command("GrappleTags", function()
 		require("grapple").open_tags()
 	end, {})
@@ -51,6 +52,7 @@ if not vim.g.vscode then
 		vim.keymap.set("n", "<leader>o" .. tags[i], function()
 			if grapple.exists({ name = tags[i] }) then
 				vim.cmd("silent noa w")
+				jumplist.register(1)
 				vim.cmd("silent Grapple select name=" .. tags[i])
 			else
 				print("there is no buffer tagged '" .. tags[i] .. "'")
