@@ -1,5 +1,5 @@
 if not vim.g.vscode then
-	vim.g.lazygit_floating_window_scaling_factor = 0.95
+	vim.g.lazygit_floating_window_scaling_factor = 1.0
 	vim.keymap.set({ "n" }, "<leader>gr", function()
 		require("telescope").extensions.lazygit.lazygit()
 	end, { noremap = true })
@@ -19,5 +19,5 @@ if not vim.g.vscode then
 			end
 		end,
 	})
-	vim.g.lazygit_floating_window_use_plenary = 1
+	vim.g.lazygit_floating_window_use_plenary = 0
 end
