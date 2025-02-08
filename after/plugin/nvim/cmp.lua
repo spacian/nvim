@@ -1,20 +1,23 @@
 if not vim.g.vscode then
-	local lsp_zero = require("lsp-zero")
-	lsp_zero.on_attach(function(_, bufnr)
-		lsp_zero.default_keymaps({ buffer = bufnr })
-	end)
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
-	local cmp_format = require("lsp-zero").cmp_format({ details = true })
+
 	local starts_with_underscore = function(label, n)
 		return label:sub(1, n) == string.sub("__", 1, n)
 	end
+
 	local ends_on_equals = function(label)
 		return string.match(label, "=$") == "="
 	end
+
 	cmp.setup({
 		preselect = cmp.PreselectMode.Item,
-		formatting = cmp_format,
+		formatting = {
+			format = function(entry, vim_item)
+				-- Customize formatting if needed
+				return vim_item
+			end,
+		},
 		mapping = {
 			["<c-l>"] = cmp.mapping(function()
 				if cmp.visible() then
@@ -22,11 +25,16 @@ if not vim.g.vscode then
 				else
 					cmp.complete()
 				end
-			end),
+			end, { "i", "s" }),
 			["<c-h>"] = cmp.mapping.abort(),
 			["<c-k>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
 			["<c-j>"] = cmp.mapping.select_next_item({ behavior = "select" }),
 		},
+		sources = cmp.config.sources({
+			{ name = "nvim_lsp" },
+			{ name = "buffer" },
+			{ name = "path" },
+		}),
 		completion = {
 			completeopt = "menu,menuone,noinsert",
 		},
