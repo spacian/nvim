@@ -16,7 +16,7 @@ if not vim.g.vscode then
 		},
 	})
 
-	vim.keymap.set("n", "<leader>oe", function()
+	vim.keymap.set("n", "<leader>oE", function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 		if bufname == "" then
 			jumplist.register(1)
