@@ -21,7 +21,7 @@ if not vim.g.vscode then
 			watch = false,
 			layout = { fullscreen = false, layout = { position = "right" } },
 			hidden = true,
-			exclude = { "^.git[/\\]", ".*__pycache__[/\\].*" },
+			auto_close = true,
 		})
 	end)
 	vim.keymap.set("n", "<leader>ob", function()
