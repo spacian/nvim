@@ -13,7 +13,6 @@ if not vim.g.vscode then
 			"yaml-language-server",
 		},
 	})
-	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 	local lspconfig = require("lspconfig")
 	local null_ls = require("null-ls")
 	local cspell_last_session = ""
@@ -55,11 +54,6 @@ if not vim.g.vscode then
 		},
 	})
 	require("mason-lspconfig").setup_handlers({
-		function(server_name)
-			lspconfig[server_name].setup({
-				capabilities = capabilities,
-			})
-		end,
 		basedpyright = function()
 			lspconfig.basedpyright.setup({
 				on_init = function(client, _)
