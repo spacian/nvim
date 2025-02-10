@@ -1,11 +1,6 @@
 if not vim.g.vscode then
 	local jumplist = require("remaps.nvim.jumplist")
 	local snacks = require("snacks")
-	snacks.setup({
-		picker = {
-			layout = { fullscreen = true },
-		},
-	})
 	vim.keymap.set("n", "<leader>of", function()
 		jumplist.register(1)
 		snacks.picker.smart({

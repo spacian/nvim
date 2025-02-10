@@ -1,5 +1,3 @@
-vim.loader.enable()
-
 ---@param bufname string|nil
 ---@return boolean
 BufIsSpecial = function(bufname)

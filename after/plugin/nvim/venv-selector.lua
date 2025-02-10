@@ -1,6 +1,5 @@
 if not vim.g.vscode then
 	local venv = require("venv-selector")
-	venv.setup({ settings = { options = {} } })
 
 	local function exists(file)
 		local ok, err, code = os.rename(file, file)
@@ -43,6 +42,9 @@ if not vim.g.vscode then
 	local last_cwd = ""
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		callback = function()
+			if BufIsSpecial() then
+				return
+			end
 			local cwd = vim.fn.getcwd():gsub("\\", "/"):lower()
 			if last_cwd ~= cwd then
 				last_cwd = cwd

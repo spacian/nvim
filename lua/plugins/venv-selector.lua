@@ -7,6 +7,7 @@ return {
 			"mfussenegger/nvim-dap",
 			"mfussenegger/nvim-dap-python",
 		},
+		opts = {},
 		lazy = false,
 		branch = "regexp",
 		enabled = not vim.g.vscode,

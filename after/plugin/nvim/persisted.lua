@@ -1,11 +1,6 @@
 if not vim.g.vscode then
 	local persisted = require("persisted")
 	local grapple = require("grapple")
-	persisted.setup({
-		autosave = false,
-		silent = true,
-		ignored_dirs = { "oil://", "replacer://" },
-	})
 	vim.keymap.set({ "n" }, "<leader>oP", function()
 		local buffer_name = vim.api.nvim_buf_get_name(0)
 		if not buffer_name == "" and BufIsSpecial() then
