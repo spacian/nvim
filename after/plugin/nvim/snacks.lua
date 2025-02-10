@@ -4,16 +4,17 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader>of", function()
 		jumplist.register(1)
 		snacks.picker.smart({
-			multie = { "files" },
+			multi = { "recent", "files" },
+			watch = true,
 			hidden = true,
-			exclude = { "^.git[/\\]", ".*__pycache__[/\\].*" },
+			filter = { cwd = true },
 		})
 	end)
 
 	vim.keymap.set("n", "<leader>oe", function()
 		jumplist.register(1)
 		snacks.picker.explorer({
-			watch = false,
+			watch = true,
 			layout = { fullscreen = false, layout = { position = "right" } },
 			hidden = true,
 			auto_close = true,
