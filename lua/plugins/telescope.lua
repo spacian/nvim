@@ -10,9 +10,7 @@ return {
 				},
 			},
 			defaults = {
-				sorting_strategy = "ascending",
 				layout_config = {
-					prompt_position = "top",
 					horizontal = {
 						preview_cutoff = 0,
 						height = { padding = 0 },

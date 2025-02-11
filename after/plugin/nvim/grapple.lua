@@ -27,17 +27,7 @@ if not vim.g.vscode then
 	vim.api.nvim_create_user_command("GrappleTags", function()
 		require("grapple").open_tags()
 	end, {})
-	vim.keymap.set("n", "<leader>oh", function()
-		if grapple.exists({ name = "prev", scope = "prev" }) then
-			if not BufIsSpecial() then
-				vim.cmd("silent noa w")
-			end
-			vim.cmd("silent Grapple select name=prev scope=prev")
-		else
-			print("there is no buffer tagged 'prev'")
-		end
-	end)
-	vim.keymap.set("t", "<c-h>", function()
+	vim.keymap.set("n", "<leader>mh", function()
 		if grapple.exists({ name = "prev", scope = "prev" }) then
 			if not BufIsSpecial() then
 				vim.cmd("silent noa w")
@@ -49,7 +39,7 @@ if not vim.g.vscode then
 	end)
 	local tags = { "j", "k", "l" }
 	for i = 1, #tags do
-		vim.keymap.set("n", "<leader>o" .. tags[i], function()
+		vim.keymap.set("n", "<leader>m" .. tags[i], function()
 			if grapple.exists({ name = tags[i] }) then
 				vim.cmd("silent noa w")
 				jumplist.register(1)
@@ -146,14 +136,8 @@ if not vim.g.vscode then
 			vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
 			vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
 			vim.keymap.set({ "n", "t" }, "<c-u><c-i>", function()
-				-- local keys = vim.api.nvim_replace_termcodes([[<c-\><c-n>:bd!<enter>]], true, false, true)
-				-- vim.api.nvim_feedkeys(keys, "n", false)
 				vim.cmd("silent bd!")
 			end, { buffer = true })
-			-- vim.keymap.set({ "t" }, "<c-u><c-i>", function()
-			-- 	local keys = vim.api.nvim_replace_termcodes([[<c-\><c-n>:bd!<enter>]], true, false, true)
-			-- 	vim.api.nvim_feedkeys(keys, "n", false)
-			-- end, { buffer = true, silent = true })
 			vim.keymap.set({ "t", "n" }, "<c-u><c-u>", function()
 				if vim.fn.winnr("$") > 1 then
 					vim.cmd("silent close")

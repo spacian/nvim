@@ -11,7 +11,7 @@ if not vim.g.vscode then
 		})
 	end)
 
-	vim.keymap.set("n", "<leader>oe", function()
+	vim.keymap.set("n", "<leader>oE", function()
 		jumplist.register(1)
 		snacks.explorer({
 			watch = false,

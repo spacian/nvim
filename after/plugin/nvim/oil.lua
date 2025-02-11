@@ -2,7 +2,7 @@ if not vim.g.vscode then
 	local jumplist = require("remaps.nvim.jumplist")
 	local oil = require("oil")
 
-	vim.keymap.set("n", "<leader>oE", function()
+	vim.keymap.set("n", "<leader>oe", function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 		if bufname == "" then
 			jumplist.register(1)
