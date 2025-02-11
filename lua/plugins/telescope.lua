@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.x",
+		branch = "0.1.x",
 		opts = {
 			pickers = {
 				find_files = {
@@ -10,7 +10,9 @@ return {
 				},
 			},
 			defaults = {
+				sorting_strategy = "ascending",
 				layout_config = {
+					prompt_position = "top",
 					horizontal = {
 						preview_cutoff = 0,
 						height = { padding = 0 },

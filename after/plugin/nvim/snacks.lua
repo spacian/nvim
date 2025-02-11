@@ -13,9 +13,19 @@ if not vim.g.vscode then
 
 	vim.keymap.set("n", "<leader>oe", function()
 		jumplist.register(1)
-		snacks.picker.explorer({
-			watch = true,
-			layout = { fullscreen = false, layout = { position = "right" } },
+		snacks.explorer({
+			watch = false,
+			diagnostics = false,
+			git_status = false,
+			layout = {
+				-- fullscreen = true,
+				preset = "vertical",
+				-- preset = "ivy",
+				-- preset = "vscode",
+				-- preset = "select",
+				-- preset = "sidebar",
+				cycle = false,
+			},
 			hidden = true,
 			auto_close = true,
 		})
