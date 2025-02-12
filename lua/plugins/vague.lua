@@ -3,6 +3,7 @@ return {
 		"vague2k/vague.nvim",
 		enabled = not vim.g.vscode,
 		priority = 1000,
+		lazy = false,
 		config = function()
 			require("vague").setup({
 				style = {

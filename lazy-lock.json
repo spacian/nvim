@@ -40,6 +40,7 @@
   "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "rose-pine": { "branch": "main", "commit": "20c7940da844aa4f162a64e552ae3c7e9fdc3b93" },
   "snacks.nvim": { "branch": "main", "commit": "6e0962a82e46a5b07445a1f43ece798b71dfccdc" },
+  "shadow.nvim": { "branch": "main", "commit": "6ec2d2d4c103b2e72256fd26390752216ab7774d" },
   "solarized-osaka.nvim": { "branch": "main", "commit": "d775b4bbb02790068fa3034ab4734fc7c09728ff" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "626998e5c1b71c130d8bc6cf7abb6709b98287bb" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
