@@ -1,6 +1,7 @@
 if not vim.g.vscode then
 	local jumplist = require("remaps.nvim.jumplist")
 	local snacks = require("snacks")
+
 	vim.keymap.set("n", "<leader>of", function()
 		jumplist.register(1)
 		snacks.picker.smart({
@@ -11,65 +12,56 @@ if not vim.g.vscode then
 		})
 	end)
 
-	vim.keymap.set("n", "<leader>oE", function()
-		jumplist.register(1)
-		snacks.explorer({
-			watch = false,
-			diagnostics = false,
-			git_status = false,
-			layout = {
-				-- fullscreen = true,
-				preset = "vertical",
-				-- preset = "ivy",
-				-- preset = "vscode",
-				-- preset = "select",
-				-- preset = "sidebar",
-				cycle = false,
-			},
-			hidden = true,
-			auto_close = true,
-		})
-	end)
 	vim.keymap.set("n", "<leader>ob", function()
 		jumplist.register(1)
 		snacks.picker.buffers()
 	end)
+
 	vim.keymap.set("n", "<leader>ff", function()
 		jumplist.register(1)
 		snacks.picker.grep()
 	end)
+
 	vim.keymap.set("n", "<leader>fw", function()
 		jumplist.register(1)
 		snacks.picker.grep_word()
 	end)
+
 	vim.keymap.set("n", "gr", function()
 		jumplist.register(1)
 		snacks.picker.lsp_references()
 	end)
+
 	vim.keymap.set("n", "gd", function()
 		jumplist.register(1)
 		snacks.picker.lsp_definitions()
 	end)
+
 	vim.keymap.set("n", "gD", function()
 		jumplist.register(1)
 		snacks.picker.lsp_type_definitions()
 	end)
+
 	vim.keymap.set("n", "<leader>oR", function()
 		jumplist.register(1)
 		snacks.picker.recent()
 	end)
+
 	vim.keymap.set("n", "<leader>or", function()
 		jumplist.register(1)
 		snacks.picker.resume()
 	end)
+
 	vim.keymap.set("n", "<leader>oq", function()
 		jumplist.register(1)
 		snacks.picker.qflist()
 	end)
+
 	vim.keymap.set("n", "<leader>od", function()
 		jumplist.register(1)
 		snacks.picker.diagnostics()
 	end)
+
 	vim.keymap.set("n", "<leader>og", function()
 		jumplist.register(1)
 		snacks.picker.git_diff()
