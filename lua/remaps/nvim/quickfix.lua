@@ -1,7 +1,13 @@
+vim.api.nvim_create_user_command("DiagnosticReset", function()
+	vim.diagnostic.reset()
+	vim.cmd("LspRestart")
+end, {})
+
 vim.keymap.set("n", "<leader>qq", function()
-	vim.diagnostic.setqflist({})
+	vim.cmd("silent cexpr []")
 	vim.diagnostic.setqflist({ open = true })
 end)
+
 vim.keymap.set("n", "<leader>qfd", function()
 	local qf = vim.fn.getqflist()
 	local filtered = {}
@@ -13,6 +19,7 @@ vim.keymap.set("n", "<leader>qfd", function()
 	end
 	vim.fn.setqflist(filtered)
 end)
+
 vim.keymap.set("n", "<leader>qft", function()
 	local qf = vim.fn.getqflist()
 	local filtered = {}
@@ -24,6 +31,7 @@ vim.keymap.set("n", "<leader>qft", function()
 	end
 	vim.fn.setqflist(filtered)
 end)
+
 vim.keymap.set("n", "<leader>qff", function()
 	local qf = vim.fn.getqflist()
 	local filtered = {}
