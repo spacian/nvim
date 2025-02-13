@@ -28,12 +28,9 @@ if not vim.g.vscode then
 		callback = function(_)
 			require("remaps.nvim.jumplist").reset()
 			vim.cmd("clearjumps")
-			if grapple.exists({ name = "prev", scope = "prev" }) then
-				grapple.untag({ name = "prev", scope = "prev" })
-			end
-			if grapple.exists({ name = "term", scope = "term" }) then
-				grapple.untag({ name = "term", scope = "term" })
-			end
+			grapple.reset({ scope = "prev" })
+			grapple.reset({ scope = "term" })
+			vim.cmd("echo ''")
 		end,
 	})
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
