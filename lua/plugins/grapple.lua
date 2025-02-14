@@ -5,6 +5,7 @@ return {
 		config = function()
 			local jumplist = require("remaps.nvim.jumplist")
 			local grapple = require("grapple")
+
 			grapple.setup({
 				scope = "prev",
 				scopes = {
@@ -16,21 +17,12 @@ return {
 					},
 				},
 			})
-			grapple.setup({
-				scope = "term",
-				scopes = {
-					{
-						name = "term",
-						resolver = function()
-							return "term", nil
-						end,
-					},
-				},
-			})
 			grapple.setup({ scope = "git" })
+
 			vim.api.nvim_create_user_command("GrappleTags", function()
 				require("grapple").open_tags()
 			end, {})
+
 			vim.keymap.set("n", "<leader>mh", function()
 				if grapple.exists({ name = "prev", scope = "prev" }) then
 					if not BufIsSpecial() then
@@ -41,6 +33,7 @@ return {
 					print("there is no buffer tagged 'prev'")
 				end
 			end)
+
 			local tags = { "j", "k", "l" }
 			for i = 1, #tags do
 				vim.keymap.set("n", "<leader>m" .. tags[i], function()
@@ -53,8 +46,9 @@ return {
 					end
 				end)
 			end
+
 			vim.keymap.set("n", "<leader>ot", function()
-				if not grapple.exists({ name = "term", scope = "term" }) then
+				if not grapple.exists({ name = "term" }) then
 					if vim.loop.os_uname().sysname == "Windows_NT" then
 						vim.cmd("term pwsh")
 						vim.fn.feedkeys("a")
@@ -64,27 +58,14 @@ return {
 						vim.fn.feedkeys("a")
 					end
 				else
-					vim.cmd("silent Grapple select name=term scope=term")
+					vim.cmd("silent Grapple select name=term")
 					vim.fn.feedkeys("a")
 				end
 			end)
+
 			vim.keymap.set("n", "<leader>tj", ":Grapple tag name=j<enter>")
 			vim.keymap.set("n", "<leader>tk", ":Grapple tag name=k<enter>")
 			vim.keymap.set("n", "<leader>tl", ":Grapple tag name=l<enter>")
-
-			vim.api.nvim_create_autocmd("TermOpen", {
-				callback = function()
-					vim.cmd("silent Grapple tag scope=term name=term")
-				end,
-			})
-
-			vim.api.nvim_create_autocmd("TermClose", {
-				callback = function()
-					if grapple.exists({ name = "term", scope = "term" }) then
-						vim.cmd("silent Grapple untag scope=term name=term")
-					end
-				end,
-			})
 
 			local last_bufname = ""
 			vim.api.nvim_create_autocmd({ "BufEnter" }, {
@@ -101,6 +82,7 @@ return {
 					end)
 				end,
 			})
+
 			vim.keymap.set({ "" }, "<c-q>", function()
 				if vim.fn.winnr("$") > 1 then
 					vim.cmd("silent close")
@@ -122,6 +104,7 @@ return {
 					return
 				end
 			end, { noremap = true })
+
 			vim.keymap.set({ "t" }, "<c-q>", function()
 				if vim.fn.winnr("$") > 1 then
 					vim.cmd("silent close")
@@ -134,9 +117,15 @@ return {
 					return
 				end
 			end, { noremap = true })
+
 			vim.api.nvim_create_autocmd("TermOpen", {
 				pattern = "*",
 				callback = function()
+					if vim.api.nvim_buf_get_name(0):match(":lazygit$") == ":lazygit" then
+						print("open lazy")
+						return
+					end
+					vim.cmd("silent Grapple tag name=term")
 					vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
 					vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
 					vim.keymap.set({ "n", "t" }, "<c-u><c-i>", function()
@@ -150,6 +139,17 @@ return {
 							grapple.select({ name = "prev", scope = "prev" })
 						end
 					end, { buffer = true })
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("TermClose", {
+				callback = function()
+					if vim.api.nvim_buf_get_name(0):match(":lazygit$") == ":lazygit" then
+						return
+					end
+					if grapple.exists({ name = "term" }) then
+						vim.cmd("silent Grapple untag name=term")
+					end
 				end,
 			})
 		end,

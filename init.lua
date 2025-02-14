@@ -28,6 +28,7 @@ if not vim.g.vscode then
 	vim.o.showmode = false
 	vim.o.jumpoptions = "stack,view"
 	vim.o.scrolloff = 3
+	vim.opt.sessionoptions:remove("terminal")
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
 	vim.cmd("language en_US")
