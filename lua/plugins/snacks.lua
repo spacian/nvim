@@ -7,7 +7,10 @@ return {
 			local snacks = require("snacks")
 			snacks.setup({
 				picker = {
-					layout = { fullscreen = true },
+					layout = {
+						fullscreen = true,
+						cycle = false,
+					},
 				},
 			})
 
@@ -74,6 +77,11 @@ return {
 			vim.keymap.set("n", "<leader>og", function()
 				jumplist.register(1)
 				snacks.picker.git_diff()
+			end)
+
+			vim.keymap.set("n", "<leader>os", function()
+				jumplist.register(1)
+				snacks.picker.lsp_symbols()
 			end)
 		end,
 	},
