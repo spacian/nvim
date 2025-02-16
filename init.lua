@@ -19,6 +19,7 @@ if not vim.g.vscode then
 	require("autocmd")
 	vim.cmd("set colorcolumn=89")
 	vim.cmd("set signcolumn=yes:1")
+	vim.cmd("set nowrap")
 	vim.o.number = false
 	vim.o.relativenumber = false
 	vim.o.cursorline = true

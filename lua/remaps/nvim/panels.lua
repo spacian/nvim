@@ -11,6 +11,11 @@ vim.api.nvim_create_user_command("CleanupBuffers", function()
 	end
 end, {})
 
+vim.keymap.set({ "", "l", "t" }, "<a-u>", "<c-w>-", { noremap = true })
+vim.keymap.set({ "", "l", "t" }, "<a-m>", "<c-w>+", { noremap = true })
+vim.keymap.set({ "", "l", "t" }, "<a->>", "<c-w>>", { noremap = true })
+vim.keymap.set({ "", "l", "t" }, "<a-<>", "<c-w><", { noremap = true })
+
 vim.keymap.set({ "n" }, "<c-s>", ":w<enter>", { noremap = true })
 
 vim.keymap.set({ "t" }, "<c-n>", [[<c-\><c-n>]], { noremap = true })

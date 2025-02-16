@@ -1,4 +1,9 @@
 if not vim.g.vscode then
+	-- this is what fixes the weird hover bug in python
+	-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+	-- vim.lsp.handlers["textDocument/signatureHelp"] =
+	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+
 	local lsp_zero = require("lsp-zero")
 	lsp_zero.on_attach(function(_, bufnr)
 		lsp_zero.default_keymaps({ buffer = bufnr })
