@@ -6,8 +6,7 @@ if not vim.g.vscode then
 		callback = function(_)
 			require("remaps.nvim.jumplist").reset()
 			vim.cmd("clearjumps")
-			grapple.reset({ scope = "prev" })
-			vim.cmd("echo ''")
+			vim.cmd("silent Grapple reset scope=prev")
 		end,
 	})
 end

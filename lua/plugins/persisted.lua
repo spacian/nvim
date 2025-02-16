@@ -29,11 +29,13 @@ return {
 				pattern = "PersistedTelescopeLoadPre",
 				callback = function(_)
 					persisted.save({ session = vim.g.persisted_loaded_session })
-					for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-						if not vim.bo[bufnr] == "terminal" then
-							vim.cmd("silent bd " .. bufnr)
+					local bufs = {}
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						if vim.bo[buf].buftype == "" then
+							bufs[#bufs + 1] = buf
 						end
 					end
+					vim.cmd("silent bd! " .. table.concat(bufs, " "))
 				end,
 			})
 			vim.api.nvim_create_autocmd({ "BufEnter" }, {
