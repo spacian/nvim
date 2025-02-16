@@ -1,8 +1,8 @@
 return {
 	{
 		"olimorris/persisted.nvim",
-		lazy = false,
 		enabled = not vim.g.vscode,
+		lazy = false,
 		config = function()
 			local persisted = require("persisted")
 			persisted.setup({

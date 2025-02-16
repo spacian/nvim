@@ -1,5 +1,6 @@
 return {
 	"ggandor/leap.nvim",
+	enabled = true,
 	lazy = false,
 	config = function()
 		require("leap").opts.equivalence_classes = {

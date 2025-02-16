@@ -1,6 +1,7 @@
 return {
 	{
 		"chrisgrieser/nvim-spider",
+        enabled = true,
 		config = function()
 			require("spider").setup({ skipInsignificantPunctuation = true, subwordMovement = false })
 			vim.keymap.set({ "n", "v" }, "w", "<cmd>lua require('spider').motion('w')<enter>")

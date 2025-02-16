@@ -1,6 +1,7 @@
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
+		enabled = not vim.g.vscode,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
@@ -9,7 +10,6 @@ return {
 		},
 		lazy = false,
 		branch = "regexp",
-		enabled = not vim.g.vscode,
 		config = function()
 			local venv = require("venv-selector")
 			venv.setup()

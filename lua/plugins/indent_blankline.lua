@@ -1,6 +1,7 @@
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		enabled = not vim.g.vscode,
 		main = "ibl",
 		opts = {
 			indent = {
@@ -12,6 +13,5 @@ return {
 				show_start = false,
 			},
 		},
-		enabled = not vim.g.vscode,
 	},
 }

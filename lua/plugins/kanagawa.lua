@@ -1,9 +1,9 @@
 return {
 	{
 		"rebelot/kanagawa.nvim",
+		enabled = not vim.g.vscode,
 		priority = 1000,
 		lazy = true,
-		enabled = not vim.g.vscode,
 		config = function()
 			local kanagawa = require("kanagawa")
 			kanagawa.setup({

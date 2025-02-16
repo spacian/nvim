@@ -1,8 +1,8 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		enabled = not vim.g.vscode,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local indicator_symbol = "●"
 			local function diagnostic(level)

@@ -1,6 +1,7 @@
 return {
 	{
 		"rjshkhr/shadow.nvim",
+		enabled = not vim.g.vscode,
 		priority = 1000,
 		lazy = true,
 		config = function()
@@ -37,6 +38,5 @@ return {
 			vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2F2F2F" })
 			vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#2F2F2F" })
 		end,
-		enabled = not vim.g.vscode,
 	},
 }

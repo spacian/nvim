@@ -1,6 +1,7 @@
 return {
 	{
 		"spacian/autoclose.nvim",
+		enabled = not vim.g.vscode,
 		opts = {
 			keys = {
 				["`"] = { escape = false, close = false, pair = "``" },
@@ -17,6 +18,5 @@ return {
 			},
 			auto_indent = false,
 		},
-		enabled = not vim.g.vscode,
 	},
 }

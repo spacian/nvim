@@ -1,6 +1,7 @@
 return {
 	{
 		"lewis6991/gitsigns.nvim",
+		enabled = not vim.g.vscode,
 		opts = {
 			sign_priority = 0,
 			signs = {
@@ -63,6 +64,5 @@ return {
 				map({ "o", "x" }, "ag", ":<C-U>Gitsigns select_hunk<CR>")
 			end,
 		},
-		enabled = not vim.g.vscode,
 	},
 }

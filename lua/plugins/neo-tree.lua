@@ -1,13 +1,13 @@
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
+		enabled = not vim.g.vscode,
 		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-		enabled = not vim.g.vscode,
 		config = function()
 			require("neo-tree").setup({
 				position = "current",

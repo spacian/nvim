@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
+		enabled = not vim.g.vscode,
 		branch = "0.1.x",
 		opts = {
 			pickers = {
@@ -43,6 +44,5 @@ return {
 			},
 		},
 		dependencies = { "nvim-lua/plenary.nvim" },
-		enabled = not vim.g.vscode,
 	},
 }
