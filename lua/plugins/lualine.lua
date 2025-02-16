@@ -48,7 +48,10 @@ return {
 						{ info_ind, color = { fg = "#229922" } },
 						{ note_ind, color = { fg = "#005599" } },
 					},
-					lualine_x = { { "filename", path = 4, file_status = false } },
+					lualine_x = {
+						{ "filename", path = 4, file_status = false },
+						{ "location" },
+					},
 					lualine_y = {},
 					lualine_z = {},
 				},
