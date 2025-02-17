@@ -1,6 +1,5 @@
 if not vim.g.vscode then
 	local jumplist = require("remaps.nvim.jumplist")
-	require("telescope").setup()
 	require("telescope").load_extension("lazygit")
 	require("telescope").load_extension("persisted")
 	require("telescope").load_extension("file_browser")
