@@ -122,7 +122,6 @@ return {
 				pattern = "*",
 				callback = function()
 					if vim.api.nvim_buf_get_name(0):match(":lazygit$") == ":lazygit" then
-						print("open lazy")
 						return
 					end
 					vim.cmd("silent Grapple tag name=term")
