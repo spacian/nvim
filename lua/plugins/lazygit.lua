@@ -12,7 +12,7 @@ return {
 				vim.cmd("LazyGit")
 			end)
 			vim.keymap.set({ "n" }, "<leader>gl", function()
-				vim.cmd("LazyGitFilter")
+				vim.cmd("LazyGitLog")
 			end)
 			vim.keymap.set({ "n" }, "<leader>gf", function()
 				vim.cmd("LazyGitFilterCurrentFile")

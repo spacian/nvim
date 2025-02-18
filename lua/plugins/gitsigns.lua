@@ -56,7 +56,6 @@ return {
 				end)
 
 				-- Actions
-				map("n", "<leader>gd", gitsigns.diffthis)
 				map("n", "<leader>gt", gitsigns.toggle_deleted)
 
 				-- Text object
