@@ -7,16 +7,21 @@ return {
 			local oil = require("oil")
 			oil.setup({
 				keymaps = {
-					["<enter>"] = "actions.select",
-					["<c-p>"] = "actions.preview",
-					["-"] = "actions.parent",
-					["<leader>r"] = "actions.refresh",
+					["<enter>"] = { "actions.select", mode = "n" },
+					["<c-p>"] = { "actions.preview", mode = "n" },
+					["<c-h>"] = { "actions.toggle_hidden", mode = "n" },
+					["-"] = { "actions.parent", mode = "n" },
+					["<leader>r"] = { "actions.refresh", mode = "n" },
 					["<esc>"] = { "actions.close", mode = "n" },
 					["q"] = { "actions.close", mode = "n" },
 				},
 				use_default_keymaps = false,
 				view_options = {
-					show_hidden = true,
+					show_hidden = false,
+					is_hidden_file = function(name, bufnr)
+						local m = name:match("^%.") or name:match("__pycache__")
+						return m ~= nil and name ~= ".." and name ~= ".gitignore"
+					end,
 				},
 			})
 
