@@ -1,6 +1,6 @@
 return {
 	{
-		"spacian/lazygit.nvim",
+		"kdheepak/lazygit.nvim",
 		enabled = not vim.g.vscode,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()

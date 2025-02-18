@@ -21,7 +21,7 @@ return {
 			"uúûüűū",
 			"zẓ",
 		}
-		vim.keymap.set({ "n" }, "s", "<Plug>(leap-forward)")
-		vim.keymap.set({ "n" }, "S", "<Plug>(leap-backward)")
+		vim.keymap.set({ "n" }, "S", "<Plug>(leap-forward)")
+		vim.keymap.set({ "n" }, "X", "<Plug>(leap-backward)")
 	end,
 }
