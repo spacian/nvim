@@ -4,21 +4,27 @@ return {
 		enabled = not vim.g.vscode,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
+			local function parent(path)
+				return path:match("^.+[/\\](.-)[/\\]?$")
+			end
+			local indicator_symbol = "●"
 			local function telescope_smart_path()
 				if BufIsSpecial() then
-					return ""
+					return parent(vim.fn.getcwd())
 				end
 				local filepath = vim.fn.expand("%:p")
 				local home = vim.fn.getcwd():lower():gsub("\\", "/")
 				if filepath:sub(1, #home):lower():gsub("\\", "/") == home then
 					filepath = "~" .. filepath:sub(#home + 1):gsub("\\", "/")
 				end
+				local max_length = 32
+				if #filepath > max_length then
+					local rep = "..."
+					filepath = rep .. filepath:sub(#filepath - max_length + #rep, #filepath)
+					filepath = filepath:gsub(rep:gsub("%.", "%.") .. ".-/", rep .. "/", 1)
+				end
 				return filepath
 			end
-			local function parent()
-				return vim.fn.getcwd():match("^.+[/\\](.+)$")
-			end
-			local indicator_symbol = "●"
 			local function diagnostic(level)
 				if (vim.diagnostic.count(0)[level] or 0) > 0 then
 					return indicator_symbol
@@ -61,7 +67,6 @@ return {
 						{ warn_ind, color = { fg = "#FFAA00" } },
 						{ info_ind, color = { fg = "#229922" } },
 						{ note_ind, color = { fg = "#005599" } },
-						{ parent },
 					},
 					lualine_x = {
 						{ telescope_smart_path },
