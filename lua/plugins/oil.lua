@@ -34,7 +34,10 @@ return {
 					return
 				end
 				jumplist.register(1)
-				vim.cmd("silent Oil %:h")
+				local file = vim.fn.expand("%:t")
+				oil.open(vim.fn.expand("%:h"), {}, function()
+					vim.cmd("silent! call search('\\V' . escape('" .. file .. "', '\\') , 'w')")
+				end)
 			end, { noremap = true })
 
 			vim.api.nvim_create_user_command("Cd", function()
