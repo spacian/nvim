@@ -10,6 +10,9 @@ return {
 					layout = {
 						fullscreen = true,
 						cycle = false,
+						preset = function()
+							return "default"
+						end,
 					},
 				},
 			})
