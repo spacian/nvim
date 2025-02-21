@@ -17,12 +17,21 @@ require("remaps")
 require("config.lazy")
 if not vim.g.vscode then
 	require("autocmd")
-	vim.cmd("set colorcolumn=89")
-	vim.cmd("set signcolumn=yes:1")
-	vim.cmd("set nowrap")
-	vim.o.number = false
-	vim.o.relativenumber = false
+	function Line(line, width)
+		local s = tostring(line)
+		local pad = width - #s
+		if pad > 0 then
+			return string.rep(" ", pad) .. s
+		else
+			return s
+		end
+	end
+	vim.o.wrap = false
+	vim.o.signcolumn = "yes:1"
+	vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 5)} %s"
 	vim.o.cursorline = true
+	vim.o.foldcolumn = "0"
+	vim.o.signcolumn = "yes:1"
 	vim.o.cmdheight = 1
 	vim.o.showcmd = false
 	vim.o.ruler = false
@@ -32,17 +41,17 @@ if not vim.g.vscode then
 	vim.opt.sessionoptions:remove("terminal")
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
+	vim.o.shell = "cmd.exe"
 	vim.cmd("language en_US")
-	vim.cmd("set shell=cmd.exe")
 else
-	vim.cmd("set wildignorecase")
+	vim.o.wildignorecase = true
 end
-vim.cmd('set shada="None"')
-vim.cmd("set splitright")
-vim.cmd("set timeoutlen=2250")
-vim.cmd("set nohlsearch")
-vim.cmd("set ignorecase")
-vim.cmd("set smartcase")
+vim.o.shada = ""
+vim.o.splitright = true
+vim.o.timeoutlen = 2250
+vim.o.hlsearch = false
+vim.o.ignorecase = true
+vim.o.smartcase = true
 vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4

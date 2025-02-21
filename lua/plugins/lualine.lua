@@ -7,7 +7,6 @@ return {
 			local function parent(path)
 				return path:match("^.+[/\\](.-)[/\\]?$")
 			end
-			local indicator_symbol = "●"
 			local function telescope_smart_path()
 				if BufIsSpecial() then
 					return parent(vim.fn.getcwd())
@@ -27,7 +26,7 @@ return {
 			end
 			local function diagnostic(level)
 				if (vim.diagnostic.count(0)[level] or 0) > 0 then
-					return indicator_symbol
+					return "●"
 				else
 					-- return "◌"
 					return "○"
