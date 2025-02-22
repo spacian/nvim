@@ -41,7 +41,7 @@ return {
 			local function info_ind()
 				return diagnostic(vim.diagnostic.severity.INFO)
 			end
-			local function note_ind()
+			local function note_hint()
 				return diagnostic(vim.diagnostic.severity.HINT)
 			end
 			local theme = require("lualine.themes.auto")
@@ -62,10 +62,46 @@ return {
 					lualine_a = {},
 					lualine_b = {},
 					lualine_c = {
-						{ error_ind, color = { fg = "#FF0000" } },
-						{ warn_ind, color = { fg = "#FFAA00" } },
-						{ info_ind, color = { fg = "#229922" } },
-						{ note_ind, color = { fg = "#005599" } },
+						{
+							error_ind,
+							color = {
+								fg = string.format(
+									"#%06X",
+									vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).fg
+										or vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).sp
+								),
+							},
+						},
+						{
+							warn_ind,
+							color = {
+								fg = string.format(
+									"#%06X",
+									vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).fg
+										or vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).sp
+								),
+							},
+						},
+						{
+							info_ind,
+							color = {
+								fg = string.format(
+									"#%06X",
+									vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).fg
+										or vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).sp
+								),
+							},
+						},
+						{
+							note_hint,
+							color = {
+								fg = string.format(
+									"#%06X",
+									vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).fg
+										or vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).sp
+								),
+							},
+						},
 					},
 					lualine_x = {
 						{ telescope_smart_path },

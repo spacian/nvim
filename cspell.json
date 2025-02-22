@@ -10,6 +10,9 @@
     ],
     "import": [],
     "words": [
+        "cmdheight",
+        "showcmd",
+        "hlsearch",
         "cterm",
         "pwsh",
         "linehl",

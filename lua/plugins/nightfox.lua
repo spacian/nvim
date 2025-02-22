@@ -4,6 +4,8 @@ return {
 		enabled = not vim.g.vscode,
 		priority = 1000,
 		lazy = true,
-		opts = {},
+		config = function()
+			vim.cmd("colorscheme nightfox")
+		end,
 	},
 }

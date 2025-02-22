@@ -20,8 +20,8 @@ return {
 					shade = "dark",
 					percentage = 0.15,
 				},
-				no_italic = true,
-				no_bold = true,
+				no_italic = false,
+				no_bold = false,
 				no_underline = false,
 				styles = {
 					comments = { "italic" },
@@ -29,10 +29,10 @@ return {
 					loops = {},
 					functions = {},
 					keywords = {},
-					strings = {},
+					strings = { "italic" },
 					variables = {},
 					numbers = {},
-					booleans = {},
+					booleans = { "italic" },
 					properties = {},
 					types = {},
 					operators = {},
@@ -42,15 +42,11 @@ return {
 				integrations = {
 					cmp = true,
 					gitsigns = true,
-					nvimtree = true,
 					treesitter = true,
 					notify = false,
-					mini = {
-						enabled = true,
-						indentscope_color = "",
-					},
 				},
 			})
+			vim.cmd("colorscheme catppuccin")
 		end,
 	},
 }
