@@ -11,6 +11,7 @@ BufIsSpecial = function(bufname)
 		or bufname:match("oil://")
 		or bufname:match("replacer://")
 		or bufname:match("neo%-tree filesystem")
+		or bufname:match("term://")
 end
 
 require("remaps")
