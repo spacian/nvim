@@ -28,7 +28,7 @@ return {
 					if not BufIsSpecial() then
 						vim.cmd("silent noa w")
 					end
-					vim.cmd("silent Grapple select name=prev scope=prev")
+					grapple.select({ name = "prev", scope = "prev" })
 				else
 					print("there is no buffer tagged 'prev'")
 				end
@@ -70,16 +70,13 @@ return {
 			local last_bufname = ""
 			vim.api.nvim_create_autocmd({ "BufEnter" }, {
 				callback = function()
-					vim.schedule(function()
-						local bufname = vim.api.nvim_buf_get_name(0)
-						if BufIsSpecial(bufname) then
-							return
-						end
-						if last_bufname ~= "" and bufname ~= last_bufname then
-							grapple.tag({ name = "prev", scope = "prev", path = last_bufname })
-						end
+					local bufname = vim.api.nvim_buf_get_name(0)
+					if last_bufname ~= "" and bufname ~= last_bufname then
+						grapple.tag({ name = "prev", scope = "prev", path = last_bufname })
+					end
+					if not BufIsSpecial(bufname) then
 						last_bufname = bufname
-					end)
+					end
 				end,
 			})
 
