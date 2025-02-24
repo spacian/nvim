@@ -1,7 +1,7 @@
 return {
 	{
 		"LunarVim/bigfile.nvim",
-		enabled = true,
+		enabled = not vim.g.vscode,
 		opts = {
 			features = {
 				"indent_blankline",
