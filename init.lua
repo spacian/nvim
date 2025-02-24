@@ -27,9 +27,9 @@ if not vim.g.vscode then
 			return s
 		end
 	end
-	vim.o.wrap = false
+	vim.o.wrap = true
 	vim.o.signcolumn = "yes:1"
-	vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 5)} %s"
+	vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 4)}%s"
 	vim.o.cursorline = true
 	vim.o.foldcolumn = "0"
 	vim.o.signcolumn = "yes:1"

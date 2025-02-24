@@ -1,7 +1,7 @@
 return {
 	{
 		"aaronik/treewalker.nvim",
-		enabled = false,
+		enabled = true,
 		after = "nvim-treesitter",
 		config = function()
 			local tw = require("treewalker")

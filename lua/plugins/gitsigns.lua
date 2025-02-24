@@ -3,7 +3,7 @@ return {
 		"lewis6991/gitsigns.nvim",
 		enabled = not vim.g.vscode,
 		config = function()
-			local sign = "│"
+			local sign = "▕"
 			require("gitsigns").setup({
 				sign_priority = 0,
 				signs = {

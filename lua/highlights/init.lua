@@ -19,7 +19,9 @@ if not highlight_exists("DiagnosticWarnLn") then
 	)
 end
 
-vim.api.nvim_set_hl(0, "MatchParen", { reverse = true })
+vim.api.nvim_set_hl(0, "MatchParen", {
+	fg = vim.api.nvim_get_hl(0, { name = "DiagnosticVirtualTextError" }).fg,
+})
 
 for _, name in ipairs({ "Error", "Warn", "Info", "Hint" }) do
 	vim.api.nvim_set_hl(0, "DiagnosticVirtualText" .. name, {
