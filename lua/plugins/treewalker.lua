@@ -2,6 +2,7 @@ return {
 	{
 		"aaronik/treewalker.nvim",
 		enabled = true,
+        lazy = false,
 		after = "nvim-treesitter",
 		config = function()
 			local tw = require("treewalker")

@@ -2,6 +2,7 @@ return {
 	{
 		"smoka7/hop.nvim",
 		enabled = false,
+		lazy = false,
 		config = function()
 			local hop = require("hop")
 			hop.setup({ keys = "kdslaeiowcpnbtyhgruvmfj" })

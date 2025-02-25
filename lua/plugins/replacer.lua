@@ -2,6 +2,7 @@ return {
 	{
 		"gabrielpoca/replacer.nvim",
 		enabled = not vim.g.vscode,
+        lazy = false,
 		config = function()
 			require("replacer").setup({ rename_files = false })
 			vim.keymap.set("n", "<leader>m", function()

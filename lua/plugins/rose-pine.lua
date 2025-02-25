@@ -1,9 +1,10 @@
 return {
 	{
 		"rose-pine/neovim",
-		enabled = not vim.g.vscode,
+		-- enabled = not vim.g.vscode,
+        enabled = false,
 		name = "rose-pine",
-		lazy = true,
+		lazy = false,
 		config = function()
 			require("rose-pine").setup({
 				variant = "auto",

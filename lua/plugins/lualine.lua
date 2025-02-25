@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		enabled = not vim.g.vscode,
+        lazy = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local function parent(path)

@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
         enabled = true,
+        lazy = false,
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {

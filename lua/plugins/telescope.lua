@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		enabled = not vim.g.vscode,
+        lazy = false,
 		branch = "0.1.x",
 		opts = {
 			pickers = {

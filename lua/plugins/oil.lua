@@ -2,6 +2,7 @@ return {
 	{
 		"stevearc/oil.nvim",
 		enabled = not vim.g.vscode,
+        lazy = false,
 		config = function()
 			local jumplist = require("remaps.nvim.jumplist")
 			local oil = require("oil")

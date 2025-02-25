@@ -19,4 +19,8 @@ require("lazy").setup({
 	change_detection = {
 		enabled = false,
 	},
+	performance = {
+		cache = { enabled = false },
+	},
+	readme = { enabled = false },
 })

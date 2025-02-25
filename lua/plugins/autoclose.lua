@@ -2,6 +2,7 @@ return {
 	{
 		"spacian/autoclose.nvim",
 		enabled = not vim.g.vscode,
+		lazy = false,
 		opts = {
 			keys = {
 				["`"] = { escape = false, close = false, pair = "``" },

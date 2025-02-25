@@ -1,9 +1,10 @@
 return {
 	{
 		"craftzdog/solarized-osaka.nvim",
-		enabled = not vim.g.vscode,
+		-- enabled = not vim.g.vscode,
+        enabled = false,
 		priority = 1000,
-		lazy = true,
+		lazy = false,
 		config = function()
 			require("solarized-osaka").setup({
 				transparent = false,
