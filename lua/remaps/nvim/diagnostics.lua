@@ -23,6 +23,7 @@ local filter_diagnostic = function()
 		vim.keymap.set("n", "[d", function()
 			vim.diagnostic.goto_prev({ severity = { min = hint, max = error } })
 		end, {})
+		return
 	end
 	local severity = letter_to_level[letter]
 	if severity == nil then
