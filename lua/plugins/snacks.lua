@@ -2,7 +2,7 @@ return {
 	{
 		"folke/snacks.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		config = function()
 			local jumplist = require("remaps.nvim.jumplist")
 			local snacks = require("snacks")
@@ -14,6 +14,19 @@ return {
 						preset = function()
 							return "default"
 						end,
+					},
+					win = {
+						preview = {
+							wo = {
+								signcolumn = "no",
+							},
+						},
+						input = {
+							keys = {
+								["<a-j>"] = { "preview_scroll_down", mode = { "i", "n" } },
+								["<a-k>"] = { "preview_scroll_up", mode = { "i", "n" } },
+							},
+						},
 					},
 				},
 			})
