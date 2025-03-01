@@ -96,10 +96,10 @@ return {
 				snacks.picker.git_diff()
 			end)
 
-			vim.keymap.set("n", "<leader>os", function()
-				jumplist.register(1)
-				snacks.picker.lsp_symbols()
-			end)
+			-- vim.keymap.set("n", "<leader>os", function()
+			-- 	jumplist.register(1)
+			-- 	snacks.picker.lsp_symbols()
+			-- end)
 		end,
 	},
 }

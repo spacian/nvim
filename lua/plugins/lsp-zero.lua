@@ -1,8 +1,9 @@
 return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		enabled = not vim.g.vscode,
-        lazy = false,
+		-- enabled = not vim.g.vscode,
+		enabled = false,
+		lazy = false,
 		branch = "v3.x",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
