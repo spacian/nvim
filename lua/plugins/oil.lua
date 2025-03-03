@@ -2,7 +2,7 @@ return {
 	{
 		"stevearc/oil.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		config = function()
 			local jumplist = require("remaps.nvim.jumplist")
 			local oil = require("oil")
@@ -52,6 +52,13 @@ return {
 				end
 				print("new working directory: " .. vim.fn.getcwd())
 			end, {})
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "oil",
+				callback = function()
+					vim.opt_local.statuscolumn = ""
+				end,
+			})
 		end,
 	},
 }
