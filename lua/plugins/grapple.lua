@@ -2,7 +2,7 @@ return {
 	{
 		"cbochs/grapple.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		config = function()
 			local jumplist = require("remaps.nvim.jumplist")
 			local grapple = require("grapple")
@@ -39,12 +39,17 @@ return {
 			for i = 1, #tags do
 				vim.keymap.set("n", "<leader>m" .. tags[i], function()
 					if grapple.exists({ name = tags[i] }) then
-						vim.cmd("silent noa w")
+						if not BufIsSpecial() then
+							vim.cmd("silent noa w")
+						end
 						jumplist.register(1)
-						vim.cmd("silent Grapple select name=" .. tags[i])
+						grapple.select({ name = tags[i] })
 					else
 						print("there is no buffer tagged '" .. tags[i] .. "'")
 					end
+				end)
+				vim.keymap.set("n", "<leader>t" .. tags[i], function()
+					grapple.tag({ name = tags[i] })
 				end)
 			end
 
@@ -59,14 +64,10 @@ return {
 						vim.fn.feedkeys("a")
 					end
 				else
-					vim.cmd("silent Grapple select name=term")
+					grapple.select({ name = "term" })
 					vim.fn.feedkeys("a")
 				end
 			end)
-
-			vim.keymap.set("n", "<leader>tj", ":Grapple tag name=j<enter>")
-			vim.keymap.set("n", "<leader>tk", ":Grapple tag name=k<enter>")
-			vim.keymap.set("n", "<leader>tl", ":Grapple tag name=l<enter>")
 
 			local last_bufname = ""
 			vim.api.nvim_create_autocmd({ "BufEnter" }, {
@@ -122,7 +123,7 @@ return {
 					if vim.api.nvim_buf_get_name(0):match(":lazygit$") == ":lazygit" then
 						return
 					end
-					vim.cmd("silent Grapple tag name=term")
+					grapple.tag({ name = "term" })
 					vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
 					vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
 					vim.keymap.set({ "n", "t" }, "<c-u><c-i>", function()
@@ -145,7 +146,7 @@ return {
 						return
 					end
 					if grapple.exists({ name = "term" }) then
-						vim.cmd("silent Grapple untag name=term")
+						grapple.untag({ name = "term" })
 					end
 				end,
 			})
