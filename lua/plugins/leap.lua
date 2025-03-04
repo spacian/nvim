@@ -5,23 +5,13 @@ return {
 	config = function()
 		require("leap").opts.equivalence_classes = {
 			" \t\r\n",
-			"([{",
-			")]}",
 			"'\"`",
-			"aäàáâãā",
-			"dḍ",
-			"eëéèêē",
-			"gǧğ",
-			"hḥḫ",
-			"iïīíìîı",
-			"nñ",
-			"oō",
-			"sṣšß",
-			"tṭ",
-			"uúûüűū",
-			"zẓ",
+			"aä",
+			"oö",
+			"uü",
+			"sß",
 		}
-		vim.keymap.set({ "n" }, "S", "<Plug>(leap-forward)")
-		vim.keymap.set({ "n" }, "X", "<Plug>(leap-backward)")
+		vim.keymap.set({ "n" }, "gj", "<Plug>(leap-forward)")
+		vim.keymap.set({ "n" }, "gk", "<Plug>(leap-backward)")
 	end,
 }
