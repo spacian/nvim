@@ -53,6 +53,7 @@ if not vim.g.vscode then
 			}),
 		},
 	})
+	local capabilities = require("blink.cmp").get_lsp_capabilities()
 	require("mason-lspconfig").setup_handlers({
 		basedpyright = function()
 			lspconfig.basedpyright.setup({
@@ -74,6 +75,7 @@ if not vim.g.vscode then
 						},
 					},
 				},
+				capabilities = capabilities,
 			})
 		end,
 		-- pyright = function()
@@ -103,6 +105,7 @@ if not vim.g.vscode then
 					client.server_capabilities.semanticTokensProvider = false
 				end,
 				settings = { json = { validate = { enable = true } } },
+				capabilities = capabilities,
 			})
 		end,
 		gopls = function()
@@ -110,6 +113,7 @@ if not vim.g.vscode then
 				on_init = function(client)
 					client.server_capabilities.semanticTokensProvider = false
 				end,
+				capabilities = capabilities,
 			})
 		end,
 		taplo = function()
@@ -118,6 +122,7 @@ if not vim.g.vscode then
 					client.server_capabilities.semanticTokensProvider = false
 				end,
 				settings = { toml = { validate = { enable = true } } },
+				capabilities = capabilities,
 			})
 		end,
 		yamlls = function()
@@ -126,6 +131,7 @@ if not vim.g.vscode then
 					client.server_capabilities.semanticTokensProvider = false
 				end,
 				settings = { yaml = { validate = { enable = true } } },
+				capabilities = capabilities,
 			})
 		end,
 		lua_ls = function()
@@ -153,6 +159,7 @@ if not vim.g.vscode then
 						format = { enable = false },
 					},
 				},
+				capabilities = capabilities,
 			})
 		end,
 	})
