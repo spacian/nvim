@@ -29,10 +29,10 @@ if not vim.g.vscode then
 	end
 	vim.o.wrap = true
 	vim.o.signcolumn = "yes:1"
+	vim.o.foldcolumn = "0"
+	vim.o.number = false
 	vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 4)}%s"
 	vim.o.cursorline = true
-	vim.o.foldcolumn = "0"
-	vim.o.signcolumn = "yes:1"
 	vim.o.cmdheight = 1
 	vim.o.showcmd = false
 	vim.o.ruler = false

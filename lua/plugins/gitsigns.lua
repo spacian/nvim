@@ -2,29 +2,21 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		config = function()
 			local sign = "▕"
+			local signs = {
+				add = { text = sign },
+				change = { text = sign },
+				changedelete = { text = sign },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				untracked = { text = sign },
+			}
 			require("gitsigns").setup({
 				sign_priority = 0,
-				signs = {
-					add = { text = sign },
-					change = { text = sign },
-					changedelete = { text = sign },
-					delete = { text = "_" },
-					topdelete = { text = "‾" },
-					-- untracked = { text = "┆" },
-					untracked = { text = "?" },
-				},
-				signs_staged = {
-					add = { text = sign },
-					change = { text = sign },
-					changedelete = { text = sign },
-					delete = { text = "_" },
-					topdelete = { text = "‾" },
-					-- untracked = { text = "┆" },
-					untracked = { text = "?" },
-				},
+				signs = signs,
+				signs_staged = signs,
 				signs_staged_enable = true,
 				attach_to_untracked = true,
 				signcolumn = true,
@@ -41,7 +33,6 @@ return {
 						vim.keymap.set(mode, l, r, opts)
 					end
 
-					-- Navigation
 					map("n", "]g", function()
 						if vim.wo.diff then
 							vim.cmd.normal({ "]g", bang = true })

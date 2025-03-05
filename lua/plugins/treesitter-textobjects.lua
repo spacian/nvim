@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		enabled = true,
-        lazy = false,
+		lazy = false,
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		after = "nvim-treesitter",
 		config = function()
@@ -46,14 +46,14 @@ return {
 					swap = {
 						enable = true,
 						swap_next = {
-							["<leader>mna"] = "@parameter.inner",
-							["<leader>mnf"] = "@function.outer",
-							["<leader>mnc"] = "@class.outer",
+							["gla"] = "@parameter.inner",
+							["glf"] = "@function.outer",
+							["glc"] = "@class.outer",
 						},
 						swap_previous = {
-							["<leader>mpa"] = "@parameter.inner",
-							["<leader>mpf"] = "@function.outer",
-							["<leader>mpc"] = "@class.outer",
+							["gha"] = "@parameter.inner",
+							["ghf"] = "@function.outer",
+							["ghc"] = "@class.outer",
 						},
 					},
 					move = {

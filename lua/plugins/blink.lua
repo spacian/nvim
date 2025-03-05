@@ -52,6 +52,11 @@ return {
 					auto_show = true,
 					auto_show_delay_ms = 1000,
 				},
+				accept = {
+					auto_brackets = {
+						enabled = false,
+					},
+				},
 			},
 		},
 		opts_extend = { "sources.default" },
