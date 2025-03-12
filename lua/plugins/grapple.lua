@@ -123,6 +123,7 @@ return {
 					if vim.api.nvim_buf_get_name(0):match(":lazygit$") == ":lazygit" then
 						return
 					end
+					vim.opt_local.statuscolumn = ""
 					grapple.tag({ name = "term" })
 					vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
 					vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
