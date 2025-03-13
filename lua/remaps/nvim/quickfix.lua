@@ -18,7 +18,7 @@ end
 
 local function fill_qflist()
 	vim.cmd("silent cexpr []")
-	vim.diagnostic.setqflist()
+	vim.diagnostic.setqflist({ open = false })
 	vim.fn.setqflist(filter_file())
 end
 
@@ -33,43 +33,41 @@ local function filter_type(filter_by)
 	return filtered
 end
 
-vim.keymap.set("n", "<leader>qq", function()
-	fill_qflist()
+local function open_qf()
 	if #vim.fn.getqflist() > 0 then
 		vim.cmd("copen")
+	else
+		vim.cmd("cclose")
 	end
+end
+
+vim.keymap.set("n", "<leader>qq", function()
+	fill_qflist()
+	open_qf()
 end)
 
 vim.keymap.set("n", "<leader>qe", function()
 	fill_qflist()
 	vim.fn.setqflist(filter_type("E"))
-	if #vim.fn.getqflist() > 0 then
-		vim.cmd("copen")
-	end
+	open_qf()
 end)
 
 vim.keymap.set("n", "<leader>qw", function()
 	fill_qflist()
 	vim.fn.setqflist(filter_type("W"))
-	if #vim.fn.getqflist() > 0 then
-		vim.cmd("copen")
-	end
+	open_qf()
 end)
 
 vim.keymap.set("n", "<leader>qi", function()
 	fill_qflist()
 	vim.fn.setqflist(filter_type("I"))
-	if #vim.fn.getqflist() > 0 then
-		vim.cmd("copen")
-	end
+	open_qf()
 end)
 
 vim.keymap.set("n", "<leader>qn", function()
 	fill_qflist()
 	vim.fn.setqflist(filter_type("N"))
-	if #vim.fn.getqflist() > 0 then
-		vim.cmd("copen")
-	end
+	open_qf()
 end)
 
 vim.keymap.set("n", "<leader>qft", function()
