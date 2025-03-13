@@ -2,7 +2,7 @@ return {
 	{
 		"sindrets/diffview.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		config = function()
 			require("diffview").setup({})
 			vim.keymap.set({ "n" }, "<leader>gG", function()

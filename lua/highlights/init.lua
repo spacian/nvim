@@ -33,3 +33,12 @@ for _, name in ipairs({ "Error", "Warn", "Info", "Hint" }) do
 		underline = true,
 	})
 end
+
+vim.api.nvim_set_hl(0, "DiffChange", {
+	bg = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false }).bg,
+})
+
+vim.api.nvim_set_hl(0, "DiffText", {
+	fg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg,
+	bg = vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).fg,
+})

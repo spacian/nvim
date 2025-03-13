@@ -40,6 +40,16 @@ if not vim.g.vscode then
 	vim.o.jumpoptions = "stack,view"
 	vim.o.scrolloff = 3
 	vim.opt.sessionoptions:remove("terminal")
+	vim.opt.diffopt = {
+		"internal",
+		"filler",
+		"closeoff",
+		"hiddenoff",
+		"algorithm:histogram",
+		"indent-heuristic",
+		"linematch:200",
+        "context:99999",
+	}
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
 	vim.cmd("language en_US")

@@ -34,19 +34,11 @@ return {
 					end
 
 					map("n", "]g", function()
-						if vim.wo.diff then
-							vim.cmd.normal({ "]g", bang = true })
-						else
-							gitsigns.nav_hunk("next")
-						end
+						gitsigns.nav_hunk("next")
 					end)
 
 					map("n", "[g", function()
-						if vim.wo.diff then
-							vim.cmd.normal({ "[g", bang = true })
-						else
-							gitsigns.nav_hunk("prev")
-						end
+						gitsigns.nav_hunk("prev")
 					end)
 					map("n", "<leader>gt", gitsigns.toggle_deleted)
 					map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
