@@ -71,6 +71,7 @@ if not vim.g.vscode then
 							diagnosticSeverityOverrides = {
 								reportUnboundVariable = "error",
 								reportMissingModuleSource = "error",
+								reportUnusedVariable = "warning",
 							},
 						},
 					},
