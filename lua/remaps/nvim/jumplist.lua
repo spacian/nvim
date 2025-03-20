@@ -1,6 +1,7 @@
 local M = {}
 
 local persistence_jump = 1
+local soft_equal_line_count = 6
 
 ---@return Node
 local create_root = function()
@@ -77,7 +78,7 @@ end
 ---@param b Node
 ---@return boolean
 local nodes_equal_soft = function(a, b)
-	return not a.root and not b.root and a.bufnr == b.bufnr and math.abs(a.lnum - b.lnum) < 9
+	return not a.root and not b.root and a.bufnr == b.bufnr and math.abs(a.lnum - b.lnum) < soft_equal_line_count
 end
 
 ---@param a Node
