@@ -1,6 +1,10 @@
 local starts_with_underscore = function(label, n)
 	return label:sub(1, n) == string.sub("__", 1, n)
 end
+
+local ends_with_equals = function(label)
+	return label:sub(#label, #label) == "="
+end
 return {
 	{
 		"saghen/blink.cmp",
@@ -29,6 +33,14 @@ return {
 					return 0
 				end,
 				sorts = {
+					function(a, b)
+						local a_ = ends_with_equals(a.label or "")
+						local b_ = ends_with_equals(b.label or "")
+						if a_ ~= b_ then
+							return a_
+						end
+						return nil
+					end,
 					function(a, b)
 						local a_ = starts_with_underscore(a.label or "", 2)
 						local b_ = starts_with_underscore(b.label or "", 2)
