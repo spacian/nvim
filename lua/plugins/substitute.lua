@@ -9,7 +9,6 @@ return {
 				},
 			})
 			vim.keymap.set("n", "S", substitute.operator, { noremap = true })
-			vim.keymap.set("x", "S", substitute.visual, { noremap = true })
 		end,
 	},
 }

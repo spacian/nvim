@@ -5,7 +5,7 @@ return {
 		lazy = false,
 		opts = {
 			keymaps = {
-				visual = "s",
+				visual = "S",
 			},
 		},
 	},
