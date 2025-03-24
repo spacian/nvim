@@ -2,9 +2,8 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		-- enabled = not vim.g.vscode,
-		enabled = false,
-		lazy = false,
+		enabled = not vim.g.vscode,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({

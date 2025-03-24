@@ -1,10 +1,9 @@
 return {
 	{
 		"rjshkhr/shadow.nvim",
-		-- enabled = not vim.g.vscode,
-		enabled = false,
+		enabled = not vim.g.vscode,
 		priority = 1000,
-		lazy = false,
+		lazy = true,
 		config = function()
 			vim.opt.termguicolors = true
 			vim.cmd.colorscheme("shadow")

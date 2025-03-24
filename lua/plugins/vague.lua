@@ -3,11 +3,15 @@ return {
 		"vague2k/vague.nvim",
 		enabled = not vim.g.vscode,
 		priority = 1000,
-		lazy = false,
+		lazy = true,
 		config = function()
 			require("vague").setup({
 				style = {
 					boolean = "italic",
+					builtin_constants = "italic",
+					builtin_functions = "italic",
+					builtin_types = "italic",
+					builtin_variables = "italic",
 				},
 				plugins = {
 					lsp = {

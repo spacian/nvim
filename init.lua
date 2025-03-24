@@ -48,7 +48,7 @@ if not vim.g.vscode then
 		"algorithm:histogram",
 		"indent-heuristic",
 		"linematch:200",
-        "context:99999",
+		"context:99999",
 	}
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
