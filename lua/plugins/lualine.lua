@@ -46,8 +46,7 @@ return {
 				return diagnostic(vim.diagnostic.severity.HINT)
 			end
 			local theme = require("lualine.themes.auto")
-			local colors = require("gruvbox").palette
-			theme.normal.c = { fg = colors.dark0, bg = colors.dark_green_hard }
+			theme.normal.c = { fg = theme.normal.bg, bg = theme.normal.fg }
 			theme.insert.c = theme.normal.c
 			theme.visual.c = theme.normal.c
 			theme.replace.c = theme.normal.c
