@@ -18,10 +18,10 @@ local filter_diagnostic = function()
 	local letter = vim.fn.input("filter diagnostic jumps by type ([E]rror,[W]arning, [I]nfo, [N]ote) or [R]eset: ")
 	if letter == "R" or letter == "r" then
 		vim.keymap.set("n", "]d", function()
-			vim.diagnostic.goto_next({ severity = { min = hint, max = error } })
+			vim.diagnostic.jump({ severity = { min = hint, max = error }, count = 1, float = false })
 		end, {})
 		vim.keymap.set("n", "[d", function()
-			vim.diagnostic.goto_prev({ severity = { min = hint, max = error } })
+			vim.diagnostic.jump({ severity = { min = hint, max = error }, count = 1, float = false })
 		end, {})
 		return
 	end
@@ -31,15 +31,17 @@ local filter_diagnostic = function()
 		return
 	end
 	vim.keymap.set("n", "]d", function()
-		vim.diagnostic.goto_next({ severity = { min = severity, max = severity } })
+		vim.diagnostic.jump({ severity = { min = severity, max = severity }, count = 1, float = false })
 	end, {})
 	vim.keymap.set("n", "[d", function()
-		vim.diagnostic.goto_prev({ severity = { min = severity, max = severity } })
+		vim.diagnostic.jump({ severity = { min = severity, max = severity }, count = 1, float = false })
 	end, {})
 end
 
 vim.keymap.set("n", "<leader>D", filter_diagnostic)
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>d", function()
+	vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+end, {})
 
 vim.diagnostic.config({
 	virtual_text = {
