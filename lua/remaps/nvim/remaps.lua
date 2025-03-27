@@ -55,7 +55,7 @@ end, { noremap = true })
 
 if vim.loop.os_uname().sysname == "Windows_NT" then
 	vim.api.nvim_create_user_command("OpenInExplorer", function()
-		vim.cmd("silent !start explorer /select,%:p")
+		vim.cmd('silent !start "" /max  explorer /select,' .. vim.api.nvim_buf_get_name(0))
 	end, {})
 end
 
