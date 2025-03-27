@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local function parent(path)
@@ -46,6 +46,8 @@ return {
 				return diagnostic(vim.diagnostic.severity.HINT)
 			end
 			local theme = require("lualine.themes.auto")
+			local colors = require("gruvbox").palette
+			theme.normal.c = { fg = colors.dark0, bg = colors.dark_green_hard }
 			theme.insert.c = theme.normal.c
 			theme.visual.c = theme.normal.c
 			theme.replace.c = theme.normal.c
@@ -66,7 +68,7 @@ return {
 						{
 							error_ind,
 							color = {
-								fg = string.format(
+								bg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).sp
@@ -76,7 +78,7 @@ return {
 						{
 							warn_ind,
 							color = {
-								fg = string.format(
+								bg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).sp
@@ -86,7 +88,7 @@ return {
 						{
 							info_ind,
 							color = {
-								fg = string.format(
+								bg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).sp
@@ -96,7 +98,7 @@ return {
 						{
 							note_hint,
 							color = {
-								fg = string.format(
+								bg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).sp
