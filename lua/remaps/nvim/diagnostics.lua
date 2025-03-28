@@ -40,7 +40,20 @@ end
 
 vim.keymap.set("n", "<leader>D", filter_diagnostic)
 vim.keymap.set("n", "<leader>d", function()
-	vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+	if vim.diagnostic.config().virtual_lines then
+		vim.diagnostic.config({ virtual_lines = false })
+	else
+		vim.diagnostic.config({ virtual_lines = { current_line = true } })
+		vim.api.nvim_create_autocmd("CursorMoved", {
+			group = vim.api.nvim_create_augroup("diagnostic-virtual-lines-disable", { clear = true }),
+			callback = function()
+				if vim.diagnostic.config().virtual_lines then
+					vim.diagnostic.config({ virtual_lines = false })
+				end
+			end,
+			once = true,
+		})
+	end
 end, {})
 
 vim.diagnostic.config({
