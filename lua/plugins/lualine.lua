@@ -46,7 +46,6 @@ return {
 				return diagnostic(vim.diagnostic.severity.HINT)
 			end
 			local theme = require("lualine.themes.auto")
-			theme.normal.c = { fg = theme.normal.bg, bg = theme.normal.fg }
 			theme.insert.c = theme.normal.c
 			theme.visual.c = theme.normal.c
 			theme.replace.c = theme.normal.c
@@ -67,7 +66,7 @@ return {
 						{
 							error_ind,
 							color = {
-								bg = string.format(
+								fg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false }).sp
@@ -77,7 +76,7 @@ return {
 						{
 							warn_ind,
 							color = {
-								bg = string.format(
+								fg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).sp
@@ -87,7 +86,7 @@ return {
 						{
 							info_ind,
 							color = {
-								bg = string.format(
+								fg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticInfo", link = false }).sp
@@ -97,7 +96,7 @@ return {
 						{
 							note_hint,
 							color = {
-								bg = string.format(
+								fg = string.format(
 									"#%06X",
 									vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).fg
 										or vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).sp
