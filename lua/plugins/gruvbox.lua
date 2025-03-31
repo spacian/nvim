@@ -3,7 +3,7 @@ return {
 		"ellisonleao/gruvbox.nvim",
 		enabled = not vim.g.vscode,
 		priority = 1000,
-		lazy = false,
+		lazy = true,
 		config = function()
 			vim.cmd("colorscheme gruvbox")
 			require("gruvbox").setup({
