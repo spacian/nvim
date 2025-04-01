@@ -23,7 +23,12 @@ return {
 					filepath = rep .. filepath:sub(#filepath - max_length + #rep, #filepath)
 					filepath = filepath:gsub(rep:gsub("%.", "%.") .. ".-/", rep .. "/", 1)
 				end
-				return filepath
+				local dir, filename = filepath:match("^(.-)([^/]+)$")
+				if dir and filename then
+					return dir .. " " .. filename
+				else
+					return filepath
+				end
 			end
 			local function diagnostic(level)
 				if (vim.diagnostic.count(0)[level] or 0) > 0 then
