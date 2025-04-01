@@ -53,5 +53,6 @@
   "undotree": { "branch": "main", "commit": "eab459ab87dd249617b5f7187bb69e614a083047" },
   "vague.nvim": { "branch": "main", "commit": "982453f671332ce0240a15be5eb223d32f877e06" },
   "venv-selector.nvim": { "branch": "regexp", "commit": "c677caa1030808a9f90092e522de7cc20c1390dd" },
-  "vimtex": { "branch": "master", "commit": "322304c5ef63f1efc75a968371fa886b967d4c0d" }
+  "vimtex": { "branch": "master", "commit": "322304c5ef63f1efc75a968371fa886b967d4c0d" },
+  "visual-whitespace.nvim": { "branch": "main", "commit": "2bdf159a49a8ed4e715b81d6e0f975dcc1751c53" }
 }
