@@ -55,6 +55,9 @@ vim.keymap.set("n", "<leader>d", function()
 		})
 	end
 end, {})
+vim.keymap.set("n", "<esc>", function()
+	vim.diagnostic.config({ virtual_lines = false })
+end)
 
 vim.diagnostic.config({
 	virtual_text = {
