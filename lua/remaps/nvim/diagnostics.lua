@@ -37,18 +37,19 @@ local filter_diagnostic = function()
 		vim.diagnostic.jump({ severity = { min = severity, max = severity }, count = 1, float = false })
 	end, {})
 end
-
+local enabled = { virtual_lines = { current_line = true } }
+local disabled = { virtual_lines = false }
 vim.keymap.set("n", "<leader>D", filter_diagnostic)
 vim.keymap.set("n", "<leader>d", function()
 	if vim.diagnostic.config().virtual_lines then
-		vim.diagnostic.config({ virtual_lines = false })
+		vim.diagnostic.config(disabled)
 	else
-		vim.diagnostic.config({ virtual_lines = { current_line = true } })
+		vim.diagnostic.config(enabled)
 		vim.api.nvim_create_autocmd("CursorMoved", {
 			group = vim.api.nvim_create_augroup("diagnostic-virtual-lines-disable", { clear = true }),
 			callback = function()
 				if vim.diagnostic.config().virtual_lines then
-					vim.diagnostic.config({ virtual_lines = false })
+					vim.diagnostic.config(disabled)
 				end
 			end,
 			once = true,
@@ -56,7 +57,7 @@ vim.keymap.set("n", "<leader>d", function()
 	end
 end, {})
 vim.keymap.set("n", "<esc>", function()
-	vim.diagnostic.config({ virtual_lines = false })
+	vim.diagnostic.config(disabled)
 end)
 
 vim.diagnostic.config({
@@ -78,4 +79,5 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = "",
 		},
 	},
+	update_in_insert = true,
 })
