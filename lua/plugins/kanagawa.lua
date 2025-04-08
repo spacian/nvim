@@ -3,7 +3,7 @@ return {
 		"rebelot/kanagawa.nvim",
 		enabled = not vim.g.vscode,
 		priority = 1000,
-		lazy = true,
+		lazy = false,
 		config = function()
 			local kanagawa = require("kanagawa")
 			kanagawa.setup({
@@ -34,7 +34,8 @@ return {
 					light = "lotus",
 				},
 			})
-			vim.cmd("colorscheme kanagawa")
+			vim.cmd("colorscheme kanagawa-dragon")
+
 			vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#43243B" }) -- kanagawa:winterRed
 			vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#49443C" }) -- kanagawa:winterYellow
 		end,

@@ -55,8 +55,6 @@ return {
 			vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = require("gruvbox").palette.dark_aqua })
 			vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = require("gruvbox").palette.dark_red })
 			vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = require("gruvbox").palette.dark2 })
-			vim.api.nvim_set_hl(0, "SignColumn", { link = "Normal" })
-			vim.api.nvim_set_hl(0, "CursorLineNr", { fg = vim.api.nvim_get_hl(0, { name = "CursorLineNr" }).fg })
 		end,
 	},
 }

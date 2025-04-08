@@ -1,7 +1,7 @@
 return {
 	{
 		"thesimonho/kanagawa-paper.nvim",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		enabled = not vim.g.vscode,
 		config = function()

@@ -44,3 +44,19 @@ vim.api.nvim_set_hl(0, "DiffText", {
 	fg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg,
 	bg = vim.api.nvim_get_hl(0, { name = "DiagnosticHint", link = false }).fg,
 })
+
+local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+for _, name in ipairs({
+	"SignColumn",
+	"CursorLineNr",
+	"LineNr",
+	"GitSignsAdd",
+	"GitSignsChange",
+	"GitSignsDelete",
+}) do
+	vim.api.nvim_set_hl(0, name, {
+		bg = normal_bg,
+		fg = vim.api.nvim_get_hl(0, { name = name, link = false }).fg,
+		default = false,
+	})
+end
