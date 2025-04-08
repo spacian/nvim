@@ -79,5 +79,6 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = "",
 		},
 	},
-	update_in_insert = true,
+	update_in_insert = false,
 })
+
