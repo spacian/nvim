@@ -56,6 +56,7 @@ vim.keymap.set("n", "<leader>d", function()
 		})
 	end
 end, {})
+vim.keymap.set("n", "<leader>k", vim.diagnostic.open_float)
 vim.keymap.set("n", "<esc>", function()
 	vim.diagnostic.config(disabled)
 end)
@@ -81,4 +82,3 @@ vim.diagnostic.config({
 	},
 	update_in_insert = false,
 })
-

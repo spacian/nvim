@@ -7,7 +7,6 @@ return {
 		config = function()
 			local kanagawa = require("kanagawa")
 			kanagawa.setup({
-				compile = true,
 				commentStyle = {},
 				functionStyle = {},
 				keywordStyle = { italic = false },
@@ -15,7 +14,7 @@ return {
 				typeStyle = {},
 				transparent = false,
 				dimInactive = false,
-				terminalColors = true,
+				terminalColors = false,
 				colors = {
 					palette = {},
 					theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
@@ -34,8 +33,7 @@ return {
 					light = "lotus",
 				},
 			})
-			vim.cmd("colorscheme kanagawa-dragon")
-
+			require("kanagawa").load("dragon")
 			vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#43243B" }) -- kanagawa:winterRed
 			vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#49443C" }) -- kanagawa:winterYellow
 		end,

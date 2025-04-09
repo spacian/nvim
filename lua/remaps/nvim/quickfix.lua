@@ -18,7 +18,8 @@ end
 
 local function fill_qflist()
 	vim.cmd("silent cexpr []")
-	vim.diagnostic.setqflist({ open = false })
+	vim.diagnostic.setqflist({ open = true })
+	vim.cmd("silent cclose")
 	vim.fn.setqflist(filter_file())
 end
 

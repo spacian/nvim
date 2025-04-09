@@ -11,7 +11,7 @@ return {
 		enabled = not vim.g.vscode,
 		lazy = false,
 		dependencies = "rafamadriz/friendly-snippets",
-		branch = "main",
+		version = "*",
 		opts = {
 			keymap = {
 				preset = "none",
@@ -32,7 +32,6 @@ return {
 				max_typos = function()
 					return 0
 				end,
-				implementation = "lua",
 				sorts = {
 					function(a, b)
 						local a_ = ends_with_equals(a.label or "")

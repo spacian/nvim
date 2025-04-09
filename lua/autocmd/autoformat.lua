@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		end
 		local clients = vim.lsp.get_clients({ bufnr = bufnr })
 		for _, client in ipairs(clients) do
-			if client.supports_method("textDocument/formatting") then
+			if client:supports_method("textDocument/formatting") then
 				vim.lsp.buf.format({ async = false })
 				break
 			end
