@@ -1,3 +1,5 @@
+local disabled_filetypes = { "latex" }
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -10,6 +12,7 @@ return {
 				textobjects = {
 					select = {
 						enable = true,
+						disable = disabled_filetypes,
 						lookahead = true,
 						keymaps = {
 							["ai"] = "@statement.outer",
@@ -45,6 +48,7 @@ return {
 					},
 					swap = {
 						enable = true,
+						disable = disabled_filetypes,
 						swap_next = {
 							["gla"] = "@parameter.inner",
 							["glf"] = "@function.outer",
@@ -58,6 +62,7 @@ return {
 					},
 					move = {
 						enable = true,
+						disable = disabled_filetypes,
 						set_jumps = false,
 						goto_next_start = {
 							["]f"] = "@function.outer",

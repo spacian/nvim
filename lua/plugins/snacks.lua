@@ -10,15 +10,20 @@ return {
 				picker = {
 					layout = {
 						fullscreen = true,
-						cycle = false,
+						cycle = true,
 						preset = function()
 							return "default"
 						end,
+					},
+					explorer = {
+						include = { "build" },
 					},
 					win = {
 						preview = {
 							wo = {
 								signcolumn = "no",
+								number = false,
+								statuscolumn = "",
 							},
 						},
 						input = {

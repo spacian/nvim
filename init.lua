@@ -32,6 +32,8 @@ if not vim.g.vscode then
 	vim.o.foldcolumn = "0"
 	vim.o.number = false
 	vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 4)}%s"
+	vim.opt.fillchars = { eob = " " }
+	vim.o.textwidth = 88
 	vim.o.cursorline = true
 	vim.o.cmdheight = 1
 	vim.o.showcmd = false
