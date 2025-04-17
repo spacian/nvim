@@ -78,6 +78,7 @@ return {
 					end
 					if not BufIsSpecial(bufname) then
 						last_bufname = bufname
+						vim.o.cursorline = true
 					end
 				end,
 			})
