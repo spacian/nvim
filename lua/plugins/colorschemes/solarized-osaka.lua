@@ -7,7 +7,7 @@ return {
 		config = function()
 			require("solarized-osaka").setup({
 				transparent = false,
-				terminal_colors = true,
+				terminal_colors = false,
 				styles = {
 					comments = { italic = false },
 					keywords = { italic = false },

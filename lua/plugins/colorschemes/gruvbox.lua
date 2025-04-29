@@ -3,11 +3,11 @@ return {
 		"ellisonleao/gruvbox.nvim",
 		enabled = not vim.g.vscode,
 		priority = 1000,
-		lazy = true,
+		lazy = false,
 		config = function()
 			vim.cmd("colorscheme gruvbox")
 			require("gruvbox").setup({
-				terminal_colors = true, -- add neovim terminal colors
+				terminal_colors = false,
 				undercurl = true,
 				underline = true,
 				bold = true,
