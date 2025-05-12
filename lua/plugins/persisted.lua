@@ -36,6 +36,7 @@ return {
 						end
 					end
 					vim.cmd("silent bd! " .. table.concat(bufs, " "))
+					vim.diagnostic.reset()
 				end,
 			})
 			vim.api.nvim_create_autocmd({ "BufEnter" }, {
