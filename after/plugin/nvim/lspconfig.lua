@@ -11,6 +11,7 @@ if not vim.g.vscode then
 			"stylua",
 			"taplo",
 			"yaml-language-server",
+			"lemminx",
 		},
 	})
 	local lspconfig = require("lspconfig")
@@ -160,6 +161,14 @@ if not vim.g.vscode then
 						format = { enable = false },
 					},
 				},
+				capabilities = capabilities,
+			})
+		end,
+		lemminx = function()
+			lspconfig.lemminx.setup({
+				on_init = function(client)
+					client.server_capabilities.semanticTokensProvider = false
+				end,
 				capabilities = capabilities,
 			})
 		end,
