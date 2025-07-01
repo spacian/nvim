@@ -14,6 +14,18 @@ vim.keymap.set({ "n" }, "<leader>yall", ":%y+<enter>", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<c-d>", "10j", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<c-u>", "10k", { noremap = true })
 vim.keymap.set({ "n" }, "<leader>o", "", { noremap = true })
-vim.keymap.set({ "n" }, "gwip", "gwip0", { noremap = true })
-vim.keymap.set({ "n" }, "gwl", "gwl0", { noremap = true })
-vim.keymap.set({ "x" }, "gw", "gw0", { noremap = true })
+vim.keymap.set({ "n" }, "gwip", function()
+	vim.o.textwidth = 88
+	vim.api.nvim_feedkeys("gwip0", "n", false)
+	vim.o.textwidth = 0
+end, { noremap = true })
+vim.keymap.set({ "n" }, "gwl", function()
+	vim.o.textwidth = 88
+	vim.api.nvim_feedkeys("gwl0", "n", false)
+	vim.o.textwidth = 0
+end, { noremap = true })
+vim.keymap.set({ "x" }, "gw", function()
+	vim.o.textwidth = 88
+	vim.api.nvim_feedkeys("gw0", "n", false)
+	vim.o.textwidth = 0
+end, { noremap = true })
