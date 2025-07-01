@@ -29,9 +29,6 @@ return {
 				default = { "lsp", "path", "buffer" },
 			},
 			fuzzy = {
-				max_typos = function()
-					return 0
-				end,
 				sorts = {
 					function(a, b)
 						local a_ = ends_with_equals(a.label or "")
@@ -49,6 +46,7 @@ return {
 						end
 						return nil
 					end,
+					"exact",
 					"score",
 					"sort_text",
 				},
