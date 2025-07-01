@@ -3,7 +3,6 @@ if not vim.g.vscode then
 	require("mason-tool-installer").setup({
 		ensure_installed = {
 			"cspell",
-			-- "pyright",
 			"basedpyright",
 			"gopls",
 			"lua_ls",
@@ -14,8 +13,102 @@ if not vim.g.vscode then
 			"lemminx",
 		},
 	})
-	local lspconfig = require("lspconfig")
+
 	local null_ls = require("null-ls")
+	null_ls.register({ sources = { null_ls.builtins.formatting.stylua } })
+
+	local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+	vim.lsp.config("lua_ls", {
+		on_init = function(client)
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.semanticTokensProvider = false
+			if client.workspace_folders then
+				local path = client.workspace_folders[1].name
+				if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+					return
+				end
+			end
+			client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+				runtime = { version = "LuaJIT" },
+				workspace = {
+					checkThirdParty = false,
+					library = { vim.env.VIMRUNTIME },
+				},
+			})
+		end,
+		settings = {
+			Lua = {
+				format = { enable = false },
+			},
+		},
+		capabilities = capabilities,
+	})
+
+	vim.lsp.config("basedpyright", {
+		on_init = function(client, _)
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.semanticTokensProvider = false
+		end,
+		settings = {
+			basedpyright = {
+				analysis = {
+					typeCheckingMode = "strict",
+					autoSearchPaths = true,
+					useLibraryCodeForTypes = true,
+					autoImportCompletions = true,
+					diagnosticMode = "workspace",
+					diagnosticSeverityOverrides = {
+						reportUnboundVariable = "error",
+						reportMissingModuleSource = "error",
+						reportUnusedVariable = "warning",
+					},
+				},
+			},
+		},
+		capabilities = capabilities,
+	})
+
+	vim.lsp.config("jsonls", {
+		on_init = function(client)
+			client.server_capabilities.semanticTokensProvider = false
+		end,
+		settings = { json = { validate = { enable = true } } },
+		capabilities = capabilities,
+	})
+
+	vim.lsp.config("gopls", {
+		on_init = function(client)
+			client.server_capabilities.semanticTokensProvider = false
+		end,
+		capabilities = capabilities,
+	})
+
+	vim.lsp.config("taplo", {
+		on_init = function(client)
+			client.server_capabilities.semanticTokensProvider = false
+		end,
+		settings = { toml = { validate = { enable = true } } },
+		capabilities = capabilities,
+	})
+
+	vim.lsp.config("yamlls", {
+		on_init = function(client)
+			client.server_capabilities.semanticTokensProvider = false
+		end,
+		settings = { yaml = { validate = { enable = true } } },
+		capabilities = capabilities,
+	})
+
+	vim.lsp.config("lemminx", {
+		on_init = function(client)
+			client.server_capabilities.semanticTokensProvider = false
+		end,
+		capabilities = capabilities,
+	})
+
+	require("mason-lspconfig").setup()
+
 	local cspell_last_session = ""
 	local force_cspell_reload = false
 	vim.api.nvim_create_user_command("CSpellReload", function()
@@ -26,6 +119,7 @@ if not vim.g.vscode then
 		force_cspell_reload = true
 		vim.cmd("noa w|e")
 	end, {})
+
 	null_ls.setup({
 		fallback_severity = vim.diagnostic.severity.HINT,
 		sources = {
@@ -53,125 +147,6 @@ if not vim.g.vscode then
 				},
 			}),
 		},
-	})
-	local capabilities = require("blink.cmp").get_lsp_capabilities()
-	require("mason-lspconfig").setup_handlers({
-		basedpyright = function()
-			lspconfig.basedpyright.setup({
-				on_init = function(client, _)
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.semanticTokensProvider = false
-				end,
-				settings = {
-					basedpyright = {
-						analysis = {
-							typeCheckingMode = "strict",
-							autoSearchPaths = true,
-							useLibraryCodeForTypes = true,
-							diagnosticMode = "workspace",
-							diagnosticSeverityOverrides = {
-								reportUnboundVariable = "error",
-								reportMissingModuleSource = "error",
-								reportUnusedVariable = "warning",
-							},
-						},
-					},
-				},
-				capabilities = capabilities,
-			})
-		end,
-		-- pyright = function()
-		-- lspconfig.pyright.setup({
-		--     settings = {
-		--         pyright = {
-		--             disableOrganizeImports = true,
-		--         },
-		--         python = {
-		--             analysis = {
-		--                 typeCheckingMode = "strict",
-		--                 autoSearchPaths = true,
-		--                 useLibraryCodeForTypes = true,
-		--                 diagnosticMode = "workspace",
-		--                 diagnosticSeverityOverrides = {
-		--                     reportUnboundVariable = "error",
-		--                     reportMissingModuleSource = "error",
-		--                 },
-		--             }
-		--         }
-		--     }
-		-- })
-		-- end,
-		jsonls = function()
-			lspconfig.jsonls.setup({
-				on_init = function(client)
-					client.server_capabilities.semanticTokensProvider = false
-				end,
-				settings = { json = { validate = { enable = true } } },
-				capabilities = capabilities,
-			})
-		end,
-		gopls = function()
-			lspconfig.gopls.setup({
-				on_init = function(client)
-					client.server_capabilities.semanticTokensProvider = false
-				end,
-				capabilities = capabilities,
-			})
-		end,
-		taplo = function()
-			lspconfig.taplo.setup({
-				on_init = function(client)
-					client.server_capabilities.semanticTokensProvider = false
-				end,
-				settings = { toml = { validate = { enable = true } } },
-				capabilities = capabilities,
-			})
-		end,
-		yamlls = function()
-			lspconfig.yamlls.setup({
-				on_init = function(client)
-					client.server_capabilities.semanticTokensProvider = false
-				end,
-				settings = { yaml = { validate = { enable = true } } },
-				capabilities = capabilities,
-			})
-		end,
-		lua_ls = function()
-			null_ls.register({ sources = { null_ls.builtins.formatting.stylua } })
-			lspconfig.lua_ls.setup({
-				on_init = function(client)
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.semanticTokensProvider = false
-					if client.workspace_folders then
-						local path = client.workspace_folders[1].name
-						if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-							return
-						end
-					end
-					client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-						runtime = { version = "LuaJIT" },
-						workspace = {
-							checkThirdParty = false,
-							library = { vim.env.VIMRUNTIME },
-						},
-					})
-				end,
-				settings = {
-					Lua = {
-						format = { enable = false },
-					},
-				},
-				capabilities = capabilities,
-			})
-		end,
-		lemminx = function()
-			lspconfig.lemminx.setup({
-				on_init = function(client)
-					client.server_capabilities.semanticTokensProvider = false
-				end,
-				capabilities = capabilities,
-			})
-		end,
 	})
 
 	vim.api.nvim_create_autocmd("LspAttach", {
