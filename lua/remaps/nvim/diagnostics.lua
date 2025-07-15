@@ -37,10 +37,18 @@ local filter_diagnostic = function()
 		vim.diagnostic.jump({ severity = { min = severity, max = severity }, count = 1, float = false })
 	end, {})
 end
-local enabled = { virtual_lines = { current_line = true } }
-local disabled = { virtual_lines = false }
-vim.keymap.set("n", "<leader>D", filter_diagnostic)
-vim.keymap.set("n", "<leader>d", function()
+vim.keymap.set("n", "<leader>fd", filter_diagnostic)
+local enabled = {
+	virtual_lines = {
+		current_line = true,
+	},
+	virtual_text = false,
+}
+local disabled = {
+	virtual_lines = false,
+	virtual_text = true,
+}
+vim.keymap.set("n", "<leader>D", function()
 	if vim.diagnostic.config().virtual_lines then
 		vim.diagnostic.config(disabled)
 	else
@@ -56,7 +64,9 @@ vim.keymap.set("n", "<leader>d", function()
 		})
 	end
 end, {})
-vim.keymap.set("n", "<leader>k", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>d", function()
+	vim.diagnostic.open_float(nil, { border = "rounded" })
+end)
 vim.keymap.set("n", "<esc>", function()
 	vim.diagnostic.config(disabled)
 end)
