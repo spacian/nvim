@@ -71,6 +71,10 @@ vim.keymap.set("n", "<esc>", function()
 	vim.diagnostic.config(disabled)
 end)
 
+vim.keymap.set("n", "<s-k>", function()
+	vim.lsp.buf.hover({ border = "rounded" })
+end)
+
 vim.diagnostic.config({
 	virtual_text = {
 		severity_sort = true,
