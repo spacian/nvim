@@ -61,8 +61,6 @@ M.delete = function(node)
 	if node.root then
 		return
 	end
-	node.next.prev = node.prev
-	node.prev.next = node.next
 	if M.cur == node then
 		if not node.prev.root then
 			M.cur = node.prev
@@ -70,6 +68,8 @@ M.delete = function(node)
 			M.cur = node.next
 		end
 	end
+	node.next.prev = node.prev
+	node.prev.next = node.next
 	node.prev = node
 	node.next = node
 end
@@ -134,10 +134,9 @@ M.jump_back = function()
 		if not M.cur.prev.root then
 			M.cur = M.cur.prev
 		end
-		M.setpos()
-		return
+	else
+		M.insert(node)
 	end
-	M.insert(node)
 	M.setpos()
 end
 
