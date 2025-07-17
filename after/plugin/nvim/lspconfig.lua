@@ -49,6 +49,9 @@ if not vim.g.vscode then
 		on_init = function(client, _)
 			client.server_capabilities.documentFormattingProvider = false
 			client.server_capabilities.semanticTokensProvider = false
+			local root = vim.fn.getcwd()
+			client.config.settings.basedpyright.analysis.extraPaths = { root }
+			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
 		end,
 		settings = {
 			basedpyright = {
