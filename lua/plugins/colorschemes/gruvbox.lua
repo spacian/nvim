@@ -5,7 +5,6 @@ return {
 		priority = 1000,
 		lazy = true,
 		config = function()
-			vim.cmd("colorscheme gruvbox")
 			require("gruvbox").setup({
 				terminal_colors = false,
 				undercurl = true,
