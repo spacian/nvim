@@ -2,7 +2,7 @@ return {
 	{
 		"linux-cultist/venv-selector.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
@@ -12,7 +12,7 @@ return {
 		branch = "regexp",
 		config = function()
 			local venv = require("venv-selector")
-			venv.setup()
+			venv.setup({})
 
 			local function exists(file)
 				local ok, err, code = os.rename(file, file)
