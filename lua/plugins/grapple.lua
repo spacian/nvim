@@ -118,10 +118,14 @@ return {
 				end
 			end, { noremap = true })
 
+			local is_lazygit_buffer = function()
+				return vim.api.nvim_buf_get_name(0):match("lazygit") == "lazygit"
+			end
+
 			vim.api.nvim_create_autocmd("TermOpen", {
 				pattern = "*",
 				callback = function()
-					if vim.api.nvim_buf_get_name(0):match(":lazygit$") == ":lazygit" then
+					if is_lazygit_buffer() then
 						return
 					end
 					vim.opt_local.statuscolumn = ""
@@ -144,7 +148,7 @@ return {
 
 			vim.api.nvim_create_autocmd("TermClose", {
 				callback = function()
-					if vim.api.nvim_buf_get_name(0):match(":lazygit$") == ":lazygit" then
+					if is_lazygit_buffer() then
 						return
 					end
 					if grapple.exists({ name = "term" }) then

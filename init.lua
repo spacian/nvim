@@ -41,7 +41,6 @@ if not vim.g.vscode then
 	vim.o.ruler = false
 	vim.o.showmode = false
 	vim.o.jumpoptions = "stack,view"
-	vim.o.scrolloff = 3
 	vim.opt.sessionoptions:remove("terminal")
 	vim.opt.diffopt = {
 		"internal",

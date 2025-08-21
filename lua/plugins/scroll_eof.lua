@@ -1,7 +1,16 @@
 return {
 	{
 		"Aasim-A/scrollEOF.nvim",
-		enabled = not vim.g.vscode,
-		opts = {},
+		enabled = true,
+		config = function()
+			local scrolloff = 3
+			vim.o.scrolloff = scrolloff
+			require("scrollEOF").setup()
+			vim.api.nvim_create_autocmd({ "BufWinEnter", "WinNew" }, {
+				callback = function()
+					vim.wo.scrolloff = scrolloff
+				end,
+			})
+		end,
 	},
 }
