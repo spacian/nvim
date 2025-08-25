@@ -14,6 +14,13 @@ local letter_to_level = {
 	n = hint,
 }
 
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ severity = { min = error, max = error }, count = 1, float = false })
+end, {})
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ severity = { min = error, max = error }, count = 1, float = false })
+end, {})
+
 local filter_diagnostic = function()
 	local letter = vim.fn.input("filter diagnostic jumps by type ([E]rror,[W]arning, [I]nfo, [N]ote) or [R]eset: ")
 	if letter == "R" or letter == "r" then
