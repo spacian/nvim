@@ -17,6 +17,7 @@ local letter_to_level = {
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ severity = { min = error, max = error }, count = 1, float = false })
 end, {})
+
 vim.keymap.set("n", "[d", function()
 	vim.diagnostic.jump({ severity = { min = error, max = error }, count = 1, float = false })
 end, {})
@@ -44,17 +45,21 @@ local filter_diagnostic = function()
 		vim.diagnostic.jump({ severity = { min = severity, max = severity }, count = 1, float = false })
 	end, {})
 end
+
 vim.keymap.set("n", "<leader>fd", filter_diagnostic)
+
 local enabled = {
 	virtual_lines = {
 		current_line = true,
 	},
 	virtual_text = false,
 }
+
 local disabled = {
 	virtual_lines = false,
 	virtual_text = true,
 }
+
 vim.keymap.set("n", "<leader>D", function()
 	if vim.diagnostic.config().virtual_lines then
 		vim.diagnostic.config(disabled)
@@ -71,15 +76,24 @@ vim.keymap.set("n", "<leader>D", function()
 		})
 	end
 end, {})
+
 vim.keymap.set("n", "<leader>d", function()
 	vim.diagnostic.open_float(nil, { border = "rounded" })
 end)
+
 vim.keymap.set("n", "<esc>", function()
 	vim.diagnostic.config(disabled)
 end)
 
 vim.keymap.set("n", "<s-k>", function()
-	vim.lsp.buf.hover({ border = "rounded" })
+	vim.lsp.buf.hover({
+		border = "rounded",
+		close_events = {
+			"CursorMoved",
+			"BufHidden",
+			"LspDetach",
+		},
+	})
 end)
 
 vim.diagnostic.config({

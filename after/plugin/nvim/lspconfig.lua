@@ -65,6 +65,8 @@ if not vim.g.vscode then
 						reportUnboundVariable = "error",
 						reportMissingModuleSource = "error",
 						reportUnusedVariable = "warning",
+						reportUnusedFunction = "warning",
+						reportUnusedImport = "warning",
 					},
 				},
 			},
