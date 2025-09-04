@@ -52,6 +52,9 @@ return {
 				},
 			},
 			completion = {
+				menu = {
+					border = "single",
+				},
 				list = {
 					selection = {
 						preselect = true,
@@ -61,6 +64,9 @@ return {
 				documentation = {
 					auto_show = true,
 					auto_show_delay_ms = 1000,
+					window = {
+						border = "rounded",
+					},
 				},
 				accept = {
 					auto_brackets = {
