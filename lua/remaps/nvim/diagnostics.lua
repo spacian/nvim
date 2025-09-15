@@ -83,6 +83,11 @@ end)
 
 vim.keymap.set("n", "<esc>", function()
 	vim.diagnostic.config(disabled)
+	for _, win in pairs(vim.api.nvim_list_wins()) do
+		if vim.api.nvim_win_get_config(win).relative ~= "" then
+			vim.api.nvim_win_close(win, false)
+		end
+	end
 end)
 
 vim.keymap.set("n", "<s-k>", function()
