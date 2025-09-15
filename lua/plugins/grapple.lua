@@ -132,7 +132,7 @@ return {
 					grapple.tag({ name = "term" })
 					vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
 					vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
-					vim.keymap.set({ "t", "n" }, "<c-u><c-o>", function()
+					vim.keymap.set({ "t", "n" }, "<c-u><c-i>", function()
 						vim.cmd("silent bd!")
 					end, { buffer = true })
 					vim.keymap.set({ "t", "n" }, "<c-u><c-u>", function()

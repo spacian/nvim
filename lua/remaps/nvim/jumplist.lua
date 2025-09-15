@@ -74,10 +74,24 @@ M.delete = function(node)
 	node.next = node
 end
 
+---@param node Node
+---@return Node
+local validate_lnum_col = function(node)
+	local lnum = vim.api.nvim_buf_line_count(node.bufnr)
+	lnum = math.max(1, math.min(node.lnum, lnum))
+	local line = vim.api.nvim_buf_get_lines(node.bufnr, lnum - 1, lnum, false)[1] or ""
+	local col = math.max(1, math.min(node.col, #line + 1))
+	node.lnum = lnum
+	node.col = col
+	return node
+end
+
 ---@param a Node
 ---@param b Node
 ---@return boolean
 local nodes_equal_soft = function(a, b)
+    a = validate_lnum_col(a)
+    b = validate_lnum_col(b)
 	return not a.root and not b.root and a.bufnr == b.bufnr and math.abs(a.lnum - b.lnum) < soft_equal_line_count
 end
 
@@ -86,15 +100,6 @@ end
 ---@return boolean
 local nodes_equal_hard = function(a, b)
 	return nodes_equal_soft(a, b) and a.lnum == b.lnum
-end
-
-local validate_lnum_col = function()
-	local lnum = vim.api.nvim_buf_line_count(M.cur.bufnr)
-	lnum = math.max(1, math.min(M.cur.lnum, lnum))
-	local line = vim.api.nvim_buf_get_lines(M.cur.bufnr, lnum - 1, lnum, false)[1] or ""
-	local col = math.max(1, math.min(M.cur.col, #line + 1))
-	M.cur.lnum = lnum
-	M.cur.col = col
 end
 
 M.setpos = function()
@@ -106,7 +111,7 @@ M.setpos = function()
 		if M.cur.bufnr ~= current_buf then
 			vim.cmd("b" .. M.cur.bufnr)
 		end
-		validate_lnum_col()
+		M.cur = validate_lnum_col(M.cur)
 		vim.fn.setpos(".", { 0, M.cur.lnum, M.cur.col, 0 })
 	end
 end
