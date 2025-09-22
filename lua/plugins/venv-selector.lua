@@ -9,7 +9,6 @@ return {
 			"mfussenegger/nvim-dap",
 			"mfussenegger/nvim-dap-python",
 		},
-		branch = "regexp",
 		config = function()
 			local venv = require("venv-selector")
 			venv.setup({})

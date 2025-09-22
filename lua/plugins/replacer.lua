@@ -2,16 +2,17 @@ return {
 	{
 		"gabrielpoca/replacer.nvim",
 		enabled = not vim.g.vscode,
-        lazy = false,
+		lazy = false,
 		config = function()
 			require("replacer").setup({ rename_files = false })
-			vim.keymap.set("n", "<leader>m", function()
-				if vim.bo.buftype == "quickfix" then
-					require("replacer").run()
-				else
-					print("replacer: Not a quickfix buffer.")
-				end
-			end, { silent = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "qf", -- quickfix buffer
+				callback = function(args)
+					vim.keymap.set("n", "<leader>m", function()
+						require("replacer").run()
+					end, { silent = true, buffer = args.buf })
+				end,
+			})
 		end,
 	},
 }

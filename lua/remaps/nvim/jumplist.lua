@@ -90,9 +90,12 @@ end
 ---@param b Node
 ---@return boolean
 local nodes_equal_soft = function(a, b)
-    a = validate_lnum_col(a)
-    b = validate_lnum_col(b)
-	return not a.root and not b.root and a.bufnr == b.bufnr and math.abs(a.lnum - b.lnum) < soft_equal_line_count
+	if a.root or b.root or a.bufnr ~= b.bufnr then
+		return false
+	end
+	a = validate_lnum_col(a)
+	b = validate_lnum_col(b)
+	return math.abs(a.lnum - b.lnum) < soft_equal_line_count
 end
 
 ---@param a Node
