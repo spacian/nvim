@@ -6,8 +6,6 @@ return {
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
-			"mfussenegger/nvim-dap",
-			"mfussenegger/nvim-dap-python",
 		},
 		config = function()
 			local venv = require("venv-selector")
