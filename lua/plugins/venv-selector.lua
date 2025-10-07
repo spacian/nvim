@@ -7,9 +7,28 @@ return {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
 		},
+		-- commit = "5e78f5cb11454ec055810f17ddf92e28173c8c68",
 		config = function()
 			local venv = require("venv-selector")
-			venv.setup({})
+			venv.setup({
+				options = {
+					require_lsp_activation = false,
+					enable_cached_venvs = false,
+					statusline_func = {
+						lualine = function()
+							local path = venv.venv()
+							if not path or path == "" then
+								return ""
+							end
+							local name = vim.fn.fnamemodify(path, ":h:t")
+							if not name or name == "" then
+								return ""
+							end
+							return "venv: " .. name
+						end,
+					},
+				},
+			})
 
 			local function exists(file)
 				local ok, err, code = os.rename(file, file)
@@ -45,7 +64,9 @@ return {
 				end
 				local python_path = vim.fn.getcwd() .. "/.venv/Scripts/python.exe"
 				if exists(python_path) then
-					venv.activate_from_path(python_path)
+					vim.defer_fn(function()
+						venv.activate_from_path(python_path)
+					end, 500)
 				end
 			end
 
@@ -67,7 +88,7 @@ return {
 			})
 
 			vim.api.nvim_create_user_command("VenvCurrent", function()
-				print(venv.python())
+				print((vim.fn.fnamemodify(venv.venv(), ":h"):gsub("\\", "/")))
 			end, {})
 		end,
 	},
