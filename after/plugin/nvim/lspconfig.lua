@@ -67,6 +67,7 @@ if not vim.g.vscode then
 						reportUnusedVariable = "warning",
 						reportUnusedFunction = "warning",
 						reportUnusedImport = "warning",
+						reportUnusedParameter = "warning",
 					},
 				},
 			},
