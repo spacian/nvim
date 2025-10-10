@@ -2,8 +2,6 @@ vim.keymap.set("n", "M", function()
 	local c = vim.fn.getcharstr()
 	if c:match("%l") then
 		c = c:upper()
-	elseif c:match("%u") then
-		c = c:lower()
 	end
 	vim.cmd("normal! m" .. c)
 	vim.schedule(function()
@@ -15,18 +13,16 @@ vim.keymap.set("n", "m", function()
 	local c = vim.fn.getcharstr()
 	if c:match("%l") then
 		c = c:upper()
-	elseif c:match("%u") then
-		c = c:lower()
 	end
 	local ok, pos = pcall(vim.api.nvim_get_mark, c, {})
 	if ok and pos[1] ~= 0 then
 		vim.cmd("normal! `" .. c .. "zz")
 	else
-		vim.notify("E20: Mark not set", vim.log.levels.ERROR)
+		vim.notify("E20: Mark " .. c .. " not set", vim.log.levels.ERROR)
 	end
 end, {})
 
-vim.keymap.set({ "n" }, "<Leader>X", function()
+vim.keymap.set({ "n" }, "<Leader>md", function()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local cur_line = vim.fn.line(".")
 	local all_marks_local = vim.fn.getmarklist(bufnr)
