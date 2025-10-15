@@ -17,6 +17,7 @@ end
 return {
 	{
 		"spacian/lsp_signature.nvim",
+		enabled = not vim.g.vscode,
 		config = function()
 			require("lsp_signature").setup({
 				bind = true,

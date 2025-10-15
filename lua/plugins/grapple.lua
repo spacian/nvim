@@ -53,6 +53,25 @@ return {
 				end)
 			end
 
+			vim.keymap.set("n", "<leader>oT", function()
+				if not grapple.exists({ name = "term" }) then
+					local folder = vim.fn.expand("%:h")
+					local enter = vim.api.nvim_replace_termcodes("<enter>", true, true, true)
+					if vim.loop.os_uname().sysname == "Windows_NT" then
+						vim.cmd("term pwsh")
+						vim.fn.feedkeys("a")
+						vim.fn.feedkeys("cd " .. folder .. enter)
+						vim.fn.feedkeys("cls" .. enter)
+					else
+						vim.cmd("term")
+						vim.fn.feedkeys("a")
+						vim.fn.feedkeys("cd " .. folder .. enter)
+					end
+				else
+					grapple.select({ name = "term" })
+					vim.fn.feedkeys("a")
+				end
+			end)
 			vim.keymap.set("n", "<leader>ot", function()
 				if not grapple.exists({ name = "term" }) then
 					if vim.loop.os_uname().sysname == "Windows_NT" then
