@@ -7,11 +7,11 @@ return {
 		config = function()
 			local kanagawa = require("kanagawa")
 			kanagawa.setup({
-				commentStyle = {},
-				functionStyle = {},
-				keywordStyle = { italic = false },
-				statementStyle = {},
-				typeStyle = {},
+				commentStyle = { bold = false },
+				functionStyle = { bold = false },
+				keywordStyle = { italic = false, bold = false },
+				statementStyle = { bold = false },
+				typeStyle = { bold = false },
 				transparent = false,
 				dimInactive = false,
 				terminalColors = false,
@@ -21,10 +21,12 @@ return {
 				},
 				overrides = function(colors)
 					return {
-						["@variable.builtin"] = { italic = false },
+						["@variable.builtin"] = { italic = false, bold = false },
+						["@keyword.operator"] = { italic = false, bold = false },
+						["@string.escape"] = { italic = false, bold = false },
 						Visual = { bg = colors.palette.winterGreen },
-						String = { italic = true },
-						Boolean = { italic = true },
+						String = { italic = true, bold = false },
+						Boolean = { italic = true, bold = false },
 					}
 				end,
 				theme = "wave",
