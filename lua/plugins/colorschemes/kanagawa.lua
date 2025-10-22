@@ -23,7 +23,11 @@ return {
 					return {
 						["@variable.builtin"] = { italic = false, bold = false },
 						["@keyword.operator"] = { italic = false, bold = false },
-						["@string.escape"] = { italic = false, bold = false },
+						["@keyword.return"] = { italic = false, bold = true },
+						-- ["@function.method"] = { italic = false, bold = true },
+						-- ["@function.call"] = { italic = false, bold = true },
+						["@string.escape"] = { italic = true, bold = true },
+						Function = { italic = false, bold = true },
 						Visual = { bg = colors.palette.winterGreen },
 						String = { italic = true, bold = false },
 						Boolean = { italic = true, bold = false },
