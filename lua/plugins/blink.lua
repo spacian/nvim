@@ -91,6 +91,8 @@ return {
 				["<c-h>"] = { "hide", "fallback" },
 				["<c-j>"] = { "select_next", "fallback" },
 				["<c-k>"] = { "select_prev", "fallback" },
+				["<c-u>"] = { "scroll_documentation_up", "fallback" },
+				["<c-m>"] = { "scroll_documentation_down", "fallback" },
 			},
 
 			appearance = {
