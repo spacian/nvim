@@ -1,62 +1,62 @@
 ---@param bufname string|nil
 ---@return boolean
 BufIsSpecial = function(bufname)
-	if bufname == nil then
-		if vim.bo.buftype ~= "" then
-			return true
-		end
-		bufname = vim.api.nvim_buf_get_name(0)
-	end
-	return bufname == ""
-		or bufname:match("oil://")
-		or bufname:match("replacer://")
-		or bufname:match("neo%-tree filesystem")
-		or bufname:match("term://")
+  if bufname == nil then
+    if vim.bo.buftype ~= "" then
+      return true
+    end
+    bufname = vim.api.nvim_buf_get_name(0)
+  end
+  return bufname == ""
+    or bufname:match("oil://")
+    or bufname:match("replacer://")
+    or bufname:match("neo%-tree filesystem")
+    or bufname:match("term://")
 end
 
 require("remaps")
 require("config.lazy")
 if not vim.g.vscode then
-	require("autocmd")
-	function Line(line, width)
-		local s = tostring(line)
-		local pad = width - #s
-		if pad > 0 then
-			return string.rep(" ", pad) .. s
-		else
-			return s
-		end
-	end
-	vim.o.wrap = true
-	vim.o.signcolumn = "yes:1"
-	vim.o.foldcolumn = "0"
-	vim.o.number = false
-	vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 4)}%s"
-	vim.opt.fillchars = { eob = " " }
-	vim.opt.formatoptions:remove("t")
-	vim.o.textwidth = 0
-	vim.o.cursorline = true
-	vim.o.cmdheight = 1
-	vim.o.showcmd = false
-	vim.o.ruler = false
-	vim.o.showmode = false
-	vim.o.jumpoptions = "stack,view"
-	vim.opt.sessionoptions:remove("terminal")
-	vim.opt.diffopt = {
-		"internal",
-		"filler",
-		"closeoff",
-		"hiddenoff",
-		"algorithm:histogram",
-		"indent-heuristic",
-		"linematch:200",
-		"context:99999",
-	}
+  require("autocmd")
+  function Line(line, width)
+    local s = tostring(line)
+    local pad = width - #s
+    if pad > 0 then
+      return string.rep(" ", pad) .. s
+    else
+      return s
+    end
+  end
+  vim.o.wrap = true
+  vim.o.signcolumn = "yes:1"
+  vim.o.foldcolumn = "0"
+  vim.o.number = false
+  vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 4)}%s"
+  vim.opt.fillchars = { eob = " " }
+  vim.opt.formatoptions:remove("t")
+  vim.o.textwidth = 0
+  vim.o.cursorline = true
+  vim.o.cmdheight = 1
+  vim.o.showcmd = false
+  vim.o.ruler = false
+  vim.o.showmode = false
+  vim.o.jumpoptions = "stack,view"
+  vim.opt.sessionoptions:remove("terminal")
+  vim.opt.diffopt = {
+    "internal",
+    "filler",
+    "closeoff",
+    "hiddenoff",
+    "algorithm:histogram",
+    "indent-heuristic",
+    "linematch:200",
+    "context:99999",
+  }
 end
 if vim.loop.os_uname().sysname == "Windows_NT" then
-	vim.cmd("language en_US")
+  vim.cmd("language en_US")
 else
-	vim.o.wildignorecase = true
+  vim.o.wildignorecase = true
 end
 vim.o.shada = ""
 vim.o.splitright = true

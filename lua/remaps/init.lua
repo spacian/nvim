@@ -1,6 +1,6 @@
 require("remaps.remaps")
 if vim.g.vscode then
-	require("remaps.code")
+  require("remaps.code")
 else
-	require("remaps.nvim")
+  require("remaps.nvim")
 end
