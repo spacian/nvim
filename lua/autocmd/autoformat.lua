@@ -7,6 +7,14 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     vim.fn.setpos(".", save_cursor)
   end,
 })
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = "*.lua",
+  callback = function()
+    local save_cursor = vim.fn.getpos(".")
+    vim.cmd("silent !stylua %:p")
+    vim.fn.setpos(".", save_cursor)
+  end,
+})
 
 local function trim_whitespace()
   vim.cmd([[%s/\s\+$//e]])

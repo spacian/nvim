@@ -7,15 +7,15 @@ if not vim.g.vscode then
       "gopls",
       "lua_ls",
       "jsonls",
-      -- "stylua",
+      "stylua",
+      "isort",
+      "black",
       "taplo",
       "yaml-language-server",
       "lemminx",
     },
   })
 
-  local null_ls = require("null-ls")
-  null_ls.register({ sources = { null_ls.builtins.formatting.stylua } })
 
   local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -133,6 +133,7 @@ if not vim.g.vscode then
     vim.cmd("noa w|e")
   end, {})
 
+  local null_ls = require("null-ls")
   null_ls.setup({
     fallback_severity = vim.diagnostic.severity.HINT,
     sources = {
