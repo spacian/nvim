@@ -9,6 +9,9 @@ return {
         },
       })
       vim.keymap.set("n", "S", substitute.operator, { noremap = true })
+      vim.keymap.set("n", "<leader>S", function()
+        substitute.operator({ register = "+" })
+      end, { noremap = true })
     end,
   },
 }
