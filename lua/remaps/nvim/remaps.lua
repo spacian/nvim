@@ -39,7 +39,7 @@ vim.keymap.set({ "n" }, "#", function()
   vim.api.nvim_feedkeys("#", "n", true)
 end, { noremap = true })
 
-vim.keymap.set({ "n" }, "gg", function()
+vim.keymap.set({ "n", "x" }, "gg", function()
   jumplist.register(1)
   if vim.v.count > 0 then
     vim.api.nvim_feedkeys(vim.v.count .. "gg", "n", true)
@@ -48,7 +48,7 @@ vim.keymap.set({ "n" }, "gg", function()
   end
 end, { noremap = true })
 
-vim.keymap.set({ "n" }, "G", function()
+vim.keymap.set({ "n", "x" }, "G", function()
   jumplist.register(1)
   vim.api.nvim_feedkeys("G$", "n", true)
 end, { noremap = true })
