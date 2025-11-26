@@ -22,16 +22,16 @@ vim.keymap.set({ "n", "v" }, "<c-u>", "10k", { noremap = true })
 vim.keymap.set({ "n" }, "<leader>o", "", { noremap = true })
 vim.keymap.set({ "n" }, "gwip", function()
   vim.o.textwidth = 88
-  vim.api.nvim_feedkeys("gwip0", "n", false)
+  vim.api.nvim_feedkeys("gwip^", "n", false)
   vim.o.textwidth = 0
 end, { noremap = true })
 vim.keymap.set({ "n" }, "gwl", function()
   vim.o.textwidth = 88
-  vim.api.nvim_feedkeys("gwl0", "n", false)
+  vim.api.nvim_feedkeys("gwl^", "n", false)
   vim.o.textwidth = 0
 end, { noremap = true })
 vim.keymap.set({ "x" }, "gw", function()
   vim.o.textwidth = 88
-  vim.api.nvim_feedkeys("gw0", "n", false)
+  vim.api.nvim_feedkeys("gw^", "n", false)
   vim.o.textwidth = 0
 end, { noremap = true })
