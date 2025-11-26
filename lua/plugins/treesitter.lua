@@ -14,7 +14,6 @@ return {
           "lua",
           "luadoc",
           "luap",
-          "markdown",
           "powershell",
           "python",
           "toml",
@@ -26,7 +25,6 @@ return {
         highlight = {
           enable = not vim.g.vscode,
           additional_vim_regex_highlighting = false,
-          disable = { "latex" },
         },
         incremental_selection = {
           enable = true,
