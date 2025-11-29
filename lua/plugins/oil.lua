@@ -39,7 +39,7 @@ return {
         oil.open(vim.fn.expand("%:h"), {}, function()
           vim.cmd("silent! call search('\\V' . escape('" .. file .. "', '\\') , 'w')")
         end)
-      end, { noremap = true })
+      end)
 
       vim.api.nvim_create_user_command("Cd", function()
         local cwd = oil.get_current_dir()

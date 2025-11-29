@@ -8,7 +8,7 @@ return {
       persisted.setup({
         autosave = false,
         silent = true,
-        ignored_dirs = { "oil://", "replacer://" },
+        ignored_dirs = { "oil://" },
       })
       vim.keymap.set({ "n" }, "<leader>oP", function()
         local buffer_name = vim.api.nvim_buf_get_name(0)

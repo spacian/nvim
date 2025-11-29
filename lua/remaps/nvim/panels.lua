@@ -11,14 +11,14 @@ vim.api.nvim_create_user_command("CleanupBuffers", function()
   end
 end, {})
 
-vim.keymap.set({ "", "l", "t" }, "<c-up>", "<c-w>-", { noremap = true })
-vim.keymap.set({ "", "l", "t" }, "<c-down>", "<c-w>+", { noremap = true })
-vim.keymap.set({ "", "l", "t" }, "<c-left>", "<c-w>>", { noremap = true })
-vim.keymap.set({ "", "l", "t" }, "<c-right>", "<c-w><", { noremap = true })
+vim.keymap.set({ "", "l", "t" }, "<c-up>", "<c-w>-")
+vim.keymap.set({ "", "l", "t" }, "<c-down>", "<c-w>+")
+vim.keymap.set({ "", "l", "t" }, "<c-left>", "<c-w>>")
+vim.keymap.set({ "", "l", "t" }, "<c-right>", "<c-w><")
 
-vim.keymap.set({ "n" }, "<c-s>", ":w<enter>", { noremap = true })
+vim.keymap.set({ "n" }, "<c-s>", ":w<enter>")
 
-vim.keymap.set({ "t" }, "<c-n>", [[<c-\><c-n>]], { noremap = true })
+vim.keymap.set({ "t" }, "<c-n>", [[<c-\><c-n>]])
 
 vim.keymap.set({ "", "l", "t" }, "<a-h>", function()
   vim.api.nvim_feedkeys(
@@ -26,7 +26,7 @@ vim.keymap.set({ "", "l", "t" }, "<a-h>", function()
     "n",
     true
   )
-end, { noremap = true })
+end)
 
 vim.keymap.set({ "", "l", "t" }, "<a-j>", function()
   vim.api.nvim_feedkeys(
@@ -34,7 +34,7 @@ vim.keymap.set({ "", "l", "t" }, "<a-j>", function()
     "n",
     true
   )
-end, { noremap = true })
+end)
 
 vim.keymap.set({ "", "l", "t" }, "<a-k>", function()
   vim.api.nvim_feedkeys(
@@ -42,7 +42,7 @@ vim.keymap.set({ "", "l", "t" }, "<a-k>", function()
     "n",
     true
   )
-end, { noremap = true })
+end)
 
 vim.keymap.set({ "", "l", "t" }, "<a-l>", function()
   vim.api.nvim_feedkeys(
@@ -50,7 +50,7 @@ vim.keymap.set({ "", "l", "t" }, "<a-l>", function()
     "n",
     true
   )
-end, { noremap = true })
+end)
 
 vim.keymap.set({ "", "l", "t" }, "<c-a-h>", function()
   if vim.fn.winnr("$") == 1 then
@@ -67,7 +67,7 @@ vim.keymap.set({ "", "l", "t" }, "<c-a-h>", function()
       true
     )
   end
-end, { noremap = true })
+end)
 
 vim.keymap.set({ "", "l", "t" }, "<c-a-j>", function()
   if vim.fn.winnr("$") == 1 then
@@ -84,7 +84,7 @@ vim.keymap.set({ "", "l", "t" }, "<c-a-j>", function()
       true
     )
   end
-end, { noremap = true })
+end)
 
 vim.keymap.set({ "", "l", "t" }, "<c-a-k>", function()
   if vim.fn.winnr("$") == 1 then
@@ -96,7 +96,7 @@ vim.keymap.set({ "", "l", "t" }, "<c-a-k>", function()
       true
     )
   end
-end, { noremap = true })
+end)
 
 vim.keymap.set({ "", "l", "t" }, "<c-a-l>", function()
   if vim.fn.winnr("$") == 1 then
@@ -108,4 +108,4 @@ vim.keymap.set({ "", "l", "t" }, "<c-a-l>", function()
       true
     )
   end
-end, { noremap = true })
+end)

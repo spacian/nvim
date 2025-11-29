@@ -1,8 +1,8 @@
 require("remaps.code.utils")
 require("remaps.code.jumps")
 
-vim.keymap.set({ "n" }, "<c-o>", Jump_back, { noremap = true })
-vim.keymap.set({ "n" }, "<c-i>", Jump_forw, { noremap = true })
+vim.keymap.set({ "n" }, "<c-o>", Jump_back)
+vim.keymap.set({ "n" }, "<c-i>", Jump_forw)
 
 local do_wrap = true
 

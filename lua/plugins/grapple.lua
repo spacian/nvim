@@ -128,7 +128,7 @@ return {
           vim.cmd("w|bd")
           return
         end
-      end, { noremap = true })
+      end)
 
       vim.keymap.set({ "t" }, "<c-q>", function()
         if vim.fn.winnr("$") > 1 then
@@ -142,7 +142,7 @@ return {
           vim.api.nvim_feedkeys(keys, "n", false)
           return
         end
-      end, { noremap = true })
+      end)
 
       local is_lazygit_buffer = function()
         return vim.api.nvim_buf_get_name(0):match("lazygit") == "lazygit"
