@@ -26,15 +26,6 @@ return {
                 statuscolumn = "",
               },
             },
-            input = {
-              keys = {
-                ["<a-j>"] = {
-                  "preview_scroll_down",
-                  mode = { "i", "n" },
-                },
-                ["<a-k>"] = { "preview_scroll_up", mode = { "i", "n" } },
-              },
-            },
           },
         },
       })
@@ -59,7 +50,7 @@ return {
         snacks.picker.grep()
       end)
 
-      vim.keymap.set("n", "<leader>fw", function()
+      vim.keymap.set({ "n", "v" }, "<leader>fw", function()
         jumplist.register(1)
         snacks.picker.grep_word()
       end)
@@ -89,11 +80,6 @@ return {
         snacks.picker.resume()
       end)
 
-      vim.keymap.set("n", "<leader>oq", function()
-        jumplist.register(1)
-        snacks.picker.qflist()
-      end)
-
       vim.keymap.set("n", "<leader>od", function()
         jumplist.register(1)
         snacks.picker.diagnostics()
@@ -103,11 +89,6 @@ return {
         jumplist.register(1)
         snacks.picker.git_diff()
       end)
-
-      -- vim.keymap.set("n", "<leader>os", function()
-      -- 	jumplist.register(1)
-      -- 	snacks.picker.lsp_symbols()
-      -- end)
     end,
   },
 }
