@@ -6,9 +6,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       vim.g.lazygit_floating_window_scaling_factor = 1.0
-      vim.keymap.set({ "n" }, "<leader>gr", function()
-        require("telescope").extensions.lazygit.lazygit()
-      end, { noremap = true })
       vim.keymap.set({ "n" }, "<leader>gg", function()
         vim.cmd("LazyGit")
       end)
