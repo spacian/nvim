@@ -7,6 +7,9 @@ return {
       local jumplist = require("remaps.nvim.jumplist")
       local snacks = require("snacks")
       snacks.setup({
+        scratch = {
+          ft = "markdown",
+        },
         picker = {
           layout = {
             fullscreen = true,
@@ -88,6 +91,16 @@ return {
       vim.keymap.set("n", "<leader>og", function()
         jumplist.register(1)
         snacks.picker.git_diff()
+      end)
+
+      vim.keymap.set("n", "<leader>oN", function()
+        jumplist.register(1)
+        snacks.scratch.select()
+      end)
+
+      vim.keymap.set("n", "<leader>on", function()
+        jumplist.register(1)
+        snacks.scratch()
       end)
     end,
   },
