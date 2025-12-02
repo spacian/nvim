@@ -30,22 +30,26 @@ return {
       keymaps = {
         view = {
           quit = "q", -- Close diff tab
-          -- toggle_explorer = "<leader>b", -- Toggle explorer visibility (explorer mode only)
-          next_hunk = "]g", -- Jump to next change
-          prev_hunk = "[g", -- Jump to previous change
-          -- next_file = "]f", -- Next file in explorer mode
-          -- prev_file = "[f", -- Previous file in explorer mode
+          toggle_explorer = "<leader>b", -- Toggle explorer visibility (explorer mode only)
+          next_hunk = "J", -- Jump to next change
+          prev_hunk = "K", -- Jump to previous change
+          next_file = "L", -- Next file in explorer mode
+          prev_file = "H", -- Previous file in explorer mode
         },
-        -- explorer = {
-        --   select = "<CR>", -- Open diff for selected file
-        --   hover = "K", -- Show file diff preview
-        --   refresh = "R", -- Refresh git status
-        -- },
+        explorer = {
+          select = "<CR>", -- Open diff for selected file
+          hover = "K", -- Show file diff preview
+          refresh = "R", -- Refresh git status
+        },
       },
     })
 
     vim.keymap.set("n", "<leader>gd", function()
       vim.cmd("CodeDiff file HEAD")
+    end)
+
+    vim.keymap.set("n", "<leader>og", function()
+      vim.cmd("CodeDiff")
     end)
   end,
 }

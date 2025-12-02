@@ -88,11 +88,6 @@ return {
         snacks.picker.diagnostics()
       end)
 
-      vim.keymap.set("n", "<leader>og", function()
-        jumplist.register(1)
-        snacks.picker.git_diff()
-      end)
-
       vim.keymap.set("n", "<leader>oN", function()
         jumplist.register(1)
         snacks.scratch.select()
