@@ -10,3 +10,9 @@ vim.api.nvim_create_autocmd({ "VimLeavePre", "BufLeave", "FocusLost" }, {
     vim.cmd("silent noa w")
   end,
 })
+
+vim.api.nvim_create_autocmd("FocusLost", {
+  callback = function()
+    vim.cmd("stopinsert")
+  end,
+})
