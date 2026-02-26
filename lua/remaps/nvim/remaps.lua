@@ -39,6 +39,12 @@ vim.keymap.set({ "n" }, "#", function()
   vim.api.nvim_feedkeys("#", "n", true)
 end)
 
+vim.keymap.set({ "n" }, "gf", function()
+  jumplist.register(1)
+  vim.cmd("set nohls")
+  vim.api.nvim_feedkeys("gf", "n", true)
+end)
+
 vim.keymap.set({ "n", "x" }, "gg", function()
   jumplist.register(1)
   if vim.v.count > 0 then

@@ -1,7 +1,6 @@
 return {
   "esmuellert/codediff.nvim",
   enabled = not vim.g.vscode,
-  dependencies = { "MunifTanjim/nui.nvim" },
   config = function()
     require("codediff").setup({
       -- Highlight configuration
