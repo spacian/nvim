@@ -16,7 +16,6 @@ if not vim.g.vscode then
     },
   })
 
-
   local capabilities = require("blink.cmp").get_lsp_capabilities()
 
   vim.lsp.config("lua_ls", {
@@ -120,7 +119,11 @@ if not vim.g.vscode then
     capabilities = capabilities,
   })
 
-  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup({
+    automatic_enable = {
+      exclude = { "stylua" },
+    },
+  })
 
   local cspell_last_session = ""
   local force_cspell_reload = false
