@@ -13,6 +13,8 @@ vim.api.nvim_create_autocmd({ "VimLeavePre", "BufLeave", "FocusLost" }, {
 
 vim.api.nvim_create_autocmd("FocusLost", {
   callback = function()
-    vim.cmd("stopinsert")
+    if not BufIsSpecial() then
+      vim.cmd("stopinsert")
+    end
   end,
 })

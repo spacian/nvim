@@ -101,7 +101,7 @@ return {
               path = last_bufname,
             })
           end
-          if not BufIsSpecial(bufname) then
+          if not BufIsSpecial() then
             last_bufname = bufname
             vim.o.cursorline = true
           end
