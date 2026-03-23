@@ -48,7 +48,7 @@ return {
             print("there is no buffer tagged '" .. tags[i] .. "'")
           end
         end)
-        vim.keymap.set("n", "<leader>t" .. tags[i], function()
+        vim.keymap.set("n", "<leader>M" .. tags[i], function()
           grapple.tag({ name = tags[i] })
         end)
       end
@@ -93,18 +93,20 @@ return {
       local last_bufname = ""
       vim.api.nvim_create_autocmd({ "BufEnter" }, {
         callback = function()
-          local bufname = vim.api.nvim_buf_get_name(0)
-          if last_bufname ~= "" and bufname ~= last_bufname then
-            grapple.tag({
-              name = "prev",
-              scope = "prev",
-              path = last_bufname,
-            })
-          end
-          if not BufIsSpecial() then
-            last_bufname = bufname
-            vim.o.cursorline = true
-          end
+          vim.schedule(function()
+            local bufname = vim.api.nvim_buf_get_name(0)
+            if last_bufname ~= "" and bufname ~= last_bufname then
+              grapple.tag({
+                name = "prev",
+                scope = "prev",
+                path = last_bufname,
+              })
+            end
+            if not BufIsSpecial() then
+              last_bufname = bufname
+              vim.o.cursorline = true
+            end
+          end)
         end,
       })
 
