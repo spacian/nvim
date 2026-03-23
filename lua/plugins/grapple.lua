@@ -160,6 +160,19 @@ return {
           grapple.tag({ name = "term" })
           vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
           vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
+          vim.keymap.set({ "t" }, "<c-u><c-o>", function()
+            if not grapple.exists({ name = "prev", scope = "prev" }) then
+              return
+            end
+            local folder = last_bufname:match("(.*)\\.*")
+            if folder ~= nil then
+              vim.fn.feedkeys(
+                "cd "
+                  .. folder
+                  .. vim.api.nvim_replace_termcodes("<enter>", true, true, true)
+              )
+            end
+          end, { buffer = true })
           vim.keymap.set({ "t", "n" }, "<c-u><c-i>", function()
             vim.cmd("silent bd!")
           end, { buffer = true })
