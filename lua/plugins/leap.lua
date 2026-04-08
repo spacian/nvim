@@ -1,6 +1,6 @@
 return {
   "https://codeberg.org/andyg/leap.nvim",
-  enabled = true,
+  enabled = false,
   lazy = false,
   config = function()
     local jumplist = require("remaps.nvim.jumplist")
