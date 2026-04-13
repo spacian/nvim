@@ -1,0 +1,7 @@
+vim.keymap.set({ "n", "x", "t" }, "<LeftMouse>", "<Nop>")
+vim.keymap.set({ "n", "x", "t" }, "<LeftMouse>", "<Nop>")
+vim.keymap.set({ "n", "x", "t" }, "<2-LeftMouse>", "<Nop>")
+vim.keymap.set({ "n", "x", "t" }, "<2-LeftMouse>", "<Nop>")
+vim.keymap.set({ "n", "x", "t" }, "<3-LeftMouse>", "<Nop>")
+vim.keymap.set({ "n", "x", "t" }, "<3-LeftMouse>", "<Nop>")
+vim.keymap.set({ "n", "x", "t" }, "<LeftDrag>", "<Nop>")
