@@ -165,9 +165,9 @@ return {
           end
           vim.opt_local.statuscolumn = ""
           grapple.tag(TERM())
-          vim.keymap.set({ "n" }, "<c-u>", "", { buffer = true, silent = true })
-          vim.keymap.set({ "n" }, "<c-d>", "", { buffer = true, silent = true })
-          vim.keymap.set({ "t" }, "<c-u><c-o>", function()
+          vim.keymap.set({ "n", "v" }, "<c-u>", "", { buffer = true, silent = true })
+          vim.keymap.set({ "n", "v" }, "<c-d>", "", { buffer = true, silent = true })
+          vim.keymap.set({ "t", "n", "v" }, "<c-u><c-o>", function()
             if not grapple.exists(PREV()) then
               return
             end
@@ -180,10 +180,10 @@ return {
               )
             end
           end, { buffer = true })
-          vim.keymap.set({ "t", "n" }, "<c-u><c-i>", function()
+          vim.keymap.set({ "t", "n", "v" }, "<c-u><c-i>", function()
             vim.cmd("silent bd!")
           end, { buffer = true })
-          vim.keymap.set({ "t", "n" }, "<c-u><c-u>", function()
+          vim.keymap.set({ "t", "n", "v" }, "<c-u><c-u>", function()
             if vim.fn.winnr("$") > 1 then
               vim.cmd("silent close")
               return
