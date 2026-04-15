@@ -1,8 +1,49 @@
--- local letters = "abcdefghijklmnopqrstuvwxyz"
--- for i = 1, #letters do
--- 	vim.keymap.set({ "n" }, "M" .. letters:sub(i, i):upper(), "m" .. letters:sub(i, i))
--- 	vim.keymap.set({ "n" }, "m" .. letters:sub(i, i):upper(), "`" .. letters:sub(i, i) .. "zz")
--- 	vim.keymap.set({ "n" }, "M" .. letters:sub(i, i), "m" .. letters:sub(i, i):upper())
--- 	vim.keymap.set({ "n" }, "m" .. letters:sub(i, i), "`" .. letters:sub(i, i):upper() .. "zz")
--- end
---
+local jumplist = require("remaps.nvim.jumplist")
+
+vim.keymap.set("n", "M", function()
+  local c = vim.fn.getcharstr()
+  if c:match("%l") then
+    c = c:upper()
+  end
+  vim.cmd("normal! m" .. c)
+  vim.schedule(function() end)
+end, {})
+
+vim.keymap.set("n", "m", function()
+  local c = vim.fn.getcharstr()
+  if c:match("%l") then
+    c = c:upper()
+  end
+  local ok, pos = pcall(vim.api.nvim_get_mark, c, {})
+  if ok and pos[1] ~= 0 then
+    jumplist.register(1)
+    vim.cmd("normal! `" .. c .. "zz")
+  else
+    vim.notify("E20: Mark " .. c .. " not set", vim.log.levels.ERROR)
+  end
+end, {})
+
+vim.keymap.set({ "n" }, "<leader>md", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local cur_line = vim.fn.line(".")
+  local all_marks_local = vim.fn.getmarklist(bufnr)
+  for _, mark in ipairs(all_marks_local) do
+    if mark.pos[2] == cur_line and string.match(mark.mark, "'[a-z]") then
+      vim.notify("Deleting mark: " .. string.sub(mark.mark, 2, 2))
+      vim.api.nvim_buf_del_mark(bufnr, string.sub(mark.mark, 2, 2))
+    end
+  end
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  local all_marks_global = vim.fn.getmarklist()
+  for _, mark in ipairs(all_marks_global) do
+    local expanded_file_name = vim.fn.fnamemodify(mark.file, ":p")
+    if
+      bufname == expanded_file_name
+      and mark.pos[2] == cur_line
+      and string.match(mark.mark, "'[A-Z]")
+    then
+      vim.notify("Deleting mark: " .. string.sub(mark.mark, 2, 2))
+      vim.api.nvim_del_mark(string.sub(mark.mark, 2, 2))
+    end
+  end
+end, {})
