@@ -1,7 +1,10 @@
+-- execute in x64 dev shell on windows!
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     enabled = true,
+    branch = "master",
     lazy = false,
     config = function()
       require("nvim-treesitter.configs").setup({
