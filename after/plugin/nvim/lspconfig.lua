@@ -13,6 +13,7 @@ if not vim.g.vscode then
       "taplo",
       "yaml-language-server",
       "lemminx",
+      "tree-sitter-cli",
     },
   })
 

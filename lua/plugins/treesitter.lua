@@ -3,40 +3,33 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    enabled = true,
-    branch = "master",
+    enabled = false,
+    branch = "main",
     lazy = false,
+    build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "bash",
-          "csv",
-          "go",
-          "json",
-          "jsonc",
-          "lua",
-          "luadoc",
-          "luap",
-          "powershell",
-          "python",
-          "toml",
-          "regex",
-          "vimdoc",
-          "xml",
-          "yaml",
-        },
-        highlight = {
-          enable = not vim.g.vscode,
-          additional_vim_regex_highlighting = false,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            node_incremental = "v",
-            node_decremental = "V",
-            scope_incremental = false,
-          },
-        },
+      require("nvim-treesitter").install({
+        "bash",
+        "csv",
+        "go",
+        "json",
+        "jsonc",
+        "lua",
+        "luadoc",
+        "luap",
+        "powershell",
+        "python",
+        "toml",
+        "regex",
+        "vimdoc",
+        "xml",
+        "yaml",
+      })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "*",
+        callback = function()
+          vim.treesitter.start()
+        end,
       })
     end,
   },
