@@ -3,62 +3,23 @@ local info = vim.diagnostic.severity.INFO
 local warn = vim.diagnostic.severity.WARN
 local error = vim.diagnostic.severity.ERROR
 
-local letter_to_level = {
-  E = error,
-  W = warn,
-  I = info,
-  N = hint,
-  e = error,
-  w = warn,
-  i = info,
-  n = hint,
-}
-
-local jump = function(direction, min, max)
-  vim.diagnostic.jump({
-    severity = { min = min, max = max },
-    count = direction * vim.v.count1,
-    float = false,
-  })
-end
-
-local forw = function(min, max)
-  jump(1, min, max)
-end
-
-local backw = function(min, max)
-  jump(-1, min, max)
-end
-
-local update = function(min, max)
-  max = max or min
-  vim.keymap.set("n", "[d", function()
-    backw(min, max)
-  end, {})
-  vim.keymap.set("n", "]d", function()
-    forw(min, max)
-  end, {})
-end
-
-update(error)
-
-local filter_diagnostic = function()
-  local prompt =
-    "filter diagnostic jumps by type ([E]rror,[W]arning, [I]nfo, [N]ote) or [R]eset: "
-  local letter = vim.fn.input(prompt)
-  if letter == "R" or letter == "r" then
-    update(hint, error)
-    return
+local get_severity = function()
+  local count = vim.diagnostic.count()
+  for _, s in ipairs({ error, warn, info, hint }) do
+    if count[s] ~= nil and count[s] > 0 then
+      return s
+    end
   end
-  local severity = letter_to_level[letter]
-  if severity == nil then
-    print(letter .. " is not a valid option")
-    return
-  end
-  update(severity)
+  return nil
 end
 
-vim.keymap.set("n", "<leader>fd", filter_diagnostic)
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = vim.v.count1, severity = get_severity() })
+end)
+
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = -vim.v.count1, severity = get_severity() })
+end)
 
 local enabled = {
   virtual_lines = {
