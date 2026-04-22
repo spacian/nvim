@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    enabled = false,
+    enabled = true,
     branch = "main",
     lazy = false,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -28,7 +28,10 @@ return {
       })
       local keymap_select = function(lhs, obj)
         vim.keymap.set({ "x", "o" }, lhs, function()
-          require("nvim-treesitter-textobjects").select_textobject(obj, "textobjects")
+          require("nvim-treesitter-textobjects.select").select_textobject(
+            obj,
+            "textobjects"
+          )
         end)
       end
       keymap_select("ai", "@statement.outer")

@@ -55,7 +55,7 @@ if not vim.g.vscode then
       client.server_capabilities.semanticTokensProvider = false
       local root = vim.fn.getcwd()
       client.config.settings.basedpyright.analysis.extraPaths = { root }
-      client.notify(
+      client:notify(
         "workspace/didChangeConfiguration",
         { settings = client.config.settings }
       )

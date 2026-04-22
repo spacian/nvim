@@ -3,17 +3,16 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    enabled = false,
+    enabled = true,
     branch = "main",
     lazy = false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter").install({
+      local languages = {
         "bash",
         "csv",
         "go",
         "json",
-        "jsonc",
         "lua",
         "luadoc",
         "luap",
@@ -24,11 +23,33 @@ return {
         "vimdoc",
         "xml",
         "yaml",
-      })
+      }
+
+      require("nvim-treesitter").install(languages)
+
+      local allowed = {}
+      for _, lang in ipairs(languages) do
+        local fts = vim.treesitter.language.get_filetypes(lang) or {}
+        for _, ft in ipairs(fts) do
+          allowed[ft] = lang
+        end
+      end
+
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "*",
-        callback = function()
-          vim.treesitter.start()
+        callback = function(args)
+          local lang = allowed[args.match]
+          if lang == nil then
+            return
+          end
+
+          local ok, err = pcall(vim.treesitter.start)
+
+          if not ok then
+            vim.notify(
+              ("treesitter attach failed (%s): %s"):format(lang, err),
+              vim.log.levels.WARN
+            )
+          end
         end,
       })
     end,
