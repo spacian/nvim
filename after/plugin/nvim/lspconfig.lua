@@ -2,22 +2,24 @@ if not vim.g.vscode then
   require("mason").setup()
   require("mason-tool-installer").setup({
     ensure_installed = {
-      "cspell",
       "basedpyright",
-      "gopls",
-      "lua_ls",
-      "jsonls",
-      "stylua",
-      "isort",
       "black",
-      "taplo",
-      "yaml-language-server",
+      "codebook",
+      "gopls",
+      "isort",
+      "jsonls",
       "lemminx",
+      "lua_ls",
+      "stylua",
+      "taplo",
       "tree-sitter-cli",
+      "yaml-language-server",
     },
   })
 
   local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+  vim.lsp.config("codebook", { init_options = { diagnosticSeverity = "hint" } })
 
   vim.lsp.config("lua_ls", {
     on_init = function(client)
@@ -126,61 +128,12 @@ if not vim.g.vscode then
     },
   })
 
-  local cspell_last_session = ""
-  local force_cspell_reload = false
-  vim.api.nvim_create_user_command("CSpellReload", function()
-    if BufIsSpecial() then
-      print("cannot reload from special buffer")
-      return
-    end
-    force_cspell_reload = true
-    vim.cmd("noa w|e")
-  end, {})
-
-  local null_ls = require("null-ls")
-  null_ls.setup({
-    fallback_severity = vim.diagnostic.severity.HINT,
-    sources = {
-      require("cspell").diagnostics.with({
-        config = {
-          cspell_import_files = function(_)
-            return {
-              vim.fn.expand("$APPDATA")
-                .. "/npm/node_modules/@cspell/dict-de-de/cspell-ext.json",
-            }
-          end,
-          cwd = function(_)
-            return vim.fn.getcwd()
-          end,
-          reset_cspell = function(params)
-            if
-              params ~= nil
-              and params.cwd ~= nil
-              and (vim.v.this_session ~= cspell_last_session or force_cspell_reload)
-            then
-              cspell_last_session = vim.v.this_session
-              force_cspell_reload = false
-              return true
-            else
-              return false
-            end
-          end,
-        },
-      }),
-    },
-  })
-
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
     callback = function(ev)
       vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
       local opts = { buffer = ev.buf }
       vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
-      -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-      -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-      -- vim.keymap.set('n', '<space>wl', function()
-      --     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      -- end, opts)
     end,
   })
 end
