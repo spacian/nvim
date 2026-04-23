@@ -42,11 +42,11 @@ return {
       vim.api.nvim_create_autocmd({ "BufEnter" }, {
         callback = function()
           vim.cmd("set nohls")
-          if not BufIsSpecial() then
-            vim.schedule(function()
+          vim.schedule(function()
+            if not BufIsSpecial() then
               persisted.save({ force = true })
-            end)
-          end
+            end
+          end)
         end,
       })
     end,
