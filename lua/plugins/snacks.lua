@@ -43,7 +43,7 @@ return {
         })
       end)
 
-      vim.keymap.set("n", "<leader>ob", function()
+      vim.keymap.set("n", "<leader>oB", function()
         jumplist.register(1)
         snacks.picker.buffers()
       end)

@@ -29,7 +29,8 @@ return {
       })
       grapple.setup({ scope = "git" })
 
-      vim.api.nvim_create_user_command("GrappleTags", function()
+      vim.keymap.set("n", "<leader>ob", function()
+        jumplist.register(1)
         require("grapple").open_tags()
       end, {})
 
@@ -63,8 +64,24 @@ return {
       end, {})
 
       vim.keymap.set("n", "<leader>m", function()
-        local c = vim.fn.getcharstr()
-        grapple.tag({ name = c })
+        local tag = vim.fn.getcharstr()
+        local path = vim.api.nvim_buf_get_name(0)
+        if grapple.exists({ path = path }) then
+          local confirm = vim.fn.input("path is already tagged, overwrite? (y/N): ")
+          if confirm:lower() ~= "y" then
+            vim.notify("tag cancelled")
+            return
+          end
+        end
+        if grapple.exists({ name = tag }) then
+          local confirm = vim.fn.input("tag already exists, override? (y/N): ")
+          if confirm:lower() ~= "y" then
+            vim.notify("tag cancelled")
+            return
+          end
+        end
+        grapple.tag({ name = tag })
+        vim.notify("tagged with '" .. tag .. "'")
       end, {})
 
       local open_term = function()
