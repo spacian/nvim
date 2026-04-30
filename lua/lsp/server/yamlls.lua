@@ -5,3 +5,4 @@ vim.lsp.config("yamlls", {
   settings = { yaml = { validate = { enable = true } } },
   capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
+vim.lsp.enable("yamlls")

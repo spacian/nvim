@@ -30,3 +30,4 @@ vim.lsp.config("basedpyright", {
   },
   capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
+vim.lsp.enable("basedpyright")

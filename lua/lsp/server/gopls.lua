@@ -4,3 +4,4 @@ vim.lsp.config("gopls", {
   end,
   capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
+vim.lsp.enable("gopls")

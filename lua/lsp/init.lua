@@ -8,12 +8,6 @@ if not vim.g.vscode then
   require("lsp.server.taplo")
   require("lsp.server.yamlls")
 
-  require("mason-lspconfig").setup({
-    automatic_enable = {
-      exclude = { "stylua" },
-    },
-  })
-
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
     callback = function(ev)
