@@ -12,6 +12,8 @@ return {
     config = function()
       require("neo-tree").setup({
         position = "current",
+        enable_git_status = false,
+        enable_diagnostics = false,
         filesystem = {
           filtered_items = {
             visible = false,
