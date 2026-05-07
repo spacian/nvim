@@ -47,7 +47,7 @@ return {
       vim.cmd("CodeDiff file HEAD")
     end)
 
-    vim.keymap.set("n", "<leader>og", function()
+    vim.keymap.set("n", "<leader>oG", function()
       vim.cmd("CodeDiff")
     end)
   end,

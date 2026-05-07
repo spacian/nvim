@@ -53,6 +53,11 @@ return {
         snacks.picker.grep()
       end)
 
+      vim.keymap.set("n", "<leader>og", function()
+        jumplist.register(1)
+        snacks.picker.git_diff()
+      end)
+
       vim.keymap.set({ "n", "v" }, "<leader>fw", function()
         jumplist.register(1)
         snacks.picker.grep_word()
