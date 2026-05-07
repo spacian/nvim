@@ -8,24 +8,6 @@ local function exists(file)
   return ok, err
 end
 
-local function workspace_update()
-  if vim.lsp.buf.list_workspace_folders ~= nil then
-    local folders = vim.lsp.buf.list_workspace_folders()
-    local found = false
-    local cwd = vim.fn.getcwd():gsub("\\", "/"):lower()
-    for i = 1, #folders do
-      if folders[i]:lower() == cwd then
-        found = true
-      else
-        vim.lsp.buf.remove_workspace_folder(folders[i])
-      end
-    end
-    if not found then
-      vim.lsp.buf.add_workspace_folder(vim.fn.getcwd():lower())
-    end
-  end
-end
-
 local function deactivate()
   local system_paths = vim.fn.getenv("PATH")
   local paths = {}
@@ -36,7 +18,6 @@ local function deactivate()
   end
   local new_path = table.concat(paths, ";")
   vim.fn.setenv("PATH", new_path)
-  vim.fn.setenv("VIRTUAL_ENV", nil)
 end
 
 local function activate(python_path)
@@ -44,16 +25,6 @@ local function activate(python_path)
   local head = vim.fn.fnamemodify(python_path, ":h")
   local new_path = head .. ";" .. system_paths
   vim.fn.setenv("PATH", new_path)
-  vim.fn.setenv("VIRTUAL_ENV", python_path)
-  for _, client in pairs(vim.lsp.get_clients()) do
-    if client.name == "basedpyright" then
-      client:notify("workspace/didChangeConfigration", {
-        settings = {
-          python = { pythonPath = python_path },
-        },
-      })
-    end
-  end
 end
 
 local venv = nil
@@ -79,9 +50,6 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     if last_cwd ~= cwd then
       last_cwd = cwd
       venv_update()
-      if vim.bo.buftype == "python" then
-        workspace_update()
-      end
     end
   end,
 })
