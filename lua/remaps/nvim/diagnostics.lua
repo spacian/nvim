@@ -21,6 +21,18 @@ vim.keymap.set("n", "[d", function()
   vim.diagnostic.jump({ count = -vim.v.count1, severity = get_severity() })
 end)
 
+local virtual_text_config = {
+  prefix = "▶",
+  severity_sort = true,
+  format = function(diagnostic)
+    local msg = diagnostic.message
+    if diagnostic.source == "Codebook" then
+      msg = "|" .. msg:match("'(.+)'") .. "|"
+    end
+    return msg
+  end,
+}
+
 local enabled = {
   virtual_lines = {
     current_line = true,
@@ -30,7 +42,7 @@ local enabled = {
 
 local disabled = {
   virtual_lines = false,
-  virtual_text = true,
+  virtual_text = virtual_text_config,
 }
 
 vim.keymap.set("n", "<leader>D", function()
@@ -74,16 +86,7 @@ vim.keymap.set("n", "<s-k>", function()
 end)
 
 vim.diagnostic.config({
-  virtual_text = {
-    severity_sort = true,
-    format = function(diagnostic)
-      local msg = diagnostic.message
-      if diagnostic.source == "Codebook" then
-        msg = "|" .. msg:match("'(.+)'") .. "|"
-      end
-      return msg
-    end,
-  },
+  virtual_text = virtual_text_config,
   severity_sort = true,
   signs = {
     text = {
