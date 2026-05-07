@@ -74,7 +74,16 @@ vim.keymap.set("n", "<s-k>", function()
 end)
 
 vim.diagnostic.config({
-  virtual_text = { severity_sort = true },
+  virtual_text = {
+    severity_sort = true,
+    format = function(diagnostic)
+      local msg = diagnostic.message
+      if diagnostic.source == "Codebook" then
+        msg = "|" .. msg:match("'(.+)'") .. "|"
+      end
+      return msg
+    end,
+  },
   severity_sort = true,
   signs = {
     text = {
