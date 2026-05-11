@@ -4,8 +4,6 @@ return {
     enabled = true,
     branch = "main",
     lazy = false,
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    after = "nvim-treesitter",
     init = function()
       vim.g.no_plugin_maps = true
     end,

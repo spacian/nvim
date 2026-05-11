@@ -3,7 +3,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     enabled = not vim.g.vscode,
     lazy = false,
-    after = { "mason", "nvim-treesitter", "neovim/nvim-lspconfig" },
+    after = { "mason", "arborist", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-tool-installer").setup({
         ensure_installed = {

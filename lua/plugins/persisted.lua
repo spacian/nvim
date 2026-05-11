@@ -44,11 +44,7 @@ return {
         pattern = "PersistedTelescopeLoadPre",
         callback = function(_)
           local buffer_name = vim.api.nvim_buf_get_name(0)
-          if
-            not buffer_name == ""
-            and not BufIsSpecial()
-            and path_is_in_workspace()
-          then
+          if buffer_name ~= "" and not BufIsSpecial() and path_is_in_workspace() then
             persisted.save({ session = vim.g.persisted_loaded_session })
           end
           local bufs = {}
@@ -58,7 +54,6 @@ return {
             end
           end
           vim.cmd("silent bd! " .. table.concat(bufs, " "))
-          vim.diagnostic.reset()
         end,
       })
 
