@@ -17,14 +17,12 @@ return {
             select = {
               lookahead = true,
               selection_modes = {
-                --   ['@parameter.outer'] = 'v', -- charwise
-                ["@class.inner"] = "V", -- linewise
-                ["@class.outer"] = "V", -- linewise
-                ["@function.outer"] = "V", -- linewise
-                ["@function.inner"] = "V", -- linewise
-                ["@block.outer"] = "V", -- linewise
-                ["@block.inner"] = "V", -- linewise
-                --   ['@class.outer'] = '<c-v>', -- blockwise
+                ["@class.inner"] = "V",
+                ["@class.outer"] = "V",
+                ["@function.outer"] = "V",
+                ["@function.inner"] = "V",
+                ["@block.outer"] = "V",
+                ["@block.inner"] = "V",
               },
               include_surrounding_whitespace = false,
             },
@@ -37,12 +35,9 @@ return {
               )
             end)
           end
-          keymap_select("ai", "@statement.outer")
           keymap_select("ah", "@assignment.lhs")
           keymap_select("al", "@assignment.rhs")
-          keymap_select("as", "@assignment.outer")
-          keymap_select("ab", "@block.outer")
-          keymap_select("ib", "@block.inner")
+          keymap_select("as", "@statement.outer")
           keymap_select("ac", "@class.outer")
           keymap_select("ic", "@class.inner")
           keymap_select("af", "@function.outer")
@@ -60,6 +55,7 @@ return {
           keymap_swap_next("gla", "@parameter.inner")
           keymap_swap_next("glf", "@function.outer")
           keymap_swap_next("glc", "@class.outer")
+          keymap_swap_next("gls", "@statement.outer")
 
           local keymap_swap_previous = function(lhs, obj)
             vim.keymap.set({ "n" }, lhs, function()
@@ -69,6 +65,7 @@ return {
           keymap_swap_previous("gha", "@parameter.inner")
           keymap_swap_previous("ghf", "@function.outer")
           keymap_swap_previous("ghc", "@class.outer")
+          keymap_swap_previous("ghs", "@statement.outer")
 
           local keymap_move_next_start = function(lhs, obj)
             vim.keymap.set({ "n", "x", "o" }, lhs, function()
@@ -81,6 +78,7 @@ return {
           keymap_move_next_start("]f", "@function.outer")
           keymap_move_next_start("]c", "@class.outer")
           keymap_move_next_start("]a", "@parameter.inner")
+          keymap_move_next_start("]s", "@statement.outer")
 
           local keymap_move_next_end = function(lhs, obj)
             vim.keymap.set({ "n", "x", "o" }, lhs, function()
@@ -93,6 +91,7 @@ return {
           keymap_move_next_end("]F", "@function.outer")
           keymap_move_next_end("]C", "@class.outer")
           keymap_move_next_end("]A", "@parameter.inner")
+          keymap_move_next_end("]S", "@statement.outer")
 
           local keymap_move_previous_start = function(lhs, obj)
             vim.keymap.set({ "n", "x", "o" }, lhs, function()
@@ -105,6 +104,7 @@ return {
           keymap_move_previous_start("[f", "@function.outer")
           keymap_move_previous_start("[c", "@class.outer")
           keymap_move_previous_start("[a", "@parameter.inner")
+          keymap_move_previous_start("[s", "@statement.outer")
 
           local keymap_move_previous_end = function(lhs, obj)
             vim.keymap.set({ "n", "x", "o" }, lhs, function()
@@ -117,6 +117,7 @@ return {
           keymap_move_previous_end("[F", "@function.outer")
           keymap_move_previous_end("[C", "@class.outer")
           keymap_move_previous_end("[A", "@parameter.inner")
+          keymap_move_previous_end("[S", "@statement.outer")
 
           local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
           vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
