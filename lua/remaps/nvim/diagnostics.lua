@@ -4,7 +4,7 @@ local warn = vim.diagnostic.severity.WARN
 local error = vim.diagnostic.severity.ERROR
 
 local get_severity = function()
-  local count = vim.diagnostic.count()
+  local count = vim.diagnostic.count(0)
   for _, s in ipairs({ error, warn, info, hint }) do
     if count[s] ~= nil and count[s] > 0 then
       return s
@@ -21,28 +21,14 @@ vim.keymap.set("n", "[d", function()
   vim.diagnostic.jump({ count = -vim.v.count1, severity = get_severity() })
 end)
 
-local virtual_text_config = {
-  prefix = "▶",
-  severity_sort = true,
-  format = function(diagnostic)
-    local msg = diagnostic.message
-    if diagnostic.source == "Codebook" then
-      msg = "|" .. msg:match("'(.+)'") .. "|"
-    end
-    return msg
-  end,
-}
-
 local enabled = {
   virtual_lines = {
     current_line = true,
   },
-  virtual_text = false,
 }
 
 local disabled = {
   virtual_lines = false,
-  virtual_text = virtual_text_config,
 }
 
 vim.keymap.set("n", "<leader>D", function()
@@ -86,7 +72,17 @@ vim.keymap.set("n", "<s-k>", function()
 end)
 
 vim.diagnostic.config({
-  virtual_text = virtual_text_config,
+  virtual_text = {
+    prefix = "▶",
+    severity_sort = true,
+    format = function(diagnostic)
+      local msg = diagnostic.message
+      if diagnostic.source == "Codebook" then
+        msg = msg:match("'.+'")
+      end
+      return msg
+    end,
+  },
   severity_sort = true,
   signs = {
     text = {
