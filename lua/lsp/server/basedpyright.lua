@@ -22,7 +22,7 @@ vim.lsp.config("basedpyright", {
           reportUnusedFunction = "warning",
           reportUnusedImport = "warning",
           reportUnusedParameter = "warning",
-          reportUnusedCallResult = false,
+          reportUnusedCallResult = "hint",
         },
       },
     },
