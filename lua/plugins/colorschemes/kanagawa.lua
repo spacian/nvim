@@ -40,8 +40,11 @@ return {
         },
       })
       kanagawa.load("dragon")
-      vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = "#43243B" }) -- kanagawa:winterRed
-      vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = "#49443C" }) -- kanagawa:winterYellow
+      local palette = require("kanagawa.colors").setup().palette
+      vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = palette.winterRed })
+      vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = palette.winterYellow })
+      vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = palette.dragonBlack5 })
+      vim.api.nvim_set_hl(0, "CursorLine", { bg = palette.dragonBlack4 })
     end,
   },
 }
