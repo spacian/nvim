@@ -15,6 +15,7 @@ return {
           ["<leader>r"] = { "actions.refresh", mode = "n" },
           ["<esc>"] = { "actions.close", mode = "n" },
           ["q"] = { "actions.close", mode = "n" },
+          ["_"] = { "actions.open_cwd", mode = "n" },
         },
         use_default_keymaps = false,
         view_options = {
