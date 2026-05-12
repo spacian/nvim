@@ -1,6 +1,5 @@
 if not vim.g.vscode then
   require("lsp.server.basedpyright")
-  require("lsp.server.codebook")
   require("lsp.server.gopls")
   require("lsp.server.jsonls")
   require("lsp.server.lemminx")

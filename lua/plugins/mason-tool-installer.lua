@@ -9,7 +9,7 @@ return {
         ensure_installed = {
           "basedpyright",
           "black",
-          "codebook",
+          "cspell",
           "gopls",
           "isort",
           "json-lsp",

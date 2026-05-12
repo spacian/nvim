@@ -75,13 +75,6 @@ vim.diagnostic.config({
   virtual_text = {
     prefix = "▶",
     severity_sort = true,
-    format = function(diagnostic)
-      local msg = diagnostic.message
-      if diagnostic.source == "Codebook" then
-        msg = msg:match("'.+'")
-      end
-      return msg
-    end,
   },
   severity_sort = true,
   signs = {

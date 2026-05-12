@@ -1,0 +1,51 @@
+{
+    "version": "0.2",
+    "language": "en,de",
+    "allowCompoundWords": true,
+    "languageSettings": [
+        {
+            "locale": "*",
+            "caseSensitive": false
+        }
+    ],
+    "import": [],
+    "words": [
+        "cmdheight",
+        "showcmd",
+        "hlsearch",
+        "cterm",
+        "pwsh",
+        "linehl",
+        "winnr",
+        "taplo",
+        "yamlls",
+        "setqflist",
+        "getqflist",
+        "qflist",
+        "nohls",
+        "lnum",
+        "lualine",
+        "buftype",
+        "venv",
+        "kanagawa",
+        "gruvbox",
+        "noremap",
+        "getcwd",
+        "nvim",
+        "keymaps",
+        "bufnr",
+        "lspconfig",
+        "pyright",
+        "basedpyright",
+        "gopls",
+        "luarc",
+        "cmd",
+        "omnifunc",
+        "autocmd",
+        "nvim",
+        "nohlsearch",
+        "sysname",
+        "shada",
+        "jsonls"
+    ]
+}
