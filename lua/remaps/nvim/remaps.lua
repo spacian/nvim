@@ -72,3 +72,7 @@ vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
     end
   end,
 })
+
+for i = 1, 12 do
+  vim.keymap.set({ "i" }, ("<F%d>"):format(i), "<Nop>")
+end
