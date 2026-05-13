@@ -29,10 +29,10 @@ for _, name in ipairs({ "Error", "Warn", "Info", "Hint" }) do
       or vim.api.nvim_get_hl(0, { name = "Diagnostic" .. name, link = false }).sp,
   })
   vim.api.nvim_set_hl(0, "DiagnosticUnderline" .. name, {
-    cterm = { underline = true },
+    cterm = { underline = name ~= "Hint" },
     sp = vim.api.nvim_get_hl(0, { name = "Diagnostic" .. name, link = false }).sp
       or vim.api.nvim_get_hl(0, { name = "Diagnostic" .. name, link = false }).fg,
-    underline = true,
+    underline = name ~= "Hint",
   })
 end
 
