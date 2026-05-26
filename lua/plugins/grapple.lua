@@ -12,6 +12,10 @@ return {
         return { name = "prev", scope = "prev", path = path }
       end
 
+      local PREV2 = function(path)
+        return { name = "prev2", scope = "prev", path = path }
+      end
+
       local TERM = function()
         return { name = "term" }
       end
@@ -23,6 +27,12 @@ return {
             name = "prev",
             resolver = function()
               return "prev", nil
+            end,
+          },
+          {
+            name = "prev2",
+            resolver = function()
+              return "prev2", nil
             end,
           },
         },
@@ -40,13 +50,12 @@ return {
             vim.cmd("silent noa w")
           end
           local path = grapple.find(PREV()).path
-          if path == vim.api.nvim_buf_get_name(0) then
-            print("already in previous buffer")
+          if path == vim.api.nvim_buf_get_name(0) and grapple.exists(PREV2()) then
+            grapple.select(PREV2())
             return
+          else
+            grapple.select(PREV())
           end
-          grapple.select(PREV())
-        else
-          print("no buffer tagged 'prev'")
         end
       end)
 
@@ -116,13 +125,25 @@ return {
       vim.api.nvim_create_autocmd({ "BufEnter" }, {
         callback = function()
           vim.defer_fn(function()
+            local is_float = vim.api.nvim_win_get_config(0).relative ~= ""
+            if is_float then
+              return
+            end
             local bufname = vim.api.nvim_buf_get_name(0)
             if last_bufname ~= "" and bufname ~= last_bufname then
+              if grapple.exists(PREV()) then
+                local prev_path = grapple.find(PREV()).path
+                if last_bufname ~= prev_path then
+                  grapple.tag(PREV2(prev_path))
+                end
+              end
               grapple.tag(PREV(last_bufname))
             end
             if not BufIsSpecial() then
               last_bufname = bufname
               vim.o.cursorline = true
+            else
+              last_bufname = ""
             end
           end, 100)
         end,
