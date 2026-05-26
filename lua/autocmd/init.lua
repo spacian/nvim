@@ -1,4 +1,5 @@
-require("autocmd.autosave")
 require("autocmd.autoformat")
+require("autocmd.autosave")
 require("autocmd.background")
+require("autocmd.clear_cmd")
 require("autocmd.venv")
