@@ -78,12 +78,12 @@ return {
         snacks.picker.lsp_type_definitions()
       end)
 
-      vim.keymap.set("n", "<leader>oR", function()
+      vim.keymap.set("n", "<leader>or", function()
         jumplist.register(1)
-        snacks.picker.recent()
+        snacks.picker.recent({ filter = { paths = { [vim.fn.getcwd()] = true } } })
       end)
 
-      vim.keymap.set("n", "<leader>or", function()
+      vim.keymap.set("n", "<leader>oR", function()
         jumplist.register(1)
         snacks.picker.resume()
       end)
