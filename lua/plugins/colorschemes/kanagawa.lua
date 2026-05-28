@@ -27,6 +27,7 @@ return {
             -- ["@function.method"] = { italic = false, bold = true },
             -- ["@function.call"] = { italic = false, bold = true },
             ["@string.escape"] = { italic = true, bold = true },
+            ["@attribute.builtin.python"] = { link = "@attribute.python" },
             Function = { italic = false, bold = true },
             Visual = { bg = colors.palette.winterGreen },
             String = { italic = true, bold = false },
