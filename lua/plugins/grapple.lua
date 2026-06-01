@@ -61,6 +61,9 @@ return {
 
       vim.keymap.set("n", "m", function()
         local c = vim.fn.getcharstr()
+        if not c:match("[a-zA-Z]") then
+          return
+        end
         if grapple.exists({ name = c }) then
           if not BufIsSpecial() then
             vim.cmd("silent noa w")
@@ -74,6 +77,9 @@ return {
 
       vim.keymap.set("n", "<leader>m", function()
         local tag = vim.fn.getcharstr()
+        if not tag:match("[a-zA-Z]") then
+          return
+        end
         local path = vim.api.nvim_buf_get_name(0)
         if grapple.exists({ path = path }) then
           local confirm = vim.fn.input("path is already tagged, overwrite? (y/N): ")
