@@ -39,11 +39,6 @@ return {
       })
       grapple.setup({ scope = "git" })
 
-      vim.keymap.set("n", "<leader>ob", function()
-        jumplist.register(1)
-        require("grapple").open_tags()
-      end, {})
-
       vim.keymap.set("n", "<leader>h", function()
         if grapple.exists(PREV()) then
           if not BufIsSpecial() then
@@ -58,40 +53,6 @@ return {
           end
         end
       end)
-
-      vim.keymap.set("n", "m", function()
-        local c = vim.fn.getcharstr()
-        if grapple.exists({ name = c }) then
-          if not BufIsSpecial() then
-            vim.cmd("silent noa w")
-          end
-          jumplist.register(1)
-          grapple.select({ name = c })
-        else
-          print("no buffer tagged '" .. c .. "'")
-        end
-      end, {})
-
-      vim.keymap.set("n", "<leader>m", function()
-        local tag = vim.fn.getcharstr()
-        local path = vim.api.nvim_buf_get_name(0)
-        if grapple.exists({ path = path }) then
-          local confirm = vim.fn.input("path is already tagged, overwrite? (y/N): ")
-          if confirm:lower() ~= "y" then
-            vim.notify("tag cancelled")
-            return
-          end
-        end
-        if grapple.exists({ name = tag }) then
-          local confirm = vim.fn.input("tag already exists, override? (y/N): ")
-          if confirm:lower() ~= "y" then
-            vim.notify("tag cancelled")
-            return
-          end
-        end
-        grapple.tag({ name = tag })
-        vim.notify("tagged with '" .. tag .. "'")
-      end, {})
 
       local open_term = function()
         if not grapple.exists(TERM()) then
