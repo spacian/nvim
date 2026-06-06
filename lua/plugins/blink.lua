@@ -2,9 +2,6 @@ local transform = function(_, items)
   local function is_basemodel_method(label)
     return label:match("^model_")
   end
-  local starts_with_underscore = function(label, n)
-    return label:sub(1, n) == string.sub("__", 1, n)
-  end
   local ends_with_equals = function(label)
     return label:sub(#label, #label) == "="
   end
@@ -13,12 +10,6 @@ local transform = function(_, items)
       item.score_offset = item.score_offset - 5
     end
     if is_basemodel_method(item.label) then
-      item.score_offset = item.score_offset - 1
-    end
-    if starts_with_underscore(item.label, 1) then
-      item.score_offset = item.score_offset - 1
-    end
-    if starts_with_underscore(item.label, 2) then
       item.score_offset = item.score_offset - 1
     end
     if ends_with_equals(item.label) then
@@ -55,6 +46,8 @@ return {
         transform_items = transform,
       },
       fuzzy = {
+        use_proximity = false,
+        frecency = { enabled = false },
         sorts = {
           "exact",
           "score",
