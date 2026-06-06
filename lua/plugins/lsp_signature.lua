@@ -40,7 +40,7 @@ return {
           return hint
         end,
         floating_window = false,
-        max_height = 1,
+        max_height = 12,
         toggle_key = "<c-s>",
       })
     end,
