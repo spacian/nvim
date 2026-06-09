@@ -22,7 +22,8 @@ return {
       end
 
       persisted.setup({
-        autostart = true,
+        autostart = false,
+        follow_cwd = false,
         silent = true,
         ignored_dirs = { "oil://" },
         should_save = path_is_in_workspace,
@@ -45,7 +46,7 @@ return {
         callback = function(_)
           local buffer_name = vim.api.nvim_buf_get_name(0)
           if buffer_name ~= "" and not BufIsSpecial() and path_is_in_workspace() then
-            persisted.save({ session = vim.g.persisted_loaded_session })
+            persisted.save({ session = persisted.current() })
           end
           local bufs = {}
           for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -57,12 +58,12 @@ return {
         end,
       })
 
-      vim.api.nvim_create_autocmd({ "BufEnter" }, {
+      vim.api.nvim_create_autocmd({ "BufEnter", "VimLeavePre" }, {
         callback = function()
           vim.cmd("set nohls")
           vim.schedule(function()
             if not BufIsSpecial() and path_is_in_workspace() then
-              persisted.save({ force = true })
+              persisted.save({ force = true, session = persisted.current() })
             end
           end)
         end,

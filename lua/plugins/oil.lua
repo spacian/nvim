@@ -52,9 +52,7 @@ return {
           return
         end
         print("new working directory: " .. vim.fn.getcwd())
-        vim.cmd("Persisted stop")
-        vim.cmd("Persisted start")
-        vim.cmd("Persisted save")
+        require("persisted").save({ session = require("persisted").current() })
       end, {})
 
       vim.api.nvim_create_autocmd("FileType", {
