@@ -67,7 +67,7 @@ end)
 vim.keymap.set("n", "<s-k>", function()
   vim.lsp.buf.hover({
     border = "rounded",
-    close_events = { "CursorMoved", "BufHidden", "LspDetach" },
+    close_events = { "CursorMoved", "BufHidden", "LspDetach", "InsertEnter" },
   })
 end)
 
