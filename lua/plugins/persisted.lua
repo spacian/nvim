@@ -1,3 +1,21 @@
+---@param file string?
+local function path_is_in_workspace(file)
+  local cwd = vim.loop.fs_realpath(vim.fn.getcwd())
+  if not file then
+    file = vim.loop.fs_realpath(vim.fn.expand("%:p"))
+  end
+  if not cwd or not file then
+    return false
+  end
+  cwd = cwd:gsub("\\", "/")
+  file = file:gsub("\\", "/")
+  if vim.loop.os_uname().version:match("Windows") then
+    cwd = cwd:lower()
+    file = file:lower()
+  end
+  return file == cwd or file:sub(1, #cwd + 1) == cwd .. "/"
+end
+
 return {
   {
     "olimorris/persisted.nvim",
@@ -5,21 +23,6 @@ return {
     lazy = false,
     config = function()
       local persisted = require("persisted")
-
-      local function path_is_in_workspace()
-        local cwd = vim.loop.fs_realpath(vim.fn.getcwd())
-        local file = vim.loop.fs_realpath(vim.fn.expand("%:p"))
-        if not cwd or not file then
-          return false
-        end
-        cwd = cwd:gsub("\\", "/")
-        file = file:gsub("\\", "/")
-        if vim.loop.os_uname().version:match("Windows") then
-          cwd = cwd:lower()
-          file = file:lower()
-        end
-        return file == cwd or file:sub(1, #cwd + 1) == cwd .. "/"
-      end
 
       persisted.setup({
         autostart = false,
@@ -54,7 +57,41 @@ return {
               bufs[#bufs + 1] = buf
             end
           end
-          vim.cmd("silent bd! " .. table.concat(bufs, " "))
+          if #bufs > 0 then
+            vim.cmd("silent bd! " .. table.concat(bufs, " "))
+          end
+        end,
+      })
+
+      local buf_valid = function(buf)
+        return vim.bo[buf].buftype == ""
+          and vim.bo[buf].buflisted
+          and vim.api.nvim_buf_is_valid(buf)
+      end
+
+      local path_valid = function(bufname)
+        return bufname ~= ""
+          and path_is_in_workspace(bufname)
+          and vim.loop.fs_stat(bufname)
+      end
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistedTelescopeLoadPost",
+        callback = function(_)
+          vim.defer_fn(function()
+            local bufs = {}
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              if buf_valid(buf) then
+                local bufname = vim.api.nvim_buf_get_name(buf)
+                if not path_valid(bufname) then
+                  bufs[#bufs + 1] = buf
+                end
+              end
+            end
+            if #bufs > 0 then
+              vim.cmd("silent bd! " .. table.concat(bufs, " "))
+            end
+          end, 100)
         end,
       })
 
