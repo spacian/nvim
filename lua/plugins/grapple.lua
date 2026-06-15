@@ -37,7 +37,7 @@ return {
           },
         },
       })
-      grapple.setup({ scope = "git" })
+      grapple.setup({ scope = "cwd" })
 
       vim.keymap.set("n", "<leader>ob", function()
         jumplist.register(1)
