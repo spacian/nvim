@@ -1,6 +1,4 @@
 local jumplist = require("remaps.nvim.jumplist")
-vim.keymap.set({ "n" }, "<a-q>", "q")
-vim.keymap.set({ "n" }, "q", "")
 vim.keymap.set({ "c" }, "<c-h>", "<c-p>")
 vim.keymap.set({ "c" }, "<c-l>", "<c-n>")
 vim.keymap.set({ "c" }, "<c-k>", "<c-y>")
@@ -76,3 +74,10 @@ vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
 for i = 1, 12 do
   vim.keymap.set({ "i" }, ("<F%d>"):format(i), "<Nop>")
 end
+
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+  callback = function()
+    vim.keymap.set("n", "<esc>", "<cmd>:q<enter>", { buffer = true })
+    vim.keymap.set("n", "q", "<cmd>:q<enter>", { buffer = true })
+  end,
+})
