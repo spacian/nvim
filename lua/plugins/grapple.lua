@@ -206,8 +206,7 @@ return {
         end,
       })
 
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "PersistedStart",
+      vim.api.nvim_create_autocmd("SessionLoadPost", {
         callback = function(_)
           vim.defer_fn(function()
             jumplist.reset()
