@@ -26,6 +26,7 @@ return {
         },
         hint_prefix = "",
         always_trigger = true,
+        hint_enable = false,
         max_width = function()
           return vim.api.nvim_win_get_width(0)
         end,
