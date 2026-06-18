@@ -90,7 +90,11 @@ return {
 
       vim.keymap.set("n", "<leader>od", function()
         jumplist.register(1)
-        snacks.picker.diagnostics()
+        snacks.picker.diagnostics({
+          sort = {
+            fields = { "severity:asc", "is_current:asc", "file:asc", "lnum:asc" },
+          },
+        })
       end)
 
       vim.keymap.set("n", "<leader>oN", function()
