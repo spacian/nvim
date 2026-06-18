@@ -1,26 +1,3 @@
-local hint = vim.diagnostic.severity.HINT
-local info = vim.diagnostic.severity.INFO
-local warn = vim.diagnostic.severity.WARN
-local error = vim.diagnostic.severity.ERROR
-
-local get_severity = function()
-  local count = vim.diagnostic.count(0)
-  for _, s in ipairs({ error, warn, info, hint }) do
-    if count[s] ~= nil and count[s] > 0 then
-      return s
-    end
-  end
-  return nil
-end
-
-vim.keymap.set("n", "]d", function()
-  vim.diagnostic.jump({ count = vim.v.count1, severity = get_severity() })
-end)
-
-vim.keymap.set("n", "[d", function()
-  vim.diagnostic.jump({ count = -vim.v.count1, severity = get_severity() })
-end)
-
 local enabled = {
   virtual_lines = {
     current_line = true,
