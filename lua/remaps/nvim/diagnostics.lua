@@ -70,3 +70,8 @@ vim.diagnostic.config({
   },
   update_in_insert = false,
 })
+
+vim.api.nvim_create_user_command("ToggleDiagnostics", function(args)
+  local enabled = vim.diagnostic.is_enabled({ bufnr = 0 })
+  vim.diagnostic.enable(not enabled, { bufnr = 0 })
+end, {})
