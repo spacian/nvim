@@ -5,6 +5,22 @@ return {
     priority = 1000,
     lazy = false,
     config = function()
+      local function merge_hl(group, opts)
+        opts = opts or {}
+        local ok, hl = pcall(vim.api.nvim_get_hl, 0, {
+          name = group,
+          link = false,
+        })
+        if not ok then
+          return {}
+        end
+        while hl and hl.link do
+          local next = vim.api.nvim_get_hl(0, { name = hl.link, link = false })
+          hl = vim.tbl_extend("force", hl, next or {})
+        end
+        hl.link = nil
+        return vim.tbl_extend("force", hl, opts)
+      end
       local kanagawa = require("kanagawa")
       kanagawa.setup({
         commentStyle = { bold = false },
@@ -23,15 +39,18 @@ return {
           return {
             ["@variable.builtin"] = { italic = false, bold = false },
             ["@keyword.operator"] = { italic = false, bold = false },
-            ["@keyword.return"] = { italic = false, bold = true },
-            -- ["@function.method"] = { italic = false, bold = true },
-            -- ["@function.call"] = { italic = false, bold = true },
-            ["@string.escape"] = { italic = true, bold = true },
+            ["@keyword.return"] = { italic = false, bold = false },
+            -- ["@function.method"] = merge_hl("@function", {bold = false}),
+            -- ["@function.method"] = merge_hl("@function", { bold = false }),
+            -- ["@function.call"] = { italic = false, bold = false },
+            -- ["@function.call"] = merge_hl("@function", { bold = false }),
+            ["@string.escape"] = { italic = false, bold = false },
             ["@attribute.builtin.python"] = { link = "@attribute.python" },
+            -- ["@function.method.call.python"] = { link = "@function.method" },
             Function = { italic = false, bold = true },
             Visual = { bg = colors.palette.winterGreen },
-            String = { italic = true, bold = false },
-            Boolean = { italic = true, bold = false },
+            String = { italic = false, bold = false },
+            Boolean = { italic = false, bold = false },
           }
         end,
         theme = "wave",
@@ -42,10 +61,23 @@ return {
       })
       kanagawa.load("dragon")
       local palette = require("kanagawa.colors").setup().palette
+      vim.api.nvim_set_hl(0, "@comment", { fg = palette.roninYellow })
+      vim.api.nvim_set_hl(0, "Comment", { fg = palette.roninYellow })
       vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = palette.winterRed })
       vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = palette.winterYellow })
       vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = palette.dragonBlack5 })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = palette.dragonBlack4 })
+      vim.api.nvim_set_hl(
+        0,
+        "@function.method",
+        merge_hl("@function", { bold = false })
+      )
+      vim.api.nvim_set_hl(0, "@function.call", merge_hl("normal"))
+      vim.api.nvim_set_hl(0, "@function.method.call", merge_hl("normal"))
+      vim.api.nvim_set_hl(0, "@variable.builtin", merge_hl("@variable.parameter"))
+      vim.api.nvim_set_hl(0, "@variable.member", merge_hl("@variable"))
+      vim.api.nvim_set_hl(0, "@keyword.operator", merge_hl("@keyword"))
+      vim.api.nvim_set_hl(0, "Number", merge_hl("Boolean"))
     end,
   },
 }
