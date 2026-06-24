@@ -50,7 +50,7 @@ return {
       },
       fuzzy = {
         use_proximity = false,
-        frecency = { enabled = false },
+        frecency = { enabled = true },
         sorts = {
           "exact",
           "score",
