@@ -5,22 +5,6 @@ return {
     priority = 1000,
     lazy = false,
     config = function()
-      local function merge_hl(group, opts)
-        opts = opts or {}
-        local ok, hl = pcall(vim.api.nvim_get_hl, 0, {
-          name = group,
-          link = false,
-        })
-        if not ok then
-          return {}
-        end
-        while hl and hl.link do
-          local next = vim.api.nvim_get_hl(0, { name = hl.link, link = false })
-          hl = vim.tbl_extend("force", hl, next or {})
-        end
-        hl.link = nil
-        return vim.tbl_extend("force", hl, opts)
-      end
       local kanagawa = require("kanagawa")
       kanagawa.setup({
         commentStyle = { bold = false },
@@ -70,14 +54,16 @@ return {
       vim.api.nvim_set_hl(
         0,
         "@function.method",
-        merge_hl("@function", { bold = false })
+        MergeHL("@function", { bold = false })
       )
-      vim.api.nvim_set_hl(0, "@function.call", merge_hl("normal"))
-      vim.api.nvim_set_hl(0, "@function.method.call", merge_hl("normal"))
-      vim.api.nvim_set_hl(0, "@variable.builtin", merge_hl("@variable.parameter"))
-      vim.api.nvim_set_hl(0, "@variable.member", merge_hl("@variable"))
-      vim.api.nvim_set_hl(0, "@keyword.operator", merge_hl("@keyword"))
-      vim.api.nvim_set_hl(0, "Number", merge_hl("Boolean"))
+      vim.api.nvim_set_hl(0, "@function.call", MergeHL("normal"))
+      vim.api.nvim_set_hl(0, "@function.method.call", MergeHL("normal"))
+      vim.api.nvim_set_hl(0, "@variable.builtin", MergeHL("@variable.parameter"))
+      vim.api.nvim_set_hl(0, "@variable.member", MergeHL("@variable"))
+      vim.api.nvim_set_hl(0, "@keyword.operator", MergeHL("@keyword"))
+      vim.api.nvim_set_hl(0, "Number", MergeHL("Boolean"))
+      vim.api.nvim_set_hl(0, "OilDirHidden", MergeHL("Directory"))
+      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = MergeHL("Normal").bg })
     end,
   },
 }

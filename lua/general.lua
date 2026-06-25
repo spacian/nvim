@@ -15,6 +15,22 @@ Line = function(line, width)
     return s
   end
 end
+      function MergeHL(group, opts)
+        opts = opts or {}
+        local ok, hl = pcall(vim.api.nvim_get_hl, 0, {
+          name = group,
+          link = false,
+        })
+        if not ok then
+          return {}
+        end
+        while hl and hl.link do
+          local next = vim.api.nvim_get_hl(0, { name = hl.link, link = false })
+          hl = vim.tbl_extend("force", hl, next or {})
+        end
+        hl.link = nil
+        return vim.tbl_extend("force", hl, opts)
+      end
 
 if not vim.g.vscode then
   vim.o.wrap = true
