@@ -64,15 +64,22 @@ return {
         if not c:match("[a-zA-Z]") then
           return
         end
-        if grapple.exists({ name = c }) then
-          if not BufIsSpecial() then
-            vim.cmd("silent noa w")
-          end
-          jumplist.register(1)
-          grapple.select({ name = c })
-        else
-          print("no buffer tagged '" .. c .. "'")
+        if not grapple.exists({ name = c }) then
+          print("no buffer tagged '" .. c .. "' or already in buffer")
+          return
         end
+        if
+          grapple.find({ name = c }).path
+          == vim.api.nvim_buf_get_name(0):gsub("/", "\\")
+        then
+          print("already in buffer '" .. c .. "'")
+          return
+        end
+        if not BufIsSpecial() then
+          vim.cmd("silent noa w")
+        end
+        jumplist.register(1)
+        grapple.select({ name = c })
       end, {})
 
       vim.keymap.set("n", "<leader>m", function()
