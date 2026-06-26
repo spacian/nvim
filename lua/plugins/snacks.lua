@@ -106,6 +106,11 @@ return {
         jumplist.register(1)
         snacks.scratch()
       end)
+
+      vim.keymap.set("n", "<leader>oq", function()
+        jumplist.register(1)
+        snacks.picker.qflist()
+      end)
     end,
   },
 }

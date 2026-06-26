@@ -13,7 +13,12 @@ vim.keymap.set({ "n" }, "J", function()
     vim.fn.setpos(".", pos)
   end)
 end)
-vim.keymap.set({ "n", "v" }, "H", "^")
+vim.keymap.set(
+  { "n", "v" },
+  "H",
+  "(col('.') == matchend(getline('.'), '^\\s*')+1 ? '0' : '^')",
+  { expr = true }
+)
 vim.keymap.set({ "n", "v" }, "L", "$")
 vim.keymap.set({ "n" }, "yall", ":%y<enter>")
 vim.keymap.set({ "n" }, "<leader>yall", ":%y+<enter>")
