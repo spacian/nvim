@@ -8,16 +8,20 @@ return {
       local grapple = require("grapple")
       local enter = vim.api.nvim_replace_termcodes("<enter>", true, true, true)
 
-      local PREV = function(path)
-        return { name = "prev", scope = "prev", path = path }
+      local PREV1 = function(path)
+        return { name = "prev1", scope = "prev", path = path }
       end
 
       local PREV2 = function(path)
         return { name = "prev2", scope = "prev", path = path }
       end
 
-      local TERM = function()
-        return { name = "term" }
+      local TERM1 = function()
+        return { name = "term1" }
+      end
+
+      local TERM2 = function()
+        return { name = "term2" }
       end
 
       grapple.setup({
@@ -27,12 +31,6 @@ return {
             name = "prev",
             resolver = function()
               return "prev", nil
-            end,
-          },
-          {
-            name = "prev2",
-            resolver = function()
-              return "prev2", nil
             end,
           },
         },
@@ -45,16 +43,16 @@ return {
       end, {})
 
       vim.keymap.set("n", "<leader>h", function()
-        if grapple.exists(PREV()) then
+        if grapple.exists(PREV1()) then
           if not BufIsSpecial() then
             vim.cmd("silent noa w")
           end
-          local path = grapple.find(PREV()).path
+          local path = grapple.find(PREV1()).path
           if path == vim.api.nvim_buf_get_name(0) and grapple.exists(PREV2()) then
             grapple.select(PREV2())
             return
           else
-            grapple.select(PREV())
+            grapple.select(PREV1())
           end
         end
       end)
@@ -106,8 +104,10 @@ return {
         vim.notify("tagged with '" .. tag .. "'")
       end, {})
 
-      local open_term = function()
-        if not grapple.exists(TERM()) then
+      local last_term_tag = nil
+      local open_term = function(opts)
+        last_term_tag = { name = opts.name }
+        if not grapple.exists(opts) then
           if vim.loop.os_uname().sysname == "Windows_NT" then
             vim.cmd("term pwsh")
             vim.fn.feedkeys("a")
@@ -117,21 +117,17 @@ return {
             vim.fn.feedkeys("a")
           end
         else
-          grapple.select(TERM())
+          grapple.select(opts)
           vim.fn.feedkeys("a")
         end
       end
 
-      vim.keymap.set("n", "<leader>ot", open_term)
+      vim.keymap.set("n", "<leader>ot", function()
+        open_term(TERM1())
+      end)
+
       vim.keymap.set("n", "<leader>oT", function()
-        local folder = vim.fn.expand("%:p:h")
-        if vim.loop.os_uname().sysname == "Windows_NT" then
-          open_term()
-          vim.fn.feedkeys("cd " .. folder .. enter)
-        else
-          open_term()
-          vim.fn.feedkeys("cd " .. folder .. enter)
-        end
+        open_term(TERM2())
       end)
 
       local last_bufname = ""
@@ -144,13 +140,13 @@ return {
             end
             local bufname = vim.api.nvim_buf_get_name(0)
             if last_bufname ~= "" and bufname ~= last_bufname then
-              if grapple.exists(PREV()) then
-                local prev_path = grapple.find(PREV()).path
+              if grapple.exists(PREV1()) then
+                local prev_path = grapple.find(PREV1()).path
                 if last_bufname ~= prev_path then
                   grapple.tag(PREV2(prev_path))
                 end
               end
-              grapple.tag(PREV(last_bufname))
+              grapple.tag(PREV1(last_bufname))
             end
             if not BufIsSpecial() then
               last_bufname = bufname
@@ -173,17 +169,20 @@ return {
             return
           end
           vim.opt_local.statuscolumn = ""
-          grapple.tag(TERM())
+          if last_term_tag ~= nil then
+            grapple.tag(last_term_tag)
+            last_term_tag = nil
+          end
           vim.keymap.set({ "n", "v" }, "<c-u>", "", { buffer = true, silent = true })
           vim.keymap.set({ "n", "v" }, "<c-d>", "", { buffer = true, silent = true })
           vim.keymap.set({ "t", "n", "v" }, "<c-u><c-y>", function()
             vim.fn.feedkeys("cd " .. vim.fn.getcwd() .. enter)
           end, { buffer = true })
           vim.keymap.set({ "t", "n", "v" }, "<c-u><c-o>", function()
-            if not grapple.exists(PREV()) then
+            if not grapple.exists(PREV1()) then
               return
             end
-            local folder = last_bufname:match("(.*)\\.*")
+            local folder = grapple.find(PREV1()).path:match("(.*)\\.*")
             if folder ~= nil then
               vim.fn.feedkeys("cd " .. folder .. enter)
             end
@@ -195,20 +194,21 @@ return {
             if vim.fn.winnr("$") > 1 then
               vim.cmd("silent close")
               return
-            elseif grapple.exists(PREV()) then
-              grapple.select(PREV())
+            elseif grapple.exists(PREV1()) then
+              grapple.select(PREV1())
             end
           end, { buffer = true })
         end,
       })
 
       vim.api.nvim_create_autocmd("TermClose", {
-        callback = function()
+        callback = function(args)
           if is_lazygit_buffer() then
             return
           end
-          if grapple.exists(TERM()) then
-            grapple.untag(TERM())
+          local name = vim.api.nvim_buf_get_name(args.buf)
+          if grapple.exists({ path = name }) then
+            grapple.untag({ path = name })
           end
         end,
       })
