@@ -176,7 +176,7 @@ return {
           vim.keymap.set({ "n", "v" }, "<c-u>", "", { buffer = true, silent = true })
           vim.keymap.set({ "n", "v" }, "<c-d>", "", { buffer = true, silent = true })
           vim.keymap.set({ "t", "n", "v" }, "<c-u><c-y>", function()
-            vim.fn.feedkeys("cd " .. vim.fn.getcwd() .. enter)
+            vim.fn.feedkeys('cd "' .. vim.fn.getcwd() .. '"' .. enter)
           end, { buffer = true })
           vim.keymap.set({ "t", "n", "v" }, "<c-u><c-o>", function()
             if not grapple.exists(PREV1()) then
@@ -184,7 +184,7 @@ return {
             end
             local folder = grapple.find(PREV1()).path:match("(.*)\\.*")
             if folder ~= nil then
-              vim.fn.feedkeys("cd " .. folder .. enter)
+              vim.fn.feedkeys('cd "' .. folder .. '"' .. enter)
             end
           end, { buffer = true })
           vim.keymap.set({ "t", "n", "v" }, "<c-u><c-i>", function()
