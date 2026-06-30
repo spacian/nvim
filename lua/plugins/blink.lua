@@ -5,7 +5,12 @@ local transform = function(_, items)
   local ends_with_equals = function(label)
     return label:sub(#label, #label) == "="
   end
+  local starts_with_underscore = function(label, n)
+    return label:sub(1, n) == string.sub("__", 1, n)
+  end
   for _, item in ipairs(items) do
+    item.score = item.score or 0
+    item.score_offset = item.score_offset or 0
     if item.deprecated or (item.tags and vim.tbl_contains(item.tags, 1)) then
       item.score_offset = item.score_offset - 5
     end
@@ -14,6 +19,12 @@ local transform = function(_, items)
     end
     if ends_with_equals(item.label) then
       item.score_offset = item.score_offset + 5
+    end
+    if starts_with_underscore(item.label, 1) then
+      item.score_offset = item.score_offset - 5
+    end
+    if starts_with_underscore(item.label, 2) then
+      item.score_offset = item.score_offset - 10
     end
   end
   return items
