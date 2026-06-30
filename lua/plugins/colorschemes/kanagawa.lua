@@ -31,7 +31,13 @@ return {
             ["@string.escape"] = { italic = false, bold = false },
             ["@attribute.builtin.python"] = { link = "@attribute.python" },
             -- ["@function.method.call.python"] = { link = "@function.method" },
-            Function = { italic = false, bold = true },
+            ["@constructor.python"] = { link = "Function" },
+            ["@property.lua"] = { link = "@variable" },
+            Function = {
+              italic = false,
+              bold = false,
+              fg = colors.palette.surimiOrange,
+            },
             Visual = { bg = colors.palette.winterGreen },
             String = { italic = false, bold = false },
             Boolean = { italic = false, bold = false },
@@ -51,11 +57,7 @@ return {
       vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = palette.winterYellow })
       vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = palette.dragonBlack5 })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = palette.dragonBlack4 })
-      vim.api.nvim_set_hl(
-        0,
-        "@function.method",
-        MergeHL("@function", { bold = false })
-      )
+      vim.api.nvim_set_hl(0, "@function.method", MergeHL("@function", { bold = false }))
       vim.api.nvim_set_hl(0, "@function.call", MergeHL("normal"))
       vim.api.nvim_set_hl(0, "@function.method.call", MergeHL("normal"))
       vim.api.nvim_set_hl(0, "@variable.builtin", MergeHL("@variable.parameter"))
