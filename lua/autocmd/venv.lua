@@ -29,27 +29,22 @@ end
 
 local venv = nil
 local function venv_update()
-  if venv ~= nil then
+  local python_path = vim.fn.getcwd() .. "/.venv/Scripts/python.exe"
+  if venv ~= nil and venv ~= python_path then
     deactivate()
     venv = nil
   end
-  local python_path = vim.fn.getcwd() .. "/.venv/Scripts/python.exe"
   if exists(python_path) then
     venv = python_path
     activate(python_path)
   end
 end
 
-local last_cwd = nil
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   callback = function()
     if BufIsSpecial() then
       return
     end
-    local cwd = vim.fn.getcwd():gsub("\\", "/"):lower()
-    if last_cwd ~= cwd then
-      last_cwd = cwd
-      venv_update()
-    end
+    venv_update()
   end,
 })
