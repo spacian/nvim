@@ -31,6 +31,12 @@ return {
           disable = { indent = languages },
         })
 
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = "text",
+          callback = function(args)
+            vim.treesitter.start(args.buf, "markdown")
+          end,
+        })
         vim.api.nvim_exec_autocmds("User", { pattern = "TreesitterSetupDone" })
       end,
     })
