@@ -66,12 +66,13 @@ return {
       vim.api.nvim_set_hl(0, "@keyword.operator", default)
       vim.api.nvim_set_hl(0, "Special", default)
       vim.api.nvim_set_hl(0, "Operator", default)
-      vim.api.nvim_set_hl(0, "Number", default)
+      vim.api.nvim_set_hl(0, "Number", { link = "String" })
       vim.api.nvim_set_hl(0, "Boolean", default)
       vim.api.nvim_set_hl(0, "@string.escape", default)
       vim.api.nvim_set_hl(0, "Type", default)
       vim.api.nvim_set_hl(0, "Constant", default)
       vim.api.nvim_set_hl(0, "OilDirHidden", MergeHL("Directory"))
+      vim.api.nvim_set_hl(0, "@magic", { link = "String" })
     end,
   },
 }
