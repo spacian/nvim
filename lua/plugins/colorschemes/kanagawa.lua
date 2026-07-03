@@ -39,7 +39,7 @@ return {
               fg = colors.palette.surimiOrange,
             },
             Visual = { bg = colors.palette.winterGreen },
-            String = { italic = false, bold = false },
+            String = { italic = false, bold = false, fg = colors.palette.springGreen },
             Boolean = { italic = false, bold = false },
           }
         end,
@@ -50,6 +50,7 @@ return {
         },
       })
       kanagawa.load("dragon")
+      local default = { link = "@keyword" }
       local palette = require("kanagawa.colors").setup().palette
       vim.api.nvim_set_hl(0, "@comment", { fg = palette.roninYellow })
       vim.api.nvim_set_hl(0, "Comment", { fg = palette.roninYellow })
@@ -62,10 +63,15 @@ return {
       vim.api.nvim_set_hl(0, "@function.method.call", MergeHL("normal"))
       vim.api.nvim_set_hl(0, "@variable.builtin", MergeHL("@variable.parameter"))
       vim.api.nvim_set_hl(0, "@variable.member", MergeHL("@variable"))
-      vim.api.nvim_set_hl(0, "@keyword.operator", MergeHL("@keyword"))
-      vim.api.nvim_set_hl(0, "Number", MergeHL("Boolean"))
+      vim.api.nvim_set_hl(0, "@keyword.operator", default)
+      vim.api.nvim_set_hl(0, "Special", default)
+      vim.api.nvim_set_hl(0, "Operator", default)
+      vim.api.nvim_set_hl(0, "Number", default)
+      vim.api.nvim_set_hl(0, "Boolean", default)
+      vim.api.nvim_set_hl(0, "@string.escape", default)
+      vim.api.nvim_set_hl(0, "Type", default)
+      vim.api.nvim_set_hl(0, "Constant", default)
       vim.api.nvim_set_hl(0, "OilDirHidden", MergeHL("Directory"))
-      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = MergeHL("Normal").bg })
     end,
   },
 }
