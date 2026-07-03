@@ -5,7 +5,7 @@ return {
     lazy = false,
     config = function()
       require("spider").setup({
-        customPatterns = { "[%wÜÄÖüäöß_]+" },
+        customPatterns = { "[%wÜÄÖüäöß_]+", ".$" },
         overrideDefault = true,
       })
       vim.keymap.set({ "n", "v" }, "w", function()
