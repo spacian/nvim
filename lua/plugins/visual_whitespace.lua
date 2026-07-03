@@ -4,8 +4,11 @@ return {
     enabled = not vim.g.vscode,
     lazy = false,
     opts = {
-      cr_char = "",
-      nl_char = "",
+      fileformat_chars = {
+        unix = "",
+        mac = "",
+        dos = "",
+      },
     },
   },
 }
