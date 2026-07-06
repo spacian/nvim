@@ -39,7 +39,68 @@ return {
 
       vim.keymap.set("n", "<leader>ob", function()
         jumplist.register(1)
-        require("grapple").open_tags()
+        local get_items = function(scope, refresh)
+          return vim
+            .iter(grapple.tags({ scope = scope }))
+            :map(function(tag)
+              if #tag.name > 1 then
+                return nil
+              end
+              local item = {
+                label = tag.name,
+                text = tag.name .. tag.path,
+                file = tag.path,
+              }
+              if not refresh and tag.path == vim.api.nvim_buf_get_name(0) then
+                item.pos = { vim.fn.line("."), vim.fn.col(".") }
+              elseif tag.cursor then
+                item.pos = { tag.cursor[1], tag.cursor[2] }
+              end
+              return item
+            end)
+            :filter(function(item)
+              return item ~= nil
+            end)
+            :totable()
+        end
+        local items = get_items()
+        local scope = "cwd"
+        require("snacks").picker.pick({
+          title = "Grapple",
+          items = get_items(scope),
+          confirm = function(picker, item)
+            if not item then
+              return
+            end
+            picker:close()
+            grapple.select({ scope = scope, name = item.label })
+          end,
+          actions = {
+            delete = function(picker, item)
+              if not item then
+                return
+              end
+              grapple.untag({ path = item.file, scope = scope })
+              local items = get_items(scope, true)
+              if #items == 0 then
+                picker:close()
+              else
+                picker.opts.items = items
+                picker:refresh()
+              end
+            end,
+          },
+          win = {
+            input = {
+              keys = {
+                ["<c-x>"] = {
+                  "delete",
+                  mode = { "n", "i" },
+                },
+              },
+            },
+          },
+        })
       end, {})
 
       vim.keymap.set("n", "<leader>h", function()
