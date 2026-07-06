@@ -25,6 +25,10 @@ return {
             return m ~= nil and name ~= ".." and name ~= ".gitignore"
           end,
         },
+        lsp_file_methods = {
+          timeout_ms = 10000,
+          autosave_changes = true,
+        },
       })
 
       vim.keymap.set("n", "<leader>oe", function()
