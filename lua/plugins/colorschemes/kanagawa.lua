@@ -31,7 +31,7 @@ return {
             ["@string.escape"] = { italic = false, bold = false },
             ["@attribute.builtin.python"] = { link = "@attribute.python" },
             -- ["@function.method.call.python"] = { link = "@function.method" },
-            ["@constructor.python"] = { link = "Function" },
+            ["@constructor.python"] = { link = "Normal" },
             ["@property.lua"] = { link = "@variable" },
             Function = {
               italic = false,
@@ -52,27 +52,37 @@ return {
       kanagawa.load("dragon")
       local default = { link = "@keyword" }
       local palette = require("kanagawa.colors").setup().palette
+      local orange = { link = "Function" }
+      local white = { link = "Normal" }
+      local green = { link = "String" }
       vim.api.nvim_set_hl(0, "@comment", { fg = palette.roninYellow })
       vim.api.nvim_set_hl(0, "Comment", { fg = palette.roninYellow })
       vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = palette.winterRed })
       vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = palette.winterYellow })
       vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = palette.dragonBlack5 })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = palette.dragonBlack4 })
-      vim.api.nvim_set_hl(0, "@function.method", MergeHL("@function", { bold = false }))
-      vim.api.nvim_set_hl(0, "@function.call", MergeHL("normal"))
-      vim.api.nvim_set_hl(0, "@function.method.call", MergeHL("normal"))
-      vim.api.nvim_set_hl(0, "@variable.builtin", MergeHL("@variable.parameter"))
-      vim.api.nvim_set_hl(0, "@variable.member", MergeHL("@variable"))
+      vim.api.nvim_set_hl(0, "OilDirHidden", MergeHL("Directory"))
+      vim.api.nvim_set_hl(0, "@function.method", orange)
+      vim.api.nvim_set_hl(0, "@function.call", white)
+      vim.api.nvim_set_hl(0, "@function.method.call", white)
+      vim.api.nvim_set_hl(0, "@variable.builtin", default)
+      vim.api.nvim_set_hl(0, "@variable.member", default)
       vim.api.nvim_set_hl(0, "@keyword.operator", default)
       vim.api.nvim_set_hl(0, "Special", default)
       vim.api.nvim_set_hl(0, "Operator", default)
-      vim.api.nvim_set_hl(0, "Number", { link = "String" })
+      vim.api.nvim_set_hl(0, "Number", green)
       vim.api.nvim_set_hl(0, "Boolean", default)
       vim.api.nvim_set_hl(0, "@string.escape", default)
       vim.api.nvim_set_hl(0, "Type", default)
-      vim.api.nvim_set_hl(0, "Constant", default)
-      vim.api.nvim_set_hl(0, "OilDirHidden", MergeHL("Directory"))
-      vim.api.nvim_set_hl(0, "@magic", { link = "String" })
+      vim.api.nvim_set_hl(0, "Constant", white)
+      vim.api.nvim_set_hl(0, "@magic", green)
+      vim.api.nvim_set_hl(0, "@class.name", orange)
+      vim.api.nvim_set_hl(0, "@function.definition", orange)
+      vim.api.nvim_set_hl(0, "@import.name", default)
+      vim.api.nvim_set_hl(0, "@import.target", default)
+      vim.api.nvim_set_hl(0, "@class.expression", white)
+      vim.api.nvim_set_hl(0, "@attribute", white)
+      vim.api.nvim_set_hl(0, "@decorator", orange)
     end,
   },
 }
