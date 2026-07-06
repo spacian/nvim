@@ -15,11 +15,19 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.colorschemes" },
   },
+  install = {
+    missing = false,
+  },
   change_detection = {
-    enabled = false,
+    enabled = true,
+    notify = false,
   },
   performance = {
-    cache = { enabled = false },
+    cache = {
+      enabled = false,
+    },
   },
-  readme = { enabled = false },
+  readme = {
+    enabled = false,
+  },
 })
