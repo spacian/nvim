@@ -30,7 +30,10 @@ end
 local venv = nil
 local function venv_update()
   local python_path = vim.fn.getcwd() .. "/.venv/Scripts/python.exe"
-  if venv ~= nil and venv ~= python_path then
+  if venv == python_path then
+    return
+  end
+  if venv ~= nil then
     deactivate()
     venv = nil
   end
