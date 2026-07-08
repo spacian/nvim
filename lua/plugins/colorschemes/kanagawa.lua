@@ -50,7 +50,7 @@ return {
         },
       })
       kanagawa.load("dragon")
-      local default = { link = "@keyword" }
+      local blue = { link = "@keyword" }
       local palette = require("kanagawa.colors").setup().palette
       local orange = { link = "Function" }
       local white = { link = "Normal" }
@@ -65,21 +65,21 @@ return {
       vim.api.nvim_set_hl(0, "@function.method", orange)
       vim.api.nvim_set_hl(0, "@function.call", white)
       vim.api.nvim_set_hl(0, "@function.method.call", white)
-      vim.api.nvim_set_hl(0, "@variable.builtin", default)
-      vim.api.nvim_set_hl(0, "@variable.member", default)
-      vim.api.nvim_set_hl(0, "@keyword.operator", default)
-      vim.api.nvim_set_hl(0, "Special", default)
-      vim.api.nvim_set_hl(0, "Operator", default)
+      vim.api.nvim_set_hl(0, "@variable.builtin", { link = "@variable.parameter" })
+      vim.api.nvim_set_hl(0, "@variable.member", white)
+      vim.api.nvim_set_hl(0, "@keyword.operator", blue)
+      vim.api.nvim_set_hl(0, "Special", blue)
+      vim.api.nvim_set_hl(0, "Operator", blue)
       vim.api.nvim_set_hl(0, "Number", green)
-      vim.api.nvim_set_hl(0, "Boolean", default)
-      vim.api.nvim_set_hl(0, "@string.escape", default)
-      vim.api.nvim_set_hl(0, "Type", default)
+      vim.api.nvim_set_hl(0, "Boolean", blue)
+      vim.api.nvim_set_hl(0, "@string.escape", blue)
+      vim.api.nvim_set_hl(0, "Type", blue)
       vim.api.nvim_set_hl(0, "Constant", white)
       vim.api.nvim_set_hl(0, "@magic", green)
       vim.api.nvim_set_hl(0, "@class.name", orange)
       vim.api.nvim_set_hl(0, "@function.definition", orange)
-      vim.api.nvim_set_hl(0, "@import.name", default)
-      vim.api.nvim_set_hl(0, "@import.target", default)
+      vim.api.nvim_set_hl(0, "@import.name", blue)
+      vim.api.nvim_set_hl(0, "@import.target", blue)
       vim.api.nvim_set_hl(0, "@class.expression", white)
       vim.api.nvim_set_hl(0, "@attribute", white)
       vim.api.nvim_set_hl(0, "@decorator", orange)
