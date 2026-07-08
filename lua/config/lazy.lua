@@ -14,6 +14,8 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
     { import = "plugins.colorschemes" },
+    { import = "plugins.helpers" },
+    { import = "plugins.setup" },
   },
   install = {
     missing = false,

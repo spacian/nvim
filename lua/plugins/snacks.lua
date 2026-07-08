@@ -18,8 +18,11 @@ return {
               return "default"
             end,
           },
-          explorer = {
-            include = { "build" },
+          sources = {
+            explorer = {
+              include = { "build" },
+              auto_close = true,
+            },
           },
           win = {
             preview = {
@@ -110,6 +113,11 @@ return {
       vim.keymap.set("n", "<leader>oq", function()
         jumplist.register(1)
         snacks.picker.qflist()
+      end)
+
+      vim.keymap.set("n", "<leader>oE", function()
+        jumplist.register(1)
+        snacks.explorer()
       end)
     end,
   },
