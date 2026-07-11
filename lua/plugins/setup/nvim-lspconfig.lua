@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  after = { "saghen/blink.cmp" },
   config = function()
     vim.api.nvim_create_autocmd("User", {
       pattern = "MasonToolsUpdateCompleted",

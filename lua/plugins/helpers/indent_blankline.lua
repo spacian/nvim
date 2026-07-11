@@ -7,28 +7,13 @@ return {
     config = function()
       require("ibl").setup({
         indent = {
-          -- char = "▏",
-          -- char = "▎",
-          -- char = "▍",
-          -- char = "▌",
-          -- char = "▋",
-          -- char = "▊",
-          -- char = "▉",
-          -- char = "█",
           char = "│",
-          -- char = "┃",
-          -- char = "▕",
-          -- char = "▐",
-          -- char = "╎",
-          -- char = "╏",
-          -- char = "┆",
-          -- char = "┇",
-          -- char = "┊",
-          -- char = "┋",
-          -- char = "║",
         },
         scope = {
           enabled = false,
+        },
+        viewport_buffer = {
+          min = 1000,
         },
       })
     end,

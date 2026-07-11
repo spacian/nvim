@@ -15,7 +15,7 @@ local transform = function(_, items)
       item.score_offset = item.score_offset - 5
     end
     if is_basemodel_method(item.label) then
-      item.score_offset = item.score_offset - 1
+      item.score_offset = item.score_offset - 5
     end
     if ends_with_equals(item.label) then
       item.score_offset = item.score_offset + 5
@@ -36,7 +36,7 @@ return {
     enabled = not vim.g.vscode,
     lazy = false,
     dependencies = "rafamadriz/friendly-snippets",
-    version = "*",
+    version = "1.*",
     opts = {
       keymap = {
         preset = "none",

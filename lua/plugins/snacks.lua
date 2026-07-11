@@ -14,9 +14,6 @@ return {
           layout = {
             fullscreen = true,
             cycle = true,
-            preset = function()
-              return "default"
-            end,
           },
           sources = {
             explorer = {

@@ -5,6 +5,7 @@ return {
     "m00qek/baleia.nvim",
     "folke/snacks.nvim",
   },
+  after = { "esmuellert/codediff.nvim" },
   config = function()
     local neogit = require("neogit")
     neogit.setup({
