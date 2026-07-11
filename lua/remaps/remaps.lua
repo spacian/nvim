@@ -40,13 +40,3 @@ vim.keymap.set({ "x" }, "gw", function()
   vim.api.nvim_feedkeys("gw^", "n", false)
   vim.o.textwidth = 0
 end)
-vim.keymap.set("n", "q", function()
-  if vim.fn.reg_recording() ~= "" then
-    vim.api.nvim_feedkeys("q", "n", false)
-    return
-  end
-  local char = vim.fn.getcharstr()
-  if vim.fn.confirm("Execute 'q" .. char .. "'?", "&Yes\n&No", 1) == 1 then
-    vim.api.nvim_feedkeys("q" .. char, "n", false)
-  end
-end)
