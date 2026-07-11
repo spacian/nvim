@@ -3,19 +3,6 @@ BufIsSpecial = function()
   return vim.bo.buftype ~= ""
 end
 
----@param line string
----@param width number
----@return string
-Line = function(line, width)
-  local s = tostring(line)
-  local pad = width - #s
-  if pad > 0 then
-    return string.rep(" ", pad) .. s
-  else
-    return s
-  end
-end
-
 function Feedkeys(keys)
   local feedable_keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
   vim.api.nvim_feedkeys(feedable_keys, "n", false)
@@ -42,8 +29,9 @@ if not vim.g.vscode then
   vim.o.wrap = true
   vim.o.signcolumn = "yes:1"
   vim.o.foldcolumn = "0"
-  vim.o.number = false
-  vim.o.statuscolumn = "%{v:lua.Line(v:lnum, 4)}%s"
+  vim.o.number = true
+  vim.o.statuscolumn = "%l%s"
+  vim.opt.numberwidth = 3
   vim.opt.fillchars = { eob = " " }
   vim.opt.formatoptions:remove("t")
   vim.o.textwidth = 0
