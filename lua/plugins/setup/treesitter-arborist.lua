@@ -40,7 +40,7 @@ return {
 
         vim.keymap.set(
           { "x" },
-          "i",
+          "v",
           function()
             if vim.treesitter.get_parser(nil, nil, { error = false }) then
               require("vim.treesitter._select").select_parent(vim.v.count1)
@@ -53,7 +53,7 @@ return {
 
         vim.keymap.set(
           { "x" },
-          "v",
+          "V",
           function()
             if vim.treesitter.get_parser(nil, nil, { error = false }) then
               require("vim.treesitter._select").select_child(vim.v.count1)
