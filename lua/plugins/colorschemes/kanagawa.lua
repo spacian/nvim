@@ -83,6 +83,12 @@ return {
       vim.api.nvim_set_hl(0, "@class.expression", white)
       vim.api.nvim_set_hl(0, "@attribute", white)
       vim.api.nvim_set_hl(0, "@decorator", orange)
+      vim.api.nvim_set_hl(0, "MultiCursorCursor", { link = "IncSearch" })
+      vim.api.nvim_set_hl(
+        0,
+        "MultiCursorDisabledCursor",
+        { fg = MergeHL("Normal").bg, bg = palette.springGreen }
+      )
     end,
   },
 }
