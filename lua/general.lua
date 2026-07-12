@@ -1,6 +1,8 @@
+---@param bufnr number|nil
 ---@return boolean
-BufIsSpecial = function()
-  return vim.bo.buftype ~= ""
+BufIsSpecial = function(bufnr)
+  bufnr = bufnr or 0
+  return vim.bo[bufnr].buftype ~= "" or vim.api.nvim_buf_get_name(bufnr) == ""
 end
 
 function Feedkeys(keys)
