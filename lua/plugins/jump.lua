@@ -1,14 +1,14 @@
 return {
-  "spacian/nvim-jump",
+  "yorickpeterse/nvim-jump",
   config = function()
     require("jump").setup({
       label = "IncSearch",
-      labels = "fjdkruvmghtybnsleislwoaqpz",
-      auto_jump = true,
+      labels = "jkfdumrvhgytnblsiecowxpqaz",
     })
+
     local jumplist = require("remaps.nvim.jumplist")
 
-    vim.keymap.set({ "n", "x", "o" }, "gj", function()
+    vim.keymap.set({ "n", "x", "o" }, "<leader>j", function()
       jumplist.register(1)
       require("jump").start()
     end, {})
