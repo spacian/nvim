@@ -7,6 +7,36 @@ return {
       local jumplist = require("remaps.nvim.jumplist")
       local snacks = require("snacks")
       snacks.setup({
+        scope = {
+          keys = {
+            textobject = {
+              ii = false,
+              ia = false,
+              ib = {
+                cursor = true,
+                desc = "inner scope",
+                edge = false,
+                min_size = 2,
+                treesitter = { blocks = { enabled = false } },
+              },
+              ab = {
+                cursor = true,
+                desc = "full scope",
+                edge = true,
+                min_size = 2,
+                treesitter = { blocks = { enabled = false } },
+              },
+            },
+            jump = {
+              ["[i"] = false,
+              ["]i"] = false,
+            },
+          },
+        },
+        indent = {
+          enabled = true,
+          char = "│",
+        },
         scratch = {
           ft = "markdown",
         },
