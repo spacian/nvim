@@ -48,6 +48,15 @@ M.insert = function(node)
   M.root.prev = node
 end
 
+---@param node Node
+M.insert_last = function(node)
+  local prev = M.root.prev
+  node.prev = prev
+  node.next = M.root
+  prev.next = node
+  M.root.prev = node
+end
+
 ---@param persistence number
 M.update = function(persistence)
   local pos = vim.fn.getpos(".")
@@ -136,6 +145,22 @@ M.register = function(persistence)
   end
 end
 
+---@param persistence number|nil
+M.append = function(persistence)
+  if persistence == nil or M.cur.root then
+    persistence = 0
+  end
+  if BufIsSpecial() then
+    return
+  end
+  local node = M.create_node(persistence)
+  if nodes_equal_soft(node, M.root.prev) then
+    M.delete(M.root.prev)
+  end
+  M.insert_last(node)
+  M.cur = M.root.prev
+end
+
 M.jump_back = function()
   if M.cur.root then
     M.register()
@@ -182,6 +207,18 @@ M.jump_forward = function()
   M.setpos()
 end
 
+---@return Position[]
+M.get_positions = function()
+  local node = M.root
+  ---@type Position[]
+  local positions = {}
+  while not node.prev.root do
+    node = node.prev
+    positions[#positions + 1] = { lnum = node.lnum, col = node.col, bufnr = node.bufnr }
+  end
+  return positions
+end
+
 local JumpList = {
   reset = M.reset,
   register = M.register,
@@ -190,6 +227,8 @@ local JumpList = {
   delete = function()
     M.delete(M.cur)
   end,
+  get_positions = M.get_positions,
+  append = M.append,
 }
 
 return JumpList
@@ -202,3 +241,8 @@ return JumpList
 ---@field prev Node
 ---@field root boolean
 ---@field persistence number
+
+---@class Position
+---@field bufnr number
+---@field lnum number
+---@field col number
