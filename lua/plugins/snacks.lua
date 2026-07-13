@@ -36,6 +36,13 @@ return {
         indent = {
           enabled = true,
           char = "│",
+          animate = {
+            enabled = true,
+            duration = {
+              step = 5,
+              total = 50,
+            },
+          },
         },
         scratch = {
           ft = "markdown",
