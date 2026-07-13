@@ -112,9 +112,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
     vim.keymap.set("n", "<c-o>", "<nop>", { buf = args.buf })
     vim.keymap.set("n", "<c-i>", "<nop>", { buf = args.buf })
-    vim.keymap.set("n", "<c-q>", function()
-      vim.cmd("cclose")
-    end, { buf = args.buf })
 
     vim.keymap.set("n", "<c-e>", function()
       vim.cmd("Refresh")
