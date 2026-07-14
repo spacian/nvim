@@ -1,12 +1,7 @@
 local jumplist = require("remaps.nvim.jumplist")
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function(args)
-    vim.schedule(function()
-      if BufIsSpecial(args.buf) then
-        return
-      end
-      jumplist.register(2)
-    end)
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  callback = function()
+    jumplist.register(2)
   end,
 })
 

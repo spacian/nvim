@@ -144,6 +144,19 @@ M.cleanup = function()
   if node.root then
     return
   end
+
+  while not node.root do
+    local prev = node.prev
+    if not (vim.bo[node.bufnr].buflisted and vim.api.nvim_buf_is_valid(node.bufnr)) then
+      M.delete(node)
+    end
+    node = prev
+  end
+
+  local node = M.root.prev
+  if node.root then
+    return
+  end
   local node_count = 1
   while not node.prev.root do
     if
