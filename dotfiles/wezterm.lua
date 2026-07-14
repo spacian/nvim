@@ -1,10 +1,23 @@
 local wezterm = require("wezterm")
 
 wezterm.on("format-window-title", function()
-  return ""
+  return "$"
+end)
+
+wezterm.on("format-tab-title", function(tab)
+  return "        " .. tostring(tab.tab_index) .. "        "
 end)
 
 local config = wezterm.config_builder()
+
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
+config.default_prog = { "pwsh.exe", "-NoLogo" }
+config.font = wezterm.font("CommitMono Nerd Font Mono")
+config.font_size = 17
+config.window_close_confirmation = "NeverPrompt"
+config.exit_behavior = "Close"
+
 local act = wezterm.action
 
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -93,12 +106,5 @@ for i = 0, 9 do
     action = act.ActivateTab(i),
   })
 end
-
-config.hide_tab_bar_if_only_one_tab = true
-config.default_prog = { "pwsh.exe", "-NoLogo" }
-config.font = wezterm.font("CommitMono Nerd Font Mono")
-config.font_size = 18.0
-config.window_close_confirmation = "NeverPrompt"
-config.exit_behavior = "Close"
 
 return config

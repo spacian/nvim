@@ -1,0 +1,5 @@
+gui:
+  showCommandLog: false
+promptToReturnFromSubprocess: false
+os:
+  edit: "nvim --remote {{filename}}"
