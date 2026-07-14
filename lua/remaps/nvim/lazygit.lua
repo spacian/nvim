@@ -12,10 +12,10 @@ local lazygit = function(args)
     "--cwd",
     vim.fn.getcwd(),
     "--",
-    "pwsh",
-    "-NoProfile",
-    "-Command",
-    ("%s; wezterm cli activate-pane --pane-id %s"):format(command, nvim_pane),
+    "cmd",
+    "/d",
+    "/c",
+    ("%s & wezterm cli activate-pane --pane-id %s"):format(command, nvim_pane),
   })
 end
 
