@@ -15,3 +15,5 @@ else
   vim.keymap.set({ "t" }, "<c-e><c-a>", [[./.venv/bin/activate<enter>]])
   vim.keymap.set({ "t" }, "<c-e><c-d>", [[deactivate<enter>]])
 end
+
+vim.opt.guicursor:append("a:blinkon0")
