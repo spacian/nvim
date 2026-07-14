@@ -2,7 +2,9 @@
 ---@return boolean
 BufIsSpecial = function(bufnr)
   bufnr = bufnr or 0
-  return vim.bo[bufnr].buftype ~= "" or vim.api.nvim_buf_get_name(bufnr) == ""
+  return not vim.fn.bufexists(bufnr)
+    or vim.api.nvim_buf_get_name(bufnr) == ""
+    or vim.bo[bufnr].buftype ~= ""
 end
 
 function Feedkeys(keys)
