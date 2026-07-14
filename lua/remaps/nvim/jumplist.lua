@@ -1,6 +1,5 @@
 local M = {}
 
-local persistence_jump = 1
 local soft_equal_line_count = 6
 local max_node_count = 100
 
@@ -11,7 +10,6 @@ local create_root = function()
     col = 0,
     bufnr = 0,
     root = true,
-    persistence = 0,
   }
   root.next = root
   root.prev = root
@@ -23,9 +21,8 @@ if M.root == nil then
   M.cur = M.root
 end
 
----@param persistence number
 ---@return Node
-M.create_node = function(persistence)
+M.create_node = function()
   local pos = vim.fn.getpos(".")
   return {
     lnum = pos[2],
@@ -34,7 +31,6 @@ M.create_node = function(persistence)
     root = false,
     prev = M.root,
     next = M.root,
-    persistence = persistence,
   }
 end
 
@@ -51,13 +47,9 @@ end
 
 ---@param old Node
 ---@param new Node
----@param force boolean
-M.update = function(old, new, force)
+M.update = function(old, new)
   old.lnum = new.lnum
   old.col = new.col
-  if force then
-    old.persistence = math.min(old.persistence, new.persistence)
-  end
 end
 
 ---@param node Node
@@ -121,15 +113,13 @@ M.setpos = function(node)
   end
 end
 
----@param persistence number|nil
-M.register = function(persistence)
-  persistence = persistence or 0
+M.register = function()
   if BufIsSpecial() then
     return
   end
-  local node = M.create_node(persistence)
+  local node = M.create_node()
   if nodes_equal_soft(M.cur, node) then
-    M.update(M.cur, node, true)
+    M.update(M.cur, node)
   else
     M.insert_after(node, M.cur)
     M.cur = M.cur.next
@@ -147,21 +137,24 @@ M.cleanup = function()
 
   while not node.root do
     local prev = node.prev
-    if not (vim.bo[node.bufnr].buflisted and vim.api.nvim_buf_is_valid(node.bufnr)) then
+    if
+      (not vim.fn.bufexists(node.bufnr))
+      or (not vim.api.nvim_buf_is_valid(node.bufnr))
+      or BufIsSpecial(node.bufnr)
+    then
       M.delete(node)
     end
     node = prev
   end
 
-  local node = M.root.prev
+  node = M.root.prev
   if node.root then
     return
   end
+
   local node_count = 1
   while not node.prev.root do
-    if
-      nodes_equal_soft(node, node.prev) or node.persistence < node.prev.persistence
-    then
+    if nodes_equal_soft(node, node.prev) then
       M.delete(node.prev)
     else
       node = node.prev
@@ -178,14 +171,18 @@ M.jump_back = function()
   if M.cur.root then
     M.register()
   end
-  local node = M.create_node(persistence_jump)
+  local node = M.create_node()
   if nodes_equal_soft(M.cur, node) then
-    M.update(M.cur, node, false)
+    M.update(M.cur, node)
     if not M.cur.prev.root then
       M.cur = M.cur.prev
     end
   elseif not BufIsSpecial() then
     M.insert_after(node, M.cur)
+    local next = M.cur.next
+    while not next.next.root do
+      M.delete(next.next)
+    end
   end
   M.cleanup()
   M.setpos(M.cur)
@@ -206,9 +203,9 @@ M.jump_forward = function()
     M.register()
   end
   M.cleanup()
-  local node = M.create_node(persistence_jump)
+  local node = M.create_node()
   if nodes_equal_soft(node, M.cur) then
-    M.update(M.cur, node, false)
+    M.update(M.cur, node)
   elseif not BufIsSpecial() then
     M.insert_after(node, M.cur)
     M.cur = M.cur.next
@@ -232,12 +229,10 @@ M.get_positions = function()
   return positions
 end
 
----@param persistence number|nil
-M.insert = function(persistence)
-  persistence = persistence or 0
-  local node = M.create_node(persistence)
+M.insert = function()
+  local node = M.create_node()
   if nodes_equal_soft(M.cur, node) then
-    M.update(M.cur, node, false)
+    M.update(M.cur, node)
   else
     M.insert_after(node, M.cur)
     M.cur = M.cur.next
@@ -262,7 +257,6 @@ return JumpList
 ---@field next Node
 ---@field prev Node
 ---@field root boolean
----@field persistence number
 
 ---@class Position
 ---@field bufnr number

@@ -31,12 +31,12 @@ return {
       vim.keymap.set("n", "<leader>oe", function()
         local bufname = vim.api.nvim_buf_get_name(0)
         if bufname == "" then
-          jumplist.register(1)
+          jumplist.register()
           vim.cmd("silent Oil .")
         elseif BufIsSpecial() then
           return
         end
-        jumplist.register(1)
+        jumplist.register()
         local file = vim.fn.expand("%:t")
         oil.open(vim.fn.expand("%:h"), {}, function()
           vim.cmd("silent! call search('\\V' . escape('" .. file .. "', '\\') , 'w')")

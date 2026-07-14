@@ -1,9 +1,4 @@
 local jumplist = require("remaps.nvim.jumplist")
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  callback = function()
-    jumplist.register(2)
-  end,
-})
 
 vim.keymap.set("n", "<leader>oj", function()
   ---@param positions Position[]
@@ -23,7 +18,7 @@ vim.keymap.set("n", "<leader>oj", function()
       )
       :totable()
   end
-  jumplist.insert(2)
+  jumplist.insert()
   require("snacks").picker.pick({
     title = "jumps",
     items = get_items(jumplist.get_positions()),

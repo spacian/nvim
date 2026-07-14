@@ -14,37 +14,37 @@ vim.keymap.set({ "n" }, "<c-o>", function()
 end)
 
 vim.keymap.set({ "n" }, "/", function()
-  jumplist.register(1)
+  jumplist.register()
   vim.cmd("set nohls")
   vim.api.nvim_feedkeys("/", "n", true)
 end)
 
 vim.keymap.set({ "n" }, "?", function()
-  jumplist.register(1)
+  jumplist.register()
   vim.cmd("set nohls")
   vim.api.nvim_feedkeys("?", "n", true)
 end)
 
 vim.keymap.set({ "n" }, "*", function()
-  jumplist.register(1)
+  jumplist.register()
   vim.cmd("set nohls")
   vim.api.nvim_feedkeys("*", "n", true)
 end)
 
 vim.keymap.set({ "n" }, "#", function()
-  jumplist.register(1)
+  jumplist.register()
   vim.cmd("set nohls")
   vim.api.nvim_feedkeys("#", "n", true)
 end)
 
 vim.keymap.set({ "n" }, "gf", function()
-  jumplist.register(1)
+  jumplist.register()
   vim.cmd("set nohls")
   vim.api.nvim_feedkeys("gf", "n", true)
 end)
 
 vim.keymap.set({ "n", "x" }, "gg", function()
-  jumplist.register(1)
+  jumplist.register()
   if vim.v.count > 0 then
     vim.api.nvim_feedkeys(vim.v.count .. "gg", "n", true)
   else
@@ -53,7 +53,7 @@ vim.keymap.set({ "n", "x" }, "gg", function()
 end)
 
 vim.keymap.set({ "n", "x" }, "G", function()
-  jumplist.register(1)
+  jumplist.register()
   vim.api.nvim_feedkeys("G$", "n", true)
 end)
 
@@ -66,7 +66,7 @@ end
 vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
   callback = function()
     if not BufIsSpecial() then
-      jumplist.register(1)
+      jumplist.register()
     end
   end,
 })

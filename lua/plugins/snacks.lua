@@ -71,7 +71,7 @@ return {
       })
 
       vim.keymap.set("n", "<leader>of", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.smart({
           multi = { "recent", "files" },
           watch = true,
@@ -81,52 +81,52 @@ return {
       end)
 
       vim.keymap.set("n", "<leader>oB", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.buffers()
       end)
 
       vim.keymap.set("n", "<leader>ff", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.grep()
       end)
 
       vim.keymap.set("n", "<leader>og", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.git_diff()
       end)
 
       vim.keymap.set({ "n", "v" }, "<leader>fw", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.grep_word()
       end)
 
       vim.keymap.set("n", "gr", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.lsp_references()
       end)
 
       vim.keymap.set("n", "gd", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.lsp_definitions()
       end)
 
       vim.keymap.set("n", "gD", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.lsp_type_definitions()
       end)
 
       vim.keymap.set("n", "<leader>or", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.recent({ filter = { paths = { [vim.fn.getcwd()] = true } } })
       end)
 
       vim.keymap.set("n", "<leader>oR", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.resume()
       end)
 
       vim.keymap.set("n", "<leader>od", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.diagnostics({
           sort = {
             fields = { "severity:asc", "is_current:asc", "file:asc", "lnum:asc" },
@@ -135,22 +135,22 @@ return {
       end)
 
       vim.keymap.set("n", "<leader>oN", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.scratch.select()
       end)
 
       vim.keymap.set("n", "<leader>on", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.scratch()
       end)
 
       vim.keymap.set("n", "<leader>oq", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.picker.qflist()
       end)
 
       vim.keymap.set("n", "<leader>oE", function()
-        jumplist.register(1)
+        jumplist.register()
         snacks.explorer()
       end)
     end,

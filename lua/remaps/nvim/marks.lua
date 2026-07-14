@@ -15,7 +15,7 @@ vim.keymap.set("n", "M", function()
   end
   local ok, pos = pcall(vim.api.nvim_get_mark, c, {})
   if ok and pos[1] ~= 0 then
-    jumplist.register(1)
+    jumplist.register()
     vim.cmd("normal! `" .. c .. "zz")
   else
     vim.notify("E20: Mark " .. c .. " not set", vim.log.levels.ERROR)

@@ -9,7 +9,7 @@ return {
     local jumplist = require("remaps.nvim.jumplist")
 
     vim.keymap.set({ "n", "x", "o" }, "<leader>j", function()
-      jumplist.register(1)
+      jumplist.register()
       require("jump").start()
     end, {})
   end,

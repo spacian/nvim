@@ -36,7 +36,7 @@ end
 
 local function open_qf()
   if #vim.fn.getqflist() > 0 then
-    jumplist.register(1)
+    jumplist.register()
     vim.cmd("copen")
   else
     vim.cmd("cclose")

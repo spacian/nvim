@@ -28,7 +28,7 @@ return {
 
       local jumplist = require("remaps.nvim.jumplist")
       vim.keymap.set("n", "<leader>os", function()
-        jumplist.register(1)
+        jumplist.register()
         vim.cmd("Namu symbols")
       end, { silent = true })
     end,

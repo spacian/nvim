@@ -38,7 +38,7 @@ return {
       grapple.setup({ scope = "cwd" })
 
       vim.keymap.set("n", "<leader>ob", function()
-        jumplist.register(1)
+        jumplist.register()
         local get_items = function(scope, refresh)
           return vim
             .iter(grapple.tags({ scope = scope }))
@@ -137,7 +137,7 @@ return {
         if not BufIsSpecial() then
           vim.cmd("silent noa w")
         end
-        jumplist.register(1)
+        jumplist.register()
         grapple.select({ name = c })
       end, {})
 
@@ -278,6 +278,7 @@ return {
         callback = function(_)
           vim.defer_fn(function()
             jumplist.reset()
+            jumplist.register()
             vim.cmd("clearjumps")
             vim.cmd("silent Grapple reset scope=prev")
           end, 250)
