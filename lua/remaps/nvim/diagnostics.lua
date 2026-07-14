@@ -49,6 +49,7 @@ vim.keymap.set("n", "<s-k>", function()
 end)
 
 vim.diagnostic.config({
+  underline = false,
   virtual_text = {
     prefix = "▶",
     severity_sort = true,
