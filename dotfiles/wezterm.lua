@@ -14,6 +14,7 @@ config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.default_prog = { "pwsh.exe", "-NoLogo" }
 config.font = wezterm.font("CommitMono Nerd Font Mono")
+config.warn_about_missing_glyphs = false
 config.font_size = 17
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior = "Close"
@@ -61,7 +62,10 @@ config.keys = {
   {
     key = "c",
     mods = "LEADER",
-    action = wezterm.action.SpawnTab("CurrentPaneDomain"),
+    action = wezterm.action.SpawnCommandInNewTab({
+      domain = "CurrentPaneDomain",
+      cwd = wezterm.home_dir,
+    }),
   },
 
   -- close pane
