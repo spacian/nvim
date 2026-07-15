@@ -1,5 +1,6 @@
 Set-Alias vim nvim
 Set-PSReadLineOption -PredictionSource None
+$env:HOME = $env:USERPROFILE
 
 Remove-Item Alias:ls
 function ls {
