@@ -39,7 +39,7 @@ return {
         jumplist.register()
         local file = vim.fn.expand("%:t")
         oil.open(vim.fn.expand("%:h"), {}, function()
-          vim.cmd("silent! call search('\\V' . escape('" .. file .. "', '\\') , 'w')")
+          vim.cmd("silent! call search('\\V' . escape(' " .. file .. "', '\\') , 'w')")
         end)
       end)
 
