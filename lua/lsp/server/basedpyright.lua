@@ -17,6 +17,7 @@ vim.lsp.config("basedpyright", {
         exclude = { ".venv" },
         diagnosticSeverityOverrides = {
           reportUnboundVariable = "error",
+          reportRedeclaration = "error",
           reportMissingModuleSource = "error",
           reportUnusedVariable = "warning",
           reportUnusedFunction = "warning",
