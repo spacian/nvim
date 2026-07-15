@@ -8,6 +8,33 @@ wezterm.on("format-tab-title", function(tab)
   return "        " .. tostring(tab.tab_index) .. "        "
 end)
 
+local activate_venv = wezterm.action_callback(function(window, pane)
+  local cwd = pane:get_current_working_dir()
+
+  if not cwd or not cwd.file_path then
+    return
+  end
+
+  local activate = wezterm.target_triple:find("windows")
+      and cwd.file_path:sub(2) .. "/.venv/Scripts/activate"
+    or cwd.file_path .. "/.venv/bin/activate"
+
+  if #wezterm.glob(activate) == 0 then
+    return
+  end
+  if wezterm.target_triple:find("windows") then
+    window:perform_action(
+      wezterm.action.SendString("./.venv/Scripts/activate" .. "\r"),
+      pane
+    )
+  else
+    window:perform_action(
+      wezterm.action.SendString("./.venv/bin/activate" .. "\r"),
+      pane
+    )
+  end
+end)
+
 local config = wezterm.config_builder()
 
 config.hide_tab_bar_if_only_one_tab = true
@@ -24,16 +51,62 @@ local act = wezterm.action
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
-  -- split panes
   {
-    key = "+",
-    mods = "LEADER|SHIFT",
-    action = wezterm.action.SplitHorizontal({}),
+    key = "e",
+    mods = "LEADER",
+    action = activate_venv,
   },
   {
-    key = "-",
+    key = "d",
     mods = "LEADER",
-    action = wezterm.action.SplitVertical({}),
+    action = wezterm.action_callback(function(window, pane)
+      window:perform_action(wezterm.action.SendString("deactivate\r"), pane)
+    end),
+  },
+  -- split panes
+  {
+    key = "J",
+    mods = "LEADER|SHIFT",
+    action = wezterm.action.SplitPane({
+      direction = "Down",
+      command = {
+        domain = "CurrentPaneDomain",
+        cwd = wezterm.home_dir,
+      },
+    }),
+  },
+  {
+    key = "K",
+    mods = "LEADER|SHIFT",
+    action = wezterm.action.SplitPane({
+      direction = "Up",
+      command = {
+        domain = "CurrentPaneDomain",
+        cwd = wezterm.home_dir,
+      },
+    }),
+  },
+  {
+    key = "H",
+    mods = "LEADER|SHIFT",
+    action = wezterm.action.SplitPane({
+      direction = "Left",
+      command = {
+        domain = "CurrentPaneDomain",
+        cwd = wezterm.home_dir,
+      },
+    }),
+  },
+  {
+    key = "L",
+    mods = "LEADER|SHIFT",
+    action = wezterm.action.SplitPane({
+      direction = "Right",
+      command = {
+        domain = "CurrentPaneDomain",
+        cwd = wezterm.home_dir,
+      },
+    }),
   },
 
   -- navigate panes
