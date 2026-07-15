@@ -71,7 +71,6 @@ config.keys = {
       direction = "Down",
       command = {
         domain = "CurrentPaneDomain",
-        cwd = wezterm.home_dir,
       },
     }),
   },
@@ -82,7 +81,6 @@ config.keys = {
       direction = "Up",
       command = {
         domain = "CurrentPaneDomain",
-        cwd = wezterm.home_dir,
       },
     }),
   },
@@ -93,7 +91,6 @@ config.keys = {
       direction = "Left",
       command = {
         domain = "CurrentPaneDomain",
-        cwd = wezterm.home_dir,
       },
     }),
   },
@@ -104,7 +101,6 @@ config.keys = {
       direction = "Right",
       command = {
         domain = "CurrentPaneDomain",
-        cwd = wezterm.home_dir,
       },
     }),
   },
@@ -137,7 +133,6 @@ config.keys = {
     mods = "LEADER",
     action = wezterm.action.SpawnCommandInNewTab({
       domain = "CurrentPaneDomain",
-      cwd = wezterm.home_dir,
     }),
   },
 
