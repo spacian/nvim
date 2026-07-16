@@ -19,6 +19,7 @@ vim.lsp.config("basedpyright", {
           reportUnboundVariable = "error",
           reportRedeclaration = "error",
           reportMissingModuleSource = "error",
+          reportDuplicateImport = "error",
           reportUnusedVariable = "warning",
           reportUnusedFunction = "warning",
           reportUnusedImport = "warning",
