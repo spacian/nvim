@@ -45,6 +45,8 @@ config.warn_about_missing_glyphs = false
 config.font_size = 17
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior = "Close"
+config.default_cursor_style = "SteadyBlock"
+config.cursor_blink_rate = 0
 
 local act = wezterm.action
 
