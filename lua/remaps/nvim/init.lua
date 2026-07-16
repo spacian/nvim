@@ -1,6 +1,5 @@
 require("remaps.nvim.diagnostics")
 require("remaps.nvim.jumps")
-require("remaps.nvim.lazygit")
 require("remaps.nvim.marks")
 require("remaps.nvim.mouse")
 require("remaps.nvim.panels")
