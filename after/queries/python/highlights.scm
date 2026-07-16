@@ -60,5 +60,7 @@
   [
     (identifier) @type
     (attribute) @type
+    (list
+      ["[" "]"] @punctuation.bracket)
   ]
   (#set! priority 200))
