@@ -70,6 +70,11 @@ return {
               map("n", "<leader>ghp", gitsigns.preview_hunk)
               map("n", "<leader>gP", gitsigns.toggle_deleted)
               map("n", "<leader>gw", gitsigns.toggle_word_diff)
+              vim.api.nvim_set_hl(
+                0,
+                "GitSignsStagedTopDelete",
+                { fg = MergeHL("GitSignsStagedDelete").fg, bg = MergeHL("Normal").bg }
+              )
             end,
           })
         end,
