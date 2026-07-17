@@ -49,8 +49,8 @@ return {
         },
         picker = {
           layout = {
-            fullscreen = true,
-            cycle = true,
+            fullscreen = false,
+            cycle = false,
           },
           sources = {
             explorer = {
@@ -74,6 +74,7 @@ return {
         jumplist.register()
         snacks.picker.smart({
           multi = { "recent", "files" },
+          layout = "select",
           watch = true,
           hidden = true,
           filter = { cwd = true },
@@ -117,7 +118,10 @@ return {
 
       vim.keymap.set("n", "<leader>or", function()
         jumplist.register()
-        snacks.picker.recent({ filter = { paths = { [vim.fn.getcwd()] = true } } })
+        snacks.picker.recent({
+          layout = "select",
+          filter = { paths = { [vim.fn.getcwd()] = true } },
+        })
       end)
 
       vim.keymap.set("n", "<leader>oR", function()
@@ -132,16 +136,6 @@ return {
             fields = { "severity:asc", "is_current:asc", "file:asc", "lnum:asc" },
           },
         })
-      end)
-
-      vim.keymap.set("n", "<leader>oN", function()
-        jumplist.register()
-        snacks.scratch.select()
-      end)
-
-      vim.keymap.set("n", "<leader>on", function()
-        jumplist.register()
-        snacks.scratch()
       end)
 
       vim.keymap.set("n", "<leader>oq", function()
