@@ -30,6 +30,7 @@ function MergeHL(group, opts)
 end
 
 if not vim.g.vscode then
+  vim.opt.shortmess:append("I")
   vim.o.wrap = true
   vim.o.signcolumn = "yes:1"
   vim.o.foldcolumn = "0"

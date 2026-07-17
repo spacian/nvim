@@ -1,3 +1,116 @@
+local function escape_pattern(str, pattern, replace, n)
+  pattern = pattern:gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1")
+  replace = replace:gsub("%%", "%%%%")
+  return str:gsub(pattern, replace, n)
+end
+
+local function list_sessions()
+  local sep = require("persisted.utils").dir_pattern()
+  local sessions = {}
+
+  for _, session in pairs(require("persisted").list()) do
+    local session_name =
+      escape_pattern(session, require("persisted.config").save_dir, "")
+        :gsub("%%", sep)
+        :gsub(vim.fn.expand("~"), sep)
+        :gsub("//", "")
+        :sub(1, -5)
+
+    if vim.fn.has("win32") == 1 then
+      session_name = escape_pattern(session_name, sep, ":", 1)
+      session_name = escape_pattern(session_name, sep, "\\")
+    end
+
+    local branch, dir_path
+
+    if session_name:find("@@", 1, true) then
+      local splits = vim.split(session_name, "@@", { plain = true })
+      branch = table.remove(splits)
+      dir_path = table.concat(splits, "@@")
+    else
+      dir_path = session_name
+    end
+
+    sessions[#sessions + 1] = {
+      text = session_name,
+      name = session_name,
+      dir_path = dir_path,
+      branch = branch,
+      file_path = session,
+    }
+  end
+
+  return sessions
+end
+
+local function load(item)
+  vim.api.nvim_exec_autocmds("User", { pattern = "PersistedTelescopeLoadPre" })
+
+  vim.schedule(function()
+    require("persisted").load({ session = item.file_path })
+  end)
+
+  vim.api.nvim_exec_autocmds("User", { pattern = "PersistedTelescopeLoadPost" })
+end
+
+local function delete(item)
+  if vim.fn.confirm(("Delete [%s]?"):format(item.name), "&Yes\n&No") == 1 then
+    vim.fn.delete(vim.fn.expand(item.file_path))
+    return true
+  end
+  return false
+end
+
+local pick_session = function(opts)
+  opts = opts or {}
+  local sessions = function()
+    return vim
+      .iter(list_sessions())
+      :filter(function(item)
+        return item.file_path ~= vim.v.this_session
+      end)
+      :totable()
+  end
+
+  local function refresh(picker)
+    picker.opts.items = sessions()
+    picker:refresh()
+  end
+
+  require("snacks").picker({
+
+    title = "Sessions",
+    layout = "select",
+
+    items = sessions(),
+
+    format = function(item)
+      return { { item.dir_path } }
+    end,
+
+    confirm = function(picker, item)
+      picker:close()
+      load(item)
+    end,
+
+    actions = {
+      delete = function(picker, item)
+        if delete(item) then
+          refresh(picker)
+        end
+      end,
+    },
+
+    win = {
+      input = {
+        keys = {
+          ["<c-x>"] = { "delete", mode = { "n", "i" } },
+        },
+      },
+    },
+  })
+end
+
 ---@param file string?
 local function path_is_in_workspace(file)
   local cwd = vim.loop.fs_realpath(vim.fn.getcwd())
@@ -32,15 +145,13 @@ return {
         should_save = path_is_in_workspace,
       })
 
-      vim.keymap.set({ "n" }, "<leader>oP", function()
-        vim.cmd("Telescope persisted")
-      end)
-
       vim.api.nvim_create_autocmd({ "VimEnter" }, {
         callback = function()
-          if vim.api.nvim_buf_get_name(0) == "" then
-            vim.cmd("Telescope persisted")
-          end
+          vim.schedule(function()
+            if vim.api.nvim_buf_get_name(0) == "" and vim.bo[0].buftype == "" then
+              pick_session()
+            end
+          end)
         end,
       })
 
@@ -105,6 +216,8 @@ return {
           end)
         end,
       })
+
+      vim.keymap.set("n", "<leader>oP", pick_session)
     end,
   },
 }

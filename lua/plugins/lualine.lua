@@ -8,7 +8,7 @@ return {
       local function parent(path)
         return path:match("^.+[/\\](.-)[/\\]?$")
       end
-      local function telescope_smart_path()
+      local function smart_path()
         if BufIsSpecial() then
           return parent(vim.fn.getcwd())
         end
@@ -113,7 +113,7 @@ return {
             },
           },
           lualine_x = {
-            { telescope_smart_path },
+            { smart_path },
             { "location" },
           },
           lualine_y = {},
