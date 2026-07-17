@@ -1,5 +1,5 @@
 return {
-  "yorickpeterse/nvim-jump",
+  "spacian/nvim-jump",
   config = function()
     require("jump").setup({
       label = "IncSearch",
