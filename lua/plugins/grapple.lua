@@ -39,7 +39,9 @@ return {
 
       vim.keymap.set("n", "<leader>ob", function()
         jumplist.register()
-        local get_items = function(scope, refresh)
+        local layout = "select" -- default
+        local current_pos = { vim.fn.line("."), vim.fn.col(".") }
+        local get_items = function(scope)
           return vim
             .iter(grapple.tags({ scope = scope }))
             :map(function(tag)
@@ -51,10 +53,12 @@ return {
                 text = tag.name .. tag.path,
                 file = tag.path,
               }
-              if not refresh and tag.path == vim.api.nvim_buf_get_name(0) then
-                item.pos = { vim.fn.line("."), vim.fn.col(".") }
-              elseif tag.cursor then
-                item.pos = { tag.cursor[1], tag.cursor[2] }
+              if layout ~= "select" then
+                if tag.path == vim.api.nvim_buf_get_name(0) then
+                  item.pos = current_pos
+                elseif tag.cursor then
+                  item.pos = { tag.cursor[1], tag.cursor[2] }
+                end
               end
               return item
             end)
@@ -63,11 +67,11 @@ return {
             end)
             :totable()
         end
-        local items = get_items()
         local scope = "cwd"
         require("snacks").picker.pick({
           title = "Grapple",
           items = get_items(scope),
+          layout = layout,
           confirm = function(picker, item)
             if not item then
               return
@@ -81,7 +85,7 @@ return {
                 return
               end
               grapple.untag({ path = item.file, scope = scope })
-              local items = get_items(scope, true)
+              local items = get_items(scope)
               if #items == 0 then
                 picker:close()
               else
@@ -124,7 +128,7 @@ return {
           return
         end
         if not grapple.exists({ name = c }) then
-          print("no buffer tagged '" .. c .. "' or already in buffer")
+          print("no buffer tagged '" .. c .. "'")
           return
         end
         if
