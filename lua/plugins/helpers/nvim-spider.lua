@@ -1,24 +1,36 @@
 return {
   {
     "chrisgrieser/nvim-spider",
-    enabled = true,
+    enabled = false,
     lazy = false,
     config = function()
       require("spider").setup({
-        customPatterns = { "[%wÜÄÖüäöß_]+", ".$" },
+        customPatterns = { "[%wÜÄÖüäöß_]+" },
         overrideDefault = true,
       })
       vim.keymap.set({ "n", "v" }, "w", function()
-        require("spider").motion("w")
+        require("spider").motion(
+          "w",
+          { customPatterns = { "[%wÜÄÖüäöß_]+", ".$" } }
+        )
       end)
       vim.keymap.set({ "n", "v" }, "e", function()
-        require("spider").motion("e")
+        require("spider").motion(
+          "e",
+          { customPatterns = { "[%wÜÄÖüäöß_]+", ".$" } }
+        )
       end)
       vim.keymap.set({ "n", "v" }, "b", function()
-        require("spider").motion("b")
+        require("spider").motion(
+          "b",
+          { customPatterns = { "[%wÜÄÖüäöß_]+", "^." } }
+        )
       end)
       vim.keymap.set({ "n", "v" }, "ge", function()
-        require("spider").motion("ge")
+        require("spider").motion(
+          "ge",
+          { customPatterns = { "[%wÜÄÖüäöß_]+", "^." } }
+        )
       end)
     end,
   },
