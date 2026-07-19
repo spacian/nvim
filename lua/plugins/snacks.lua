@@ -56,6 +56,9 @@ return {
             explorer = {
               include = { "build" },
               auto_close = true,
+              diagnostics = false,
+              git_status = false,
+              layout = { preset = "default", fullscreen = true },
             },
           },
           win = {
