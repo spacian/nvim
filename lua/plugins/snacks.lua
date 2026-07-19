@@ -13,18 +13,26 @@ return {
               ii = false,
               ia = false,
               ib = {
-                cursor = true,
+                cursor = false,
                 desc = "inner scope",
                 edge = false,
                 min_size = 2,
-                treesitter = { blocks = { enabled = false } },
+                treesitter = {
+                  blocks = {
+                    enabled = false,
+                  },
+                },
               },
               ab = {
-                cursor = true,
+                cursor = false,
                 desc = "full scope",
                 edge = true,
                 min_size = 2,
-                treesitter = { blocks = { enabled = false } },
+                treesitter = {
+                  blocks = {
+                    enabled = false,
+                  },
+                },
               },
             },
             jump = {
@@ -36,8 +44,15 @@ return {
         indent = {
           enabled = true,
           char = "│",
-          animate = {
+          indent = {
+            enabled = false,
+          },
+          scope = {
             enabled = true,
+            cursor = false,
+          },
+          animate = {
+            enabled = false,
             duration = {
               step = 5,
               total = 50,
@@ -58,7 +73,10 @@ return {
               auto_close = true,
               diagnostics = false,
               git_status = false,
-              layout = { preset = "default", fullscreen = true },
+              layout = {
+                preset = "default",
+                fullscreen = true,
+              },
             },
           },
           win = {
@@ -86,7 +104,7 @@ return {
 
       vim.keymap.set("n", "<leader>oB", function()
         jumplist.register()
-        snacks.picker.buffers()
+        snacks.picker.buffers({ layout = "select" })
       end)
 
       vim.keymap.set("n", "<leader>ff", function()
