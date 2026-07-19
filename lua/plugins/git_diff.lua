@@ -13,7 +13,7 @@ return {
     })
 
     vim.keymap.set("n", "<leader>gd", function()
-      vim.cmd("CodeDiff HEAD")
+      vim.cmd("CodeDiff file HEAD")
     end)
   end,
 }
