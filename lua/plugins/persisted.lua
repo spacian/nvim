@@ -77,12 +77,26 @@ local pick_session = function(opts)
     picker:refresh()
   end
 
+  local session_list = sessions()
+  local width = vim
+    .iter(session_list)
+    :map(function(item)
+      return #item.dir_path
+    end)
+    :fold(0, math.max) + 2
   require("snacks").picker({
 
     title = "Sessions",
-    layout = "select",
+    layout = {
+      preset = "select",
+      layout = {
+        width = width,
+        height = math.floor(width * 0.15),
+        max_width = vim.api.nvim_win_get_width(0),
+      },
+    },
 
-    items = sessions(),
+    items = session_list,
 
     format = function(item)
       return { { item.dir_path } }
