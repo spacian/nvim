@@ -84,29 +84,26 @@ local pick_session = function(opts)
       return #item.dir_path
     end)
     :fold(0, math.max) + 2
-  require("snacks").picker({
 
+  require("snacks").picker({
     title = "Sessions",
     layout = {
       preset = "select",
       layout = {
         width = width,
-        height = math.floor(width * 0.15),
+        min_width = 1,
+        height = 0.4,
         max_width = vim.api.nvim_win_get_width(0),
       },
     },
-
     items = session_list,
-
     format = function(item)
       return { { item.dir_path } }
     end,
-
     confirm = function(picker, item)
       picker:close()
       load(item)
     end,
-
     actions = {
       delete = function(picker, item)
         if delete(item) then
@@ -114,7 +111,6 @@ local pick_session = function(opts)
         end
       end,
     },
-
     win = {
       input = {
         keys = {

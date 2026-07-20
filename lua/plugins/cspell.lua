@@ -4,6 +4,7 @@ return {
     enabled = not vim.g.vscode,
     lazy = false,
     dependencies = {
+      "nvim-lua/plenary.nvim",
       "nvimtools/none-ls.nvim",
     },
     config = function()

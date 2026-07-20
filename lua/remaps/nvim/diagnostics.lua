@@ -8,6 +8,15 @@ local disabled = {
   virtual_lines = false,
 }
 
+vim.keymap.set("i", "<c-k>", function()
+  vim.lsp.buf.signature_help({
+    max_height = 1,
+    border = "rounded",
+    focusable = false,
+    anchor_bias = "above",
+  })
+end)
+
 vim.keymap.set("n", "<leader>D", function()
   if vim.diagnostic.config().virtual_lines then
     vim.diagnostic.config(disabled)

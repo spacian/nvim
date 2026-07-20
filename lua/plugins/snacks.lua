@@ -168,6 +168,11 @@ return {
         jumplist.register()
         snacks.explorer()
       end)
+
+      vim.keymap.set("n", "<leader>os", function()
+        jumplist.register()
+        snacks.picker.lsp_symbols({ layout = { preset = "select" } })
+      end)
     end,
   },
 }

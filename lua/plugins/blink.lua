@@ -35,7 +35,6 @@ return {
     "saghen/blink.cmp",
     enabled = not vim.g.vscode,
     lazy = false,
-    dependencies = "rafamadriz/friendly-snippets",
     version = "1.*",
     opts = {
       keymap = {
