@@ -43,7 +43,7 @@ return {
         end)
       end)
 
-      vim.api.nvim_create_user_command("Cd", function()
+      vim.api.nvim_create_user_command("ChangeWorkingDirectory", function()
         local cwd = oil.get_current_dir()
         if cwd ~= nil then
           vim.cmd("cd " .. cwd)
