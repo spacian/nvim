@@ -1,0 +1,8 @@
+require("keymaps.nvim.diagnostics")
+require("keymaps.nvim.jumps")
+require("keymaps.nvim.marks")
+require("keymaps.nvim.mouse")
+require("keymaps.nvim.panels")
+require("keymaps.nvim.quickfix")
+require("keymaps.nvim.keymaps")
+require("keymaps.nvim.terminal")

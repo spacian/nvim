@@ -4,7 +4,7 @@ return {
     enabled = not vim.g.vscode,
     lazy = false,
     config = function()
-      local jumplist = require("remaps.nvim.jumplist")
+      local jumplist = require("keymaps.nvim.jumplist")
       local snacks = require("snacks")
       snacks.setup({
         scope = {
@@ -159,6 +159,15 @@ return {
         })
       end)
 
+      vim.keymap.set("n", "<leader>oD", function()
+        jumplist.register()
+        snacks.picker.diagnostics_buffer({
+          sort = {
+            fields = { "severity:asc", "lnum:asc" },
+          },
+        })
+      end)
+
       vim.keymap.set("n", "<leader>oq", function()
         jumplist.register()
         snacks.picker.qflist()
@@ -172,6 +181,51 @@ return {
       vim.keymap.set("n", "<leader>os", function()
         jumplist.register()
         snacks.picker.lsp_symbols({ layout = { preset = "select" } })
+      end)
+
+      vim.keymap.set("n", "<leader>om", function()
+        jumplist.register()
+        snacks.picker.marks()
+      end)
+
+      vim.keymap.set("n", "<leader>ou", function()
+        jumplist.register()
+        snacks.picker.undo()
+      end)
+
+      local function scratch(title, path)
+        local buf = vim.fn.bufadd(path)
+        vim.fn.bufload(buf)
+        snacks.win({
+          buf = buf,
+          width = 0.6,
+          height = 0.6,
+          border = "rounded",
+          title = title,
+        })
+        for _, key in ipairs({ "q", "<esc>" }) do
+          vim.keymap.set("n", key, function()
+            vim.api.nvim_win_close(0, false)
+            for _, k in ipairs({ "q", "<esc>" }) do
+              vim.keymap.del("n", k, { buf = buf })
+            end
+          end, { buffer = buf, silent = true })
+        end
+        vim.api.nvim_create_autocmd("BufLeave", {
+          callback = function()
+            vim.cmd("silent noa w")
+          end,
+          buf = buf,
+          once = true,
+        })
+      end
+
+      vim.keymap.set("n", "<leader>on", function()
+        scratch("Notes", vim.fn.getcwd() .. "/notes.txt")
+      end)
+
+      vim.keymap.set("n", "<leader>oN", function()
+        scratch("Global Notes", vim.fn.stdpath("data") .. "/notes.txt")
       end)
     end,
   },

@@ -1,0 +1,5 @@
+require("keymaps.code.code")
+require("keymaps.code.commands")
+require("keymaps.code.jumps")
+require("keymaps.code.navigation")
+require("keymaps.code.git")

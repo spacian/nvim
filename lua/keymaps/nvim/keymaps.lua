@@ -1,4 +1,4 @@
-local jumplist = require("remaps.nvim.jumplist")
+local jumplist = require("keymaps.nvim.jumplist")
 vim.keymap.set({ "c" }, "<c-h>", "<c-p>")
 vim.keymap.set({ "c" }, "<c-l>", "<c-n>")
 vim.keymap.set({ "c" }, "<c-k>", "<c-y>")

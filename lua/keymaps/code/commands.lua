@@ -1,5 +1,5 @@
-require("remaps.code.utils")
-require("remaps.code.jumps")
+require("keymaps.code.utils")
+require("keymaps.code.jumps")
 
 vim.keymap.set({ "n" }, "<leader>oe", function()
   Register_jump()

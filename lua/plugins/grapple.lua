@@ -4,7 +4,7 @@ return {
     enabled = not vim.g.vscode,
     lazy = false,
     config = function()
-      local jumplist = require("remaps.nvim.jumplist")
+      local jumplist = require("keymaps.nvim.jumplist")
       local grapple = require("grapple")
       local enter = vim.api.nvim_replace_termcodes("<enter>", true, true, true)
 
@@ -122,7 +122,7 @@ return {
         end
       end)
 
-      vim.keymap.set("n", "m", function()
+      vim.keymap.set("n", "M", function()
         local c = vim.fn.getcharstr()
         if not c:match("[a-zA-Z]") then
           return
@@ -145,7 +145,7 @@ return {
         grapple.select({ name = c })
       end, {})
 
-      vim.keymap.set("n", "<leader>m", function()
+      vim.keymap.set("n", "<leader>M", function()
         local tag = vim.fn.getcharstr()
         if not tag:match("[a-zA-Z]") then
           return

@@ -1,4 +1,4 @@
-local jumplist = require("remaps.nvim.jumplist")
+local jumplist = require("keymaps.nvim.jumplist")
 local function filter_file(filter_by)
   if filter_by == nil then
     filter_by = vim.fn.getcwd():lower():gsub("\\", "/")

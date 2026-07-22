@@ -1,8 +1,17 @@
+local function buffer_in_float(buf)
+  for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+    if vim.api.nvim_win_get_config(win).relative ~= "" then
+      return true
+    end
+  end
+  return false
+end
+
 ---@param bufnr number|nil
 ---@return boolean
 BufIsSpecial = function(bufnr)
   bufnr = bufnr or 0
-  return not vim.fn.bufexists(bufnr)
+  return not vim.api.nvim_buf_is_valid(bufnr) and not buffer_in_float(bufnr)
     or vim.api.nvim_buf_get_name(bufnr) == ""
     or vim.bo[bufnr].buftype ~= ""
 end

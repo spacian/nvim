@@ -1,8 +1,0 @@
-require("remaps.nvim.diagnostics")
-require("remaps.nvim.jumps")
-require("remaps.nvim.marks")
-require("remaps.nvim.mouse")
-require("remaps.nvim.panels")
-require("remaps.nvim.quickfix")
-require("remaps.nvim.remaps")
-require("remaps.nvim.terminal")

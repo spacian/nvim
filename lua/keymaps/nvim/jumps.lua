@@ -1,4 +1,4 @@
-local jumplist = require("remaps.nvim.jumplist")
+local jumplist = require("keymaps.nvim.jumplist")
 
 vim.keymap.set("n", "<leader>oj", function()
   ---@param positions Position[]

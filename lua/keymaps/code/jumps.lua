@@ -1,4 +1,4 @@
-require("remaps.code.utils")
+require("keymaps.code.utils")
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   callback = function()
