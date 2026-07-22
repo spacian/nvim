@@ -29,6 +29,7 @@ return {
           prefer_wasm = false,
           install_popular = false,
           disable = { indent = languages },
+          update_cadence = "manual",
         })
 
         vim.api.nvim_create_autocmd("FileType", {
