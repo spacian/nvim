@@ -33,7 +33,7 @@ return {
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "*",
       callback = function(args)
-        require("conform").format({ bufnr = args.buf })
+        require("conform").format({ bufnr = args.buf, timeout_ms = 2000 })
       end,
     })
   end,
