@@ -94,7 +94,7 @@ return {
       vim.keymap.set("n", "<leader>of", function()
         jumplist.register()
         snacks.picker.smart({
-          multi = { "recent", "files" },
+          multi = { "files" },
           layout = "select",
           watch = true,
           hidden = true,
