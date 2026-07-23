@@ -59,11 +59,14 @@ end)
 
 if vim.loop.os_uname().sysname == "Windows_NT" then
   vim.api.nvim_create_user_command("OpenInExplorer", function()
-    vim.cmd('silent !start "" /max  explorer /select,' .. vim.api.nvim_buf_get_name(0))
+    vim.cmd(
+      'silent !start "" /max  explorer /select,'
+        .. vim.api.nvim_buf_get_name(0):gsub("/", "\\")
+    )
   end, {})
 end
 
-vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
+vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
   callback = function()
     if not BufIsSpecial() then
       jumplist.register()
