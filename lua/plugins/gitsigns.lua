@@ -67,7 +67,7 @@ return {
                 gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
               end)
               map("n", "<leader>gR", gitsigns.reset_buffer)
-              map("n", "<leader>ghp", gitsigns.preview_hunk)
+              map("n", "<leader>ghp", gitsigns.preview_hunk_inline)
               map("n", "<leader>gP", gitsigns.toggle_deleted)
               map("n", "<leader>gw", gitsigns.toggle_word_diff)
               vim.api.nvim_set_hl(
