@@ -64,6 +64,12 @@ if vim.loop.os_uname().sysname == "Windows_NT" then
         .. vim.api.nvim_buf_get_name(0):gsub("/", "\\")
     )
   end, {})
+  vim.api.nvim_create_user_command("CopyFilePath", function()
+    vim.fn.setreg("+", vim.fn.expand("%:p"))
+  end, {})
+  vim.api.nvim_create_user_command("CopyFolderPath", function()
+    vim.fn.setreg("+", vim.fn.expand("%:p:h"))
+  end, {})
 end
 
 vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
