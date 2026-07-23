@@ -20,6 +20,7 @@ return {
           "stylua",
           "taplo",
           "tree-sitter-cli",
+          "xmlformatter",
           "yaml-language-server",
         },
       })
