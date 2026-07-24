@@ -1,7 +1,4 @@
 local jumplist = require("keymaps.nvim.jumplist")
-vim.keymap.set({ "c" }, "<c-h>", "<c-p>")
-vim.keymap.set({ "c" }, "<c-l>", "<c-n>")
-vim.keymap.set({ "c" }, "<c-k>", "<c-y>")
 
 vim.keymap.set({ "n" }, "<c-i>", function()
   jumplist.jump_forward()

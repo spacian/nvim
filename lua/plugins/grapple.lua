@@ -16,14 +16,6 @@ return {
         return { name = "prev2", scope = "prev", path = path }
       end
 
-      local TERM1 = function()
-        return { name = "term1" }
-      end
-
-      local TERM2 = function()
-        return { name = "term2" }
-      end
-
       grapple.setup({
         scope = "prev",
         scopes = {
@@ -37,162 +29,56 @@ return {
       })
       grapple.setup({ scope = "cwd" })
 
-      vim.keymap.set("n", "<leader>ob", function()
-        jumplist.register()
-        local layout = "select" -- default
-        local current_pos = { vim.fn.line("."), vim.fn.col(".") }
-        local get_items = function(scope)
-          return vim
-            .iter(grapple.tags({ scope = scope }))
-            :map(function(tag)
-              if #tag.name > 1 then
-                return nil
-              end
-              local item = {
-                label = tag.name,
-                text = tag.name .. tag.path,
-                file = tag.path,
-              }
-              if layout ~= "select" then
-                if tag.path == vim.api.nvim_buf_get_name(0) then
-                  item.pos = current_pos
-                elseif tag.cursor then
-                  item.pos = { tag.cursor[1], tag.cursor[2] }
-                end
-              end
-              return item
-            end)
-            :filter(function(item)
-              return item ~= nil
-            end)
-            :totable()
-        end
-        local scope = "cwd"
-        require("snacks").picker.pick({
-          title = "Grapple",
-          items = get_items(scope),
-          layout = layout,
-          confirm = function(picker, item)
-            if not item then
-              return
-            end
-            picker:close()
-            grapple.select({ scope = scope, name = item.label })
-          end,
-          actions = {
-            delete = function(picker, item)
-              if not item then
-                return
-              end
-              grapple.untag({ path = item.file, scope = scope })
-              local items = get_items(scope)
-              if #items == 0 then
-                picker:close()
-              else
-                picker.opts.items = items
-                picker:refresh()
-              end
-            end,
-          },
-          win = {
-            input = {
-              keys = {
-                ["<c-x>"] = {
-                  "delete",
-                  mode = { "n", "i" },
-                },
-              },
-            },
-          },
-        })
-      end, {})
-
       vim.keymap.set("n", "<leader>h", function()
         if grapple.exists(PREV1()) then
           if not BufIsSpecial() then
             vim.cmd("silent noa w")
           end
           local path = grapple.find(PREV1()).path
-          if path == vim.api.nvim_buf_get_name(0) and grapple.exists(PREV2()) then
+          local bufname = vim.api.nvim_buf_get_name(0)
+          if path == bufname and grapple.exists(PREV2()) then
             grapple.select(PREV2())
-            return
           else
             grapple.select(PREV1())
           end
         end
       end)
 
-      vim.keymap.set("n", "M", function()
-        local c = vim.fn.getcharstr()
-        if not c:match("[a-zA-Z]") then
-          return
-        end
-        if not grapple.exists({ name = c }) then
-          print("no buffer tagged '" .. c .. "'")
-          return
-        end
-        if
-          grapple.find({ name = c }).path
-          == vim.api.nvim_buf_get_name(0):gsub("/", "\\")
-        then
-          print("already in buffer '" .. c .. "'")
-          return
-        end
-        if not BufIsSpecial() then
-          vim.cmd("silent noa w")
-        end
-        jumplist.register()
-        grapple.select({ name = c })
+      vim.keymap.set("n", "<leader>ob", function()
+        grapple.toggle_tags()
       end, {})
 
-      vim.keymap.set("n", "<leader>M", function()
-        local tag = vim.fn.getcharstr()
-        if not tag:match("[a-zA-Z]") then
-          return
-        end
-        local path = vim.api.nvim_buf_get_name(0)
-        if grapple.exists({ path = path }) then
-          local confirm = vim.fn.input("path is already tagged, overwrite? (y/N): ")
-          if confirm:lower() ~= "y" then
-            vim.notify("tag cancelled")
-            return
-          end
-        end
-        if grapple.exists({ name = tag }) then
-          local confirm = vim.fn.input("tag already exists, override? (y/N): ")
-          if confirm:lower() ~= "y" then
-            vim.notify("tag cancelled")
-            return
-          end
-        end
-        grapple.tag({ name = tag })
-        vim.notify("tagged with '" .. tag .. "'")
-      end, {})
-
-      local last_term_tag = nil
-      local open_term = function(opts)
-        last_term_tag = { name = opts.name }
-        if not grapple.exists(opts) then
-          if vim.loop.os_uname().sysname == "Windows_NT" then
-            vim.cmd("term pwsh")
-            vim.fn.feedkeys("a")
-            vim.fn.feedkeys("cls" .. enter)
-          else
-            vim.cmd("term")
-            vim.fn.feedkeys("a")
-          end
+      vim.keymap.set("n", "<leader>m", function()
+        local m = { path = vim.api.nvim_buf_get_name(0) }
+        if grapple.find(m) then
+          grapple.untag(m)
+          vim.notify("removed")
         else
-          grapple.select(opts)
-          vim.fn.feedkeys("a")
+          grapple.tag(m)
+          vim.notify("tagged")
         end
-      end
+      end, {})
 
-      vim.keymap.set("n", "<leader>ot", function()
-        open_term(TERM1())
+      vim.keymap.set("n", "<c-l>", function()
+        grapple.cycle_tags("next")
       end)
 
-      vim.keymap.set("n", "<leader>oT", function()
-        open_term(TERM2())
+      vim.keymap.set("n", "<c-h>", function()
+        grapple.cycle_tags("prev")
+      end)
+
+      vim.keymap.set("n", "<c-j>", function()
+        local index = 1
+        if grapple.exists({ index = index }) then
+          grapple.select({ index = index })
+        end
+      end)
+
+      vim.keymap.set("n", "<c-k>", function()
+        local index = 2
+        if grapple.exists({ index = index }) then
+          grapple.select({ index = index })
+        end
       end)
 
       local last_bufname = ""
@@ -234,10 +120,6 @@ return {
             return
           end
           vim.opt_local.statuscolumn = ""
-          if last_term_tag ~= nil then
-            grapple.tag(last_term_tag)
-            last_term_tag = nil
-          end
           vim.keymap.set({ "n", "v" }, "<c-u>", "", { buffer = true, silent = true })
           vim.keymap.set({ "n", "v" }, "<c-d>", "", { buffer = true, silent = true })
           vim.keymap.set({ "t", "n", "v" }, "<c-u><c-y>", function()
@@ -263,18 +145,6 @@ return {
               grapple.select(PREV1())
             end
           end, { buffer = true })
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("TermClose", {
-        callback = function(args)
-          if is_lazygit_buffer() then
-            return
-          end
-          local name = vim.api.nvim_buf_get_name(args.buf)
-          if grapple.exists({ path = name }) then
-            grapple.untag({ path = name })
-          end
         end,
       })
 

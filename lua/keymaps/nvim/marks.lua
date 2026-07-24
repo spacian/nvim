@@ -1,6 +1,6 @@
 local jumplist = require("keymaps.nvim.jumplist")
 
-vim.keymap.set("n", "<leader>m", function()
+vim.keymap.set("n", "M", function()
   local c = vim.fn.getcharstr()
   if c:match("%l") then
     c = c:upper()
