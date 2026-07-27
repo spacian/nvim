@@ -21,5 +21,7 @@ return {
     })
     autopairs.remove_rule("'")
     autopairs.remove_rule("`")
+    autopairs.remove_rule('"""')
+    autopairs.remove_rule('"')
   end,
 }
