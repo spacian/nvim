@@ -8,7 +8,7 @@ local disabled = {
   virtual_lines = false,
 }
 
-vim.keymap.set("i", "<c-k>", function()
+vim.keymap.set("i", "<c-s>", function()
   vim.lsp.buf.signature_help({
     max_height = 1,
     border = "rounded",
@@ -43,9 +43,13 @@ end)
 
 vim.keymap.set("n", "<esc>", function()
   vim.diagnostic.config(disabled)
+  local current_win = vim.api.nvim_get_current_win()
   for _, win in pairs(vim.api.nvim_list_wins()) do
-    if vim.api.nvim_win_get_config(win).relative ~= "" then
-      vim.api.nvim_win_close(win, false)
+    if win ~= current_win then
+      local cfg = vim.api.nvim_win_get_config(win)
+      if cfg.relative ~= "" and cfg.focusable then
+        vim.api.nvim_win_close(win, false)
+      end
     end
   end
 end)

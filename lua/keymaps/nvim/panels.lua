@@ -16,8 +16,6 @@ vim.keymap.set({ "", "l", "t" }, "<c-down>", "<c-w>+")
 vim.keymap.set({ "", "l", "t" }, "<c-left>", "<c-w>>")
 vim.keymap.set({ "", "l", "t" }, "<c-right>", "<c-w><")
 
-vim.keymap.set({ "n" }, "<c-s>", ":w<enter>")
-
 vim.keymap.set({ "t" }, "<c-n>", [[<c-\><c-n>]])
 
 vim.keymap.set({ "", "l", "t" }, "<a-h>", function()

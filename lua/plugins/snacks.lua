@@ -203,21 +203,6 @@ return {
           border = "rounded",
           title = title,
         })
-        for _, key in ipairs({ "q", "<esc>" }) do
-          vim.keymap.set("n", key, function()
-            vim.api.nvim_win_close(0, false)
-            for _, k in ipairs({ "q", "<esc>" }) do
-              vim.keymap.del("n", k, { buf = buf })
-            end
-          end, { buffer = buf, silent = true })
-        end
-        vim.api.nvim_create_autocmd("BufLeave", {
-          callback = function()
-            vim.cmd("silent noa w")
-          end,
-          buf = buf,
-          once = true,
-        })
       end
 
       vim.keymap.set("n", "<leader>on", function()
