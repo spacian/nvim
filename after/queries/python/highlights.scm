@@ -64,3 +64,6 @@
       ["[" "]"] @punctuation.bracket)
   ]
   (#set! priority 200))
+
+(attribute
+  attribute: (identifier) @variable.member)
