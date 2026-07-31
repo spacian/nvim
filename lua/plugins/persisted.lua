@@ -63,21 +63,13 @@ end
 
 local pick_session = function(opts)
   opts = opts or {}
-  local sessions = function()
-    return vim
-      .iter(list_sessions())
-      :filter(function(item)
-        return item.file_path ~= vim.v.this_session
-      end)
-      :totable()
-  end
 
   local function refresh(picker)
-    picker.opts.items = sessions()
+    picker.opts.items = list_sessions()
     picker:refresh()
   end
 
-  local session_list = sessions()
+  local session_list = list_sessions()
   local width = vim
     .iter(session_list)
     :map(function(item)
@@ -91,7 +83,7 @@ local pick_session = function(opts)
       preset = "select",
       layout = {
         width = width,
-        min_width = 1,
+        min_width = 80,
         height = 0.4,
         max_width = vim.api.nvim_win_get_width(0),
       },

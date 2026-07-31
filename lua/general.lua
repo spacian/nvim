@@ -9,7 +9,7 @@ end
 
 ---@param bufnr number|nil
 ---@return boolean
-BufIsSpecial = function(bufnr)
+function BufIsSpecial(bufnr)
   bufnr = bufnr or 0
   return not vim.api.nvim_buf_is_valid(bufnr) and not buffer_in_float(bufnr)
     or vim.api.nvim_buf_get_name(bufnr) == ""
