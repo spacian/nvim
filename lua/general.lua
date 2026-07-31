@@ -67,11 +67,13 @@ if not vim.g.vscode then
     "context:99999",
   }
 end
+
 if vim.loop.os_uname().sysname == "Windows_NT" then
   vim.cmd("language en_US")
 else
   vim.o.wildignorecase = true
 end
+
 vim.o.shada = ""
 vim.o.splitright = true
 vim.o.timeoutlen = 2250

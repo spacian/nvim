@@ -22,6 +22,7 @@ local activate_venv = wezterm.action_callback(function(window, pane)
   if #wezterm.glob(activate) == 0 then
     return
   end
+
   if wezterm.target_triple:find("windows") then
     window:perform_action(
       wezterm.action.SendString("./.venv/Scripts/activate" .. "\r"),
@@ -29,7 +30,7 @@ local activate_venv = wezterm.action_callback(function(window, pane)
     )
   else
     window:perform_action(
-      wezterm.action.SendString("./.venv/bin/activate" .. "\r"),
+      wezterm.action.SendString("source ./.venv/bin/activate" .. "\r"),
       pane
     )
   end
@@ -40,13 +41,27 @@ local config = wezterm.config_builder()
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.default_prog = { "pwsh.exe", "-NoLogo" }
-config.font = wezterm.font("CommitMono Nerd Font Mono")
+config.font = wezterm.font("Cascadia Mono", { weight = 501 })
 config.warn_about_missing_glyphs = false
-config.font_size = 17
+config.font_size = 16
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior = "Close"
 config.default_cursor_style = "SteadyBlock"
 config.cursor_blink_rate = 0
+config.max_fps = 240
+config.animation_fps = 240
+
+config.colors = {
+  cursor_bg = "#c5c9c5",
+  cursor_fg = "#181616",
+}
+
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
 
 local act = wezterm.action
 
