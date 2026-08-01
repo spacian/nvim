@@ -33,7 +33,6 @@ end
 return {
   {
     "saghen/blink.cmp",
-    enabled = not vim.g.vscode,
     lazy = false,
     version = "1.*",
     opts = {
@@ -47,7 +46,10 @@ return {
         ["<c-f>"] = { "scroll_documentation_down", "fallback" },
       },
       cmdline = {
-        keymap = { preset = "inherit" },
+        keymap = {
+          preset = "inherit",
+          ["<tab>"] = { "show", "accept", "fallback" },
+        },
         completion = { menu = { auto_show = false } },
       },
       appearance = {
