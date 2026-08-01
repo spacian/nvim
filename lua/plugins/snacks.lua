@@ -37,6 +37,22 @@ return {
             jump = {
               ["[i"] = false,
               ["]i"] = false,
+              ["[b"] = {
+                min_size = 2,
+                bottom = false,
+                cursor = false,
+                edge = true,
+                treesitter = { blocks = { enabled = false } },
+                desc = "jump to top edge of scope",
+              },
+              ["]b"] = {
+                min_size = 2,
+                bottom = true,
+                cursor = false,
+                edge = true,
+                treesitter = { blocks = { enabled = false } },
+                desc = "jump to bottom edge of scope",
+              },
             },
           },
         },
