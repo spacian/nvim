@@ -56,6 +56,7 @@ for _, name in ipairs({
   "GitSignsStagedAdd",
   "GitSignsStagedChange",
   "GitSignsStagedDelete",
+  "GitSignsStagedTopDelete",
 }) do
   vim.api.nvim_set_hl(0, name, {
     bg = normal_bg,
