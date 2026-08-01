@@ -29,6 +29,7 @@ return {
       grapple.setup({ scope = "cwd" })
 
       vim.keymap.set("n", "<leader>h", function()
+        jumplist.register()
         if grapple.exists(PREV1()) then
           if not BufIsSpecial() then
             vim.cmd("silent noa w")
@@ -44,6 +45,7 @@ return {
       end)
 
       vim.keymap.set("n", "<leader>ob", function()
+        jumplist.register()
         grapple.toggle_tags()
       end, {})
 
@@ -59,14 +61,17 @@ return {
       end, {})
 
       vim.keymap.set("n", "<c-l>", function()
+        jumplist.register()
         grapple.cycle_tags("next")
       end)
 
       vim.keymap.set("n", "<c-h>", function()
+        jumplist.register()
         grapple.cycle_tags("prev")
       end)
 
       vim.keymap.set("n", "<c-j>", function()
+        jumplist.register()
         local index = 1
         if grapple.exists({ index = index }) then
           grapple.select({ index = index })
@@ -74,6 +79,7 @@ return {
       end)
 
       vim.keymap.set("n", "<c-k>", function()
+        jumplist.register()
         local index = 2
         if grapple.exists({ index = index }) then
           grapple.select({ index = index })
