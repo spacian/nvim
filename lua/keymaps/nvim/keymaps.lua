@@ -83,7 +83,6 @@ end
 
 vim.api.nvim_create_autocmd("CmdwinEnter", {
   callback = function()
-    vim.keymap.set("n", "<esc>", "<cmd>:q<enter>", { buffer = true })
     vim.keymap.set("n", "q", "<cmd>:q<enter>", { buffer = true })
   end,
 })
