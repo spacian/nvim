@@ -82,6 +82,7 @@ return {
           keymap_move_next_start("]c", "@class.outer")
           keymap_move_next_start("]a", "@parameter.inner")
           keymap_move_next_start("]s", "@statement.outer")
+          keymap_move_next_start("]k", "@comment.outer")
 
           local keymap_move_next_end = function(lhs, obj)
             vim.keymap.set({ "n", "x", "o" }, lhs, function()
@@ -95,6 +96,7 @@ return {
           keymap_move_next_end("]C", "@class.outer")
           keymap_move_next_end("]A", "@parameter.inner")
           keymap_move_next_end("]S", "@statement.outer")
+          keymap_move_next_end("]K", "@comment.outer")
 
           local keymap_move_previous_start = function(lhs, obj)
             vim.keymap.set({ "n", "x", "o" }, lhs, function()
@@ -108,6 +110,7 @@ return {
           keymap_move_previous_start("[c", "@class.outer")
           keymap_move_previous_start("[a", "@parameter.inner")
           keymap_move_previous_start("[s", "@statement.outer")
+          keymap_move_previous_start("[k", "@comment.outer")
 
           local keymap_move_previous_end = function(lhs, obj)
             vim.keymap.set({ "n", "x", "o" }, lhs, function()
@@ -121,6 +124,7 @@ return {
           keymap_move_previous_end("[C", "@class.outer")
           keymap_move_previous_end("[A", "@parameter.inner")
           keymap_move_previous_end("[S", "@statement.outer")
+          keymap_move_previous_end("[K", "@comment.outer")
 
           local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
           vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
