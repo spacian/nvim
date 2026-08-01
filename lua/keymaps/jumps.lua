@@ -1,5 +1,3 @@
-local jumplist = require("keymaps.nvim.jumplist")
-
 vim.keymap.set("n", "<leader>oj", function()
   ---@param positions Position[]
   local get_items = function(positions)
@@ -18,9 +16,9 @@ vim.keymap.set("n", "<leader>oj", function()
       )
       :totable()
   end
-  jumplist.insert()
+  Jumplist.insert()
   require("snacks").picker.pick({
     title = "jumps",
-    items = get_items(jumplist.get_positions()),
+    items = get_items(Jumplist.get_positions()),
   })
 end, {})

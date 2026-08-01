@@ -1,4 +1,3 @@
-local jumplist = require("keymaps.nvim.jumplist")
 local function filter_file(filter_by)
   if filter_by == nil then
     filter_by = vim.fn.getcwd():lower():gsub("\\", "/")
@@ -36,7 +35,7 @@ end
 
 local function open_qf()
   if #vim.fn.getqflist() > 0 then
-    jumplist.register()
+    Jumplist.register()
     vim.cmd("copen")
   else
     vim.cmd("cclose")

@@ -3,13 +3,12 @@ return {
     "cbochs/grapple.nvim",
     lazy = false,
     config = function()
-      local jumplist = require("keymaps.nvim.jumplist")
       local grapple = require("grapple")
 
       grapple.setup({ scope = "cwd" })
 
       vim.keymap.set("n", "<leader>ob", function()
-        jumplist.register()
+        Jumplist.register()
         grapple.toggle_tags()
       end, {})
 
@@ -25,17 +24,17 @@ return {
       end, {})
 
       vim.keymap.set("n", "<c-l>", function()
-        jumplist.register()
+        Jumplist.register()
         grapple.cycle_tags("next")
       end)
 
       vim.keymap.set("n", "<c-h>", function()
-        jumplist.register()
+        Jumplist.register()
         grapple.cycle_tags("prev")
       end)
 
       vim.keymap.set("n", "<c-j>", function()
-        jumplist.register()
+        Jumplist.register()
         local index = 1
         if grapple.exists({ index = index }) then
           grapple.select({ index = index })
@@ -43,7 +42,7 @@ return {
       end)
 
       vim.keymap.set("n", "<c-k>", function()
-        jumplist.register()
+        Jumplist.register()
         local index = 2
         if grapple.exists({ index = index }) then
           grapple.select({ index = index })
@@ -53,8 +52,8 @@ return {
       vim.api.nvim_create_autocmd("SessionLoadPost", {
         callback = function(_)
           vim.defer_fn(function()
-            jumplist.reset()
-            jumplist.register()
+            Jumplist.reset()
+            Jumplist.register()
             vim.cmd("clearjumps")
           end, 250)
         end,

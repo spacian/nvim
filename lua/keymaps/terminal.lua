@@ -41,14 +41,13 @@ local function open(name)
   vim.cmd.startinsert()
 end
 
-local jumplist = require("keymaps.nvim.jumplist")
 vim.keymap.set("n", "<leader>ot", function()
-  jumplist.register()
+  Jumplist.register()
   open("")
 end)
 
 vim.keymap.set("n", "<leader>oT", function()
-  jumplist.register()
+  Jumplist.register()
   local get_items = function()
     local items = {}
     for name, bufnr in pairs(terms[vim.fn.getcwd()] or {}) do

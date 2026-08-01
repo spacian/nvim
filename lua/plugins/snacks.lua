@@ -3,7 +3,6 @@ return {
     "folke/snacks.nvim",
     lazy = false,
     config = function()
-      local jumplist = require("keymaps.nvim.jumplist")
       local snacks = require("snacks")
       snacks.setup({
         scope = {
@@ -107,7 +106,7 @@ return {
       })
 
       vim.keymap.set("n", "<leader>of", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.smart({
           multi = { "files" },
           layout = "select",
@@ -118,47 +117,47 @@ return {
       end)
 
       vim.keymap.set("n", "<leader>oB", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.buffers({ layout = "select" })
       end)
 
       vim.keymap.set("n", "<leader>ff", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.grep()
       end)
 
       vim.keymap.set("n", "<leader>og", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.git_diff()
       end)
 
       vim.keymap.set({ "n", "v" }, "<leader>fw", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.grep_word()
       end)
 
       vim.keymap.set("n", "gr", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.lsp_references()
       end)
 
       vim.keymap.set("n", "gd", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.lsp_definitions()
       end)
 
       vim.keymap.set("n", "gD", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.lsp_type_definitions()
       end)
 
       vim.keymap.set("n", "<leader>oR", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.resume()
       end)
 
       vim.keymap.set("n", "<leader>od", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.diagnostics({
           sort = {
             fields = { "severity:asc", "is_current:asc", "file:asc", "lnum:asc" },
@@ -167,7 +166,7 @@ return {
       end)
 
       vim.keymap.set("n", "<leader>oD", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.diagnostics_buffer({
           sort = {
             fields = { "severity:asc", "lnum:asc" },
@@ -176,27 +175,27 @@ return {
       end)
 
       vim.keymap.set("n", "<leader>oq", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.qflist()
       end)
 
       vim.keymap.set("n", "<leader>oE", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.explorer()
       end)
 
       vim.keymap.set("n", "<leader>os", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.lsp_symbols({ layout = { preset = "select" } })
       end)
 
       vim.keymap.set("n", "<leader>om", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.marks()
       end)
 
       vim.keymap.set("n", "<leader>ou", function()
-        jumplist.register()
+        Jumplist.register()
         snacks.picker.undo()
       end)
 

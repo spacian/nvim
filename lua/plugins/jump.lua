@@ -28,9 +28,8 @@ return {
       },
     })
 
-    local jumplist = require("keymaps.nvim.jumplist")
     vim.keymap.set({ "n", "x", "o" }, "s", function()
-      jumplist.register()
+      Jumplist.register()
       require("flash").jump({ search = { mode = "search" } })
     end)
   end,

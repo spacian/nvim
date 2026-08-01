@@ -1,3 +1,5 @@
+Jumplist = require("keymaps.jumplist")
+
 local function buffer_in_float(buf)
   for _, win in ipairs(vim.fn.win_findbuf(buf)) do
     if vim.api.nvim_win_get_config(win).relative ~= "" then

@@ -3,7 +3,6 @@ return {
     "stevearc/oil.nvim",
     lazy = false,
     config = function()
-      local jumplist = require("keymaps.nvim.jumplist")
       local oil = require("oil")
       oil.setup({
         keymaps = {
@@ -37,12 +36,12 @@ return {
       vim.keymap.set("n", "<leader>oe", function()
         local bufname = vim.api.nvim_buf_get_name(0)
         if bufname == "" then
-          jumplist.register()
+          Jumplist.register()
           vim.cmd("silent Oil .")
         elseif BufIsSpecial() then
           return
         end
-        jumplist.register()
+        Jumplist.register()
         local file = vim.fn.expand("%:t")
         oil.open(vim.fn.expand("%:h"), {}, function()
           vim.cmd("silent! call search('\\V' . escape(' " .. file .. "', '\\') , 'w')")

@@ -15,7 +15,7 @@ return {
             topdelete = { text = "‾" },
             untracked = { text = sign },
           }
-          local jumplist = require("keymaps.nvim.jumplist")
+
           require("gitsigns").setup({
             sign_priority = 10000,
             signs = signs,
@@ -37,7 +37,7 @@ return {
               end
 
               local jump_hunk = function(opts)
-                jumplist.register()
+                Jumplist.register()
                 if opts.forward then
                   gitsigns.nav_hunk("next")
                 else

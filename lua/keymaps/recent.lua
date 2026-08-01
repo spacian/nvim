@@ -12,8 +12,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
-local jumplist = require("keymaps.nvim.jumplist")
-
 local get_items = function()
   local items = {}
   for bufname, nr in pairs(files[vim.fn.getcwd()] or {}) do
@@ -33,7 +31,7 @@ local get_items = function()
 end
 
 vim.keymap.set("n", "<leader>or", function()
-  jumplist.register()
+  Jumplist.register()
   require("snacks").picker({
     title = "Recent",
     layout = "select",
@@ -58,7 +56,7 @@ vim.keymap.set("n", "<leader>or", function()
 end)
 
 vim.keymap.set("n", "<leader>h", function()
-  jumplist.register()
+  Jumplist.register()
   local bufname = vim.api.nvim_buf_get_name(0)
   for _, item in ipairs(get_items()) do
     if item.file ~= bufname then
