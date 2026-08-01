@@ -16,11 +16,9 @@ else
   vim.keymap.set({ "t" }, "<c-e><c-d>", [[deactivate<enter>]])
 end
 
-local M = {}
-
 local terms = {}
 
-function M.open(name)
+local function open(name)
   local project = vim.fn.getcwd()
   terms[project] = terms[project] or {}
 
@@ -46,7 +44,7 @@ end
 local jumplist = require("keymaps.nvim.jumplist")
 vim.keymap.set("n", "<leader>ot", function()
   jumplist.register()
-  M.open("")
+  open("")
 end)
 
 vim.keymap.set("n", "<leader>oT", function()
@@ -76,7 +74,7 @@ vim.keymap.set("n", "<leader>oT", function()
       end
       if item.label and item.label ~= "" then
         vim.schedule(function()
-          M.open(item.label)
+          open(item.label)
         end)
       end
     end,

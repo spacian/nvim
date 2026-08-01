@@ -38,35 +38,33 @@ function MergeHL(group, opts)
   return vim.tbl_extend("force", hl, opts)
 end
 
-if not vim.g.vscode then
-  vim.opt.shortmess:append("I")
-  vim.o.wrap = true
-  vim.o.signcolumn = "yes:1"
-  vim.o.foldcolumn = "0"
-  vim.o.number = true
-  vim.o.statuscolumn = "%l%s"
-  vim.opt.numberwidth = 3
-  vim.opt.fillchars = { eob = " " }
-  vim.opt.formatoptions:remove("t")
-  vim.o.textwidth = 0
-  vim.o.cursorline = true
-  vim.o.cmdheight = 1
-  vim.o.showcmd = false
-  vim.o.ruler = false
-  vim.o.showmode = false
-  vim.o.jumpoptions = "stack,view"
-  vim.opt.sessionoptions:remove("terminal")
-  vim.opt.diffopt = {
-    "internal",
-    "filler",
-    "closeoff",
-    "hiddenoff",
-    "algorithm:histogram",
-    "indent-heuristic",
-    "linematch:200",
-    "context:99999",
-  }
-end
+vim.opt.shortmess:append("I")
+vim.o.wrap = true
+vim.o.signcolumn = "yes:1"
+vim.o.foldcolumn = "0"
+vim.o.number = true
+vim.o.statuscolumn = "%l%s"
+vim.opt.numberwidth = 3
+vim.opt.fillchars = { eob = " " }
+vim.opt.formatoptions:remove("t")
+vim.o.textwidth = 0
+vim.o.cursorline = true
+vim.o.cmdheight = 1
+vim.o.showcmd = false
+vim.o.ruler = false
+vim.o.showmode = false
+vim.o.jumpoptions = "stack,view"
+vim.opt.sessionoptions:remove("terminal")
+vim.opt.diffopt = {
+  "internal",
+  "filler",
+  "closeoff",
+  "hiddenoff",
+  "algorithm:histogram",
+  "indent-heuristic",
+  "linematch:200",
+  "context:99999",
+}
 
 if vim.loop.os_uname().sysname == "Windows_NT" then
   vim.cmd("language en_US")

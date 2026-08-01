@@ -1,7 +1,6 @@
 return {
   {
     "craftzdog/solarized-osaka.nvim",
-    enabled = not vim.g.vscode,
     priority = 1000,
     lazy = true,
     config = function()

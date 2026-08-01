@@ -1,7 +1,6 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
-    enabled = not vim.g.vscode,
     lazy = false,
     config = function()
       vim.api.nvim_create_autocmd("User", {

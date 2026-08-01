@@ -1,5 +1,3 @@
-local M = {}
-
 local files = {}
 local count = 0
 

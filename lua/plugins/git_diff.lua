@@ -1,6 +1,5 @@
 return {
   "esmuellert/codediff.nvim",
-  enabled = not vim.g.vscode,
   config = function()
     require("codediff").setup({
       diff = {

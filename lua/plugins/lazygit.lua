@@ -1,7 +1,6 @@
 return {
   {
     "kdheepak/lazygit.nvim",
-    enabled = not vim.g.vscode,
     lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()

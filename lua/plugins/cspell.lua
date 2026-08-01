@@ -1,7 +1,6 @@
 return {
   {
     "spacian/cspell.nvim",
-    enabled = not vim.g.vscode,
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",

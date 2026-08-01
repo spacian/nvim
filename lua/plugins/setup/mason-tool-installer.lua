@@ -1,7 +1,6 @@
 return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    enabled = not vim.g.vscode,
     lazy = false,
     after = { "mason", "arborist", "neovim/nvim-lspconfig" },
     config = function()

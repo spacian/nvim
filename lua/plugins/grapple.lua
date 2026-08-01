@@ -1,7 +1,6 @@
 return {
   {
     "cbochs/grapple.nvim",
-    enabled = not vim.g.vscode,
     lazy = false,
     config = function()
       local jumplist = require("keymaps.nvim.jumplist")
