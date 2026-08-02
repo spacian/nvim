@@ -13,9 +13,17 @@ end
 ---@return boolean
 function BufIsSpecial(bufnr)
   bufnr = bufnr or 0
-  return not vim.api.nvim_buf_is_valid(bufnr) and not buffer_in_float(bufnr)
-    or vim.api.nvim_buf_get_name(bufnr) == ""
-    or vim.bo[bufnr].buftype ~= ""
+  if not vim.fn.bufexists(bufnr) then
+    return true
+  end
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return true
+  end
+  if buffer_in_float(bufnr) then
+    return true
+  end
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  return bufname == "" or vim.bo[bufnr].buftype ~= "" or vim.uv.fs_stat(bufname) == nil
 end
 
 function Feedkeys(keys)
