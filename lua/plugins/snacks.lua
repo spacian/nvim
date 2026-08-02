@@ -141,6 +141,11 @@ return {
         snacks.picker.lsp_references()
       end)
 
+      vim.keymap.set("n", "gR", function()
+        Jumplist.register()
+        snacks.picker.lsp_incoming_calls()
+      end)
+
       vim.keymap.set("n", "gd", function()
         Jumplist.register()
         snacks.picker.lsp_definitions()
