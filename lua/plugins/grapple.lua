@@ -48,16 +48,6 @@ return {
           grapple.select({ index = index })
         end
       end)
-
-      vim.api.nvim_create_autocmd("SessionLoadPost", {
-        callback = function(_)
-          vim.defer_fn(function()
-            Jumplist.reset()
-            Jumplist.register()
-            vim.cmd("clearjumps")
-          end, 250)
-        end,
-      })
     end,
   },
 }

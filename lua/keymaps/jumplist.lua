@@ -1,10 +1,12 @@
 local M = {}
+local roots = {}
+local currents = {}
 
 local soft_equal_line_count = 6
 local max_node_count = 100
 
 ---@return Node
-local create_root = function()
+local function create_root()
   local root = {
     lnum = 0,
     col = 0,
@@ -16,64 +18,8 @@ local create_root = function()
   return root
 end
 
-if M.root == nil then
-  M.root = create_root()
-  M.cur = M.root
-end
-
----@return Node
-M.create_node = function()
-  local pos = vim.fn.getpos(".")
-  return {
-    lnum = pos[2],
-    col = pos[3],
-    bufnr = vim.api.nvim_get_current_buf(),
-    root = false,
-    prev = M.root,
-    next = M.root,
-  }
-end
-
 ---@param node Node
----@param after_node Node
-M.insert_after = function(node, after_node)
-  local prev = after_node
-  local next = after_node.next
-  prev.next = node
-  node.prev = prev
-  node.next = next
-  next.prev = node
-end
-
----@param old Node
----@param new Node
-M.update = function(old, new)
-  old.lnum = new.lnum
-  old.col = new.col
-end
-
----@param node Node
-M.delete = function(node)
-  if node.root then
-    return
-  end
-  if M.cur == node then
-    if not node.prev.root then
-      M.cur = node.prev
-    else
-      M.cur = node.next
-    end
-  end
-  local prev = node.prev
-  local next = node.next
-  prev.next = next
-  next.prev = prev
-  node.next = node
-  node.prev = node
-end
-
----@param node Node
-local validate_lnum_col = function(node)
+local function validate_lnum_col(node)
   local lnum = vim.api.nvim_buf_line_count(node.bufnr)
   lnum = math.max(1, math.min(node.lnum, lnum))
   local line = vim.api.nvim_buf_get_lines(node.bufnr, lnum - 1, lnum, false)[1] or ""
@@ -85,7 +31,7 @@ end
 ---@param a Node
 ---@param b Node
 ---@return boolean
-local nodes_equal_soft = function(a, b)
+local function nodes_equal_soft(a, b)
   if a.root or b.root or a.bufnr ~= b.bufnr then
     return false
   end
@@ -97,20 +43,100 @@ end
 ---@param a Node
 ---@param b Node
 ---@return boolean
-local nodes_equal_hard = function(a, b)
+local function nodes_equal_hard(a, b)
   return nodes_equal_soft(a, b) and a.lnum == b.lnum
 end
 
 ---@param node Node
-M.setpos = function(node)
+---@param after_node Node
+local function insert_after(node, after_node)
+  local prev = after_node
+  local next = after_node.next
+  prev.next = node
+  node.prev = prev
+  node.next = next
+  next.prev = node
+end
+
+---@param old Node
+---@param new Node
+local function update(old, new)
+  old.lnum = new.lnum
+  old.col = new.col
+end
+
+---@param node Node
+local function setpos(node)
   if not node.root then
     local current_buf = vim.api.nvim_get_current_buf()
     if node.bufnr ~= current_buf then
-      vim.cmd("b " .. M.cur.bufnr)
+      vim.cmd("b " .. node.bufnr)
     end
     validate_lnum_col(node)
     vim.fn.setpos(".", { 0, node.lnum, node.col, 0 })
   end
+end
+
+---@return string
+M.key = function()
+  return vim.fn.getcwd()
+end
+
+---@return Node
+M.root = function()
+  local key = M.key()
+  if not roots[key] then
+    roots[key] = create_root()
+    currents[key] = roots[key]
+  end
+  return roots[key]
+end
+
+---@return Node
+M.get_cur = function()
+  local key = M.key()
+  if not currents[key] then
+    M.root()
+  end
+  return currents[key]
+end
+
+---@param node Node
+M.set_cur = function(node)
+  currents[M.key()] = node
+end
+
+---@return Node
+M.create_node = function()
+  local pos = vim.fn.getpos(".")
+  return {
+    lnum = pos[2],
+    col = pos[3],
+    bufnr = vim.api.nvim_get_current_buf(),
+    root = false,
+    prev = M.root(),
+    next = M.root(),
+  }
+end
+
+---@param node Node
+M.delete = function(node)
+  if node.root then
+    return
+  end
+  if M.get_cur() == node then
+    if not node.prev.root then
+      M.set_cur(node.prev)
+    else
+      M.set_cur(node.next)
+    end
+  end
+  local prev = node.prev
+  local next = node.next
+  prev.next = next
+  next.prev = prev
+  node.next = node
+  node.prev = node
 end
 
 M.register = function()
@@ -118,19 +144,19 @@ M.register = function()
     return
   end
   local node = M.create_node()
-  if nodes_equal_soft(M.cur, node) then
-    M.update(M.cur, node)
+  if nodes_equal_soft(M.get_cur(), node) then
+    update(M.get_cur(), node)
   else
-    M.insert_after(node, M.cur)
-    M.cur = M.cur.next
-    while not M.cur.next.root do
-      M.delete(M.cur.next)
+    insert_after(node, M.get_cur())
+    M.set_cur(M.get_cur().next)
+    while not M.get_cur().next.root do
+      M.delete(M.get_cur().next)
     end
   end
 end
 
 M.cleanup = function()
-  local node = M.root.prev
+  local node = M.root().prev
   if node.root then
     return
   end
@@ -139,7 +165,6 @@ M.cleanup = function()
     local prev = node.prev
     if
       (not vim.fn.bufexists(node.bufnr))
-      or (not vim.api.nvim_buf_is_valid(node.bufnr))
       or BufIsSpecial(node.bufnr)
     then
       M.delete(node)
@@ -147,7 +172,7 @@ M.cleanup = function()
     node = prev
   end
 
-  node = M.root.prev
+  node = M.root().prev
   if node.root then
     return
   end
@@ -163,63 +188,53 @@ M.cleanup = function()
   end
   while node_count > max_node_count do
     node_count = node_count - 1
-    M.delete(M.root.next)
+    M.delete(M.root().next)
   end
 end
 
 M.jump_back = function()
-  if M.cur.root then
+  if M.get_cur().root then
     M.register()
   end
   local node = M.create_node()
-  if nodes_equal_soft(M.cur, node) then
-    M.update(M.cur, node)
-    if not M.cur.prev.root then
-      M.cur = M.cur.prev
+  if nodes_equal_soft(M.get_cur(), node) then
+    update(M.get_cur(), node)
+    if not M.get_cur().prev.root then
+      M.set_cur(M.get_cur().prev)
     end
   elseif not BufIsSpecial() then
-    M.insert_after(node, M.cur)
-    local next = M.cur.next
+    insert_after(node, M.get_cur())
+    local next = M.get_cur().next
     while not next.next.root do
       M.delete(next.next)
     end
   end
   M.cleanup()
-  M.setpos(M.cur)
-end
-
-M.reset = function()
-  local next = M.root.next
-  local prev = M.root.prev
-  next.prev = next
-  prev.next = prev
-  M.cur = M.root
-  M.root.next = M.root
-  M.root.prev = M.root
+  setpos(M.get_cur())
 end
 
 M.jump_forward = function()
-  if M.cur.root then
+  if M.get_cur().root then
     M.register()
   end
   M.cleanup()
   local node = M.create_node()
-  if nodes_equal_soft(node, M.cur) then
-    M.update(M.cur, node)
+  if nodes_equal_soft(node, M.get_cur()) then
+    update(M.get_cur(), node)
   elseif not BufIsSpecial() then
-    M.insert_after(node, M.cur)
-    M.cur = M.cur.next
+    insert_after(node, M.get_cur())
+    M.set_cur(M.get_cur().next)
   end
-  if not M.cur.next.root then
-    M.cur = M.cur.next
+  if not M.get_cur().next.root then
+    M.set_cur(M.get_cur().next)
   end
-  M.setpos(M.cur)
+  setpos(M.get_cur())
 end
 
 ---@return Position[]
 M.get_positions = function()
   M.cleanup()
-  local node = M.root
+  local node = M.root()
   ---@type Position[]
   local positions = {}
   while not node.prev.root do
@@ -231,11 +246,11 @@ end
 
 M.insert = function()
   local node = M.create_node()
-  if nodes_equal_soft(M.cur, node) then
-    M.update(M.cur, node)
+  if nodes_equal_soft(M.get_cur(), node) then
+    update(M.get_cur(), node)
   else
-    M.insert_after(node, M.cur)
-    M.cur = M.cur.next
+    insert_after(node, M.get_cur())
+    M.set_cur(M.get_cur().next)
   end
 end
 
