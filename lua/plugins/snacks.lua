@@ -189,11 +189,6 @@ return {
         snacks.explorer()
       end)
 
-      vim.keymap.set("n", "<leader>os", function()
-        Jumplist.register()
-        snacks.picker.lsp_symbols({ layout = { preset = "select" } })
-      end)
-
       vim.keymap.set("n", "<leader>om", function()
         Jumplist.register()
         snacks.picker.marks()
