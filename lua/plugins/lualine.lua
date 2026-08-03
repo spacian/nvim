@@ -8,6 +8,14 @@ return {
         return path:match("^.+[/\\](.-)[/\\]?$")
       end
       local function smart_path()
+        if vim.bo.filetype == "oil" then
+          local dir = require("oil").get_current_dir()
+          local relative = vim.fn.fnamemodify(dir, ":.")
+          if relative ~= dir then
+            return parent(vim.fn.getcwd()) .. "\\" .. relative
+          end
+          return dir
+        end
         if BufIsSpecial() then
           return parent(vim.fn.getcwd())
         end
