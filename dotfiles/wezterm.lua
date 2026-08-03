@@ -54,6 +54,7 @@ config.animation_fps = 240
 config.colors = {
   cursor_bg = "#c5c9c5",
   cursor_fg = "#181616",
+  cursor_border = "#c5c9c5",
 }
 
 config.window_padding = {
