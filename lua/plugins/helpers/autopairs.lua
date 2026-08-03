@@ -20,8 +20,10 @@ return {
       enable_afterquote = false,
     })
     autopairs.remove_rule("'")
+    autopairs.remove_rule("'''")
     autopairs.remove_rule("`")
-    autopairs.remove_rule('"""')
+    autopairs.remove_rule("```")
     autopairs.remove_rule('"')
+    autopairs.remove_rule('"""')
   end,
 }
