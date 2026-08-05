@@ -60,6 +60,7 @@
   [
     (identifier) @type
     (attribute) @type
+    (generic_type) @type
     (list
       ["[" "]"] @punctuation.bracket)
   ]
