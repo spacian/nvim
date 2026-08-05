@@ -11,7 +11,7 @@ return {
         python = { "isort", "black" },
         toml = { "taplo" },
         yaml = { "prettier" },
-        xml = { "xmlformatter" },
+        xml = { lsp_format = "prefer" },
       },
       formatters = {
         isort = {
