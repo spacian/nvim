@@ -12,9 +12,9 @@ return {
           local dir = require("oil").get_current_dir()
           local relative = vim.fn.fnamemodify(dir, ":.")
           if relative ~= dir then
-            return parent(vim.fn.getcwd()) .. "\\" .. relative
+            return (parent(vim.fn.getcwd()) .. "\\" .. relative):gsub("\\", "/")
           end
-          return dir
+          return dir:gsub("\\", "/")
         end
         if BufIsSpecial() then
           return parent(vim.fn.getcwd())
