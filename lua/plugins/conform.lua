@@ -17,6 +17,8 @@ return {
         isort = {
           command = "isort",
           args = {
+            "--profile",
+            "black",
             "--stdout",
             "--filename",
             "$FILENAME",
