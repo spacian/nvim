@@ -41,9 +41,17 @@ local config = wezterm.config_builder()
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.default_prog = { "pwsh.exe", "-NoLogo" }
-config.font = wezterm.font("Cascadia Mono", { weight = 501 })
+-- config.font = wezterm.font("Cascadia Mono", { weight = 501 })
+-- config.font_size = 16
+config.font = wezterm.font("CommitMono Nerd Font Mono", { weight = 600 })
+config.font_size = 15
+config.line_height = 1.15
+config.harfbuzz_features = {
+  "calt=0",
+  "liga=0",
+  "clig=0",
+}
 config.warn_about_missing_glyphs = false
-config.font_size = 16
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior = "Close"
 config.default_cursor_style = "SteadyBlock"
