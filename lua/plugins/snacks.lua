@@ -11,7 +11,7 @@ return {
               ii = false,
               ia = false,
               ib = {
-                cursor = false,
+                cursor = true,
                 desc = "inner scope",
                 edge = false,
                 min_size = 2,
@@ -22,7 +22,7 @@ return {
                 },
               },
               ab = {
-                cursor = false,
+                cursor = true,
                 desc = "full scope",
                 edge = true,
                 min_size = 2,
@@ -39,7 +39,7 @@ return {
               ["[b"] = {
                 min_size = 2,
                 bottom = false,
-                cursor = false,
+                cursor = true,
                 edge = true,
                 treesitter = { blocks = { enabled = false } },
                 desc = "jump to top edge of scope",
@@ -47,7 +47,7 @@ return {
               ["]b"] = {
                 min_size = 2,
                 bottom = true,
-                cursor = false,
+                cursor = true,
                 edge = true,
                 treesitter = { blocks = { enabled = false } },
                 desc = "jump to bottom edge of scope",
@@ -63,7 +63,7 @@ return {
           },
           scope = {
             enabled = true,
-            cursor = false,
+            cursor = true,
           },
           animate = {
             enabled = false,
@@ -218,6 +218,8 @@ return {
       vim.keymap.set("n", "<leader>oN", function()
         scratch("Global Notes", vim.fn.stdpath("data") .. "/notes.txt")
       end)
+
+      vim.api.nvim_set_hl(0, "SnacksIndentScope", { link = "String" })
     end,
   },
 }
