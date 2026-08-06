@@ -57,13 +57,7 @@
   (#set! priority 200))
 
 (type
-  [
-    (identifier) @type
-    (attribute) @type
-    (generic_type) @type
-    (list
-      ["[" "]"] @punctuation.bracket)
-  ]
+  (_) @type
   (#set! priority 200))
 
 (attribute
