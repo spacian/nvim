@@ -1,4 +1,4 @@
-Jumplist = require("keymaps.jumplist")
+Jumplist = require("modules.jumplist")
 
 local function buffer_in_float(buf)
   for _, win in ipairs(vim.fn.win_findbuf(buf)) do
