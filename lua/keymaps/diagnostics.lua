@@ -44,11 +44,13 @@ end)
 vim.keymap.set("n", "<esc>", function()
   vim.diagnostic.config(disabled)
   local current_win = vim.api.nvim_get_current_win()
-  for _, win in pairs(vim.api.nvim_list_wins()) do
-    if win ~= current_win then
-      local cfg = vim.api.nvim_win_get_config(win)
-      if cfg.relative ~= "" and cfg.focusable then
-        vim.api.nvim_win_close(win, false)
+  if vim.api.nvim_win_get_config(current_win).relative == "" then
+    for _, win in pairs(vim.api.nvim_list_wins()) do
+      if win ~= current_win then
+        local cfg = vim.api.nvim_win_get_config(win)
+        if cfg.relative ~= "" and cfg.focusable then
+          vim.api.nvim_win_close(win, false)
+        end
       end
     end
   end
