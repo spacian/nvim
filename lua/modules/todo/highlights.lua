@@ -1,0 +1,7 @@
+vim.api.nvim_set_hl(0, "TaskPriorityNormal", { fg = MergeHL("Normal").fg })
+vim.api.nvim_set_hl(0, "TaskPriorityImportant", { link = "DiagnosticInfo" })
+vim.api.nvim_set_hl(0, "TaskPriorityUrgent", { link = "DiagnosticWarn" })
+vim.api.nvim_set_hl(0, "TaskPriorityImportantUrgent", { link = "DiagnosticError" })
+vim.api.nvim_set_hl(0, "TaskStateOpen", { fg = MergeHL("Normal").fg })
+vim.api.nvim_set_hl(0, "TaskStateInProgress", { link = "DiagnosticInfo" })
+vim.api.nvim_set_hl(0, "TaskStateDone", { link = "DiagnosticHint" })

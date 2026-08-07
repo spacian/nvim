@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 vim.keymap.set({ "n", "v" }, "<leader><leader>", "")
 vim.keymap.set({ "v" }, "p", '"_dP')
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
