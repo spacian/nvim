@@ -3,7 +3,7 @@ local M = {}
 local types = require("modules.todo.types")
 
 ---@param task Task
----@return integer
+---@return number
 function M.priority_value(task)
   return (task.important and 2 or 0) + (task.urgent and 4 or 0)
 end
@@ -22,6 +22,9 @@ function M.create_window()
     border = "rounded",
   })
 
+  vim.bo[buf].buftype = "nofile"
+  vim.bo[buf].bufhidden = "wipe"
+  vim.bo[buf].swapfile = false
   vim.wo[win].number = false
   vim.wo[win].relativenumber = false
   vim.wo[win].signcolumn = "no"
@@ -32,25 +35,38 @@ function M.create_window()
   return buf
 end
 
----@param task any
----@return boolean
-function M.is_task(task)
-  if
-    type(task) == "table"
-    and type(task.title) == "string"
-    and type(task.important) == "boolean"
-    and type(task.urgent) == "boolean"
-    and vim.islist(task.children)
-  then
-    for _, child in ipairs(task.children) do
-      if not M.is_task(child) then
-        return false
-      end
-    end
-    return true
-  else
-    return false
-  end
+---@param text string
+---@param callback function(string): nil
+function M.open_note(text, callback)
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[buf].bufhidden = "wipe"
+  vim.bo[buf].swapfile = false
+  vim.bo[buf].filetype = "text"
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n"))
+
+  local width = 60
+  local height = 20
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = math.floor((vim.o.columns - width) / 2),
+    row = math.floor((vim.o.lines - height) / 2),
+    border = "rounded",
+  })
+
+  vim.api.nvim_create_autocmd("BufWipeout", {
+    buffer = buf,
+    once = true,
+    callback = function()
+      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+      callback(table.concat(lines, "\n"))
+    end,
+  })
+
+  vim.keymap.set("n", "q", function()
+    vim.cmd("q")
+  end, { buf = buf, nowait = true })
 end
 
 ---@param tasks Task[]

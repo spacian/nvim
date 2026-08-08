@@ -11,12 +11,14 @@ local TaskState = {
 ---| "done"
 
 ---@class Task
----@field id integer
+---@field id number
 ---@field title string
 ---@field state TaskStateValue
 ---@field important boolean
 ---@field urgent boolean
 ---@field children Task[]
+---@field collapsed boolean?
+---@field notes string?
 
 return {
   TaskState = TaskState,

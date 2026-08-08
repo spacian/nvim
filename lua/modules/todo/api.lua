@@ -15,9 +15,6 @@ local line_ref = {}
 ---@param tasks Task[]
 local function update(buf, tasks)
   line_ref = renderer.render(buf, tasks)
-  if filepath ~= nil then
-    persistence.write(filepath, tasks)
-  end
 end
 
 ---@return number?
@@ -136,6 +133,57 @@ local function set_keymaps(buf)
       update(buf, data.tasks())
     end
   end, { buf = buf, nowait = true })
+
+  vim.keymap.set("n", "c", function()
+    local id = task_id()
+    if id ~= nil then
+      data.collapse(id)
+      update(buf, data.tasks())
+    end
+  end, { buf = buf, nowait = true })
+
+  vim.keymap.set("n", "D", function()
+    local id = task_id()
+    if id ~= nil then
+      data.move_delete(id)
+      update(buf, data.tasks())
+    end
+  end, { buf = buf, nowait = true })
+
+  vim.keymap.set("n", "m", function()
+    data.move()
+    update(buf, data.tasks())
+  end, { buf = buf, nowait = true })
+
+  vim.keymap.set("n", "M", function()
+    local id = task_id()
+    if id ~= nil then
+      data.move_to_child(id)
+      update(buf, data.tasks())
+    end
+  end)
+
+  vim.keymap.set("n", "o", function()
+    local id = task_id()
+    if id ~= nil then
+      util.open_note(data.get_notes(id), function(text)
+        vim.schedule(function()
+          data.set_notes(id, text)
+          update(buf, data.tasks())
+        end)
+      end)
+    end
+  end, { buf = buf, nowait = true })
+
+  vim.api.nvim_create_autocmd("BufWipeout", {
+    buffer = buf,
+    once = true,
+    callback = function()
+      if filepath ~= nil then
+        persistence.write(filepath, data.tasks())
+      end
+    end,
+  })
 end
 
 function M.open()

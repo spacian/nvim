@@ -9,15 +9,17 @@ context.ref = {}
 context.parent = {}
 ---@type Task[]
 context.tasks = {}
-
+---@type Task?
+local task_copy = nil
+---@type Task?
+local task_move = nil
+---@type number
 local task_id = 0
 
 local function make_id()
   task_id = task_id + 1
   return task_id
 end
----@type Task?
-local task_copy = nil
 
 ---@param tasks Task[]
 local function update_ids(tasks)
@@ -132,6 +134,14 @@ function M.toggle_important(id)
 end
 
 ---@param id number
+function M.collapse(id)
+  local task = context.ref[id]
+  if #task.children > 0 then
+    task.collapsed = not task.collapsed
+  end
+end
+
+---@param id number
 function M.cycle_state(id)
   local task = context.ref[id]
   local states = require("modules.todo.types").TaskState
@@ -169,6 +179,72 @@ function M.delete(id)
   end
   context.ref[id] = nil
   context.parent[id] = nil
+end
+
+---@param id number
+function M.move_delete(id)
+  local parent = context.parent[id]
+  if parent ~= nil then
+    local children = context.ref[parent].children
+    for i, neighbor in pairs(children) do
+      if neighbor.id == id then
+        table.remove(children, i)
+        break
+      end
+    end
+  else
+    for i, neighbor in pairs(context.tasks) do
+      if neighbor.id == id then
+        table.remove(context.tasks, i)
+        break
+      end
+    end
+  end
+  task_move = context.ref[id]
+  context.ref[id] = nil
+  context.parent[id] = nil
+end
+
+function M.move()
+  if task_move ~= nil then
+    table.insert(context.tasks, task_move)
+    context.ref[task_move.id] = task_move
+    task_move = nil
+  else
+    print("not moving anything")
+  end
+end
+
+---@param id number
+function M.move_to_child(id)
+  if task_move ~= nil then
+    local task = context.ref[id]
+    table.insert(task.children, task_move)
+    context.parent[task_move.id] = id
+    context.ref[task_move.id] = task_move
+    task_move = nil
+  else
+    print("not moving anything")
+  end
+end
+
+---@param id number
+---@return string
+function M.get_notes(id)
+  local task = context.ref[id]
+  return task.notes or ""
+end
+
+---@param id number
+---@param text string
+function M.set_notes(id, text)
+  local task = context.ref[id]
+  task.notes = text
+end
+
+---@return boolean
+function M.moving()
+  return task_move ~= nil
 end
 
 ---@return Task[]

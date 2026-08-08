@@ -25,8 +25,8 @@ local priority_groups = {
 }
 
 ---@param tasks Task[]
----@param buf integer
----@return integer[]
+---@param buf number
+---@return number[]
 function M.render(buf, tasks)
   vim.api.nvim_buf_clear_namespace(buf, ref_ns, 0, -1)
   vim.api.nvim_buf_clear_namespace(buf, hl_ns, 0, -1)
@@ -36,14 +36,15 @@ function M.render(buf, tasks)
   local refs = {}
 
   ---@param task Task
-  ---@param depth integer
+  ---@param depth number
   ---@param forced_hl? string
   local function add_task(task, depth, forced_hl)
     local line = #lines
     local indent = " " .. string.rep("  ", depth)
     local symbol = state_symbols[task.state] or "?"
+    local indicator = #task.children > 0 and " /" or ""
 
-    local text = indent .. symbol .. " " .. task.title
+    local text = indent .. symbol .. " " .. task.title .. indicator
     table.insert(lines, text)
 
     if task.state == types.TaskState.DONE then
@@ -66,11 +67,12 @@ function M.render(buf, tasks)
       ns = hl_ns,
     })
 
-    -- table.insert(refs, #refs + 1, task.id)
     refs[#refs + 1] = task.id
 
-    for _, child in ipairs(task.children) do
-      add_task(child, depth + 1, forced_hl)
+    if not task.collapsed then
+      for _, child in ipairs(task.children) do
+        add_task(child, depth + 1, forced_hl)
+      end
     end
   end
 
@@ -78,9 +80,6 @@ function M.render(buf, tasks)
     add_task(task, 0)
   end
 
-  vim.bo[buf].buftype = "nofile"
-  vim.bo[buf].bufhidden = "wipe"
-  vim.bo[buf].swapfile = false
   vim.bo[buf].modifiable = true
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
   vim.bo[buf].modifiable = false
