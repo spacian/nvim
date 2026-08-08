@@ -36,22 +36,6 @@ return {
             jump = {
               ["[i"] = false,
               ["]i"] = false,
-              ["[b"] = {
-                min_size = 2,
-                bottom = false,
-                cursor = true,
-                edge = true,
-                treesitter = { blocks = { enabled = false } },
-                desc = "jump to top edge of scope",
-              },
-              ["]b"] = {
-                min_size = 2,
-                bottom = true,
-                cursor = true,
-                edge = true,
-                treesitter = { blocks = { enabled = false } },
-                desc = "jump to bottom edge of scope",
-              },
             },
           },
         },
@@ -219,7 +203,31 @@ return {
         scratch("Global Notes", vim.fn.stdpath("data") .. "/notes.txt")
       end)
 
-      vim.api.nvim_set_hl(0, "SnacksIndentScope", { link = "String" })
+      vim.api.nvim_set_hl(0, "SnacksIndentScope", { link = "@keyword.return" })
+
+      vim.keymap.set("n", "]b", function()
+        Jumplist.register()
+        snacks.scope.jump({
+          min_size = 2,
+          bottom = true,
+          cursor = true,
+          edge = true,
+          treesitter = { blocks = { enabled = false } },
+          desc = "jump to bottom edge of scope",
+        })
+      end)
+
+      vim.keymap.set("n", "[b", function()
+        Jumplist.register()
+        snacks.scope.jump({
+          min_size = 2,
+          bottom = false,
+          cursor = true,
+          edge = true,
+          treesitter = { blocks = { enabled = false } },
+          desc = "jump to top edge of scope",
+        })
+      end)
     end,
   },
 }
