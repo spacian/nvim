@@ -1,5 +1,7 @@
 local M = {}
-require("modules.todo.highlights")
+
+local opts = {}
+
 local renderer = require("modules.todo.renderer")
 local data = require("modules.todo.data")
 local util = require("modules.todo.util")
@@ -14,10 +16,10 @@ local line_ref = {}
 ---@type number?
 local buf = nil
 
----@param buf number
+---@param ubuf number
 ---@param tasks Task[]
-local function update(buf, tasks)
-  line_ref = renderer.render(buf, tasks)
+local function update(ubuf, tasks)
+  line_ref = renderer.render(ubuf, tasks)
 end
 
 ---@return number?
@@ -39,7 +41,21 @@ local function input_task_name(text)
   return title
 end
 
-function M.cycle_state()
+function M.reload_from_file()
+  if filepath then
+    local tasks = persistence.read(filepath)
+    if tasks ~= nil then
+      data.setup(tasks)
+    else
+      data.setup({})
+      print("invalid input file for todo")
+    end
+  else
+    print("no path set")
+  end
+end
+
+function M.state_cycle()
   local id = task_id()
   if buf and id then
     data.cycle_state(id)
@@ -63,7 +79,7 @@ function M.toggle_important()
   end
 end
 
-function M.delete()
+function M.delete_shallow()
   local id = task_id()
   if buf and id then
     if data.has_children(id) then
@@ -84,7 +100,7 @@ function M.sort()
   end
 end
 
-function M.create_task()
+function M.task_create()
   if buf then
     local title = input_task_name("")
     if title ~= nil then
@@ -94,7 +110,7 @@ function M.create_task()
   end
 end
 
-function M.create_subtask()
+function M.task_create_child()
   local id = task_id()
   if buf and id then
     local title = input_task_name("")
@@ -116,14 +132,14 @@ function M.rename()
   end
 end
 
-function M.shallow_copy()
+function M.copy_shallow()
   local id = task_id()
   if id ~= nil then
     data.copy_task(id)
   end
 end
 
-function M.paste_shallow()
+function M.paste_to_root_shallow()
   if buf then
     data.paste()
     update(buf, data.tasks())
@@ -138,7 +154,7 @@ function M.paste_to_child_shallow()
   end
 end
 
-function M.toggle_collapse()
+function M.collapse_toggle()
   local id = task_id()
   if buf and id then
     data.collapse(id)
@@ -154,7 +170,7 @@ function M.move_delete()
   end
 end
 
-function M.move_paste()
+function M.move_paste_to_root()
   if buf then
     data.move()
     update(buf, data.tasks())
@@ -169,86 +185,21 @@ function M.move_paste_to_child()
   end
 end
 
-function M.notes()
+function M.notes_open()
   local id = task_id()
   if buf and id then
-    util.open_note(data.get_title(id), data.get_notes(id), function(text)
-      vim.schedule(function()
-        data.set_notes(id, text)
-        update(buf, data.tasks())
-      end)
-    end)
+    util.open_note(
+      data.get_title(id),
+      data.get_notes(id),
+      opts.keymaps.notes,
+      function(text)
+        vim.schedule(function()
+          data.set_notes(id, text)
+          update(buf, data.tasks())
+        end)
+      end
+    )
   end
-end
-
-local function set_keymaps()
-  vim.keymap.set("n", "<space>", function()
-    M.cycle_state()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "u", function()
-    M.toggle_urgent()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "i", function()
-    M.toggle_important()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "q", function()
-    vim.cmd("q")
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "d", function()
-    M.delete()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "s", function()
-    M.sort()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "N", function()
-    M.create_task()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "n", function()
-    M.create_subtask()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "r", function()
-    M.rename()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "y", function()
-    M.shallow_copy()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "P", function()
-    M.paste_shallow()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "p", function()
-    M.paste_to_child_shallow()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "<enter>", function()
-    M.toggle_collapse()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "D", function()
-    M.move_delete()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "M", function()
-    M.move_paste()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "m", function()
-    M.move_paste_to_child()
-  end, { buf = buf, nowait = true })
-
-  vim.keymap.set("n", "o", function()
-    M.notes()
-  end, { buf = buf, nowait = true })
 end
 
 function M.open()
@@ -265,20 +216,60 @@ function M.open()
         line_ref = {}
       end,
     })
+    for key, fun in pairs(opts.keymaps.tasks) do
+      if fun then
+        vim.keymap.set("n", key, fun, { buf = buf, nowait = true })
+      end
+    end
     update(buf, data.tasks())
-    set_keymaps()
   end
 end
 
----@param path string
-function M.setup(path)
-  filepath = path
-  local tasks = persistence.read(filepath)
-  if tasks ~= nil then
-    data.setup(tasks)
-  else
-    vim.print("invalid input file for todo")
+function M.update_config(user_opts)
+  opts = vim.tbl_deep_extend("force", opts, user_opts)
+  filepath = opts.filepath
+end
+
+function M.setup(user_opts)
+  user_opts = user_opts or {}
+  M.update_config(user_opts)
+  M.reload_from_file()
+  if opts.keymaps.todo_open then
+    vim.keymap.set("n", opts.keymaps.todo_open, M.open)
   end
 end
+
+opts = {
+  filepath = vim.fs.joinpath(vim.fn.stdpath("data"), "todo", "tasks.json"),
+  keymaps = {
+    todo_open = "<leader>td",
+    tasks = {
+      ["<space>"] = M.state_cycle,
+      ["n"] = M.task_create_child,
+      ["N"] = M.task_create,
+      ["r"] = M.rename,
+      ["<enter>"] = M.collapse_toggle,
+      ["y"] = M.copy_shallow,
+      ["p"] = M.paste_to_child_shallow,
+      ["P"] = M.paste_to_root_shallow,
+      ["q"] = function()
+        vim.cmd("q")
+      end,
+      ["u"] = M.toggle_urgent,
+      ["i"] = M.toggle_important,
+      ["o"] = M.notes_open,
+      ["d"] = M.delete_shallow,
+      ["D"] = M.move_delete,
+      ["m"] = M.move_paste_to_child,
+      ["M"] = M.move_paste_to_root,
+      ["s"] = M.sort,
+    },
+    notes = {
+      ["q"] = function()
+        vim.cmd("q")
+      end,
+    },
+  },
+}
 
 return M

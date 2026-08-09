@@ -40,12 +40,22 @@ end
 ---@param title string
 ---@param text string
 ---@param callback function(string): nil
-function M.open_note(title, text, callback)
+function M.open_note(title, text, keymaps, callback)
   local buf = vim.api.nvim_create_buf(false, true)
+
   vim.bo[buf].bufhidden = "wipe"
   vim.bo[buf].swapfile = false
   vim.bo[buf].filetype = "text"
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n"))
+
+  vim.api.nvim_create_autocmd("BufWipeout", {
+    buffer = buf,
+    once = true,
+    callback = function()
+      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+      callback(table.concat(lines, "\n"))
+    end,
+  })
 
   local width = 60
   local height = 20
@@ -60,18 +70,11 @@ function M.open_note(title, text, callback)
     border = "rounded",
   })
 
-  vim.api.nvim_create_autocmd("BufWipeout", {
-    buffer = buf,
-    once = true,
-    callback = function()
-      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-      callback(table.concat(lines, "\n"))
-    end,
-  })
-
-  vim.keymap.set("n", "q", function()
-    vim.cmd("q")
-  end, { buf = buf, nowait = true })
+  for key, fun in pairs(keymaps) do
+    if fun then
+      vim.keymap.set("n", key, fun, { buf = buf, nowait = true })
+    end
+  end
 end
 
 ---@param tasks Task[]

@@ -37,6 +37,13 @@ end
 
 ---@param tasks Task[]
 function M.setup(tasks)
+  context.parent = {}
+  context.ref = {}
+  context.tasks = {}
+  task_copy = nil
+  task_move = nil
+  task_id = 0
+
   ---@param task Task
   local function visit(task)
     context.ref[task.id] = task
