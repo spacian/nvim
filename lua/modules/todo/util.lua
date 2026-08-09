@@ -14,6 +14,8 @@ function M.create_window()
   local width = 40
   local height = 20
   local win = vim.api.nvim_open_win(buf, true, {
+    title = "Tasks",
+    title_pos = "center",
     relative = "editor",
     width = width,
     height = height,
@@ -35,9 +37,10 @@ function M.create_window()
   return buf
 end
 
+---@param title string
 ---@param text string
 ---@param callback function(string): nil
-function M.open_note(text, callback)
+function M.open_note(title, text, callback)
   local buf = vim.api.nvim_create_buf(false, true)
   vim.bo[buf].bufhidden = "wipe"
   vim.bo[buf].swapfile = false
@@ -46,7 +49,9 @@ function M.open_note(text, callback)
 
   local width = 60
   local height = 20
-  local win = vim.api.nvim_open_win(buf, true, {
+  vim.api.nvim_open_win(buf, true, {
+    title = title,
+    title_pos = "center",
     relative = "editor",
     width = width,
     height = height,
@@ -102,7 +107,7 @@ function M.create_task(title, id)
     id = id,
     title = title,
     state = "open",
-    important = false,
+    important = true,
     urgent = false,
     children = {},
   }
