@@ -29,7 +29,6 @@ return {
           prefer_wasm = false,
           install_popular = false,
           disable = { indent = languages },
-          update_cadence = "manual",
         })
 
         vim.api.nvim_create_autocmd("FileType", {
@@ -65,6 +64,7 @@ return {
           { desc = "Select child treesitter node or inner incremental lsp selections" }
         )
 
+        vim.highlight.priorities.treesitter = 90
         vim.api.nvim_exec_autocmds("User", { pattern = "TreesitterSetupDone" })
       end,
     })
