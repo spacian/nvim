@@ -35,6 +35,30 @@ local function update_ids(tasks)
   end
 end
 
+---@param task Task
+---@param collapse boolean
+local function collapse_recursive(task, collapse)
+  if #task.children > 0 then
+    task.collapsed = collapse
+    for _, child in ipairs(task.children) do
+      collapse_recursive(child, collapse)
+    end
+  end
+end
+
+---@param id number
+function M.collapse_recursive(id)
+  local task = context.ref[id]
+  collapse_recursive(task, not task.collapsed)
+end
+
+---@param collapse boolean
+function M.collapse_all(collapse)
+  for _, task in ipairs(context.tasks) do
+    collapse_recursive(task, collapse)
+  end
+end
+
 ---@param tasks Task[]
 function M.setup(tasks)
   context.parent = {}

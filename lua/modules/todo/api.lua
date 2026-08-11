@@ -2,10 +2,10 @@ local M = {}
 
 local opts = {}
 
-local renderer = require("modules.todo.renderer")
 local data = require("modules.todo.data")
-local util = require("modules.todo.util")
 local persistence = require("modules.todo.persistence")
+local renderer = require("modules.todo.renderer")
+local util = require("modules.todo.util")
 
 ---@type string?
 local filepath = nil
@@ -15,6 +15,9 @@ local line_ref = {}
 
 ---@type number?
 local buf = nil
+
+---@type boolean
+local collapse_all = true
 
 ---@param ubuf number
 ---@param tasks Task[]
@@ -162,6 +165,22 @@ function M.collapse_toggle()
   end
 end
 
+function M.collapse_recursive()
+  local id = task_id()
+  if buf and id then
+    data.collapse_recursive(id)
+    update(buf, data.tasks())
+  end
+end
+
+---@param collapse boolean
+function M.collapse_all(collapse)
+  if buf then
+    data.collapse_all(collapse)
+    update(buf, data.tasks())
+  end
+end
+
 function M.move_delete()
   local id = task_id()
   if buf and id then
@@ -249,6 +268,11 @@ opts = {
       ["N"] = M.task_create,
       ["r"] = M.rename,
       ["<enter>"] = M.collapse_toggle,
+      ["c"] = M.collapse_recursive,
+      ["C"] = function()
+        M.collapse_all(collapse_all)
+        collapse_all = not collapse_all
+      end,
       ["y"] = M.copy_shallow,
       ["p"] = M.paste_to_child_shallow,
       ["P"] = M.paste_to_root_shallow,
