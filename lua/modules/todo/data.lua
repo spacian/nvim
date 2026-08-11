@@ -52,10 +52,24 @@ function M.collapse_recursive(id)
   collapse_recursive(task, not task.collapsed)
 end
 
----@param collapse boolean
-function M.collapse_all(collapse)
-  for _, task in ipairs(context.tasks) do
-    collapse_recursive(task, collapse)
+---@param id number
+function M.collapse_level(id)
+  local parents = id and context.parent[id] and context.ref[context.parent[id]].children
+    or context.tasks
+  local collapse = nil
+  if #context.ref[id].children > 0 and context.ref[id].collapsed ~= nil then
+    collapse = not context.ref[id].collapsed
+  end
+  for _, task in ipairs(parents) do
+    if #task.children > 0 then
+      if collapse == nil then
+        collapse = not task.collapsed
+      end
+      task.collapsed = collapse
+      for _, child in ipairs(task.children) do
+        collapse_recursive(child, true)
+      end
+    end
   end
 end
 
@@ -96,16 +110,14 @@ end
 function M.add_subtask(title, parent)
   local task = util.create_task(title, make_id())
   table.insert(context.ref[parent].children, task)
+  context.ref[parent].collapsed = nil
   context.ref[task.id] = task
   context.parent[task.id] = parent
 end
 
 ---@param id number
 function M.copy_task(id)
-  local orig = context.ref[id]
-  task_copy = util.create_task(orig.title, 0)
-  task_copy.important = orig.important
-  task_copy.urgent = orig.urgent
+  task_copy = vim.deepcopy(context.ref[id])
 end
 
 function M.paste()
@@ -125,6 +137,7 @@ function M.paste_to_child(parent)
     task_copy = vim.deepcopy(task_copy)
     task_copy.id = make_id()
     table.insert(context.ref[parent].children, task_copy)
+    context.ref[parent].collapsed = nil
     context.ref[task_copy.id] = task_copy
     context.parent[task_copy.id] = parent
   else
@@ -142,6 +155,12 @@ end
 ---@return string
 function M.get_title(id)
   return context.ref[id].title
+end
+
+---@param id number
+---@return number?
+function M.get_parent(id)
+  return context.parent[id]
 end
 
 ---@param id number
@@ -165,11 +184,36 @@ function M.toggle_important(id)
 end
 
 ---@param id number
-function M.collapse(id)
+function M.collapse_toggle(id)
   local task = context.ref[id]
   if #task.children > 0 then
     task.collapsed = not task.collapsed
   end
+end
+
+---@param id number
+---@param value boolean
+function M.collapse(id, value)
+  local task = context.ref[id]
+  if #task.children > 0 then
+    task.collapsed = value
+  end
+end
+
+---@param id number
+---@return number?
+function M.collapse_smart(id)
+  local task = context.ref[id]
+  if #task.children > 0 and not task.collapsed then
+    task.collapsed = true
+    return id
+  end
+  local parent = context.parent[id] or id
+  task = context.ref[parent]
+  if #task.children > 0 then
+    task.collapsed = true
+  end
+  return parent
 end
 
 ---@param id number
@@ -251,6 +295,7 @@ function M.move_to_child(id)
   if task_move ~= nil then
     local task = context.ref[id]
     table.insert(task.children, task_move)
+    task.collapsed = nil
     context.parent[task_move.id] = id
     context.ref[task_move.id] = task_move
     task_move = nil

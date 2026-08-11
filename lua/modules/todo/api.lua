@@ -16,9 +16,6 @@ local line_ref = {}
 ---@type number?
 local buf = nil
 
----@type boolean
-local collapse_all = true
-
 ---@param ubuf number
 ---@param tasks Task[]
 local function update(ubuf, tasks)
@@ -31,6 +28,15 @@ local function task_id()
     return nil
   end
   return line_ref[vim.api.nvim_win_get_cursor(0)[1]]
+end
+
+---@param id number
+local function set_cursor(id)
+  for line, ref in ipairs(line_ref) do
+    if ref == id then
+      vim.api.nvim_win_set_cursor(0, { line, 0 })
+    end
+  end
 end
 
 ---@param text string
@@ -97,9 +103,11 @@ function M.delete_shallow()
 end
 
 function M.sort()
-  if buf then
+  local id = task_id()
+  if buf and id then
     data.sort()
     update(buf, data.tasks())
+    set_cursor(id)
   end
 end
 
@@ -160,12 +168,50 @@ end
 function M.collapse_toggle()
   local id = task_id()
   if buf and id then
-    data.collapse(id)
+    data.collapse_toggle(id)
     update(buf, data.tasks())
   end
 end
 
-function M.collapse_recursive()
+function M.collapse_enable()
+  local id = task_id()
+  if buf and id then
+    data.collapse(id, true)
+    update(buf, data.tasks())
+    set_cursor(id)
+  end
+end
+
+function M.collapse_disable()
+  local id = task_id()
+  if buf and id then
+    data.collapse(id, false)
+    update(buf, data.tasks())
+  end
+end
+
+function M.collapse_smart()
+  local id = task_id()
+  if buf and id then
+    local parent = data.collapse_smart(id)
+    update(buf, data.tasks())
+    if parent then
+      set_cursor(parent)
+    end
+  end
+end
+
+function M.to_parent()
+  local id = task_id()
+  if buf and id then
+    local parent = data.get_parent(id)
+    if parent then
+      set_cursor(parent)
+    end
+  end
+end
+
+function M.collapse_toggle_recursive()
   local id = task_id()
   if buf and id then
     data.collapse_recursive(id)
@@ -173,11 +219,12 @@ function M.collapse_recursive()
   end
 end
 
----@param collapse boolean
-function M.collapse_all(collapse)
-  if buf then
-    data.collapse_all(collapse)
+function M.collapse_toggle_level()
+  local id = task_id()
+  if buf and id then
+    data.collapse_level(id)
     update(buf, data.tasks())
+    set_cursor(id)
   end
 end
 
@@ -268,11 +315,11 @@ opts = {
       ["N"] = M.task_create,
       ["r"] = M.rename,
       ["<enter>"] = M.collapse_toggle,
-      ["c"] = M.collapse_recursive,
-      ["C"] = function()
-        M.collapse_all(collapse_all)
-        collapse_all = not collapse_all
-      end,
+      ["l"] = M.collapse_disable,
+      ["h"] = M.collapse_smart,
+      ["H"] = M.to_parent,
+      ["c"] = M.collapse_toggle_recursive,
+      ["C"] = M.collapse_toggle_level,
       ["y"] = M.copy_shallow,
       ["p"] = M.paste_to_child_shallow,
       ["P"] = M.paste_to_root_shallow,

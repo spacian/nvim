@@ -42,9 +42,15 @@ function M.render(buf, tasks)
     local line = #lines
     local indent = " " .. string.rep("  ", depth)
     local symbol = state_symbols[task.state] or "?"
-    local indicator = #task.children > 0 and " /" or ""
+    local indicator_children = #task.children > 0 and " /" or ""
+    local indicator_note = task.notes and #task.notes > 0 and " *" or ""
 
-    local text = indent .. symbol .. " " .. task.title .. indicator
+    local text = indent
+      .. symbol
+      .. " "
+      .. task.title
+      .. indicator_note
+      .. indicator_children
     table.insert(lines, text)
 
     if task.state == types.TaskState.DONE then

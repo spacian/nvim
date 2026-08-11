@@ -11,7 +11,7 @@ end
 ---@return number buf
 function M.create_window()
   local buf = vim.api.nvim_create_buf(false, true)
-  local width = 40
+  local width = 60
   local height = 20
   local win = vim.api.nvim_open_win(buf, true, {
     title = "Tasks",
@@ -32,7 +32,7 @@ function M.create_window()
   vim.wo[win].signcolumn = "no"
   vim.wo[win].foldcolumn = "0"
   vim.wo[win].wrap = false
-  vim.wo[win].cursorline = false
+  vim.wo[win].cursorline = true
   vim.wo[win].winfixwidth = true
   return buf
 end
@@ -57,9 +57,9 @@ function M.open_note(title, text, keymaps, callback)
     end,
   })
 
-  local width = 60
+  local width = 80
   local height = 20
-  vim.api.nvim_open_win(buf, true, {
+  local win = vim.api.nvim_open_win(buf, true, {
     title = title,
     title_pos = "center",
     relative = "editor",
@@ -69,6 +69,7 @@ function M.open_note(title, text, keymaps, callback)
     row = math.floor((vim.o.lines - height) / 2),
     border = "rounded",
   })
+  vim.wo[win].cursorline = true
 
   for key, fun in pairs(keymaps) do
     if fun then
