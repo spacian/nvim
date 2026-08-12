@@ -1,6 +1,7 @@
 local M = {}
 
 local util = require("modules.todo.util")
+local types = require("modules.todo.types")
 
 local context = {}
 ---@type table<number, Task>
@@ -38,6 +39,9 @@ end
 ---@param task Task
 ---@param collapse boolean
 local function collapse_recursive(task, collapse)
+  if task.state == types.TaskState.DONE then
+    collapse = true
+  end
   if #task.children > 0 then
     task.collapsed = collapse
     for _, child in ipairs(task.children) do
@@ -54,20 +58,32 @@ end
 
 ---@param id number
 function M.collapse_level(id)
-  local parents = id and context.parent[id] and context.ref[context.parent[id]].children
+  local neighbors = id
+      and context.parent[id]
+      and context.ref[context.parent[id]].children
     or context.tasks
   local collapse = nil
-  if #context.ref[id].children > 0 and context.ref[id].collapsed ~= nil then
-    collapse = not context.ref[id].collapsed
+  local ref_task = context.ref[id]
+  if
+    ref_task.state ~= types.TaskState.DONE
+    and #ref_task.children > 0
+    and ref_task.collapsed ~= nil
+  then
+    collapse = not ref_task.collapsed
   end
-  for _, task in ipairs(parents) do
+  for _, task in ipairs(neighbors) do
+    local done = task.state == types.TaskState.DONE
     if #task.children > 0 then
-      if collapse == nil then
-        collapse = not task.collapsed
-      end
-      task.collapsed = collapse
-      for _, child in ipairs(task.children) do
-        collapse_recursive(child, true)
+      if not done then
+        if collapse == nil then
+          collapse = not task.collapsed
+        end
+        task.collapsed = collapse
+        for _, child in ipairs(task.children) do
+          collapse_recursive(child, true)
+        end
+      else
+        task.collapsed = true
       end
     end
   end
@@ -161,6 +177,12 @@ end
 ---@return number?
 function M.get_parent(id)
   return context.parent[id]
+end
+
+---@param id number
+---@return number?
+function M.get_first_child(id)
+  return #context.ref[id].children > 0 and context.ref[id].children[1].id or nil
 end
 
 ---@param id number
@@ -326,6 +348,44 @@ end
 ---@return Task[]
 function M.tasks()
   return context.tasks
+end
+
+---@param id number
+---@return number?
+---@return number?
+function M.get_neighbors(id)
+  local prev = nil
+  local next = nil
+  local neighbors = id
+      and context.parent[id]
+      and context.ref[context.parent[id]].children
+    or context.tasks
+  for i, task in ipairs(neighbors) do
+    if task.id == id then
+      prev = neighbors[i - 1] and neighbors[i - 1].id or nil
+      next = neighbors[i + 1] and neighbors[i + 1].id or nil
+      break
+    end
+  end
+  return prev, next
+end
+
+---@param id number
+function M.delete_done(id)
+  local task = context.ref[id]
+  if task.state == types.TaskState.DONE then
+    M.delete(id)
+  else
+    for i = #task.children, 1, -1 do
+      M.delete_done(task.children[i].id)
+    end
+  end
+end
+
+function M.delete_done_all()
+  for i = #context.tasks, 1, -1 do
+    M.delete_done(context.tasks[i].id)
+  end
 end
 
 return M

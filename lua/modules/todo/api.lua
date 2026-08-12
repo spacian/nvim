@@ -13,29 +13,28 @@ local filepath = nil
 ---@type number[]
 local line_ref = {}
 
+---@type table<number, number>
+local task_ref = {}
+
 ---@type number?
 local buf = nil
 
----@param ubuf number
----@param tasks Task[]
-local function update(ubuf, tasks)
-  line_ref = renderer.render(ubuf, tasks)
+local function redraw()
+  if buf then
+    line_ref, task_ref = renderer.render(buf, data.tasks())
+  end
 end
 
 ---@return number?
 local function task_id()
-  if #line_ref == 0 then
-    return nil
-  end
   return line_ref[vim.api.nvim_win_get_cursor(0)[1]]
 end
 
 ---@param id number
 local function set_cursor(id)
-  for line, ref in ipairs(line_ref) do
-    if ref == id then
-      vim.api.nvim_win_set_cursor(0, { line, 0 })
-    end
+  local line = task_ref[id]
+  if line then
+    vim.api.nvim_win_set_cursor(0, { line, 0 })
   end
 end
 
@@ -66,31 +65,31 @@ end
 
 function M.state_cycle()
   local id = task_id()
-  if buf and id then
+  if id then
     data.cycle_state(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.toggle_urgent()
   local id = task_id()
-  if buf and id then
+  if id then
     data.toggle_urgent(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.toggle_important()
   local id = task_id()
-  if buf and id then
+  if id then
     data.toggle_important(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.delete_shallow()
   local id = task_id()
-  if buf and id then
+  if id then
     if data.has_children(id) then
       if vim.fn.confirm("delete task and all children?", "&Yes\n&No", 2) ~= 1 then
         return
@@ -98,15 +97,32 @@ function M.delete_shallow()
     end
     data.copy_task(id)
     data.delete(id)
-    update(buf, data.tasks())
+    redraw()
+  end
+end
+
+function M.delete_done()
+  local id = task_id()
+  if id then
+    data.delete_done(id)
+    redraw()
+  end
+end
+
+function M.delete_done_all()
+  local id = task_id()
+  if id then
+    data.delete_done_all()
+    redraw()
+    set_cursor(id)
   end
 end
 
 function M.sort()
   local id = task_id()
-  if buf and id then
+  if id then
     data.sort()
-    update(buf, data.tasks())
+    redraw()
     set_cursor(id)
   end
 end
@@ -116,29 +132,29 @@ function M.task_create()
     local title = input_task_name("")
     if title ~= nil then
       data.add_task(title)
-      update(buf, data.tasks())
+      redraw()
     end
   end
 end
 
 function M.task_create_child()
   local id = task_id()
-  if buf and id then
+  if id then
     local title = input_task_name("")
     if title ~= nil then
       data.add_subtask(title, id)
-      update(buf, data.tasks())
+      redraw()
     end
   end
 end
 
 function M.rename()
   local id = task_id()
-  if buf and id then
+  if id then
     local title = input_task_name(data.get_title(id))
     if title ~= nil then
       data.rename(title, id)
-      update(buf, data.tasks())
+      redraw()
     end
   end
 end
@@ -153,57 +169,69 @@ end
 function M.paste_to_root_shallow()
   if buf then
     data.paste()
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.paste_to_child_shallow()
   local id = task_id()
-  if buf and id then
+  if id then
     data.paste_to_child(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.collapse_toggle()
   local id = task_id()
-  if buf and id then
+  if id then
     data.collapse_toggle(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.collapse_enable()
   local id = task_id()
-  if buf and id then
+  if id then
     data.collapse(id, true)
-    update(buf, data.tasks())
+    redraw()
     set_cursor(id)
   end
 end
 
 function M.collapse_disable()
   local id = task_id()
-  if buf and id then
+  if id then
     data.collapse(id, false)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.collapse_smart()
   local id = task_id()
-  if buf and id then
+  if id then
     local parent = data.collapse_smart(id)
-    update(buf, data.tasks())
+    redraw()
     if parent then
       set_cursor(parent)
     end
   end
 end
 
+function M.to_first_child()
+  local id = task_id()
+  if id then
+    local child = data.get_first_child(id)
+    if child then
+      data.collapse(id, false)
+      redraw()
+      set_cursor(child)
+    end
+  end
+end
+
 function M.to_parent()
   local id = task_id()
-  if buf and id then
+  if id then
     local parent = data.get_parent(id)
     if parent then
       set_cursor(parent)
@@ -211,49 +239,69 @@ function M.to_parent()
   end
 end
 
+function M.to_next_neighbor()
+  local id = task_id()
+  if id then
+    local _, next = data.get_neighbors(id)
+    if next then
+      set_cursor(next)
+    end
+  end
+end
+
+function M.to_prev_neighbor()
+  local id = task_id()
+  if id then
+    local prev, _ = data.get_neighbors(id)
+    if prev then
+      set_cursor(prev)
+    end
+  end
+end
+
 function M.collapse_toggle_recursive()
   local id = task_id()
-  if buf and id then
+  if id then
     data.collapse_recursive(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.collapse_toggle_level()
   local id = task_id()
-  if buf and id then
+  if id then
     data.collapse_level(id)
-    update(buf, data.tasks())
+    redraw()
     set_cursor(id)
   end
 end
 
 function M.move_delete()
   local id = task_id()
-  if buf and id then
+  if id then
     data.move_delete(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.move_paste_to_root()
   if buf then
     data.move()
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.move_paste_to_child()
   local id = task_id()
-  if buf and id then
+  if id then
     data.move_to_child(id)
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
 function M.notes_open()
   local id = task_id()
-  if buf and id then
+  if id then
     util.open_note(
       data.get_title(id),
       data.get_notes(id),
@@ -261,7 +309,7 @@ function M.notes_open()
       function(text)
         vim.schedule(function()
           data.set_notes(id, text)
-          update(buf, data.tasks())
+          redraw()
         end)
       end
     )
@@ -269,7 +317,7 @@ function M.notes_open()
 end
 
 function M.open()
-  if buf == nil then
+  if not buf then
     buf = util.create_window()
     vim.api.nvim_create_autocmd("BufWipeout", {
       buffer = buf,
@@ -287,7 +335,7 @@ function M.open()
         vim.keymap.set("n", key, fun, { buf = buf, nowait = true })
       end
     end
-    update(buf, data.tasks())
+    redraw()
   end
 end
 
@@ -318,6 +366,9 @@ opts = {
       ["l"] = M.collapse_disable,
       ["h"] = M.collapse_smart,
       ["H"] = M.to_parent,
+      ["L"] = M.to_first_child,
+      ["J"] = M.to_next_neighbor,
+      ["K"] = M.to_prev_neighbor,
       ["c"] = M.collapse_toggle_recursive,
       ["C"] = M.collapse_toggle_level,
       ["y"] = M.copy_shallow,
@@ -334,6 +385,8 @@ opts = {
       ["m"] = M.move_paste_to_child,
       ["M"] = M.move_paste_to_root,
       ["s"] = M.sort,
+      ["x"] = M.delete_done,
+      ["X"] = M.delete_done_all,
     },
     notes = {
       ["q"] = function()

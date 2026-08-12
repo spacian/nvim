@@ -28,6 +28,7 @@ function M.create_window()
   vim.bo[buf].bufhidden = "wipe"
   vim.bo[buf].swapfile = false
   vim.wo[win].number = false
+  vim.wo[win].winfixbuf = true
   vim.wo[win].relativenumber = false
   vim.wo[win].signcolumn = "no"
   vim.wo[win].foldcolumn = "0"
@@ -69,6 +70,7 @@ function M.open_note(title, text, keymaps, callback)
     row = math.floor((vim.o.lines - height) / 2),
     border = "rounded",
   })
+  vim.wo[win].winfixbuf = true
   vim.wo[win].cursorline = true
 
   for key, fun in pairs(keymaps) do

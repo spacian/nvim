@@ -27,6 +27,7 @@ local priority_groups = {
 ---@param tasks Task[]
 ---@param buf number
 ---@return number[]
+---@return table<number, number>
 function M.render(buf, tasks)
   vim.api.nvim_buf_clear_namespace(buf, ref_ns, 0, -1)
   vim.api.nvim_buf_clear_namespace(buf, hl_ns, 0, -1)
@@ -97,7 +98,11 @@ function M.render(buf, tasks)
     })
   end
 
-  return refs
+  local task_to_line = {}
+  for i, ref in ipairs(refs) do
+    task_to_line[ref] = i
+  end
+  return refs, task_to_line
 end
 
 return M
