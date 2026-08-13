@@ -4,6 +4,7 @@ local hl_ns = vim.api.nvim_create_namespace("todo_hl")
 local ref_ns = vim.api.nvim_create_namespace("todo_ref")
 local types = require("modules.todo.types")
 local util = require("modules.todo.util")
+local hl = require("modules.todo.highlights")
 
 local state_symbols = {
   open = "○",
@@ -12,17 +13,48 @@ local state_symbols = {
 }
 
 local state_groups = {
-  [types.TaskState.OPEN] = "TaskStateOpen",
-  [types.TaskState.IN_PROGRESS] = "TaskStateInProgress",
-  [types.TaskState.DONE] = "TaskStateDone",
+  [types.TaskState.OPEN] = hl.TaskHighlights.STATE_OPEN,
+  [types.TaskState.IN_PROGRESS] = hl.TaskHighlights.STATE_IN_PROGRESS,
+  [types.TaskState.DONE] = hl.TaskHighlights.STATE_DONE,
 }
 
 local priority_groups = {
-  [0] = "TaskPriorityNormal",
-  [2] = "TaskPriorityImportant",
-  [4] = "TaskPriorityUrgent",
-  [6] = "TaskPriorityImportantUrgent",
+  [0] = hl.TaskHighlights.PRIORITY_NORMAL,
+  [2] = hl.TaskHighlights.PRIORITY_IMPORTANT,
+  [4] = hl.TaskHighlights.PRIORITY_URGENT,
+  [6] = hl.TaskHighlights.PRIORITY_IMPORTANT_URGENT,
 }
+
+---@param ancestors boolean[]
+---@return string
+local function tree_prefix(ancestors)
+  if #ancestors == 0 then
+    return " "
+  end
+  local pfx = { " " }
+  for i = 1, #ancestors - 1 do
+    table.insert(pfx, ancestors[i] and "│  " or "   ")
+  end
+  table.insert(pfx, ancestors[#ancestors] and "├─ " or "└─ ")
+  return table.concat(pfx)
+end
+
+---@param tree_highlights table<number,string>
+---@param extmarks table
+---@param line_nr number
+---@param line string
+local function tree_highlight(tree_highlights, extmarks, line_nr, line)
+  for i, thl in ipairs(tree_highlights) do
+    local start_col = 1 + (i - 1) * 3
+    table.insert(extmarks, {
+      line = line_nr,
+      group = thl,
+      start_col = vim.str_byteindex(line, "utf-16", start_col),
+      end_col = vim.str_byteindex(line, "utf-16", start_col + 3),
+      ns = hl_ns,
+    })
+  end
+end
 
 ---@param tasks Task[]
 ---@param buf number
@@ -34,14 +66,16 @@ function M.render(buf, tasks)
 
   local lines = {}
   local extmarks = {}
+  local tree_highlights = {}
   local refs = {}
 
   ---@param task Task
-  ---@param depth number
   ---@param forced_hl? string
-  local function add_task(task, depth, forced_hl)
+  ---@param ancestors? boolean[]
+  local function add_task(task, forced_hl, ancestors)
+    ancestors = ancestors or {}
     local line = #lines
-    local indent = " " .. string.rep("  ", depth)
+    local indent = tree_prefix(ancestors)
     local symbol = state_symbols[task.state] or "?"
     local indicator_children = #task.children > 0 and " /" or ""
     local indicator_note = task.notes and #task.notes > 0 and " *" or ""
@@ -54,13 +88,15 @@ function M.render(buf, tasks)
       .. indicator_children
     table.insert(lines, text)
 
+    tree_highlight(tree_highlights, extmarks, line, text)
+
     if task.state == types.TaskState.DONE then
       forced_hl = state_groups[task.state]
     end
 
     table.insert(extmarks, {
       line = line,
-      group = forced_hl or state_groups[task.state],
+      group = forced_hl or priority_groups[util.priority_value(task)],
       start_col = #indent,
       end_col = #indent + #symbol,
       ns = hl_ns,
@@ -68,7 +104,7 @@ function M.render(buf, tasks)
 
     table.insert(extmarks, {
       line = line,
-      group = forced_hl or priority_groups[util.priority_value(task)],
+      group = forced_hl or hl.TaskHighlights.NORMAL,
       start_col = #indent + #symbol + 1,
       end_col = #text,
       ns = hl_ns,
@@ -77,14 +113,18 @@ function M.render(buf, tasks)
     refs[#refs + 1] = task.id
 
     if not task.collapsed then
-      for _, child in ipairs(task.children) do
-        add_task(child, depth + 1, forced_hl)
+      table.insert(tree_highlights, forced_hl or hl.TaskHighlights.NORMAL)
+      for i, child in ipairs(task.children) do
+        table.insert(ancestors, i < #task.children)
+        add_task(child, forced_hl, ancestors)
+        ancestors[#ancestors] = nil
       end
+      tree_highlights[#tree_highlights] = nil
     end
   end
 
   for _, task in ipairs(tasks) do
-    add_task(task, 0)
+    add_task(task)
   end
 
   vim.bo[buf].modifiable = true
