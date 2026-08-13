@@ -8,19 +8,11 @@ return {
         keymaps = {
           ["<enter>"] = { "actions.select", mode = "n" },
           ["<c-p>"] = { "actions.preview", mode = "n" },
-          ["<leader>h"] = { "actions.toggle_hidden", mode = "n" },
+          ["<c-h>"] = { "actions.toggle_hidden", mode = "n" },
           ["-"] = { "actions.parent", mode = "n" },
           ["<leader>r"] = { "actions.refresh", mode = "n" },
           ["q"] = { "actions.close", mode = "n" },
           ["_"] = { "actions.open_cwd", mode = "n" },
-          ["<c-l>"] = { "actions.select", mode = "n" },
-          ["<c-h>"] = { "actions.parent", mode = "n" },
-          ["<c-j>"] = function()
-            Feedkeys("j")
-          end,
-          ["<c-k>"] = function()
-            Feedkeys("k")
-          end,
         },
         use_default_keymaps = false,
         view_options = {

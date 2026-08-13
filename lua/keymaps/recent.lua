@@ -55,7 +55,7 @@ vim.keymap.set("n", "<leader>or", function()
   })
 end)
 
-vim.keymap.set("n", "<leader>h", function()
+vim.keymap.set("n", "<c-h>", function()
   Jumplist.register()
   local bufname = vim.api.nvim_buf_get_name(0)
   for _, item in ipairs(get_items()) do

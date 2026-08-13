@@ -23,30 +23,14 @@ return {
         end
       end, {})
 
-      vim.keymap.set("n", "<c-l>", function()
+      vim.keymap.set("n", "<c-j>", function()
         Jumplist.register()
         grapple.cycle_tags("next")
       end)
 
-      vim.keymap.set("n", "<c-h>", function()
-        Jumplist.register()
-        grapple.cycle_tags("prev")
-      end)
-
-      vim.keymap.set("n", "<c-j>", function()
-        Jumplist.register()
-        local index = 1
-        if grapple.exists({ index = index }) then
-          grapple.select({ index = index })
-        end
-      end)
-
       vim.keymap.set("n", "<c-k>", function()
         Jumplist.register()
-        local index = 2
-        if grapple.exists({ index = index }) then
-          grapple.select({ index = index })
-        end
+        grapple.cycle_tags("prev")
       end)
 
       vim.api.nvim_create_autocmd("FileType", {
