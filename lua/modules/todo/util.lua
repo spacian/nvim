@@ -9,7 +9,7 @@ function M.priority_value(task)
 end
 
 ---@return number buf
-function M.create_window()
+function M.open_task_window()
   local buf = vim.api.nvim_create_buf(false, true)
   local width = 60
   local height = 20
@@ -40,7 +40,53 @@ end
 
 ---@param title string
 ---@param text string
----@param callback function(string): nil
+---@param keymaps table<string, fun(): nil>
+---@param callback fun(string): nil
+function M.open_oneline_window(title, text, keymaps, callback)
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[buf].bufhidden = "wipe"
+  vim.bo[buf].swapfile = false
+  vim.bo[buf].filetype = "text"
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n"))
+
+  vim.api.nvim_create_autocmd("BufWipeout", {
+    buffer = buf,
+    once = true,
+    callback = function()
+      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+      callback(table.concat(lines, " "))
+    end,
+  })
+
+  for key, fun in pairs(keymaps) do
+    if fun then
+      vim.keymap.set("n", key, fun, { buf = buf, nowait = true })
+    end
+  end
+
+  local width = 40
+  local height = 1
+  local win = vim.api.nvim_open_win(buf, true, {
+    title = title,
+    title_pos = "center",
+    relative = "editor",
+    width = width,
+    height = height,
+    col = math.floor((vim.o.columns - width) / 2),
+    row = math.floor((vim.o.lines - height) / 2),
+    border = "rounded",
+  })
+
+  vim.wo[win].winfixbuf = true
+  vim.wo[win].cursorline = false
+  vim.cmd("norm! G$")
+  vim.cmd("startinsert!")
+end
+
+---@param title string
+---@param text string
+---@param keymaps table<string, fun(): nil>
+---@param callback fun(string): nil
 function M.open_note(title, text, keymaps, callback)
   local buf = vim.api.nvim_create_buf(false, true)
 
@@ -93,8 +139,8 @@ function M.sort_tasks(tasks)
     if state_a ~= state_b then
       return state_a < state_b
     end
-    local prio_a = M.priority_value(a)
-    local prio_b = M.priority_value(b)
+    local prio_a = M.priority_value(a) + (a.sort_offset or 0)
+    local prio_b = M.priority_value(b) + (b.sort_offset or 0)
     if prio_a ~= prio_b then
       return prio_a > prio_b
     end

@@ -195,11 +195,26 @@ function M.sort()
   util.sort_tasks(context.tasks)
 end
 
+---@param id number
+---@param offset number?
+function M.sort_offset_set(id, offset)
+  local task = context.ref[id]
+  task.sort_offset = offset
+end
+
+---@param id number
+---@return number?
+function M.sort_offset_get(id)
+  return context.ref[id].sort_offset
+end
+
+---@param id number
 function M.toggle_urgent(id)
   local task = context.ref[id]
   task.urgent = not task.urgent
 end
 
+---@param id number
 function M.toggle_important(id)
   local task = context.ref[id]
   task.important = not task.important
@@ -223,19 +238,26 @@ function M.collapse(id, value)
 end
 
 ---@param id number
+---@return boolean
+function M.collapsed(id)
+  return context.ref[id].collapsed or false
+end
+
+---@param id number
 ---@return number?
 function M.collapse_smart(id)
   local task = context.ref[id]
   if #task.children > 0 and not task.collapsed then
     task.collapsed = true
-    return id
+    return task.id
   end
   local parent = context.parent[id] or id
   task = context.ref[parent]
-  if #task.children > 0 then
+  if not task.collapsed then
     task.collapsed = true
+    return parent
   end
-  return parent
+  return nil
 end
 
 ---@param id number
@@ -257,7 +279,6 @@ function M.delete(id)
   for i = #children, 1, -1 do
     M.delete(children[i].id)
   end
-
   local parent = context.parent[id]
   if parent ~= nil then
     for i, neighbor in pairs(context.ref[parent].children) do

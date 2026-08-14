@@ -25,6 +25,14 @@ local function redraw()
   end
 end
 
+local function cursor_down()
+  vim.api.nvim_feedkeys("j", "n", true)
+end
+
+local function cursor_up()
+  vim.api.nvim_feedkeys("k", "n", true)
+end
+
 ---@return number?
 local function task_id()
   return line_ref[vim.api.nvim_win_get_cursor(0)[1]]
@@ -38,15 +46,14 @@ local function set_cursor(id)
   end
 end
 
----@param text string
+---@param name string
 ---@return string?
-local function input_task_name(text)
-  local title = vim.fn.input("task name: ", text)
-  if title:match("^%s*$") ~= nil then
-    print("invalid task name '" .. title .. "'")
+local function validate_name(name)
+  if name:match("^%s*$") ~= nil then
+    print("invalid name '" .. name .. "'")
     return nil
   end
-  return title
+  return name
 end
 
 function M.reload_from_file()
@@ -127,35 +134,74 @@ function M.sort()
   end
 end
 
+function M.sort_offset_set()
+  local id = task_id()
+  if id then
+    local offset = data.sort_offset_get(id)
+    local text = offset and tostring(offset) or ""
+    util.open_oneline_window(
+      "Task Sort Offset",
+      text,
+      opts.keymaps.floating,
+      function(new_offset)
+        if #new_offset == 0 then
+          data.sort_offset_set(id, 0)
+          return
+        end
+        local value = tonumber(new_offset)
+        if value then
+          data.sort_offset_set(id, value)
+        end
+      end
+    )
+  end
+end
+
 function M.task_create()
   if buf then
-    local title = input_task_name("")
-    if title ~= nil then
-      data.add_task(title)
-      redraw()
-    end
+    util.open_oneline_window("New Task", "", opts.keymaps.floating, function(title)
+      local validated = validate_name(title)
+      if validated then
+        data.add_task(validated)
+        redraw()
+      end
+    end)
   end
 end
 
 function M.task_create_child()
   local id = task_id()
   if id then
-    local title = input_task_name("")
-    if title ~= nil then
-      data.add_subtask(title, id)
-      redraw()
-    end
+    util.open_oneline_window(
+      "New Child Task",
+      "",
+      opts.keymaps.floating,
+      function(title)
+        local validated = validate_name(title)
+        if validated then
+          data.add_subtask(validated, id)
+          redraw()
+        end
+      end
+    )
   end
 end
 
 function M.rename()
   local id = task_id()
   if id then
-    local title = input_task_name(data.get_title(id))
-    if title ~= nil then
-      data.rename(title, id)
-      redraw()
-    end
+    util.open_oneline_window(
+      "Rename Task",
+      data.get_title(id),
+      opts.keymaps.floating,
+      function(title)
+        local validated = validate_name(title)
+        if validated then
+          data.rename(validated, id)
+          redraw()
+        end
+      end
+    )
   end
 end
 
@@ -206,18 +252,38 @@ function M.collapse_disable()
   end
 end
 
-function M.collapse_smart()
+function M.collapse_disable_smart()
   local id = task_id()
   if id then
-    local parent = data.collapse_smart(id)
-    redraw()
-    if parent then
-      set_cursor(parent)
+    if data.collapsed(id) then
+      data.collapse(id, false)
+      redraw()
+    else
+      local child = data.get_first_child(id)
+      if child then
+        set_cursor(child)
+      else
+        cursor_down()
+      end
     end
   end
 end
 
-function M.to_first_child()
+function M.collapse_smart()
+  local id = task_id()
+  if id then
+    local new_id = data.collapse_smart(id)
+    redraw()
+    print(new_id)
+    if new_id then
+      set_cursor(new_id)
+    else
+      cursor_up()
+    end
+  end
+end
+
+function M.to_first_child_or_next()
   local id = task_id()
   if id then
     local child = data.get_first_child(id)
@@ -225,6 +291,8 @@ function M.to_first_child()
       data.collapse(id, false)
       redraw()
       set_cursor(child)
+    else
+      cursor_down()
     end
   end
 end
@@ -235,6 +303,8 @@ function M.to_parent()
     local parent = data.get_parent(id)
     if parent then
       set_cursor(parent)
+    else
+      cursor_up()
     end
   end
 end
@@ -305,7 +375,7 @@ function M.notes_open()
     util.open_note(
       data.get_title(id),
       data.get_notes(id),
-      opts.keymaps.notes,
+      opts.keymaps.floating,
       function(text)
         vim.schedule(function()
           data.set_notes(id, text)
@@ -318,7 +388,7 @@ end
 
 function M.open()
   if not buf then
-    buf = util.create_window()
+    buf = util.open_task_window()
     vim.api.nvim_create_autocmd("BufWipeout", {
       buffer = buf,
       once = true,
@@ -363,10 +433,10 @@ opts = {
       ["N"] = M.task_create,
       ["r"] = M.rename,
       ["<enter>"] = M.collapse_toggle,
-      ["l"] = M.collapse_disable,
+      ["l"] = M.collapse_disable_smart,
       ["h"] = M.collapse_smart,
       ["H"] = M.to_parent,
-      ["L"] = M.to_first_child,
+      ["L"] = M.to_first_child_or_next,
       ["J"] = M.to_next_neighbor,
       ["K"] = M.to_prev_neighbor,
       ["c"] = M.collapse_toggle_recursive,
@@ -380,6 +450,7 @@ opts = {
       ["u"] = M.toggle_urgent,
       ["i"] = M.toggle_important,
       ["o"] = M.notes_open,
+      ["O"] = M.sort_offset_set,
       ["d"] = M.delete_shallow,
       ["D"] = M.move_delete,
       ["m"] = M.move_paste_to_child,
@@ -388,8 +459,11 @@ opts = {
       ["x"] = M.delete_done,
       ["X"] = M.delete_done_all,
     },
-    notes = {
+    floating = {
       ["q"] = function()
+        vim.cmd("q")
+      end,
+      ["<esc>"] = function()
         vim.cmd("q")
       end,
     },
