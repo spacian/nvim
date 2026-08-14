@@ -78,6 +78,22 @@ function M.state_cycle()
   end
 end
 
+function M.priority_cycle_increase()
+  local id = task_id()
+  if id then
+    data.cycle_prio_increase(id)
+    redraw()
+  end
+end
+
+function M.priority_cycle_decrease()
+  local id = task_id()
+  if id then
+    data.cycle_prio_decrease(id)
+    redraw()
+  end
+end
+
 function M.toggle_urgent()
   local id = task_id()
   if id then
@@ -429,6 +445,8 @@ opts = {
     todo_open = "<leader>td",
     tasks = {
       ["<space>"] = M.state_cycle,
+      ["p"] = M.priority_cycle_increase,
+      ["P"] = M.priority_cycle_decrease,
       ["n"] = M.task_create_child,
       ["N"] = M.task_create,
       ["r"] = M.rename,
@@ -442,13 +460,11 @@ opts = {
       ["c"] = M.collapse_toggle_recursive,
       ["C"] = M.collapse_toggle_level,
       ["y"] = M.copy_shallow,
-      ["p"] = M.paste_to_child_shallow,
-      ["P"] = M.paste_to_root_shallow,
+      ["i"] = M.paste_to_child_shallow,
+      ["I"] = M.paste_to_root_shallow,
       ["q"] = function()
         vim.cmd("q")
       end,
-      ["u"] = M.toggle_urgent,
-      ["i"] = M.toggle_important,
       ["o"] = M.notes_open,
       ["O"] = M.sort_offset_set,
       ["d"] = M.delete_shallow,

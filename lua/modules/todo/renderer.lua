@@ -1,28 +1,13 @@
 local M = {}
 
 local hl_ns = vim.api.nvim_create_namespace("todo_hl")
-local ref_ns = vim.api.nvim_create_namespace("todo_ref")
 local types = require("modules.todo.types")
-local util = require("modules.todo.util")
 local hl = require("modules.todo.highlights")
 
 local state_symbols = {
   open = "○",
   in_progress = "◐",
   done = "●",
-}
-
-local state_groups = {
-  [types.TaskState.OPEN] = hl.TaskHighlights.STATE_OPEN,
-  [types.TaskState.IN_PROGRESS] = hl.TaskHighlights.STATE_IN_PROGRESS,
-  [types.TaskState.DONE] = hl.TaskHighlights.STATE_DONE,
-}
-
-local priority_groups = {
-  [0] = hl.TaskHighlights.PRIORITY_NORMAL,
-  [2] = hl.TaskHighlights.PRIORITY_IMPORTANT,
-  [4] = hl.TaskHighlights.PRIORITY_URGENT,
-  [6] = hl.TaskHighlights.PRIORITY_IMPORTANT_URGENT,
 }
 
 ---@param ancestors boolean[]
@@ -61,7 +46,6 @@ end
 ---@return number[]
 ---@return table<number, number>
 function M.render(buf, tasks)
-  vim.api.nvim_buf_clear_namespace(buf, ref_ns, 0, -1)
   vim.api.nvim_buf_clear_namespace(buf, hl_ns, 0, -1)
 
   local lines = {}
@@ -91,12 +75,12 @@ function M.render(buf, tasks)
     tree_highlight(tree_highlights, extmarks, line, text)
 
     if task.state == types.TaskState.DONE then
-      forced_hl = state_groups[task.state]
+      forced_hl = hl.TaskHighlights.STATE_DONE
     end
 
     table.insert(extmarks, {
       line = line,
-      group = forced_hl or priority_groups[util.priority_value(task)],
+      group = forced_hl or hl.get_priority_hl(task),
       start_col = #indent,
       end_col = #indent + #symbol,
       ns = hl_ns,
@@ -104,7 +88,7 @@ function M.render(buf, tasks)
 
     table.insert(extmarks, {
       line = line,
-      group = forced_hl or hl.TaskHighlights.NORMAL,
+      group = forced_hl or hl.get_priority_hl(task),
       start_col = #indent + #symbol + 1,
       end_col = #text,
       ns = hl_ns,
@@ -113,7 +97,7 @@ function M.render(buf, tasks)
     refs[#refs + 1] = task.id
 
     if not task.collapsed then
-      table.insert(tree_highlights, forced_hl or hl.TaskHighlights.NORMAL)
+      table.insert(tree_highlights, forced_hl or hl.get_priority_hl(task))
       for i, child in ipairs(task.children) do
         table.insert(ancestors, i < #task.children)
         add_task(child, forced_hl, ancestors)

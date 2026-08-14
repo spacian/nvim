@@ -51,6 +51,39 @@ local function collapse_recursive(task, collapse)
 end
 
 ---@param id number
+function M.cycle_prio_increase(id)
+  local task = context.ref[id]
+  if task.important and task.urgent then
+    task.important = false
+  elseif task.urgent then
+    task.important = true
+    task.urgent = false
+  elseif task.important then
+    task.important = false
+  else
+    task.urgent = true
+    task.important = true
+  end
+end
+
+---@param id number
+function M.cycle_prio_decrease(id)
+  local task = context.ref[id]
+  if task.important and task.urgent then
+    task.important = false
+    task.urgent = false
+  elseif task.urgent then
+    task.important = true
+  elseif task.important then
+    task.urgent = true
+    task.important = false
+  else
+    task.urgent = false
+    task.important = true
+  end
+end
+
+---@param id number
 function M.collapse_recursive(id)
   local task = context.ref[id]
   collapse_recursive(task, not task.collapsed)
@@ -134,6 +167,7 @@ end
 ---@param id number
 function M.copy_task(id)
   task_copy = vim.deepcopy(context.ref[id])
+  task_copy.children = {}
 end
 
 function M.paste()

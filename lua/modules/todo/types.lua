@@ -1,5 +1,7 @@
+local M = {}
+
 ---@class TaskState
-local TaskState = {
+M.TaskState = {
   OPEN = "open",
   IN_PROGRESS = "in_progress",
   DONE = "done",
@@ -21,6 +23,4 @@ local TaskState = {
 ---@field title string
 ---@field urgent boolean
 
-return {
-  TaskState = TaskState,
-}
+return M
