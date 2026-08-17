@@ -391,7 +391,7 @@ function M.notes_open()
     util.open_note(
       data.get_title(id),
       data.get_notes(id),
-      opts.keymaps.floating,
+      opts.keymaps.notes,
       function(text)
         vim.schedule(function()
           data.set_notes(id, text)
@@ -475,6 +475,17 @@ opts = {
       ["x"] = M.delete_done,
       ["X"] = M.delete_done_all,
     },
+    notes = {
+      ["q"] = function()
+        vim.cmd("q")
+      end,
+      ["<esc>"] = function()
+        vim.cmd("q")
+      end,
+      ["<enter>"] = function()
+        vim.cmd("q")
+      end,
+    },
     floating = {
       ["q"] = function()
         vim.cmd("q")
@@ -482,6 +493,13 @@ opts = {
       ["<esc>"] = function()
         vim.cmd("q")
       end,
+      ["<enter>"] = {
+        { "n", "i" },
+        function()
+          vim.cmd("stopinsert")
+          vim.cmd("q")
+        end,
+      },
     },
   },
 }

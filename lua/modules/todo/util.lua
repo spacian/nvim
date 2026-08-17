@@ -2,6 +2,20 @@ local M = {}
 
 local types = require("modules.todo.types")
 
+local function set_keymaps(keymaps, buf)
+  for key, fun in pairs(keymaps) do
+    if fun then
+      if type(fun) == "function" then
+        vim.keymap.set("n", key, fun, { buf = buf, nowait = true })
+      else
+        local modes = fun[1]
+        local mode_fun = fun[2]
+        vim.keymap.set(modes, key, mode_fun, { buf = buf, nowait = true })
+      end
+    end
+  end
+end
+
 ---@param task Task
 ---@return number
 function M.priority_value(task)
@@ -58,11 +72,7 @@ function M.open_oneline_window(title, text, keymaps, callback)
     end,
   })
 
-  for key, fun in pairs(keymaps) do
-    if fun then
-      vim.keymap.set("n", key, fun, { buf = buf, nowait = true })
-    end
-  end
+  set_keymaps(keymaps, buf)
 
   local width = 40
   local height = 1
@@ -119,10 +129,10 @@ function M.open_note(title, text, keymaps, callback)
   vim.wo[win].winfixbuf = true
   vim.wo[win].cursorline = true
 
-  for key, fun in pairs(keymaps) do
-    if fun then
-      vim.keymap.set("n", key, fun, { buf = buf, nowait = true })
-    end
+  set_keymaps(keymaps, buf)
+
+  if #text == 0 then
+    vim.cmd("startinsert")
   end
 end
 
