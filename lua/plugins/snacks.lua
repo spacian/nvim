@@ -115,7 +115,7 @@ return {
         snacks.picker.git_diff()
       end)
 
-      vim.keymap.set({ "n", "v" }, "<leader>fw", function()
+      vim.keymap.set({ "n", "x" }, "<leader>fw", function()
         Jumplist.register()
         snacks.picker.grep_word()
       end)

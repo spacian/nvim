@@ -78,21 +78,21 @@ vim.api.nvim_create_autocmd("TermOpen", {
       return
     end
     vim.opt_local.statuscolumn = ""
-    vim.keymap.set({ "n", "v" }, "<c-u>", "", { buffer = true, silent = true })
-    vim.keymap.set({ "n", "v" }, "<c-d>", "", { buffer = true, silent = true })
-    vim.keymap.set({ "t", "n", "v" }, "<c-u><c-y>", function()
+    vim.keymap.set({ "n", "x" }, "<c-u>", "", { buffer = true, silent = true })
+    vim.keymap.set({ "n", "x" }, "<c-d>", "", { buffer = true, silent = true })
+    vim.keymap.set({ "t", "n", "x" }, "<c-u><c-y>", function()
       vim.fn.feedkeys('cd "' .. vim.fn.getcwd() .. '"' .. enter)
     end, { buffer = true })
-    vim.keymap.set({ "t", "n", "v" }, "<c-u><c-o>", function()
+    vim.keymap.set({ "t", "n", "x" }, "<c-u><c-o>", function()
       local folder = get_items()[1].file:match("(.*)\\.*")
       if folder ~= nil then
         vim.fn.feedkeys('cd "' .. folder .. '"' .. enter)
       end
     end, { buffer = true })
-    vim.keymap.set({ "t", "n", "v" }, "<c-u><c-i>", function()
+    vim.keymap.set({ "t", "n", "x" }, "<c-u><c-i>", function()
       vim.cmd("silent bd!")
     end, { buffer = true })
-    vim.keymap.set({ "t", "n", "v" }, "<c-u><c-u>", function()
+    vim.keymap.set({ "t", "n", "x" }, "<c-u><c-u>", function()
       if vim.fn.winnr("$") > 1 then
         vim.cmd("silent close")
         return

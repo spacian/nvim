@@ -9,7 +9,7 @@ return {
         },
       })
       vim.keymap.set("n", "S", substitute.operator)
-      vim.keymap.set("v", "<leader>S", substitute.operator)
+      vim.keymap.set("x", "<leader>S", substitute.operator)
       vim.keymap.set("n", "<leader>S", function()
         substitute.operator({ register = "+" })
       end)

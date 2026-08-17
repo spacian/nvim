@@ -1,10 +1,10 @@
-vim.keymap.set({ "n", "v" }, "<leader><leader>", "")
-vim.keymap.set({ "v" }, "p", '"_dP')
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
-vim.keymap.set({ "n", "v" }, "<leader>P", '"+P')
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set({ "n", "v" }, "<leader>Y", '"+y$')
-vim.keymap.set({ "n", "v" }, "<c-t>", "")
+vim.keymap.set({ "n", "x" }, "<leader><leader>", "")
+vim.keymap.set({ "x" }, "p", '"_dP')
+vim.keymap.set({ "n", "x" }, "<leader>p", '"+p')
+vim.keymap.set({ "n", "x" }, "<leader>P", '"+P')
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y')
+vim.keymap.set({ "n", "x" }, "<leader>Y", '"+y$')
+vim.keymap.set({ "n", "x" }, "<c-t>", "")
 vim.keymap.set({ "n" }, "J", function()
   local pos = vim.fn.getpos(".")
   vim.fn.feedkeys("J", "n")
@@ -13,32 +13,27 @@ vim.keymap.set({ "n" }, "J", function()
   end)
 end)
 vim.keymap.set(
-  { "n", "v" },
+  { "n", "x", "o" },
   "H",
   "(col('.') == matchend(getline('.'), '^\\s*')+1 ? '0' : '^')",
   { expr = true }
 )
-vim.keymap.set({ "n", "v" }, "L", "$")
-vim.keymap.set({ "n" }, "yall", ":%y<enter>")
-vim.keymap.set({ "n" }, "<leader>yall", ":%y+<enter>")
-vim.keymap.set({ "n", "v" }, "<c-d>", "10j")
-vim.keymap.set({ "n", "v" }, "<c-u>", "10k")
+vim.keymap.set({ "n", "x", "o" }, "L", "$")
+vim.keymap.set({ "n", "x" }, "<c-d>", "10j")
+vim.keymap.set({ "n", "x" }, "<c-u>", "10k")
 vim.keymap.set({ "n" }, "<leader>o", "")
-vim.keymap.set({ "n" }, "gwip", function()
-  vim.o.textwidth = 88
-  vim.api.nvim_feedkeys("gwip^", "n", false)
-  vim.o.textwidth = 0
-end)
-vim.keymap.set({ "n" }, "gwl", function()
-  vim.o.textwidth = 88
-  vim.api.nvim_feedkeys("gwl^", "n", false)
-  vim.o.textwidth = 0
-end)
-vim.keymap.set({ "x" }, "gw", function()
-  vim.o.textwidth = 88
-  vim.api.nvim_feedkeys("gw^", "n", false)
-  vim.o.textwidth = 0
-end)
+
+local function wrap_textwrap(key)
+  vim.keymap.set({ "n" }, key, function()
+    vim.o.textwidth = 88
+    vim.api.nvim_feedkeys(key .. "^", "nx", false)
+    vim.o.textwidth = 0
+  end)
+end
+
+for _, key in ipairs({ "gwip", "gwl", "gw" }) do
+  wrap_textwrap(key)
+end
 
 vim.keymap.set({ "n" }, "<c-i>", function()
   Jumplist.jump_forward()
@@ -50,35 +45,16 @@ vim.keymap.set({ "n" }, "<c-o>", function()
   vim.api.nvim_feedkeys("zz", "n", true)
 end)
 
-vim.keymap.set({ "n" }, "/", function()
-  Jumplist.register()
-  vim.cmd("set nohls")
-  vim.api.nvim_feedkeys("/", "n", true)
-end)
+local function wrap_register(key)
+  vim.keymap.set({ "n" }, key, function()
+    Jumplist.register()
+    vim.api.nvim_feedkeys(key, "n", true)
+  end)
+end
 
-vim.keymap.set({ "n" }, "?", function()
-  Jumplist.register()
-  vim.cmd("set nohls")
-  vim.api.nvim_feedkeys("?", "n", true)
-end)
-
-vim.keymap.set({ "n" }, "*", function()
-  Jumplist.register()
-  vim.cmd("set nohls")
-  vim.api.nvim_feedkeys("*", "n", true)
-end)
-
-vim.keymap.set({ "n" }, "#", function()
-  Jumplist.register()
-  vim.cmd("set nohls")
-  vim.api.nvim_feedkeys("#", "n", true)
-end)
-
-vim.keymap.set({ "n" }, "gf", function()
-  Jumplist.register()
-  vim.cmd("set nohls")
-  vim.api.nvim_feedkeys("gf", "n", true)
-end)
+for _, key in ipairs({ "/", "?", "*", "#", "gf" }) do
+  wrap_register(key)
+end
 
 vim.keymap.set({ "n", "x" }, "gg", function()
   Jumplist.register()
