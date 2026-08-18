@@ -59,6 +59,19 @@ return {
       sources = {
         default = { "lsp", "path", "buffer" },
         transform_items = transform,
+        providers = {
+          path = {
+            opts = {
+              get_cwd = function()
+                if vim.bo.filetype == "python" then
+                  return vim.fn.getcwd()
+                end
+                local dir = vim.fn.expand("%:p:h")
+                return dir ~= "" and dir or vim.fn.getcwd()
+              end,
+            },
+          },
+        },
       },
       fuzzy = {
         use_proximity = false,
