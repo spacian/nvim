@@ -290,12 +290,20 @@ function M.collapse_smart()
   if id then
     local new_id = data.collapse_smart(id)
     redraw()
-    print(new_id)
     if new_id then
       set_cursor(new_id)
     else
       cursor_up()
     end
+  end
+end
+
+function M.collapse_all()
+  local id = task_id()
+  if id then
+    id = data.collapse_all(id)
+    redraw()
+    set_cursor(id)
   end
 end
 
@@ -445,33 +453,32 @@ opts = {
     todo_open = "<leader>td",
     tasks = {
       ["<space>"] = M.state_cycle,
-      ["p"] = M.priority_cycle_increase,
-      ["P"] = M.priority_cycle_decrease,
-      ["n"] = M.task_create_child,
-      ["N"] = M.task_create,
-      ["r"] = M.rename,
       ["<enter>"] = M.collapse_toggle,
       ["l"] = M.collapse_disable_smart,
       ["h"] = M.collapse_smart,
-      ["H"] = M.to_parent,
-      ["L"] = M.to_first_child_or_next,
       ["J"] = M.to_next_neighbor,
       ["K"] = M.to_prev_neighbor,
-      ["c"] = M.collapse_toggle_recursive,
-      ["C"] = M.collapse_toggle_level,
-      ["y"] = M.copy_shallow,
-      ["i"] = M.paste_to_child_shallow,
-      ["I"] = M.paste_to_root_shallow,
+      ["L"] = M.collapse_toggle_recursive,
+      ["H"] = M.collapse_all,
+      ["n"] = M.task_create_child,
+      ["N"] = M.task_create,
+      ["s"] = M.sort,
+      ["r"] = M.rename,
+      ["p"] = M.priority_cycle_increase,
+      ["P"] = M.priority_cycle_decrease,
       ["q"] = function()
         vim.cmd("q")
       end,
+      ["c"] = M.collapse_toggle_level,
       ["o"] = M.notes_open,
       ["O"] = M.sort_offset_set,
+      ["y"] = M.copy_shallow,
       ["d"] = M.delete_shallow,
+      ["i"] = M.paste_to_child_shallow,
+      ["I"] = M.paste_to_root_shallow,
       ["D"] = M.move_delete,
       ["m"] = M.move_paste_to_child,
       ["M"] = M.move_paste_to_root,
-      ["s"] = M.sort,
       ["x"] = M.delete_done,
       ["X"] = M.delete_done_all,
     },

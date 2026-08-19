@@ -122,6 +122,18 @@ function M.collapse_level(id)
   end
 end
 
+---@param id number
+---@return number
+function M.collapse_all(id)
+  while context.parent[id] do
+    id = context.parent[id]
+  end
+  for _, task in ipairs(context.tasks) do
+    collapse_recursive(task, true)
+  end
+  return id
+end
+
 ---@param tasks Task[]
 function M.setup(tasks)
   context.parent = {}
@@ -285,13 +297,7 @@ function M.collapse_smart(id)
     task.collapsed = true
     return task.id
   end
-  local parent = context.parent[id] or id
-  task = context.ref[parent]
-  if not task.collapsed then
-    task.collapsed = true
-    return parent
-  end
-  return nil
+  return context.parent[id] or id
 end
 
 ---@param id number
