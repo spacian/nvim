@@ -297,7 +297,7 @@ function M.collapse_smart(id)
     task.collapsed = true
     return task.id
   end
-  return context.parent[id] or id
+  return context.parent[id]
 end
 
 ---@param id number
